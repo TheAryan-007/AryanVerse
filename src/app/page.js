@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 /**
  * AryanVerse Page Component — Client-Side Core
@@ -72,6 +72,53 @@ export default function Home() {
           />
         </Canvas>
       </div>
+
+      {/* CSS Centered Planet Overlay */}
+      {transitionState !== "WORLD" && transitionState !== "ATMOSPHERE" && (
+        <div 
+          onClick={() => {
+            if (transitionState === "IDLE") {
+              setTransitionState("ZOOMING");
+            }
+          }}
+          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center cursor-pointer transition-all duration-[2000ms] ease-in-out z-10 ${
+            transitionState === "ZOOMING" 
+              ? "scale-[2.5] opacity-0 blur-[10px] pointer-events-none" 
+              : "scale-100 opacity-100"
+          }`}
+          style={{
+            width: '380px',
+            height: '380px',
+            borderRadius: '50%',
+            overflow: 'hidden',
+            boxShadow: '0 0 40px 10px rgba(123,47,190,0.6), 0 0 80px 20px rgba(123,47,190,0.3), 0 0 120px 30px rgba(123,47,190,0.15)',
+          }}
+        >
+          <img 
+            src="/planet.png" 
+            alt="Ethervia Planet" 
+            className="select-none pointer-events-none"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center',
+              clipPath: 'circle(48.5%)',
+              animation: 'rotatePlanet 60s linear infinite'
+            }}
+          />
+          {/* 3D Depth Shadow Overlay */}
+          <div 
+            style={{
+              background: 'radial-gradient(circle at 35% 35%, transparent 40%, rgba(0,0,0,0.5) 100%)',
+              borderRadius: '50%',
+              position: 'absolute',
+              inset: 0,
+              pointerEvents: 'none'
+            }}
+          />
+        </div>
+      )}
 
       {/* 1. CINEMATIC ATMOSPHERE ENTRY FLASH OVERLAY */}
       <div 

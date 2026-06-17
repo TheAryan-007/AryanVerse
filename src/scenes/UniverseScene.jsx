@@ -1,4 +1,4 @@
-﻿/**
+/**
  * UniverseScene Component — AryanVerse
  * 
  * The main 3D scene rendering inside the R3F Canvas.
@@ -11,7 +11,7 @@ import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import Starfield from './Starfield';
 import Galaxy from './Galaxy';
-import AryanVersePlanet from './AryanVersePlanet';
+import EtherviaPlanet from './EtherviaPlanet';
 import WarpParticles from './WarpParticles';
 import DestinationHubs from './DestinationHubs';
 
@@ -122,7 +122,7 @@ export default function UniverseScene({ transitionState, setTransitionState, sel
       <Starfield />
       <Galaxy />
       
-      <AryanVersePlanet
+      <EtherviaPlanet
         transitionState={transitionState}
         onPlanetClick={handlePlanetClick}
       />
