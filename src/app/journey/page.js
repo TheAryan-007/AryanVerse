@@ -3,9 +3,13 @@
 /**
  * Journey Archive Environment — AryanVerse
  * 
- * A story-driven cinematic scroll timeline for Chapter 1 (Foundations), Chapter 2 (The Shift),
- * and Chapter 3 (The Transformation).
- * Alternate-aligns moments on desktop (text left, SVGs right, and vice versa)
+ * A story-driven cinematic scroll timeline for:
+ * - Chapter 1: Foundations
+ * - Chapter 2: The Shift
+ * - Chapter 3: The Transformation
+ * - Chapter 4: The Leader
+ * 
+ * Alternate-aligns moments on desktop (text left, SVGs/Photos right, and vice versa)
  * and collapses to a single-column stack on mobile.
  * 
  * Features smooth continuous CSS idle animations on abstract vector illustrations,
@@ -727,8 +731,7 @@ function CovidClockIllustration() {
             <stop offset="100%" stopColor="#020617" stopOpacity="0.05"/>
           </linearGradient>
           <pattern id="staticPattern" width="10" height="10" patternUnits="userSpaceOnUse">
-            <rect width="10" height="0.5" fill="rgba(255,255,255,0.03)"/>
-            <rect y="5" width="10" height="0.5" fill="rgba(0,0,0,0.15)"/>
+            <rect width="100" height="80" fill="rgba(255,255,255,0.03)"/>
           </pattern>
         </defs>
         
@@ -920,12 +923,10 @@ function MaverickMentorsIllustration() {
         <path d="M52 24 H56 M52 26 H56" stroke="#0ea5e9" strokeWidth="0.6" opacity="0.6"/>
         <ellipse cx="61" cy="23" rx="2.5" ry="1.5" stroke="#0ea5e9" strokeWidth="0.5" fill="none" opacity="0.6"/>
 
-        {/* Mentor 1 */}
         <g className="animate-[float_5s_infinite]" style={{ transformOrigin: "42px 42px" }}>
           <circle cx="42" cy="38" r="2.5" fill="#fff" fillOpacity="0.8"/>
           <path d="M37 46 C37 43 47 43 47 46 L45 62 H39 Z" fill="#0d9488" fillOpacity="0.75"/>
         </g>
-        {/* Mentor 2 */}
         <g className="animate-[float_5s_infinite]" style={{ transformOrigin: "58px 42px", animationDelay: "1s" }}>
           <circle cx="58" cy="38" r="2.5" fill="#fff" fillOpacity="0.9"/>
           <path d="M53 46 C53 43 63 43 63 46 L61 62 H55 Z" fill="#0284c7" fillOpacity="0.8"/>
@@ -934,6 +935,336 @@ function MaverickMentorsIllustration() {
         <ellipse cx="50" cy="62" rx="16" ry="2" fill="#0ea5e9" fillOpacity="0.2" className="blur-sm"/>
       </svg>
       <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/70 via-transparent to-transparent pointer-events-none" />
+    </div>
+  );
+}
+
+// ==========================================
+// CHAPTER 4 ILLUSTRATIONS
+// ==========================================
+
+// 1. Chapter 4 Title Illustration - Golden Seal
+function Chapter4TitleIllustration() {
+  return (
+    <div className="relative w-full max-w-[320px] aspect-square flex items-center justify-center pointer-events-none">
+      <svg className="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="chap4Portal" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.4"/>
+            <stop offset="100%" stopColor="#A855F7" stopOpacity="0.4"/>
+          </linearGradient>
+          <radialGradient id="portalGoldGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.3"/>
+            <stop offset="100%" stopColor="#050508" stopOpacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="50" cy="50" r="40" fill="url(#portalGoldGlow)" className="animate-[breathe_5s_infinite]"/>
+        <circle cx="50" cy="50" r="32" stroke="url(#chap4Portal)" strokeWidth="0.8" strokeDasharray="4,2" className="animate-[spin_25s_linear_infinite]"/>
+        <circle cx="50" cy="50" r="20" stroke="#fbbf24" strokeWidth="0.4" strokeOpacity="0.7" className="animate-[spin_15s_linear_infinite_reverse]"/>
+        <polygon points="42,56 46,45 50,52 54,45 58,56" stroke="#fbbf24" strokeWidth="0.8" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+        <line x1="42" y1="58" x2="58" y2="58" stroke="#fbbf24" strokeWidth="0.8"/>
+        <circle cx="50" cy="30" r="1.5" fill="#fbbf24" className="animate-ping" style={{ animationDuration: "3s" }}/>
+      </svg>
+    </div>
+  );
+}
+
+// 2. Fork in road steep path (Moment 1)
+function DifficultRoadIllustration() {
+  return (
+    <div className="w-full max-w-[420px] aspect-[4/3] rounded-2xl border border-white/5 bg-[#0b0c10]/40 flex items-center justify-center p-6 shadow-inner relative overflow-hidden group">
+      <svg className="w-full h-full" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="roadSky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#1e3a8a" stopOpacity="0.5"/>
+            <stop offset="100%" stopColor="#0f172a" stopOpacity="0.2"/>
+          </linearGradient>
+          <linearGradient id="steepPath" x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0%" stopColor="#3b82f6"/>
+            <stop offset="100%" stopColor="#fbbf24"/>
+          </linearGradient>
+        </defs>
+        <rect width="100" height="80" rx="4" fill="url(#roadSky)"/>
+
+        <path d="M15 75 Q35 75 45 68" stroke="#1e293b" strokeWidth="3" fill="none" strokeLinecap="round"/>
+        <path d="M45 68 Q65 68 85 72" stroke="#334155" strokeWidth="2.5" strokeDasharray="1.5,2" fill="none" opacity="0.6"/>
+        <path d="M45 68 Q55 50 68 30 T88 12" stroke="url(#steepPath)" strokeWidth="2" fill="none" strokeLinecap="round" className="animate-[pulse_2s_infinite]"/>
+
+        <g className="animate-[float_5s_infinite]" style={{ transformOrigin: "66px 32px" }}>
+          <circle cx="66" cy="30" r="1.2" fill="#fff"/>
+          <path d="M64 34 Q66 31 68 34 L66 40 Z" fill="#3b82f6"/>
+        </g>
+
+        <circle cx="88" cy="12" r="1.5" fill="#fbbf24" className="animate-ping" style={{ animationDuration: "2s" }}/>
+        <circle cx="88" cy="12" r="0.8" fill="#fff"/>
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#050508]/60 via-transparent to-transparent pointer-events-none" />
+    </div>
+  );
+}
+
+// 3. Section A classroom (Moment 2)
+function SectionAIllustration() {
+  return (
+    <div className="w-full max-w-[420px] aspect-[4/3] rounded-2xl border border-white/5 bg-[#17120a]/30 flex items-center justify-center p-6 shadow-inner relative overflow-hidden group">
+      <svg className="w-full h-full" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="intenseSky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#78350f" stopOpacity="0.6"/>
+            <stop offset="60%" stopColor="#1c1917" stopOpacity="0.3"/>
+            <stop offset="100%" stopColor="#0c0a09" stopOpacity="0.1"/>
+          </linearGradient>
+          <radialGradient id="deskFocusSpot" cx="50%" cy="40%" r="50%">
+            <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.3"/>
+            <stop offset="100%" stopColor="transparent" stopOpacity="0"/>
+          </radialGradient>
+        </defs>
+        
+        <rect width="100" height="80" rx="4" fill="url(#intenseSky)"/>
+        
+        <circle cx="25" cy="40" r="15" fill="url(#deskFocusSpot)" opacity="0.8"/>
+        <circle cx="75" cy="40" r="15" fill="url(#deskFocusSpot)" opacity="0.8"/>
+
+        <polygon points="12,50 32,50 30,58 10,58" fill="#1e1b18" stroke="#fbbf24" strokeWidth="0.4" strokeOpacity="0.4"/>
+        <polygon points="8,62 30,62 27,72 5,72" fill="#141210" stroke="#fbbf24" strokeWidth="0.5" strokeOpacity="0.6"/>
+        
+        <polygon points="68,50 88,50 90,58 70,58" fill="#1e1b18" stroke="#fbbf24" strokeWidth="0.4" strokeOpacity="0.4"/>
+        <polygon points="70,62 92,62 95,72 73,72" fill="#141210" stroke="#fbbf24" strokeWidth="0.5" strokeOpacity="0.6"/>
+
+        <rect x="25" y="10" width="50" height="22" fill="#0d0e12" stroke="#a855f7" strokeWidth="0.6" strokeOpacity="0.4"/>
+        <path d="M30 18 H45 M30 22 H40 M55 18 L60 22 L65 18" stroke="#cbd5e1" strokeWidth="0.4" opacity="0.6"/>
+        <text x="48" y="24" fill="#a855f7" fontSize="3.5" fontFamily="monospace" opacity="0.8">A</text>
+
+        <polygon points="25,0 12,50 38,50" fill="#fbbf24" opacity="0.04"/>
+        <polygon points="75,0 62,50 88,50" fill="#fbbf24" opacity="0.04"/>
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#050508]/60 via-transparent to-transparent pointer-events-none" />
+    </div>
+  );
+}
+
+// 4. Populating courtyard courtyard (Moment 4)
+function SchoolYardIllustration() {
+  return (
+    <div className="w-full max-w-[420px] aspect-[4/3] rounded-2xl border border-white/5 bg-[#0d0d1a]/30 flex items-center justify-center p-6 shadow-inner relative overflow-hidden group">
+      <svg className="w-full h-full" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="yardSky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#4c1d95" stopOpacity="0.6"/>
+            <stop offset="60%" stopColor="#1e1b4b" stopOpacity="0.4"/>
+            <stop offset="100%" stopColor="#78350f" stopOpacity="0.2"/>
+          </linearGradient>
+          <radialGradient id="yardLightGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.2"/>
+            <stop offset="100%" stopColor="transparent" stopOpacity="0"/>
+          </radialGradient>
+        </defs>
+        
+        <rect width="100" height="80" rx="4" fill="url(#yardSky)"/>
+        <circle cx="50" cy="40" r="30" fill="url(#yardLightGlow)"/>
+
+        <path d="M10 50 L10 30 H25 L30 20 H70 L75 30 H90 L90 50 Z" fill="#090a14" stroke="rgba(255,255,255,0.04)" strokeWidth="0.5"/>
+        <rect x="38" y="28" width="24" height="22" fill="#05060b" opacity="0.8"/>
+        
+        <rect x="42" y="32" width="4" height="6" fill="#fbbf24" fillOpacity="0.7" className="animate-pulse" style={{ animationDuration: "3s" }}/>
+        <rect x="54" y="32" width="4" height="6" fill="#fbbf24" fillOpacity="0.7" className="animate-pulse" style={{ animationDuration: "5s" }}/>
+
+        <line x1="0" y1="50" x2="100" y2="50" stroke="rgba(255,255,255,0.06)" strokeWidth="0.5"/>
+
+        <g className="animate-[float_4s_infinite]" style={{ transformOrigin: "75px 56px" }}>
+          <circle cx="75" cy="50" r="1" fill="#fbbf24"/>
+          <path d="M73 51.5 L77 51 L75 58 L73 58 Z" fill="#fbbf24"/>
+          <line x1="75" y1="54" x2="78" y2="56" stroke="#fbbf24" strokeWidth="0.6"/>
+          <line x1="75" y1="54" x2="71" y2="55" stroke="#fbbf24" strokeWidth="0.6"/>
+        </g>
+
+        <g className="animate-[float_5s_infinite]" style={{ transformOrigin: "50px 58px", animationDelay: "1.5s" }}>
+          <circle cx="50" cy="52" r="1" fill="#a855f7"/>
+          <path d="M49 53.5 H51 L51 60 H49 Z" fill="#a855f7"/>
+        </g>
+
+        <circle cx="64" cy="56" r="0.8" fill="#fff" className="animate-bounce" style={{ animationDuration: "1.2s" }}/>
+        
+        <path d="M30 20 L40 18 L50 20 L60 18 L70 20" stroke="#a855f7" strokeWidth="0.3" strokeDasharray="1,1"/>
+        <polygon points="34,19 37,21 34,22" fill="#fbbf24"/>
+        <polygon points="44,18 47,20 44,21" fill="#a855f7"/>
+        <polygon points="54,19 57,21 54,22" fill="#fbbf24"/>
+        <polygon points="64,18 67,20 64,21" fill="#a855f7"/>
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#050508]/60 via-transparent to-transparent pointer-events-none" />
+    </div>
+  );
+}
+
+// 5. Sports Day Participation (Moment 5)
+function SportsDayIllustration() {
+  return (
+    <div className="w-full max-w-[420px] aspect-[4/3] rounded-2xl border border-white/5 bg-[#0c0d17]/30 flex items-center justify-center p-6 shadow-inner relative overflow-hidden group">
+      <svg className="w-full h-full" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="sportsSky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#431407" stopOpacity="0.5"/>
+            <stop offset="60%" stopColor="#1e1b4b" stopOpacity="0.3"/>
+            <stop offset="100%" stopColor="#020617" stopOpacity="0.1"/>
+          </linearGradient>
+        </defs>
+        
+        <rect width="100" height="80" rx="4" fill="url(#sportsSky)"/>
+        
+        <polygon points="15,70 25,50 35,50 45,70" fill="#090a14" stroke="rgba(255,255,255,0.03)" strokeWidth="0.5"/>
+        <polygon points="25,50 35,50 35,70 25,70" fill="#040409" stroke="#fbbf24" strokeWidth="0.4" opacity="0.4"/>
+        <text x="28" y="62" fill="#fbbf24" fontSize="5" fontFamily="monospace" opacity="0.6">3</text>
+
+        <path d="M0 70 Q45 45 100 70" stroke="rgba(255,255,255,0.05)" strokeWidth="1"/>
+        <path d="M0 74 Q45 48 100 74" stroke="rgba(255,255,255,0.08)" strokeWidth="1.2"/>
+
+        <g className="animate-[float_6s_infinite]" style={{ transformOrigin: "18px 46px" }}>
+          <circle cx="18" cy="40" r="1.2" fill="#fff" fillOpacity="0.8"/>
+          <path d="M15 42 H21 L20 48 H16 Z" fill="#a855f7" fillOpacity="0.7"/>
+          <line x1="15.5" y1="42.5" x2="15.5" y2="47" stroke="#cbd5e1" strokeWidth="0.6"/>
+          <line x1="20.5" y1="42.5" x2="20.5" y2="47" stroke="#cbd5e1" strokeWidth="0.6"/>
+        </g>
+
+        <g className="animate-[float_4s_infinite]" style={{ transformOrigin: "60px 48px", animationDelay: "1s" }}>
+          <circle cx="60" cy="46" r="1.2" fill="#fbbf24"/>
+          <path d="M57 48.5 L63 47.5 L61 54 L58 55 Z" fill="#fbbf24"/>
+          <line x1="59" y1="54" x2="57" y2="59" stroke="#fbbf24" strokeWidth="0.8"/>
+          <line x1="60" y1="54" x2="63" y2="58" stroke="#fbbf24" strokeWidth="0.8"/>
+        </g>
+        
+        <line x1="52" y1="47" x2="48" y2="47" stroke="rgba(251,191,36,0.3)" strokeWidth="0.6"/>
+        <line x1="51" y1="51" x2="46" y2="51" stroke="rgba(251,191,36,0.3)" strokeWidth="0.6"/>
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#050508]/60 via-transparent to-transparent pointer-events-none" />
+    </div>
+  );
+}
+
+// 6. Figure standing between two groups (Moment 6)
+function BridgeIllustration() {
+  return (
+    <div className="w-full max-w-[420px] aspect-[4/3] rounded-2xl border border-white/5 bg-[#0d0d1a]/30 flex items-center justify-center p-6 shadow-inner relative overflow-hidden group">
+      <svg className="w-full h-full" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bridgeSky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#311042" stopOpacity="0.8"/>
+            <stop offset="100%" stopColor="#050508" stopOpacity="0.2"/>
+          </linearGradient>
+          <radialGradient id="bridgeGlow" cx="50%" cy="38%" r="40%">
+            <stop offset="0%" stopColor="#A855F7" stopOpacity="0.3"/>
+            <stop offset="100%" stopColor="transparent" stopOpacity="0"/>
+          </radialGradient>
+        </defs>
+        
+        <rect width="100" height="80" rx="4" fill="url(#bridgeSky)"/>
+        <circle cx="50" cy="38" r="30" fill="url(#bridgeGlow)"/>
+
+        <g className="animate-[float_5s_infinite]" style={{ transformOrigin: "50px 38px" }}>
+          <circle cx="50" cy="32" r="1.8" fill="#fff"/>
+          <path d="M46 39.5 C46 36.5 54 36.5 54 39.5 L52 56 H48 Z" fill="#A855F7"/>
+          <path d="M50 36.5 L34 33.5" stroke="#A855F7" strokeWidth="1.2" strokeLinecap="round"/>
+          <path d="M50 36.5 L66 33.5" stroke="#A855F7" strokeWidth="1.2" strokeLinecap="round"/>
+        </g>
+
+        <g opacity="0.6">
+          <circle cx="22" cy="42" r="1.2" fill="#cbd5e1"/>
+          <path d="M19 47.5 C19 45 25 45 25 47.5 L24 58 H20 Z" fill="#475569"/>
+          <circle cx="16" cy="44" r="1.2" fill="#cbd5e1"/>
+          <path d="M13 49 C13 47 19 47 19 49 L18 58 H14 Z" fill="#334155"/>
+        </g>
+        <span className="absolute bottom-5 left-10 font-space-mono text-[8px] text-slate-500 uppercase tracking-widest">
+          Students
+        </span>
+
+        <g opacity="0.6">
+          <circle cx="78" cy="42" r="1.2" fill="#cbd5e1"/>
+          <path d="M75 47.5 C75 45 81 45 81 47.5 L80 58 H76 Z" fill="#475569"/>
+          <circle cx="84" cy="44" r="1.2" fill="#cbd5e1"/>
+          <path d="M81 49 C81 47 87 47 87 49 L86 58 H82 Z" fill="#334155"/>
+        </g>
+        <span className="absolute bottom-5 right-10 font-space-mono text-[8px] text-purple-400 uppercase tracking-widest">
+          Teachers
+        </span>
+
+        <ellipse cx="50" cy="56" rx="22" ry="2" fill="#090914" stroke="#A855F7" strokeWidth="0.3" opacity="0.7"/>
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#050508]/60 via-transparent to-transparent pointer-events-none" />
+    </div>
+  );
+}
+
+// 7. Paint brushes + code circuits (Moment 7)
+function FineArtsIllustration() {
+  return (
+    <div className="w-full max-w-[420px] aspect-[4/3] rounded-2xl border border-white/5 bg-[#0a0815]/30 flex items-center justify-center p-6 shadow-inner relative overflow-hidden group">
+      <svg className="w-full h-full" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="artSky" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#4f46e5" stopOpacity="0.4"/>
+            <stop offset="50%" stopColor="#db2777" stopOpacity="0.3"/>
+            <stop offset="100%" stopColor="#fb923c" stopOpacity="0.2"/>
+          </linearGradient>
+          <linearGradient id="brushGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#db2777"/>
+            <stop offset="50%" stopColor="#a855f7"/>
+            <stop offset="100%" stopColor="#06b6d4"/>
+          </linearGradient>
+        </defs>
+        
+        <rect width="100" height="80" rx="4" fill="url(#artSky)"/>
+
+        <path d="M15 15 H40 L45 20 V35" stroke="#06b6d4" strokeWidth="0.5" strokeOpacity="0.4" fill="none"/>
+        <circle cx="15" cy="15" r="1.2" fill="#06b6d4" fillOpacity="0.5"/>
+        <rect x="38" y="35" width="14" height="14" rx="1" fill="#020617" stroke="#06b6d4" strokeWidth="0.4" strokeOpacity="0.5"/>
+        
+        <path d="M85 65 H60 L55 60 V45" stroke="#fb923c" strokeWidth="0.5" strokeOpacity="0.4" fill="none"/>
+        <circle cx="85" cy="65" r="1.2" fill="#fb923c" fillOpacity="0.5"/>
+
+        <path d="M10 65 Q35 15 70 32 T95 15" stroke="url(#brushGrad)" strokeWidth="4" strokeLinecap="round" fill="none" strokeOpacity="0.75" className="animate-[breathe_8s_infinite]"/>
+        <path d="M5 58 Q25 22 55 35 T85 28" stroke="#fbbf24" strokeWidth="1.5" strokeLinecap="round" fill="none" strokeOpacity="0.6" className="animate-[float_6s_infinite]" style={{ animationDelay: "1s" }}/>
+
+        <text x="20" y="32" fill="#06b6d4" fontSize="3.5" fontFamily="monospace" opacity="0.5">01</text>
+        <text x="75" y="48" fill="#fb923c" fontSize="3.5" fontFamily="monospace" opacity="0.5">10</text>
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#050508]/60 via-transparent to-transparent pointer-events-none" />
+    </div>
+  );
+}
+
+// 8. Confident figure looking at golden sunrise horizon (Moment 9)
+function HorizonIllustration() {
+  return (
+    <div className="w-full max-w-[420px] aspect-[4/3] rounded-2xl border border-white/5 bg-[#05050b]/40 flex items-center justify-center p-6 shadow-inner relative overflow-hidden group">
+      <svg className="w-full h-full" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="horizonSky" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.4"/>
+            <stop offset="50%" stopColor="#a855f7" stopOpacity="0.2"/>
+            <stop offset="100%" stopColor="#05050b" stopOpacity="0.05"/>
+          </linearGradient>
+          <radialGradient id="sunRiseGlow" cx="50%" cy="58%" r="45%">
+            <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.4"/>
+            <stop offset="100%" stopColor="transparent" stopOpacity="0"/>
+          </radialGradient>
+        </defs>
+        
+        <rect width="100" height="80" rx="4" fill="url(#horizonSky)"/>
+        <circle cx="50" cy="58" r="28" fill="url(#sunRiseGlow)" className="animate-[breathe_7s_infinite]"/>
+
+        <circle cx="15" cy="15" r="0.4" fill="#fff" className="animate-pulse" style={{ animationDuration: "3s" }}/>
+        <circle cx="85" cy="22" r="0.4" fill="#fff" className="animate-pulse" style={{ animationDuration: "4s" }}/>
+        <circle cx="50" cy="12" r="0.5" fill="#fff" className="animate-pulse" style={{ animationDuration: "5s" }}/>
+
+        <path d="M-5 80 L35 55 Q50 52 65 55 L105 80 Z" fill="#090a14" stroke="rgba(255,255,255,0.02)" strokeWidth="0.5"/>
+
+        <g className="animate-[float_5s_infinite]" style={{ transformOrigin: "50px 52px" }}>
+          <circle cx="50" cy="46.5" r="1.3" fill="#fff"/>
+          <path d="M47.5 52 C47.5 49.5 52.5 49.5 52.5 52 L51.5 62 H48.5 Z" fill="#fbbf24"/>
+        </g>
+        
+        <circle cx="50" cy="57" r="5" fill="#fbbf24" className="blur-xs"/>
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#050508]/60 via-transparent to-transparent pointer-events-none" />
     </div>
   );
 }
@@ -1016,6 +1347,22 @@ export default function JourneyPage() {
       },
     });
 
+    // ScrollTrigger to detect Chapter 4 in viewport
+    ScrollTrigger.create({
+      trigger: "#chapter4-container",
+      scroller: mainRef.current,
+      start: "top 40%",
+      end: "bottom 40%",
+      onToggle: (self) => {
+        if (self.isActive) {
+          setCurrentChapter({
+            title: "CHAPTER 4 — THE LEADER",
+            subtitle: "Class 11 Milestone",
+          });
+        }
+      },
+    });
+
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
@@ -1073,6 +1420,11 @@ export default function JourneyPage() {
           0% { text-shadow: 0 0 4px rgba(168, 85, 247, 0.2); }
           50% { text-shadow: 0 0 16px rgba(168, 85, 247, 0.7), 0 0 25px rgba(59, 130, 246, 0.4); }
           100% { text-shadow: 0 0 4px rgba(168, 85, 247, 0.2); }
+        }
+        @keyframes goldPulseLarge {
+          0% { box-shadow: 0 0 8px rgba(251, 191, 36, 0.25); border-color: rgba(251, 191, 36, 0.25); }
+          50% { box-shadow: 0 0 35px rgba(251, 191, 36, 0.75); border-color: rgba(251, 191, 36, 0.85); }
+          100% { box-shadow: 0 0 8px rgba(251, 191, 36, 0.25); border-color: rgba(251, 191, 36, 0.25); }
         }
       `}} />
 
@@ -1648,7 +2000,7 @@ export default function JourneyPage() {
           </section>
 
           {/* MOMENT 9 — The First Boards */}
-          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 relative">
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 border-b border-white/5 relative">
             {/* Optimistic open sky glow */}
             <div className="absolute inset-0 w-[600px] h-[400px] rounded-full bg-gradient-to-tr from-[#A855F7]/10 via-[#3b82f6]/5 to-transparent blur-[140px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
 
@@ -1678,10 +2030,273 @@ export default function JourneyPage() {
                 <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed mt-1">
                   I entered this phase as a student still trying to find his place. I left it with friendships that would last years, a growing love for storytelling, and a much better understanding of who I was becoming. For the first time, the future no longer felt distant. It felt like something waiting to be built.
                 </p>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        {/* ==========================================
+            CHAPTER 4: THE LEADER
+            ========================================== */}
+        <div id="chapter4-container" className="w-full flex flex-col">
+          
+          {/* TITLE MOMENT: CHAPTER 4 */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col items-center justify-center text-center px-6 relative">
+            {/* Rich gold-to-purple background glow */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#fbbf24]/5 to-[#A855F7]/5 blur-[100px] z-[-1] pointer-events-none rounded-full max-w-md mx-auto" />
+            
+            <div className="flex flex-col items-center gap-4 max-w-2xl">
+              <span className="font-space-mono text-xs md:text-sm tracking-[0.3em] text-[#fbbf24] uppercase font-bold">
+                Chapter 4
+              </span>
+              <h1 className="font-orbitron text-5xl md:text-7xl font-black tracking-widest mt-1 text-transparent bg-clip-text bg-gradient-to-r from-[#fbbf24] via-slate-100 to-[#f59e0b] drop-shadow-[0_0_30px_rgba(251,191,36,0.25)]">
+                The Leader
+              </h1>
+              <p className="font-inter text-xs md:text-sm text-slate-400 max-w-md mt-4 leading-relaxed italic">
+                Stepping into responsibility, authority, and creative self-expression in Class 11.
+              </p>
+            </div>
+            <div className="mt-12">
+              <Chapter4TitleIllustration />
+            </div>
+          </section>
+
+          {/* MOMENT 1 — Choosing the Difficult Road */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 border-b border-white/5 relative">
+            {/* Saturated blue/purple glow */}
+            <div className="absolute inset-0 w-[500px] h-[350px] rounded-full bg-gradient-to-tr from-[#3b82f6]/5 to-[#a855f7]/3 blur-[120px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+            
+            <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
+              {/* Text column - Left */}
+              <div className="flex flex-col gap-5 order-2 md:order-1">
+                <h2 className="font-orbitron text-3xl md:text-4xl font-black tracking-wide text-white">
+                  Choosing the Difficult Road
+                </h2>
+                <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed mt-2">
+                  When the time came to select a stream, I chose PCM — Physics, Chemistry, and Mathematics. Not because it was easy. Not because someone forced me. I chose PCM because I genuinely believed that if I could survive one of the most demanding academic paths, many future challenges would become easier to handle. My philosophy was simple: if you learn to face the strongest opponent, every other opponent feels less intimidating. That belief became one of the foundations of my approach toward life.
+                </p>
+              </div>
+              {/* Illustration column - Right */}
+              <div className="flex items-center justify-center order-1 md:order-2 w-full">
+                <DifficultRoadIllustration />
+              </div>
+            </div>
+          </section>
+
+          {/* MOMENT 2 — Section A */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 border-b border-white/5 relative">
+            {/* Golden focused light glow */}
+            <div className="absolute inset-0 w-[500px] h-[350px] rounded-full bg-[#fbbf24]/3 blur-[120px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+
+            <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
+              {/* Illustration column - Left */}
+              <div className="flex items-center justify-center order-1 w-full">
+                <SectionAIllustration />
+              </div>
+              {/* Text column - Right */}
+              <div className="flex flex-col gap-5 order-2">
+                <h2 className="font-orbitron text-3xl md:text-4xl font-black tracking-wide text-white">
+                  The Section Everyone Wanted
+                </h2>
+                <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed mt-2">
+                  For the first time, I was selected for Section A — the section known throughout the school as the topper's section. The students here were serious. Focused. Competitive. Walking into that classroom felt different. Everyone seemed smarter. More disciplined. More prepared. It was intimidating at first. But it also motivated me. Because being surrounded by capable people forces you to grow.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* MOMENT 3 — The Unexpected Result */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 border-b border-white/5 relative">
+            {/* Premium gold & purple blend glow */}
+            <div className="absolute inset-0 w-[500px] h-[350px] rounded-full bg-gradient-to-tr from-[#fbbf24]/5 via-[#a855f7]/3 to-transparent blur-[120px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+
+            <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
+              {/* Text column - Left */}
+              <div className="flex flex-col gap-5 order-2 md:order-1">
+                <h2 className="font-orbitron text-3xl md:text-4xl font-black tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-[#fbbf24] to-[#f59e0b] drop-shadow-[0_0_15px_rgba(251,191,36,0.2)]">
+                  Head Boy
+                </h2>
+                <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed mt-2">
+                  I had applied for Sports Captain. That was the position I truly wanted. After rounds of interviews and evaluations, the final results were announced. And something happened that I never expected. The teachers didn't select me as Sports Captain. Instead, they selected me as Head Boy — the highest student leadership position in the school. I was surprised. Excited. Nervous. And honored. Because with that title came something much bigger than authority. Responsibility.
+                </p>
+              </div>
+              
+              {/* Head Boy Real Photo Column - Right */}
+              <div className="flex flex-col items-center justify-center order-1 md:order-2 w-full max-w-[320px] mx-auto gap-4">
+                <div className="w-[200px] h-[200px] shrink-0 overflow-hidden rounded-full border border-[#fbbf24]/30 shadow-[0_0_20px_rgba(251,191,36,0.2)]">
+                  <img 
+                    src="/headboy-photo.jpg" 
+                    alt="Head Boy Aryan Chauhan"
+                    className="w-full h-full object-cover object-center filter saturate-95 brightness-95" 
+                  />
+                </div>
+                <div className="px-4 py-1.5 border border-[#fbbf24]/30 bg-[#fbbf24]/10 rounded-full font-orbitron font-bold text-xs text-[#fbbf24] tracking-wider animate-[goldPulse_3s_infinite]">
+                  HEAD BOY — Selected
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* MOMENT 4 — Bringing School Back to Life */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 border-b border-white/5 relative">
+            {/* Highly saturated purple/gold glow */}
+            <div className="absolute inset-0 w-[550px] h-[400px] rounded-full bg-gradient-to-tr from-[#a855f7]/6 to-[#fbbf24]/4 blur-[130px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+
+            <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
+              {/* Illustration column - Left */}
+              <div className="flex items-center justify-center order-1 w-full">
+                <SchoolYardIllustration />
+              </div>
+              {/* Text column - Right */}
+              <div className="flex flex-col gap-5 order-2">
+                <h2 className="font-orbitron text-3xl md:text-4xl font-black tracking-wide text-white">
+                  Bringing School Back to Life
+                </h2>
+                <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed mt-2">
+                  One of the first things I noticed was that many activities had disappeared after COVID. Sports Day had stopped. Events had become limited. The energy of student life wasn't the same. I didn't want that to continue. So I started talking to teachers. Convincing them. Planning with them. Explaining why these events mattered. Because school should be more than classrooms and exams — it should create memories. Eventually, many activities returned. Sports Day returned. Students participated again. And watching those things happen felt incredibly rewarding.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* MOMENT 5 — The Irony */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 border-b border-white/5 relative">
+            {/* Playful gold background glow */}
+            <div className="absolute inset-0 w-[500px] h-[350px] rounded-full bg-[#fbbf24]/2 blur-[120px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+
+            <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
+              {/* Text column - Left */}
+              <div className="flex flex-col gap-5 order-2 md:order-1">
+                <h2 className="font-orbitron text-3xl md:text-4xl font-black tracking-wide text-white animate-[textShimmer_3s_infinite]">
+                  The Irony of Leadership
+                </h2>
+                <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed mt-2">
+                  One of the funniest parts of the story was Sports Day itself. I had worked hard to help bring it back. Yet as Head Boy, I wasn't supposed to favor my own house or participate unfairly. Leadership required neutrality. Unfortunately for me, my house team wasn't particularly strong. We struggled throughout the competition. Eventually, the teachers allowed me to participate. I gave it everything I had. And despite all the challenges, we managed to finish in third place. Not first. Not second. But honestly, that wasn't the point. The experience mattered far more than the result.
+                </p>
+              </div>
+              
+              {/* Playful Stats Card & Illustration Column - Right */}
+              <div className="flex flex-col gap-6 items-center justify-center order-1 md:order-2 w-full max-w-[420px] mx-auto">
+                <div 
+                  className="w-full bg-[#0d0d1a]/55 border border-[#fbbf24]/30 p-6 rounded-2xl flex flex-col gap-1 text-center shadow-[0_0_20px_rgba(251,191,36,0.15)] relative group overflow-hidden"
+                >
+                  <span className="font-orbitron font-black text-4xl text-[#fbbf24] drop-shadow-[0_0_10px_rgba(251,191,36,0.3)]">
+                    3rd Place 🏅
+                  </span>
+                  <span className="font-inter text-xs text-slate-400 italic mt-1 uppercase tracking-wide">
+                    The experience mattered more than the result.
+                  </span>
+                </div>
+                <SportsDayIllustration />
+              </div>
+            </div>
+          </section>
+
+          {/* MOMENT 6 — Learning Leadership */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 border-b border-white/5 relative">
+            {/* Deep purple background glow */}
+            <div className="absolute inset-0 w-[500px] h-[350px] rounded-full bg-[#A855F7]/3 blur-[120px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+
+            <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
+              {/* Illustration column - Left */}
+              <div className="flex items-center justify-center order-1 w-full">
+                <BridgeIllustration />
+              </div>
+              
+              {/* Text column & Pull Quote - Right */}
+              <div className="flex flex-col gap-5 order-2">
+                <h2 className="font-orbitron text-3xl md:text-4xl font-black tracking-wide text-white">
+                  Learning Leadership
+                </h2>
+                <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed mt-2">
+                  Most people think leadership means giving instructions. Class 11 taught me the opposite. Leadership means listening. Students brought problems. Teachers brought expectations. Both sides wanted solutions. And many times, solving one person's problem created another person's problem. That's when I began understanding something important: Leadership isn't about making everyone happy. It's about making the best possible decision for the larger group. That lesson would stay with me long after school ended.
+                </p>
+                
+                <blockquote className="border-l-2 border-[#A855F7] pl-4 font-inter text-slate-300 italic text-sm md:text-base leading-relaxed mt-4">
+                  "Leadership isn't about making everyone happy. It's about making the best possible decision for the larger group."
+                </blockquote>
+              </div>
+            </div>
+          </section>
+
+          {/* MOMENT 7 — Fine Arts */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 border-b border-white/5 relative">
+            {/* Mixed vibrant gradient glow */}
+            <div className="absolute inset-0 w-[500px] h-[350px] rounded-full bg-gradient-to-tr from-[#ec4899]/3 via-[#3b82f6]/2 to-[#fbbf24]/2 blur-[120px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+
+            <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
+              {/* Text column - Left */}
+              <div className="flex flex-col gap-5 order-2 md:order-1">
+                <h2 className="font-orbitron text-3xl md:text-4xl font-black tracking-wide text-white">
+                  Fine Arts — The Other Side
+                </h2>
+                <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed mt-2">
+                  Despite choosing PCM, there was another side of me that many people didn't expect. Creativity. I selected Fine Arts as my additional subject. Partly because I enjoyed it. Partly because creativity had always been present inside me. Even before I became interested in design, storytelling, and content creation, there was always a creative side trying to find an outlet. Looking back, Fine Arts was one of the earliest signs of the creative interests that would later shape many of my projects.
+                </p>
+              </div>
+              {/* Illustration column - Right */}
+              <div className="flex items-center justify-center order-1 md:order-2 w-full">
+                <FineArtsIllustration />
+              </div>
+            </div>
+          </section>
+
+          {/* MOMENT 8 — The Number Seven */}
+          <section className="scroll-animate-moment w-full min-h-[60vh] flex flex-col items-center justify-center text-center px-6 border-b border-white/5 relative">
+            {/* Minimal gold pulsing glow */}
+            <div className="absolute inset-0 w-[450px] h-[450px] rounded-full bg-[#fbbf24]/2 blur-[130px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+            
+            <div className="max-w-2xl flex flex-col items-center gap-6">
+              <h2 className="font-orbitron text-2xl md:text-3xl font-black tracking-wide text-white">
+                The Number Seven
+              </h2>
+              
+              {/* Glowing softly large number 7 */}
+              <div className="font-orbitron text-8xl font-black text-[#fbbf24] drop-shadow-[0_0_35px_rgba(251,191,36,0.6)] animate-[goldPulseLarge_4s_infinite] select-none my-4">
+                7
+              </div>
+              
+              <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed max-w-md">
+                At the end of the year, I scored 74%. Not the highest score. Not the lowest score. It turned out to be the seventh-highest result in the class. And somehow, that felt fitting. Because seven had always been my lucky number. A small coincidence. But one that made me smile.
+              </p>
+              
+              {/* Chips row */}
+              <div className="flex flex-wrap gap-2.5 mt-2 justify-center">
+                {["74% Score", "7th in Class", "Lucky Number: 7"].map((chip) => (
+                  <span 
+                    key={chip} 
+                    className="font-space-mono text-[9px] md:text-xs text-[#fbbf24] border border-[#fbbf24]/20 bg-[#fbbf24]/5 px-3 py-1 rounded-full uppercase tracking-wider font-bold"
+                  >
+                    {chip}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* MOMENT 9 — From Student to Leader */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 relative">
+            {/* Rich, optimistic golden-purple glow */}
+            <div className="absolute inset-0 w-[600px] h-[400px] rounded-full bg-gradient-to-tr from-[#fbbf24]/8 via-[#a855f7]/5 to-transparent blur-[140px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+
+            <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
+              {/* Illustration column - Left */}
+              <div className="flex items-center justify-center order-1 w-full">
+                <HorizonIllustration />
+              </div>
+              
+              {/* Text Column - Right */}
+              <div className="flex flex-col gap-5 order-2">
+                <h2 className="font-orbitron text-3xl md:text-4xl font-black tracking-wide text-white">
+                  From Student to Leader
+                </h2>
+                <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed mt-2">
+                  Class 11 transformed me from a student into a leader. It taught me responsibility. Teamwork. Decision making. Communication. And the importance of creating opportunities for others. But even bigger challenges were waiting. The next chapter would bring board examinations, entrepreneurship, internships, major life decisions, and the beginning of the path that would eventually lead to AryanVerse. For the first time, the future no longer felt like a distant idea. It was approaching fast.
+                </p>
                 
                 <div className="mt-8 flex flex-col gap-1.5 self-start">
-                  <span className="font-space-mono text-[9px] text-[#A855F7] tracking-[0.25em] uppercase font-bold">
-                    Chapter 4
+                  <span className="font-space-mono text-[9px] text-[#fbbf24] tracking-[0.25em] uppercase font-bold">
+                    Chapter 5
                   </span>
                   <span className="font-orbitron text-xs text-slate-500 uppercase tracking-widest font-black">
                     Coming Soon
