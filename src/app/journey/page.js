@@ -1610,12 +1610,229 @@ function FinalBellIllustration() {
   );
 }
 
+// Walking boy SVG character
+function WalkingBoy() {
+  return (
+    <g>
+      {/* Head */}
+      <circle cx="10" cy="5" r="2.2" fill="#fff" />
+      {/* Backpack */}
+      <rect x="2.5" y="8" width="4" height="9" rx="1.2" fill="#1e1b4b" stroke="#a855f7" strokeWidth="0.8" />
+      {/* Torso */}
+      <path d="M 8.5 7.5 H 11.5 V 17 H 8.5 Z" fill="#090d16" stroke="#3b82f6" strokeWidth="0.8" />
+      
+      {/* Legs walking cycle frames */}
+      {/* Frame 1: Left Leg back, right leg forward */}
+      <g className="animate-[walkF1_0.8s_infinite]">
+        <path d="M 9 17 L 6 25" stroke="#a855f7" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M 11 17 L 14 25" stroke="#3b82f6" strokeWidth="1.5" strokeLinecap="round" />
+      </g>
+      
+      {/* Frame 2: Legs passing straight */}
+      <g className="animate-[walkF2_0.8s_infinite]">
+        <path d="M 9 17 L 9.5 25" stroke="#a855f7" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M 11 17 L 10.5 25" stroke="#3b82f6" strokeWidth="1.5" strokeLinecap="round" />
+      </g>
+      
+      {/* Frame 3: Left leg forward, right leg back */}
+      <g className="animate-[walkF3_0.8s_infinite]">
+        <path d="M 9 17 L 13 25" stroke="#a855f7" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M 11 17 L 7 25" stroke="#3b82f6" strokeWidth="1.5" strokeLinecap="round" />
+      </g>
+
+      {/* Arm swinging */}
+      <line x1="10" y1="10" x2="13" y2="15" stroke="#e2e8f0" strokeWidth="1" strokeLinecap="round" className="animate-[float_4s_infinite]" />
+    </g>
+  );
+}
+
+// Journey Map Selector
+function JourneyMap({ onNodeClick }) {
+  const nodes = [
+    { num: "Ch.1", name: "Foundations", id: "chapter-1", cx: 100, cy: 520, mcx: 200, mcy: 520 },
+    { num: "Ch.2", name: "The Shift", id: "chapter-2", cx: 300, cy: 440, mcx: 200, mcy: 410 },
+    { num: "Ch.3", name: "The Transformation", id: "chapter-3", cx: 500, cy: 360, mcx: 200, mcy: 300 },
+    { num: "Ch.4", name: "The Leader", id: "chapter-4", cx: 700, cy: 240, mcx: 200, mcy: 190 },
+    { num: "Ch.5", name: "The Crossroads", id: "chapter-5", cx: 900, cy: 120, mcx: 200, mcy: 80 },
+  ];
+
+  return (
+    <section id="journey-map-section" className="w-full min-h-screen flex flex-col justify-between items-center py-16 px-6 relative border-b border-white/5 select-none overflow-hidden z-10">
+      {/* Title block */}
+      <div id="map-header" className="text-center flex flex-col gap-2.5 opacity-0">
+        <h1 className="font-orbitron text-4xl md:text-5xl font-black tracking-widest text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.15)]">
+          JOURNEY ARCHIVE
+        </h1>
+        <p className="font-inter text-sm md:text-base text-slate-400 italic">
+          The story of how AryanVerse came to be.
+        </p>
+      </div>
+
+      {/* Desktop Map (Winding Path) */}
+      <div className="hidden md:block w-full max-w-5xl aspect-[5/3] relative my-6">
+        <svg className="w-full h-full overflow-visible" viewBox="0 0 1000 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="purpleGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="8" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+            <linearGradient id="pathGrad" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0%" stopColor="#3b82f6" />
+              <stop offset="50%" stopColor="#a855f7" />
+              <stop offset="100%" stopColor="#fbbf24" />
+            </linearGradient>
+          </defs>
+
+          {/* Dash winding path */}
+          <path
+            id="desktop-path"
+            d="M 100 520 C 220 520, 220 440, 300 440 C 380 440, 420 360, 500 360 C 580 360, 620 240, 700 240 C 780 240, 780 120, 900 120"
+            stroke="url(#pathGrad)"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+            strokeDasharray="8 8"
+            strokeOpacity="0.85"
+            filter="url(#purpleGlow)"
+          />
+
+          {/* Glowing node connections */}
+          {nodes.map((node) => (
+            <g
+              key={node.id}
+              className="map-node-group opacity-0 cursor-pointer group"
+              onClick={() => onNodeClick(node.id)}
+            >
+              {/* Glowing hover circle */}
+              <circle
+                cx={node.cx}
+                cy={node.cy}
+                r="20"
+                className="fill-[#050508] stroke-[#a855f7] strokeWidth-2 transition-all duration-300 group-hover:stroke-white group-hover:scale-110"
+                style={{ transformOrigin: `${node.cx}px ${node.cy}px` }}
+              />
+              <circle
+                cx={node.cx}
+                cy={node.cy}
+                r="6"
+                className="fill-[#a855f7] group-hover:fill-white transition-colors duration-300"
+              />
+              
+              {/* Labels */}
+              <text
+                x={node.cx}
+                y={node.cy - 28}
+                textAnchor="middle"
+                className="font-space-mono text-[10px] fill-slate-400 font-bold uppercase tracking-wider"
+              >
+                {node.num}
+              </text>
+              <text
+                x={node.cx}
+                y={node.cy + 34}
+                textAnchor="middle"
+                className="font-orbitron text-[11px] font-black fill-white tracking-widest uppercase transition-colors duration-300 group-hover:text-[#a855f7]"
+              >
+                {node.name}
+              </text>
+            </g>
+          ))}
+
+          {/* Walking Boy */}
+          <g id="desktop-boy" opacity="0">
+            <WalkingBoy />
+          </g>
+        </svg>
+      </div>
+
+      {/* Mobile Map (Vertical Path) */}
+      <div className="block md:hidden w-full max-w-sm aspect-[2/3] relative my-6">
+        <svg className="w-full h-full overflow-visible" viewBox="0 0 400 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+          {/* Vertical straight line */}
+          <line
+            id="mobile-path"
+            x1="200"
+            y1="520"
+            x2="200"
+            y2="80"
+            stroke="#a855f7"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeDasharray="6 6"
+            strokeOpacity="0.8"
+          />
+
+          {/* Glowing node connections */}
+          {nodes.map((node) => (
+            <g
+              key={node.id}
+              className="map-node-group-mobile opacity-0 cursor-pointer group"
+              onClick={() => onNodeClick(node.id)}
+            >
+              {/* Glowing hover circle */}
+              <circle
+                cx={node.mcx}
+                cy={node.mcy}
+                r="18"
+                className="fill-[#050508] stroke-[#a855f7] strokeWidth-2 transition-all duration-300 group-hover:stroke-white group-hover:scale-110"
+                style={{ transformOrigin: `${node.mcx}px ${node.mcy}px` }}
+              />
+              <circle
+                cx={node.mcx}
+                cy={node.mcy}
+                r="5"
+                className="fill-[#a855f7] group-hover:fill-white"
+              />
+              
+              {/* Labels (Left Chapter Num, Right Chapter Name) */}
+              <text
+                x={node.mcx - 28}
+                y={node.mcy + 4}
+                textAnchor="end"
+                className="font-space-mono text-[9px] fill-slate-400 font-bold"
+              >
+                {node.num}
+              </text>
+              <text
+                x={node.mcx + 28}
+                y={node.mcy + 4}
+                textAnchor="start"
+                className="font-orbitron text-[10px] font-black fill-white tracking-wider uppercase transition-colors duration-300 group-hover:text-[#a855f7]"
+              >
+                {node.name}
+              </text>
+            </g>
+          ))}
+
+          {/* Walking Boy */}
+          <g id="mobile-boy" opacity="0">
+            <WalkingBoy />
+          </g>
+        </svg>
+      </div>
+
+      {/* Bottom Scroll Down indicator */}
+      <div id="map-scroll-indicator" className="flex flex-col items-center gap-1.5 opacity-0 animate-[bounce_2s_infinite] cursor-pointer" onClick={() => onNodeClick("chapter-1")}>
+        <span className="font-space-mono text-[10px] md:text-xs text-[#a855f7] tracking-[0.25em] uppercase font-bold">
+          ↓ Scroll to explore
+        </span>
+      </div>
+    </section>
+  );
+}
+
 export default function JourneyPage() {
   const mainRef = useRef(null);
   const [currentChapter, setCurrentChapter] = useState({
     title: "CHAPTER 1 — FOUNDATIONS",
     subtitle: "Birth to Class 6",
   });
+
+  const handleNodeClick = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -1642,7 +1859,7 @@ export default function JourneyPage() {
 
     // ScrollTrigger to detect Chapter 1 in viewport
     ScrollTrigger.create({
-      trigger: "#chapter1-container",
+      trigger: "#chapter-1",
       scroller: mainRef.current,
       start: "top 40%",
       end: "bottom 40%",
@@ -1658,7 +1875,7 @@ export default function JourneyPage() {
 
     // ScrollTrigger to detect Chapter 2 in viewport
     ScrollTrigger.create({
-      trigger: "#chapter2-container",
+      trigger: "#chapter-2",
       scroller: mainRef.current,
       start: "top 40%",
       end: "bottom 40%",
@@ -1674,7 +1891,7 @@ export default function JourneyPage() {
 
     // ScrollTrigger to detect Chapter 3 in viewport
     ScrollTrigger.create({
-      trigger: "#chapter3-container",
+      trigger: "#chapter-3",
       scroller: mainRef.current,
       start: "top 40%",
       end: "bottom 40%",
@@ -1690,7 +1907,7 @@ export default function JourneyPage() {
 
     // ScrollTrigger to detect Chapter 4 in viewport
     ScrollTrigger.create({
-      trigger: "#chapter4-container",
+      trigger: "#chapter-4",
       scroller: mainRef.current,
       start: "top 40%",
       end: "bottom 40%",
@@ -1706,7 +1923,7 @@ export default function JourneyPage() {
 
     // ScrollTrigger to detect Chapter 5 in viewport
     ScrollTrigger.create({
-      trigger: "#chapter5-container",
+      trigger: "#chapter-5",
       scroller: mainRef.current,
       start: "top 40%",
       end: "bottom 40%",
@@ -1719,6 +1936,75 @@ export default function JourneyPage() {
         }
       },
     });
+
+    // Winding path animations and walking boy timeline
+    // Initial positions setup
+    gsap.set("#desktop-boy", { x: 90, y: 494, opacity: 0 });
+    gsap.set("#mobile-boy", { x: 190, y: 494, opacity: 0 });
+    gsap.set(".map-node-group", { opacity: 0, scale: 0, transformOrigin: "center center" });
+    gsap.set(".map-node-group-mobile", { opacity: 0, scale: 0, transformOrigin: "center center" });
+    gsap.set("#map-header", { opacity: 0, y: -20 });
+    gsap.set("#map-scroll-indicator", { opacity: 0 });
+
+    const desktopPath = document.getElementById("desktop-path");
+    const mobilePath = document.getElementById("mobile-path");
+    let dLength = 0;
+    let mLength = 0;
+
+    if (desktopPath) {
+      dLength = desktopPath.getTotalLength();
+      gsap.set(desktopPath, { strokeDasharray: dLength, strokeDashoffset: dLength });
+    }
+    if (mobilePath) {
+      mLength = mobilePath.getTotalLength();
+      gsap.set(mobilePath, { strokeDasharray: mLength, strokeDashoffset: mLength });
+    }
+
+    const loadTimeline = gsap.timeline({ delay: 0.5 });
+    
+    // Header fades in
+    loadTimeline.to("#map-header", { opacity: 1, y: 0, duration: 0.5 });
+
+    // Path draws itself
+    if (desktopPath) {
+      loadTimeline.to(desktopPath, { strokeDashoffset: 0, duration: 1.5, ease: "power1.inOut" }, "-=0.2");
+    }
+    if (mobilePath) {
+      loadTimeline.to(mobilePath, { strokeDashoffset: 0, duration: 1.5, ease: "power1.inOut" }, "<");
+    }
+
+    // Boy fades in at start
+    loadTimeline.to(["#desktop-boy", "#mobile-boy"], { opacity: 1, duration: 0.2 }, "-=0.2");
+
+    // Add walking label
+    loadTimeline.add("walk-start");
+
+    // Desktop walking animation
+    loadTimeline.to("#desktop-boy", { x: 90, y: 494, duration: 0.1 }, "walk-start") // Node 1
+                .to(gsap.utils.toArray(".map-node-group")[0], { opacity: 1, scale: 1, duration: 0.3, ease: "elastic.out(1, 0.7)" }, "walk-start")
+                .to("#desktop-boy", { x: 290, y: 414, duration: 0.5, ease: "power1.inOut" }, "walk-start+=0.1") // Node 2
+                .to(gsap.utils.toArray(".map-node-group")[1], { opacity: 1, scale: 1, duration: 0.3, ease: "elastic.out(1, 0.7)" }, "walk-start+=0.6")
+                .to("#desktop-boy", { x: 490, y: 334, duration: 0.5, ease: "power1.inOut" }, "walk-start+=0.6") // Node 3
+                .to(gsap.utils.toArray(".map-node-group")[2], { opacity: 1, scale: 1, duration: 0.3, ease: "elastic.out(1, 0.7)" }, "walk-start+=1.1")
+                .to("#desktop-boy", { x: 690, y: 214, duration: 0.5, ease: "power1.inOut" }, "walk-start+=1.1") // Node 4
+                .to(gsap.utils.toArray(".map-node-group")[3], { opacity: 1, scale: 1, duration: 0.3, ease: "elastic.out(1, 0.7)" }, "walk-start+=1.6")
+                .to("#desktop-boy", { x: 890, y: 94, duration: 0.5, ease: "power1.inOut" }, "walk-start+=1.6") // Node 5
+                .to(gsap.utils.toArray(".map-node-group")[4], { opacity: 1, scale: 1, duration: 0.3, ease: "elastic.out(1, 0.7)" }, "walk-start+=2.1");
+
+    // Mobile walking animation
+    loadTimeline.to("#mobile-boy", { x: 190, y: 494, duration: 0.1 }, "walk-start") // Node 1
+                .to(gsap.utils.toArray(".map-node-group-mobile")[0], { opacity: 1, scale: 1, duration: 0.3, ease: "elastic.out(1, 0.7)" }, "walk-start")
+                .to("#mobile-boy", { x: 190, y: 384, duration: 0.5, ease: "power1.inOut" }, "walk-start+=0.1") // Node 2
+                .to(gsap.utils.toArray(".map-node-group-mobile")[1], { opacity: 1, scale: 1, duration: 0.3, ease: "elastic.out(1, 0.7)" }, "walk-start+=0.6")
+                .to("#mobile-boy", { x: 190, y: 274, duration: 0.5, ease: "power1.inOut" }, "walk-start+=0.6") // Node 3
+                .to(gsap.utils.toArray(".map-node-group-mobile")[2], { opacity: 1, scale: 1, duration: 0.3, ease: "elastic.out(1, 0.7)" }, "walk-start+=1.1")
+                .to("#mobile-boy", { x: 190, y: 164, duration: 0.5, ease: "power1.inOut" }, "walk-start+=1.1") // Node 4
+                .to(gsap.utils.toArray(".map-node-group-mobile")[3], { opacity: 1, scale: 1, duration: 0.3, ease: "elastic.out(1, 0.7)" }, "walk-start+=1.6")
+                .to("#mobile-boy", { x: 190, y: 54, duration: 0.5, ease: "power1.inOut" }, "walk-start+=1.6") // Node 5
+                .to(gsap.utils.toArray(".map-node-group-mobile")[4], { opacity: 1, scale: 1, duration: 0.3, ease: "elastic.out(1, 0.7)" }, "walk-start+=2.1");
+
+    // Scroll indicator fades in at end
+    loadTimeline.to("#map-scroll-indicator", { opacity: 1, duration: 0.5 }, "walk-start+=2.3");
 
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
@@ -1791,6 +2077,23 @@ export default function JourneyPage() {
           0% { opacity: 0; transform: translateY(12px); }
           100% { opacity: 1; transform: translateY(0); }
         }
+        @keyframes walkF1 {
+          0%, 33.3% { opacity: 1; }
+          33.4%, 100% { opacity: 0; }
+        }
+        @keyframes walkF2 {
+          0%, 33.3% { opacity: 0; }
+          33.4%, 66.6% { opacity: 1; }
+          66.7%, 100% { opacity: 0; }
+        }
+        @keyframes walkF3 {
+          0%, 66.6% { opacity: 0; }
+          66.7%, 100% { opacity: 1; }
+        }
+        @keyframes bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-6px); }
+        }
       `}} />
 
       <div 
@@ -1821,10 +2124,13 @@ export default function JourneyPage() {
       {/* MOMENT STRUCTURE CONTAINER */}
       <div className="w-full flex flex-col z-10">
 
+        {/* Journey Map Chapter Selector at the top */}
+        <JourneyMap onNodeClick={handleNodeClick} />
+
         {/* ==========================================
             CHAPTER 1: FOUNDATIONS
             ========================================== */}
-        <div id="chapter1-container" className="w-full flex flex-col">
+        <div id="chapter-1" className="w-full flex flex-col">
           
           {/* OPENING MOMENT: CHAPTER TITLE */}
           <section className="scroll-animate-moment w-full min-h-screen flex flex-col items-center justify-center text-center px-6 relative">
@@ -2005,7 +2311,7 @@ export default function JourneyPage() {
         {/* ==========================================
             CHAPTER 2: THE SHIFT
             ========================================== */}
-        <div id="chapter2-container" className="w-full flex flex-col">
+        <div id="chapter-2" className="w-full flex flex-col">
           
           {/* TITLE MOMENT: CHAPTER 2 */}
           <section className="scroll-animate-moment w-full min-h-screen flex flex-col items-center justify-center text-center px-6 relative">
@@ -2156,7 +2462,7 @@ export default function JourneyPage() {
         {/* ==========================================
             CHAPTER 3: THE TRANSFORMATION
             ========================================== */}
-        <div id="chapter3-container" className="w-full flex flex-col">
+        <div id="chapter-3" className="w-full flex flex-col">
           
           {/* TITLE MOMENT: CHAPTER 3 */}
           <section className="scroll-animate-moment w-full min-h-screen flex flex-col items-center justify-center text-center px-6 relative">
@@ -2403,7 +2709,7 @@ export default function JourneyPage() {
         {/* ==========================================
             CHAPTER 4: THE LEADER
             ========================================== */}
-        <div id="chapter4-container" className="w-full flex flex-col">
+        <div id="chapter-4" className="w-full flex flex-col">
           
           {/* TITLE MOMENT: CHAPTER 4 */}
           <section className="scroll-animate-moment w-full min-h-screen flex flex-col items-center justify-center text-center px-6 relative">
@@ -2675,7 +2981,7 @@ export default function JourneyPage() {
         {/* ==========================================
             CHAPTER 5: THE CROSSROADS
             ========================================== */}
-        <div id="chapter5-container" className="w-full flex flex-col">
+        <div id="chapter-5" className="w-full flex flex-col">
           
           {/* TITLE MOMENT: CHAPTER 5 */}
           <section className="scroll-animate-moment w-full min-h-screen flex flex-col items-center justify-center text-center px-6 relative">
