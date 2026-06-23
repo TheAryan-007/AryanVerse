@@ -1269,6 +1269,347 @@ function HorizonIllustration() {
   );
 }
 
+// Chapter 5 Title Illustration - The Crossroads (Double Arrow Portal)
+function Chapter5TitleIllustration() {
+  return (
+    <div className="w-full max-w-[420px] aspect-[4/3] rounded-2xl border border-white/5 bg-[#05050b]/40 flex items-center justify-center p-6 shadow-inner relative overflow-hidden group">
+      <svg className="w-full h-full" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="portalLeftGlow" cx="30%" cy="40%" r="35%">
+            <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.3"/>
+            <stop offset="100%" stopColor="transparent" stopOpacity="0"/>
+          </radialGradient>
+          <radialGradient id="portalRightGlow" cx="70%" cy="40%" r="35%">
+            <stop offset="0%" stopColor="#a855f7" stopOpacity="0.3"/>
+            <stop offset="100%" stopColor="transparent" stopOpacity="0"/>
+          </radialGradient>
+          <linearGradient id="splitPathGrad" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0%" stopColor="#475569" />
+            <stop offset="50%" stopColor="#3b82f6" />
+            <stop offset="100%" stopColor="#a855f7" />
+          </linearGradient>
+        </defs>
+        
+        {/* Left Portal Glow */}
+        <circle cx="30" cy="35" r="18" fill="url(#portalLeftGlow)" className="animate-[breathe_6s_infinite]" />
+        <circle cx="30" cy="35" r="6" stroke="#3b82f6" strokeWidth="1" strokeDasharray="3 3" className="animate-spin" style={{ animationDuration: "12s" }} />
+        
+        {/* Right Portal Glow */}
+        <circle cx="70" cy="35" r="18" fill="url(#portalRightGlow)" className="animate-[breathe_8s_infinite]" />
+        <circle cx="70" cy="35" r="6" stroke="#a855f7" strokeWidth="1" strokeDasharray="3 3" className="animate-spin" style={{ animationDuration: "15s" }} />
+        
+        {/* Split Path */}
+        <path d="M50 75 V55 Q50 45 30 35" stroke="url(#splitPathGrad)" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+        <path d="M50 75 V55 Q50 45 70 35" stroke="url(#splitPathGrad)" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+        
+        {/* Tiny traveler shape in middle */}
+        <circle cx="50" cy="62" r="1.5" fill="#fff" className="animate-[float_4s_infinite]" />
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#050508]/60 via-transparent to-transparent pointer-events-none" />
+    </div>
+  );
+}
+
+// 1. Pressed desk with books and a clock in cold blue-grey tones (Moment 1)
+function RaceBeginsIllustration() {
+  return (
+    <div className="w-full max-w-[420px] aspect-[4/3] rounded-2xl border border-white/5 bg-[#05050b]/40 flex items-center justify-center p-6 shadow-inner relative overflow-hidden group">
+      <svg className="w-full h-full" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="coolSky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#1e293b" stopOpacity="0.3"/>
+            <stop offset="100%" stopColor="#050508" stopOpacity="0.05"/>
+          </linearGradient>
+        </defs>
+        <rect width="100" height="80" rx="4" fill="url(#coolSky)" />
+        {/* Desk line */}
+        <line x1="10" y1="65" x2="90" y2="65" stroke="#475569" strokeWidth="1.5" />
+        {/* Books stack */}
+        <rect x="25" y="55" width="22" height="10" rx="1" fill="#334155" stroke="#475569" strokeWidth="0.5" />
+        <rect x="27" y="47" width="18" height="8" rx="1" fill="#1e293b" stroke="#475569" strokeWidth="0.5" />
+        <rect x="26" y="41" width="20" height="6" rx="1" fill="#475569" stroke="#64748b" strokeWidth="0.5" />
+        {/* Desk lamp light cone (subtle blue-grey) */}
+        <polygon points="75,25 60,65 90,65" fill="#38bdf8" fillOpacity="0.05" />
+        {/* Clock */}
+        <circle cx="75" cy="35" r="10" stroke="#475569" strokeWidth="1" fill="#0f172a" />
+        <circle cx="75" cy="35" r="8" fill="#1e293b" />
+        <line x1="75" y1="35" x2="75" y2="30" stroke="#64748b" strokeWidth="1" strokeLinecap="round" /> {/* hour hand */}
+        <g style={{ transformOrigin: "75px 35px", animation: "clockTick 60s linear infinite" }}>
+          <line x1="75" y1="35" x2="79" y2="35" stroke="#38bdf8" strokeWidth="0.75" strokeLinecap="round" /> {/* minute hand */}
+        </g>
+        {/* Tiny details */}
+        <circle cx="75" cy="35" r="1" fill="#38bdf8" />
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#050508]/60 via-transparent to-transparent pointer-events-none" />
+    </div>
+  );
+}
+
+// 2. Physics vs Chemistry side-by-side elements (Moment 2)
+function PhysicsChemistryIllustration() {
+  return (
+    <div className="w-full max-w-[420px] aspect-[4/3] rounded-2xl border border-white/5 bg-[#05050b]/40 flex items-center justify-center p-6 shadow-inner relative overflow-hidden group">
+      <svg className="w-full h-full" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="physicsGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.4"/>
+            <stop offset="100%" stopColor="transparent" stopOpacity="0"/>
+          </radialGradient>
+          <radialGradient id="chemGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.3"/>
+            <stop offset="100%" stopColor="transparent" stopOpacity="0"/>
+          </radialGradient>
+        </defs>
+        
+        {/* Physics side - Left (Warm) */}
+        <circle cx="30" cy="40" r="15" fill="url(#physicsGlow)" className="animate-[breathe_6s_infinite]" />
+        <circle cx="30" cy="40" r="6" fill="#fbbf24" className="animate-[float_5s_infinite]" />
+        <ellipse cx="30" cy="40" rx="12" ry="4" stroke="#fbbf24" strokeWidth="0.5" strokeOpacity="0.3" transform="rotate(30 30 40)" />
+        <ellipse cx="30" cy="40" rx="12" ry="4" stroke="#fbbf24" strokeWidth="0.5" strokeOpacity="0.3" transform="rotate(-30 30 40)" />
+        
+        {/* Chemistry side - Right (Cold/Sharp) */}
+        <circle cx="70" cy="40" r="15" fill="url(#chemGlow)" className="animate-[breathe_8s_infinite]" />
+        <g className="animate-[float_6s_infinite]" style={{ transformOrigin: "70px 40px", animationDelay: "1s" }}>
+          {/* Jagged crystal/hexagon structure */}
+          <polygon points="70,28 79,33 79,47 70,52 61,47 61,33" stroke="#06b6d4" strokeWidth="1" fill="#0c4a6e" fillOpacity="0.4" />
+          <line x1="70" y1="28" x2="70" y2="52" stroke="#06b6d4" strokeWidth="0.5" strokeOpacity="0.5" />
+          <line x1="61" y1="33" x2="79" y2="47" stroke="#06b6d4" strokeWidth="0.5" strokeOpacity="0.5" />
+          <line x1="61" y1="47" x2="79" y2="33" stroke="#06b6d4" strokeWidth="0.5" strokeOpacity="0.5" />
+          <circle cx="70" cy="28" r="1" fill="#22d3ee" />
+          <circle cx="79" cy="33" r="1" fill="#22d3ee" />
+          <circle cx="79" cy="47" r="1" fill="#22d3ee" />
+          <circle cx="70" cy="52" r="1" fill="#22d3ee" />
+          <circle cx="61" cy="47" r="1" fill="#22d3ee" />
+          <circle cx="61" cy="33" r="1" fill="#22d3ee" />
+        </g>
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#050508]/60 via-transparent to-transparent pointer-events-none" />
+    </div>
+  );
+}
+
+// 3. Greyed-out outlines of previous milestones fading away (Moment 3)
+function SacrificeIllustration() {
+  return (
+    <div className="w-full max-w-[420px] aspect-[4/3] rounded-2xl border border-white/5 bg-[#05050b]/40 flex items-center justify-center p-6 shadow-inner relative overflow-hidden group">
+      <svg className="w-full h-full" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Runner outline - fading */}
+        <g opacity="0.15" className="animate-[float_8s_infinite]">
+          <path d="M20 55 L25 50 L23 42 L28 40 L31 46" stroke="#94a3b8" strokeWidth="0.8" strokeLinecap="round" />
+          <circle cx="28" cy="37" r="1.5" stroke="#94a3b8" strokeWidth="0.8" />
+          <line x1="23" y1="42" x2="18" y2="46" stroke="#94a3b8" strokeWidth="0.8" />
+        </g>
+        {/* Headboy star outline - fading */}
+        <g opacity="0.15" className="animate-[breathe_7s_infinite]">
+          <path d="M50 20 L53 27 H60 L55 32 L57 39 L50 35 L43 39 L45 32 L40 27 H47 Z" stroke="#94a3b8" strokeWidth="0.8" fill="none" />
+        </g>
+        {/* Two friends outline - fading */}
+        <g opacity="0.15" className="animate-[float_6s_infinite]" style={{ animationDelay: "2s" }}>
+          <circle cx="72" cy="48" r="2" stroke="#94a3b8" strokeWidth="0.8" />
+          <path d="M68 58 C68 53 76 53 76 58" stroke="#94a3b8" strokeWidth="0.8" />
+          
+          <circle cx="82" cy="46" r="2" stroke="#94a3b8" strokeWidth="0.8" />
+          <path d="M78 58 C78 51 86 51 86 58" stroke="#94a3b8" strokeWidth="0.8" />
+        </g>
+        
+        {/* Centered minimal cross layout */}
+        <line x1="50" y1="10" x2="50" y2="70" stroke="#334155" strokeWidth="0.5" strokeDasharray="3 3" />
+        <line x1="10" y1="40" x2="90" y2="40" stroke="#334155" strokeWidth="0.5" strokeDasharray="3 3" />
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#050508]/60 via-transparent to-transparent pointer-events-none" />
+    </div>
+  );
+}
+
+// 4. Exam hall with distressed and one smiling figures (Moment 4)
+function PhysicsPaperIllustration() {
+  return (
+    <div className="w-full max-w-[420px] aspect-[4/3] rounded-2xl border border-white/5 bg-[#05050b]/40 flex items-center justify-center p-6 shadow-inner relative overflow-hidden group">
+      <svg className="w-full h-full" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="logicGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.25"/>
+            <stop offset="100%" stopColor="transparent" stopOpacity="0"/>
+          </radialGradient>
+        </defs>
+        
+        {/* Distressed desks (Left and Right) */}
+        <g opacity="0.3">
+          {/* Left desk */}
+          <line x1="15" y1="55" x2="35" y2="55" stroke="#475569" strokeWidth="1" />
+          <path d="M22 55 C22 51 28 51 28 55" stroke="#475569" strokeWidth="1" />
+          <circle cx="25" cy="46" r="2" fill="#475569" />
+          {/* Head down line */}
+          <path d="M25 44 L23 48" stroke="#475569" strokeWidth="1" />
+          
+          {/* Right desk */}
+          <line x1="65" y1="55" x2="85" y2="55" stroke="#475569" strokeWidth="1" />
+          <path d="M72 55 C72 51 78 51 78 55" stroke="#475569" strokeWidth="1" />
+          <circle cx="75" cy="46" r="2" fill="#475569" />
+          <path d="M75 44 L77 48" stroke="#475569" strokeWidth="1" />
+        </g>
+        
+        {/* Smiling student in center */}
+        <circle cx="50" cy="45" r="20" fill="url(#logicGlow)" className="animate-[breathe_6s_infinite]" />
+        
+        <g className="animate-[float_5s_infinite]">
+          <line x1="40" y1="60" x2="60" y2="60" stroke="#3b82f6" strokeWidth="1.5" />
+          {/* Student chest and head */}
+          <path d="M44 60 C44 54 56 54 56 60" fill="#1e3a8a" stroke="#3b82f6" strokeWidth="1" />
+          <circle cx="50" cy="49" r="3.5" fill="#1d4ed8" stroke="#3b82f6" strokeWidth="1" />
+          {/* Smiling curves */}
+          <path d="M49.5 49 Q50 49.5 50.5 49" stroke="#38bdf8" strokeWidth="0.5" />
+          
+          {/* Logic/physics symbols floating */}
+          <text x="35" y="32" fill="#38bdf8" fontSize="5" fontFamily="monospace" opacity="0.75" className="animate-pulse">E=mc²</text>
+          <path d="M60 25 Q64 30 68 25 T72 30" stroke="#38bdf8" strokeWidth="0.8" fill="none" opacity="0.6" />
+          <text x="58" y="38" fill="#38bdf8" fontSize="6" fontFamily="monospace" opacity="0.75" className="animate-pulse" style={{ animationDelay: "1.5s" }}>∫</text>
+        </g>
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#050508]/60 via-transparent to-transparent pointer-events-none" />
+    </div>
+  );
+}
+
+// 5. Blurred math equations behind frosted glass (Moment 5)
+function MathStoryIllustration() {
+  return (
+    <div className="w-full max-w-[420px] aspect-[4/3] rounded-2xl border border-white/5 bg-[#05050b]/40 flex items-center justify-center p-6 shadow-inner relative overflow-hidden group">
+      <svg className="w-full h-full" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#1e293b" strokeWidth="0.5"/>
+          </pattern>
+        </defs>
+        
+        {/* Grid background */}
+        <rect width="100" height="80" fill="url(#grid)" />
+        
+        {/* Some complex math formulas blurred */}
+        <g opacity="0.4" className="blur-[2px]">
+          <text x="20" y="25" fill="#a855f7" fontSize="4" fontFamily="monospace">f(x) = sin(x) + cos(x)</text>
+          <text x="35" y="45" fill="#6366f1" fontSize="4" fontFamily="monospace">{"dy/dx = lim(h->0)..."}</text>
+          <text x="15" y="60" fill="#a855f7" fontSize="4" fontFamily="monospace">x² + y² = z²</text>
+        </g>
+        
+        {/* Frosted Glass Overlay */}
+        <rect x="10" y="10" width="80" height="60" rx="6" fill="#0d0d1a" fillOpacity="0.75" stroke="#334155" strokeWidth="0.75" className="backdrop-blur-sm" />
+        
+        {/* Glitch noise elements inside the glass */}
+        <g className="animate-[glitch_3s_infinite]">
+          <line x1="15" y1="30" x2="85" y2="30" stroke="#a855f7" strokeWidth="1" strokeDasharray="5 20" opacity="0.6" />
+          <line x1="20" y1="50" x2="80" y2="50" stroke="#6366f1" strokeWidth="0.8" strokeDasharray="10 15" opacity="0.5" />
+        </g>
+        
+        <g className="animate-[staticLines_5s_infinite]">
+          <rect x="25" y="20" width="50" height="2" fill="#a855f7" opacity="0.2" />
+          <rect x="15" y="45" width="70" height="1" fill="#6366f1" opacity="0.3" />
+        </g>
+        
+        {/* Central Question mark */}
+        <text x="50" y="48" fill="#a855f7" fontSize="16" fontFamily="monospace" textAnchor="middle" opacity="0.25" className="animate-[breathe_4s_infinite] font-bold">?</text>
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#050508]/60 via-transparent to-transparent pointer-events-none" />
+    </div>
+  );
+}
+
+// 6. Paint stroke cosmic nebula representing creativity (Moment 6)
+function ArtistInsideIllustration() {
+  return (
+    <div className="w-full max-w-[420px] aspect-[4/3] rounded-2xl border border-white/5 bg-[#05050b]/40 flex items-center justify-center p-6 shadow-inner relative overflow-hidden group">
+      <svg className="w-full h-full" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="artGrad1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#ec4899" />
+            <stop offset="50%" stopColor="#f97316" />
+            <stop offset="100%" stopColor="#fbbf24" />
+          </linearGradient>
+          <radialGradient id="nebulaGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.3"/>
+            <stop offset="50%" stopColor="#ec4899" stopOpacity="0.15"/>
+            <stop offset="100%" stopColor="transparent" stopOpacity="0"/>
+          </radialGradient>
+        </defs>
+        
+        {/* Background glow */}
+        <circle cx="50" cy="40" r="30" fill="url(#nebulaGlow)" className="animate-[breathe_8s_infinite]" />
+        
+        {/* Swirling color paths */}
+        <path d="M15 55 Q35 15 65 30 T85 45" stroke="url(#artGrad1)" strokeWidth="5" strokeLinecap="round" fill="none" strokeOpacity="0.8" className="animate-[float_6s_infinite]" />
+        <path d="M10 40 Q40 60 70 35 T90 25" stroke="#fbbf24" strokeWidth="2.5" strokeLinecap="round" fill="none" strokeOpacity="0.6" className="animate-[breathe_5s_infinite]" style={{ animationDelay: "1s" }} />
+        
+        {/* Easel/palette minimal silhouettes */}
+        <g className="animate-[float_7s_infinite]" style={{ transformOrigin: "50px 40px", animationDelay: "0.5s" }}>
+          {/* Palette */}
+          <path d="M45 45 C40 45 35 48 35 53 C35 58 45 61 53 58 C57 56 60 52 58 48 C56 44 50 45 45 45 Z" fill="#1e293b" stroke="#fbbf24" strokeWidth="0.75" />
+          {/* Thumb hole */}
+          <circle cx="39" cy="51" r="1.5" fill="#05050b" />
+          {/* Tiny color spots on palette */}
+          <circle cx="45" cy="49" r="1" fill="#ec4899" />
+          <circle cx="50" cy="51" r="1" fill="#f97316" />
+          <circle cx="48" cy="55" r="1" fill="#fbbf24" />
+          {/* Paintbrush */}
+          <line x1="33" y1="62" x2="52" y2="43" stroke="#e2e8f0" strokeWidth="1.2" strokeLinecap="round" />
+          <path d="M52 43 L54 41 L53 43 Z" fill="#ec4899" />
+        </g>
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#050508]/60 via-transparent to-transparent pointer-events-none" />
+    </div>
+  );
+}
+
+// 7. School pillars fading down into starry space (Moment 8)
+function FinalBellIllustration() {
+  return (
+    <div className="w-full max-w-[420px] aspect-[4/3] rounded-2xl border border-white/5 bg-[#05050b]/40 flex items-center justify-center p-6 shadow-inner relative overflow-hidden group">
+      <svg className="w-full h-full" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="spaceOpening" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0%" stopColor="#050508" />
+            <stop offset="40%" stopColor="#090d16" />
+            <stop offset="100%" stopColor="#1e1b4b" stopOpacity="0.6" />
+          </linearGradient>
+          <radialGradient id="portalGlow" cx="50%" cy="30%" r="40%">
+            <stop offset="0%" stopColor="#a855f7" stopOpacity="0.4"/>
+            <stop offset="100%" stopColor="transparent" stopOpacity="0"/>
+          </radialGradient>
+        </defs>
+        
+        {/* Space background */}
+        <rect width="100" height="80" fill="url(#spaceOpening)" />
+        
+        {/* Glowing portal above */}
+        <circle cx="50" cy="25" r="20" fill="url(#portalGlow)" className="animate-[breathe_8s_infinite]" />
+        <circle cx="50" cy="25" r="8" stroke="#a855f7" strokeWidth="0.5" strokeOpacity="0.5" className="animate-[float_6s_infinite]" />
+        
+        {/* Stars */}
+        <circle cx="20" cy="15" r="0.5" fill="#fff" className="animate-pulse" style={{ animationDuration: "2s" }} />
+        <circle cx="80" cy="20" r="0.4" fill="#fff" className="animate-pulse" style={{ animationDuration: "3s" }} />
+        <circle cx="35" cy="35" r="0.6" fill="#fff" className="animate-pulse" style={{ animationDuration: "4s" }} />
+        <circle cx="65" cy="10" r="0.5" fill="#fff" className="animate-pulse" style={{ animationDuration: "5s" }} />
+        
+        {/* School pillars/doors at the bottom fading into black */}
+        <g opacity="0.6">
+          {/* Ground line */}
+          <line x1="5" y1="70" x2="95" y2="70" stroke="#334155" strokeWidth="1.5" />
+          {/* Left pillar */}
+          <rect x="15" y="45" width="8" height="25" fill="#0f172a" stroke="#1e293b" strokeWidth="0.75" />
+          <rect x="13" y="42" width="12" height="3" fill="#1e293b" />
+          
+          {/* Right pillar */}
+          <rect x="77" y="45" width="8" height="25" fill="#0f172a" stroke="#1e293b" strokeWidth="0.75" />
+          <rect x="75" y="42" width="12" height="3" fill="#1e293b" />
+          
+          {/* Archway joining them */}
+          <path d="M23 45 Q50 32 77 45" stroke="#1e293b" strokeWidth="2.5" fill="none" />
+        </g>
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#050508] via-transparent to-transparent pointer-events-none" />
+    </div>
+  );
+}
+
 export default function JourneyPage() {
   const mainRef = useRef(null);
   const [currentChapter, setCurrentChapter] = useState({
@@ -1363,6 +1704,22 @@ export default function JourneyPage() {
       },
     });
 
+    // ScrollTrigger to detect Chapter 5 in viewport
+    ScrollTrigger.create({
+      trigger: "#chapter5-container",
+      scroller: mainRef.current,
+      start: "top 40%",
+      end: "bottom 40%",
+      onToggle: (self) => {
+        if (self.isActive) {
+          setCurrentChapter({
+            title: "CHAPTER 5 — THE CROSSROADS",
+            subtitle: "Class 12 Milestone",
+          });
+        }
+      },
+    });
+
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
@@ -1425,6 +1782,14 @@ export default function JourneyPage() {
           0% { box-shadow: 0 0 8px rgba(251, 191, 36, 0.25); border-color: rgba(251, 191, 36, 0.25); }
           50% { box-shadow: 0 0 35px rgba(251, 191, 36, 0.75); border-color: rgba(251, 191, 36, 0.85); }
           100% { box-shadow: 0 0 8px rgba(251, 191, 36, 0.25); border-color: rgba(251, 191, 36, 0.25); }
+        }
+        @keyframes clockTick {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        @keyframes slowFadeIn {
+          0% { opacity: 0; transform: translateY(12px); }
+          100% { opacity: 1; transform: translateY(0); }
         }
       `}} />
 
@@ -2299,9 +2664,257 @@ export default function JourneyPage() {
                     Chapter 5
                   </span>
                   <span className="font-orbitron text-xs text-slate-500 uppercase tracking-widest font-black">
-                    Coming Soon
+                    Scroll to Continue
                   </span>
                 </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        {/* ==========================================
+            CHAPTER 5: THE CROSSROADS
+            ========================================== */}
+        <div id="chapter5-container" className="w-full flex flex-col">
+          
+          {/* TITLE MOMENT: CHAPTER 5 */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col items-center justify-center text-center px-6 relative">
+            {/* Cool-to-purple background glow */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#3b82f6]/5 to-[#a855f7]/5 blur-[100px] z-[-1] pointer-events-none rounded-full max-w-md mx-auto" />
+            
+            <div className="flex flex-col items-center gap-4 max-w-2xl">
+              <span className="font-space-mono text-xs md:text-sm tracking-[0.3em] text-[#3b82f6] uppercase font-bold">
+                Chapter 5
+              </span>
+              <h1 className="font-orbitron text-5xl md:text-7xl font-black tracking-widest mt-1 text-transparent bg-clip-text bg-gradient-to-r from-[#3b82f6] via-slate-100 to-[#a855f7] drop-shadow-[0_0_30px_rgba(59,130,246,0.25)]">
+                The Crossroads
+              </h1>
+              <p className="font-inter text-xs md:text-sm text-slate-400 max-w-md mt-4 leading-relaxed italic">
+                Facing pressure, academic hurdles, and deciding my own creative destiny.
+              </p>
+            </div>
+            <div className="mt-12">
+              <Chapter5TitleIllustration />
+            </div>
+          </section>
+
+          {/* MOMENT 1 — The Race Begins */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 border-b border-white/5 relative">
+            {/* Cool clinical blue-grey glow */}
+            <div className="absolute inset-0 w-[500px] h-[350px] rounded-full bg-gradient-to-tr from-[#1e293b]/5 to-[#334155]/3 blur-[120px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+            
+            <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
+              {/* Text column - Left */}
+              <div className="flex flex-col gap-5 order-2 md:order-1">
+                <h2 className="font-orbitron text-3xl md:text-4xl font-black tracking-wide text-white">
+                  The Race Begins
+                </h2>
+                <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed mt-2">
+                  Almost overnight, life became centered around one thing. Marks. Percentages. Competitive exams. IIT. Ranks. Cutoffs. Results. Every conversation somehow found its way back to academics. Somewhere along the way, it felt as though people stopped asking who you wanted to become and only cared about what rank you would achieve. That shift affected me more than I expected. For the first time, I felt disconnected from the environment around me.
+                </p>
+              </div>
+              {/* Illustration column - Right */}
+              <div className="flex items-center justify-center order-1 md:order-2 w-full">
+                <RaceBeginsIllustration />
+              </div>
+            </div>
+          </section>
+
+          {/* MOMENT 2 — The Subject That Betrayed Me */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 border-b border-white/5 relative">
+            {/* Split warm (Physics) and cool (Chemistry) glow */}
+            <div className="absolute inset-0 w-[550px] h-[380px] rounded-full bg-gradient-to-tr from-[#fbbf24]/2 via-[#06b6d4]/2 to-transparent blur-[130px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+
+            <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
+              {/* Illustration column - Left */}
+              <div className="flex items-center justify-center order-1 w-full">
+                <PhysicsChemistryIllustration />
+              </div>
+              {/* Text column - Right */}
+              <div className="flex flex-col gap-5 order-2">
+                <h2 className="font-orbitron text-3xl md:text-4xl font-black tracking-wide text-white">
+                  The Subject That Betrayed Me
+                </h2>
+                <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed mt-2">
+                  If Physics was my strongest ally, Chemistry was my greatest enemy. Physics felt logical. It felt intuitive. It felt like solving puzzles. Chemistry felt different. And throughout Class 12, it remained one of my biggest academic challenges. There were days when I questioned myself. Days when concepts refused to make sense. Days when effort didn't seem to produce results. But I kept going. Because giving up was never an option.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* MOMENT 3 — The Sacrifice */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 border-b border-white/5 relative">
+            {/* Desaturated, sparse dark slate glow */}
+            <div className="absolute inset-0 w-[500px] h-[350px] rounded-full bg-[#0f172a]/4 blur-[120px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+
+            <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
+              {/* Text column - Left */}
+              <div className="flex flex-col gap-5 order-2 md:order-1">
+                <h2 className="font-orbitron text-3xl md:text-4xl font-black tracking-wide text-white">
+                  The Sacrifice
+                </h2>
+                <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed mt-2">
+                  Unlike previous years, Class 12 demanded everything. The activities disappeared. The events disappeared. The leadership responsibilities disappeared. The freedom disappeared. Most of my energy went into preparing for the future. Looking back, this is one reason why Class 12 feels less colorful than other chapters. It wasn't a year of experiences. It was a year of preparation. A year of sacrifice. A year spent building foundations for whatever came next.
+                </p>
+              </div>
+              {/* Illustration column - Right */}
+              <div className="flex items-center justify-center order-1 md:order-2 w-full">
+                <SacrificeIllustration />
+              </div>
+            </div>
+          </section>
+
+          {/* MOMENT 4 — The Physics Paper */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 border-b border-white/5 relative">
+            {/* Concentrated logic blue glow */}
+            <div className="absolute inset-0 w-[500px] h-[350px] rounded-full bg-[#3b82f6]/5 blur-[120px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+
+            <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
+              {/* Illustration column - Left */}
+              <div className="flex items-center justify-center order-1 w-full">
+                <PhysicsPaperIllustration />
+              </div>
+              {/* Text column & Pull Quote - Right */}
+              <div className="flex flex-col gap-5 order-2">
+                <h2 className="font-orbitron text-3xl md:text-4xl font-black tracking-wide text-white">
+                  The Infamous Paper — February 2025
+                </h2>
+                <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed mt-2">
+                  The first paper was Physics — ironically, the subject I loved most. I walked into the examination hall confident. Prepared. Ready. Then I saw the paper. And suddenly everything changed. The Physics paper that year became infamous. Students across the country walked out shocked. Some were upset. Some were frustrated. Some were close to tears. Meanwhile, our classroom had a completely different reaction. We laughed. Not because the paper was easy. But because it was so unexpected — it wasn't testing memorization. It was testing logic. Reasoning. Problem-solving. Thinking under pressure. Fortunately, those were things I enjoyed.
+                </p>
+                <blockquote className="border-l-2 border-[#3b82f6] pl-4 font-inter text-slate-300 italic text-base leading-relaxed mt-4 text-center mx-auto max-w-lg">
+                  "Sometimes confidence comes not from knowing every answer, but from trusting your ability to figure things out when things go wrong."
+                </blockquote>
+              </div>
+            </div>
+          </section>
+
+          {/* MOMENT 5 — The Mathematics Story */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col items-center justify-center text-center px-6 border-b border-white/5 relative">
+            {/* Glitchy mystical purple glow */}
+            <div className="absolute inset-0 w-[450px] h-[450px] rounded-full bg-gradient-to-tr from-[#a855f7]/3 via-[#6366f1]/2 to-transparent blur-[130px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+            
+            <div className="max-w-2xl flex flex-col items-center gap-6">
+              <h2 className="font-orbitron text-2xl md:text-3xl font-black tracking-wide text-white">
+                The Mathematics Story
+              </h2>
+              <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed">
+                Mathematics became one of the most frustrating parts of my board journey. Not because I was unprepared. Not because the paper was impossible. In fact, quite the opposite. I knew the concepts. I understood the questions. I felt capable of performing well. Yet sometimes life creates situations that cannot be explained by preparation alone. Sometimes things simply don't go according to plan.
+              </p>
+              
+              <div className="font-inter text-lg md:text-xl italic text-[#a855f7] drop-shadow-[0_0_12px_rgba(168,85,247,0.45)] select-none my-3 font-semibold tracking-wide animate-[textShimmer_3s_infinite]">
+                "A story I still haven't fully told."
+              </div>
+              
+              <div className="mt-4">
+                <MathStoryIllustration />
+              </div>
+            </div>
+          </section>
+
+          {/* MOMENT 6 — The Artist Hidden Inside */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 border-b border-white/5 relative">
+            {/* Warmest gold and orange burst glow */}
+            <div className="absolute inset-0 w-[550px] h-[380px] rounded-full bg-gradient-to-tr from-[#fbbf24]/6 via-[#f97316]/2 to-transparent blur-[130px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+
+            <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
+              {/* Text & Stat Column - Left */}
+              <div className="flex flex-col gap-5 order-2 md:order-1">
+                <h2 className="font-orbitron text-3xl md:text-4xl font-black tracking-wide text-white">
+                  The Artist Hidden Inside
+                </h2>
+                <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed mt-2">
+                  Amid Physics, Chemistry, Mathematics, and board pressure, there was one subject that reminded me of a different side of myself. Fine Arts. While many people viewed it as an additional subject, I saw it as something more. A place where creativity survived inside an otherwise heavily academic year. At the end of the year, I scored 100 out of 100 in Fine Arts. A perfect score. And in many ways, that result felt symbolic. Because even during one of the most academically demanding periods of my life, creativity still found a way to exist.
+                </p>
+                
+                {/* Large gold stat card */}
+                <div className="mt-4 max-w-[280px] bg-[#0d0d1a]/55 border border-[#fbbf24]/30 p-6 rounded-2xl flex flex-col gap-1 text-center shadow-[0_0_20px_rgba(251,191,36,0.2)]">
+                  <span className="font-orbitron font-black text-4xl text-[#fbbf24] drop-shadow-[0_0_10px_rgba(251,191,36,0.3)]">
+                    100 / 100
+                  </span>
+                  <span className="font-inter text-xs text-slate-400 italic mt-1 leading-relaxed">
+                    Fine Arts — Creativity survives everything.
+                  </span>
+                </div>
+              </div>
+              
+              {/* Illustration column - Right */}
+              <div className="flex items-center justify-center order-1 md:order-2 w-full">
+                <ArtistInsideIllustration />
+              </div>
+            </div>
+          </section>
+
+          {/* MOMENT 7 — The Result */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 border-b border-white/5 relative">
+            {/* Purple and gold blend glow */}
+            <div className="absolute inset-0 w-[500px] h-[350px] rounded-full bg-gradient-to-tr from-[#a855f7]/4 via-[#fbbf24]/3 to-transparent blur-[120px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+
+            <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
+              {/* Text Column - Left */}
+              <div className="flex flex-col gap-5 order-2 md:order-1">
+                <h2 className="font-orbitron text-3xl md:text-4xl font-black tracking-wide text-white">
+                  The Result
+                </h2>
+                <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed mt-2">
+                  When the board results arrived, I scored 81%. For some people, that number might seem average. For others, it might seem disappointing. For me, it felt honest. Because I knew exactly how much work had gone into earning it. I knew the sacrifices. The struggles. The pressure. The effort nobody else could see. I never measured success purely through percentages. I measured it through growth. And in that sense, Class 12 taught me more than many other years combined.
+                </p>
+              </div>
+              
+              {/* Side-by-side stats cards - Right */}
+              <div className="grid grid-cols-2 gap-4 order-1 md:order-2 w-full max-w-[420px] mx-auto">
+                <div className="bg-[#0d0d1a]/55 border border-[#a855f7]/30 p-6 rounded-2xl flex flex-col gap-2 text-center shadow-[0_0_15px_rgba(168,85,247,0.1)]">
+                  <span className="font-orbitron font-black text-4xl text-[#a855f7] drop-shadow-[0_0_8px_rgba(168,85,247,0.3)]">
+                    81%
+                  </span>
+                  <span className="font-space-mono text-[10px] text-slate-400 uppercase tracking-wider font-bold">
+                    Class 12 Boards
+                  </span>
+                </div>
+                <div className="bg-[#0d0d1a]/55 border border-[#fbbf24]/30 p-6 rounded-2xl flex flex-col gap-2 text-center shadow-[0_0_15px_rgba(251,191,36,0.1)]">
+                  <span className="font-orbitron font-black text-4xl text-[#fbbf24] drop-shadow-[0_0_8px_rgba(251,191,36,0.3)]">
+                    100/100
+                  </span>
+                  <span className="font-space-mono text-[10px] text-slate-400 uppercase tracking-wider font-bold">
+                    Fine Arts Score
+                  </span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* MOMENT 8 — The Final Bell */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col items-center justify-center text-center px-6 relative">
+            {/* Cinematic dark starfield opening glow */}
+            <div className="absolute inset-0 w-[550px] h-[550px] rounded-full bg-gradient-to-tr from-[#1e1b4b]/8 via-[#a855f7]/4 to-transparent blur-[140px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+            
+            <div className="max-w-3xl flex flex-col items-center gap-6">
+              <h2 className="font-orbitron text-2xl md:text-3xl font-black tracking-wide text-white">
+                The Final Bell
+              </h2>
+              <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed max-w-2xl">
+                With 81% in Class 12 and a perfect 100 in Fine Arts, my school journey finally came to an end. The classrooms that had once felt permanent became memories. The teachers who guided me became chapters. The corridors that had seen countless conversations became part of the past. For the first time in my life, there was no next school year waiting. School was over.
+              </p>
+              
+              <div 
+                className="font-inter text-xl md:text-2xl italic text-transparent bg-clip-text bg-gradient-to-r from-slate-100 via-slate-300 to-[#a855f7] select-none my-6 font-bold max-w-xl leading-relaxed text-center opacity-0 animate-[slowFadeIn_2.5s_ease-out_forwards]"
+                style={{ animationDelay: "1s" }}
+              >
+                "The next chapter would no longer be written for me. I would have to write it myself."
+              </div>
+              
+              <div className="mt-4">
+                <FinalBellIllustration />
+              </div>
+              
+              {/* College Begins indicator */}
+              <div className="mt-12 flex flex-col gap-1.5 items-center">
+                <span className="font-space-mono text-[9px] text-[#a855f7] tracking-[0.25em] uppercase font-bold">
+                  Chapter 6
+                </span>
+                <span className="font-orbitron text-xs text-slate-400 uppercase tracking-widest font-black">
+                  College Begins
+                </span>
               </div>
             </div>
           </section>
