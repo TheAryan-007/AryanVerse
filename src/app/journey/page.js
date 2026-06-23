@@ -3,7 +3,8 @@
 /**
  * Journey Archive Environment — AryanVerse
  * 
- * A story-driven cinematic scroll timeline for Chapter 1 (Foundations) and Chapter 2 (The Shift).
+ * A story-driven cinematic scroll timeline for Chapter 1 (Foundations), Chapter 2 (The Shift),
+ * and Chapter 3 (The Transformation).
  * Alternate-aligns moments on desktop (text left, SVGs right, and vice versa)
  * and collapses to a single-column stack on mobile.
  * 
@@ -608,6 +609,335 @@ function WindingRoadIllustration() {
   );
 }
 
+// ==========================================
+// CHAPTER 3 ILLUSTRATIONS
+// ==========================================
+
+// 1. Chapter 3 Title Illustration - Transition Spiral
+function Chapter3TitleIllustration() {
+  return (
+    <div className="relative w-full max-w-[320px] aspect-square flex items-center justify-center pointer-events-none">
+      <svg className="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="chap3Portal" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#64748b" stopOpacity="0.3"/>
+            <stop offset="100%" stopColor="#A855F7" stopOpacity="0.5"/>
+          </linearGradient>
+        </defs>
+        <circle cx="50" cy="50" r="40" fill="none" stroke="url(#chap3Portal)" strokeWidth="0.5" className="animate-[breathe_6s_infinite]"/>
+        <path d="M50 50 Q55 35 60 50 T70 50 T80 50" stroke="#A855F7" strokeWidth="0.4" strokeOpacity="0.7" fill="none" className="animate-[spin_40s_linear_infinite]"/>
+        <path d="M50 50 Q45 65 40 50 T30 50 T20 50" stroke="#64748b" strokeWidth="0.4" strokeOpacity="0.5" fill="none" className="animate-[spin_40s_linear_infinite_reverse]"/>
+        <circle cx="50" cy="50" r="3" fill="#A855F7" className="animate-ping" style={{ animationDuration: "5s" }}/>
+        <circle cx="50" cy="50" r="1.5" fill="#fff"/>
+      </svg>
+    </div>
+  );
+}
+
+// 2. Muted classroom outline (Moment 1)
+function RamEeshClassroomIllustration() {
+  return (
+    <div className="w-full max-w-[420px] aspect-[4/3] rounded-2xl border border-white/5 bg-[#0b0c10]/40 flex items-center justify-center p-6 shadow-inner relative overflow-hidden group">
+      <svg className="w-full h-full" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="greySky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#334155" stopOpacity="0.4"/>
+            <stop offset="100%" stopColor="#0f172a" stopOpacity="0.2"/>
+          </linearGradient>
+          <linearGradient id="windowLight" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#94a3b8" stopOpacity="0.12"/>
+            <stop offset="100%" stopColor="#94a3b8" stopOpacity="0"/>
+          </linearGradient>
+        </defs>
+        <rect width="100" height="80" rx="4" fill="url(#greySky)"/>
+
+        <rect x="5" y="10" width="18" height="28" fill="#1e293b" stroke="rgba(255,255,255,0.04)" strokeWidth="0.5"/>
+        <line x1="14" y1="10" x2="14" y2="38" stroke="rgba(255,255,255,0.04)" strokeWidth="0.5"/>
+        <line x1="5" y1="24" x2="23" y2="24" stroke="rgba(255,255,255,0.04)" strokeWidth="0.5"/>
+        
+        <polygon points="5,24 85,75 50,80 5,38" fill="url(#windowLight)"/>
+
+        {/* Row 3 */}
+        <rect x="35" y="45" width="14" height="4" fill="#1e293b" opacity="0.6"/>
+        <line x1="42" y1="49" x2="42" y2="58" stroke="#1e293b" strokeWidth="0.8" opacity="0.6"/>
+        <rect x="55" y="45" width="14" height="4" fill="#1e293b" opacity="0.6"/>
+        <line x1="62" y1="49" x2="62" y2="58" stroke="#1e293b" strokeWidth="0.8" opacity="0.6"/>
+
+        {/* Row 2 */}
+        <rect x="30" y="52" width="16" height="5" fill="#1e293b" opacity="0.8"/>
+        <line x1="38" y1="57" x2="38" y2="68" stroke="#1e293b" strokeWidth="1" opacity="0.8"/>
+        <rect x="52" y="52" width="16" height="5" fill="#1e293b" opacity="0.8"/>
+        <line x1="60" y1="57" x2="60" y2="68" stroke="#1e293b" strokeWidth="1" opacity="0.8"/>
+
+        {/* Row 1 */}
+        <rect x="25" y="60" width="18" height="6" fill="#111827"/>
+        <line x1="34" y1="66" x2="34" y2="80" stroke="#111827" strokeWidth="1.2"/>
+        <rect x="48" y="60" width="18" height="6" fill="#111827"/>
+        <line x1="57" y1="66" x2="57" y2="80" stroke="#111827" strokeWidth="1.2"/>
+
+        <circle cx="28" cy="40" r="0.3" fill="#cbd5e1" fillOpacity="0.4" className="animate-[float_8s_infinite]"/>
+        <circle cx="42" cy="55" r="0.25" fill="#cbd5e1" fillOpacity="0.3" className="animate-[float_10s_infinite]" style={{ animationDelay: "2s" }}/>
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#050508]/60 via-transparent to-transparent pointer-events-none" />
+    </div>
+  );
+}
+
+// 3. Simple two figures (Moment 2)
+function FriendshipIllustration() {
+  return (
+    <div className="w-full max-w-[420px] aspect-[4/3] rounded-2xl border border-white/5 bg-[#0d0d1a]/30 flex items-center justify-center p-6 shadow-inner relative overflow-hidden group">
+      <svg className="w-full h-full" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="friendSpot" cx="50%" cy="42%" r="40%">
+            <stop offset="0%" stopColor="#fb923c" stopOpacity="0.25"/>
+            <stop offset="100%" stopColor="transparent" stopOpacity="0"/>
+          </radialGradient>
+        </defs>
+        <rect width="100" height="80" rx="4" fill="#090d16" opacity="0.3"/>
+        <circle cx="50" cy="42" r="32" fill="url(#friendSpot)" className="animate-[breathe_7s_infinite]"/>
+
+        {/* Figure 1 */}
+        <g className="animate-[float_6s_infinite]" style={{ transformOrigin: "44px 44px" }}>
+          <circle cx="44" cy="38" r="2.5" fill="#fff" fillOpacity="0.8"/>
+          <path d="M39 46.5 C39 43 49 43 49 46.5 L47 58 H41 Z" fill="#94a3b8" fillOpacity="0.7"/>
+        </g>
+
+        {/* Figure 2 */}
+        <g className="animate-[float_6s_infinite]" style={{ transformOrigin: "56px 44px", animationDelay: "1.5s" }}>
+          <circle cx="56" cy="38" r="2.5" fill="#fff" fillOpacity="0.9"/>
+          <path d="M51 46.5 C51 43 61 43 61 46.5 L59 58 H53 Z" fill="#64748b" fillOpacity="0.8"/>
+        </g>
+        
+        <ellipse cx="50" cy="58" rx="14" ry="2" fill="#050508" opacity="0.6"/>
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#050508]/60 via-transparent to-transparent pointer-events-none" />
+    </div>
+  );
+}
+
+// 4. Glitching desaturated clock (Moment 3)
+function CovidClockIllustration() {
+  return (
+    <div className="w-full max-w-[420px] aspect-[4/3] rounded-2xl border border-white/5 bg-[#07070d]/60 flex items-center justify-center p-6 shadow-inner relative overflow-hidden group">
+      <svg className="w-full h-full select-none" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="covidSky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#1e293b" stopOpacity="0.2"/>
+            <stop offset="100%" stopColor="#020617" stopOpacity="0.05"/>
+          </linearGradient>
+          <pattern id="staticPattern" width="10" height="10" patternUnits="userSpaceOnUse">
+            <rect width="10" height="0.5" fill="rgba(255,255,255,0.03)"/>
+            <rect y="5" width="10" height="0.5" fill="rgba(0,0,0,0.15)"/>
+          </pattern>
+        </defs>
+        
+        <rect width="100" height="80" rx="4" fill="url(#covidSky)"/>
+        <rect width="100" height="80" fill="url(#staticPattern)" className="opacity-60"/>
+
+        <g className="animate-[glitch_2s_infinite]">
+          <circle cx="50" cy="38" r="22" stroke="#475569" strokeWidth="0.8" strokeDasharray="3,2" fill="#0f172a" fillOpacity="0.3"/>
+          <circle cx="50" cy="38" r="18" stroke="#334155" strokeWidth="0.5"/>
+
+          <line x1="50" y1="38" x2="50" y2="24" stroke="#64748b" strokeWidth="1" strokeLinecap="round"/>
+          <line x1="50" y1="38" x2="62" y2="44" stroke="#475569" strokeWidth="0.8" strokeLinecap="round" className="animate-[pulse_1s_infinite]"/>
+          <circle cx="50" cy="38" r="1.5" fill="#94a3b8"/>
+
+          <path d="M50 16 L48 24 L52 28 L49 38 L50 48" stroke="#090d16" strokeWidth="0.8" strokeLinecap="round"/>
+          <path d="M32 38 L42 36 L50 38" stroke="#090d16" strokeWidth="0.6" strokeLinecap="round"/>
+        </g>
+
+        <rect x="15" y="25" width="22" height="1.5" fill="#334155" opacity="0.3" className="animate-[staticLines_1.8s_infinite]"/>
+        <rect x="62" y="50" width="18" height="1.2" fill="#475569" opacity="0.25" className="animate-[staticLines_2.2s_infinite]" style={{ animationDelay: "0.5s" }}/>
+        <rect x="35" y="58" width="30" height="0.8" fill="#1e293b" opacity="0.4" className="animate-[staticLines_3s_infinite]" style={{ animationDelay: "1s" }}/>
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#050508]/85 via-transparent to-transparent pointer-events-none" />
+    </div>
+  );
+}
+
+// 5. Cinema Screen & Clapperboard (Moment 4)
+function CinephileIllustration() {
+  return (
+    <div className="w-full max-w-[420px] aspect-[4/3] rounded-2xl border border-white/5 bg-[#0c0704]/40 flex items-center justify-center p-6 shadow-inner relative overflow-hidden group">
+      <svg className="w-full h-full" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="screenGlow" cx="50%" cy="36%" r="55%">
+            <stop offset="0%" stopColor="#fb923c" stopOpacity="0.45"/>
+            <stop offset="50%" stopColor="#d97706" stopOpacity="0.15"/>
+            <stop offset="100%" stopColor="transparent" stopOpacity="0"/>
+          </radialGradient>
+          <linearGradient id="clapperGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#fb923c"/>
+            <stop offset="100%" stopColor="#f59e0b"/>
+          </linearGradient>
+        </defs>
+        
+        <rect width="100" height="80" rx="4" fill="#0c0704"/>
+        <rect width="100" height="80" fill="url(#screenGlow)" className="animate-[breathe_8s_infinite]"/>
+
+        <polygon points="50,0 20,80 80,80" fill="#fb923c" opacity="0.04"/>
+
+        <rect x="22" y="16" width="56" height="30" rx="2" fill="#0d0d1a" stroke="#d97706" strokeWidth="0.8" className="shadow-[0_0_20px_rgba(251,146,60,0.25)]"/>
+        <path d="M26 40 L38 30 L48 36 L62 25 L74 40 Z" fill="#b45309" fillOpacity="0.3"/>
+        <circle cx="62" cy="24" r="2.5" fill="#f59e0b" fillOpacity="0.5"/>
+
+        <path d="M12 55 Q20 30 14 20 T10 8" stroke="#fb923c" strokeWidth="1.5" strokeOpacity="0.25" fill="none" strokeDasharray="1,1.5" className="animate-[float_6s_infinite]" style={{ transformOrigin: "12px 30px" }}/>
+        
+        <g className="animate-[float_5s_infinite]" style={{ transformOrigin: "82px 48px", animationDelay: "1s" }}>
+          <rect x="76" y="44" width="12" height="9" rx="0.5" fill="#0d0a08" stroke="url(#clapperGrad)" strokeWidth="0.5"/>
+          <polygon points="76,41 88,40 88,43 76,44" fill="#0d0a08" stroke="url(#clapperGrad)" strokeWidth="0.5"/>
+          <line x1="79" y1="41.2" x2="81" y2="43.8" stroke="#fb923c" strokeWidth="0.6"/>
+          <line x1="83" y1="40.8" x2="85" y2="43.4" stroke="#fb923c" strokeWidth="0.6"/>
+        </g>
+
+        <circle cx="32" cy="55" r="0.6" fill="#fb923c" className="animate-ping" style={{ animationDuration: "3s" }}/>
+        <circle cx="68" cy="62" r="0.5" fill="#f59e0b" className="animate-ping" style={{ animationDuration: "4s", animationDelay: "1.5s" }}/>
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0c0704]/80 via-transparent to-transparent pointer-events-none" />
+    </div>
+  );
+}
+
+// 6. Split Doors (Moment 5)
+function DoorsIllustration() {
+  return (
+    <div className="w-full max-w-[420px] aspect-[4/3] rounded-2xl border border-white/5 bg-[#0d0d1a]/30 flex items-center justify-center p-6 shadow-inner relative overflow-hidden group">
+      <svg className="w-full h-full" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="splitSky" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#0f172a"/>
+            <stop offset="50%" stopColor="#020617"/>
+            <stop offset="100%" stopColor="#1c1917"/>
+          </linearGradient>
+          <linearGradient id="openDoorLight" x1="68" y1="20" x2="90" y2="70">
+            <stop offset="0%" stopColor="#fb923c" stopOpacity="0.4"/>
+            <stop offset="100%" stopColor="#fb923c" stopOpacity="0"/>
+          </linearGradient>
+        </defs>
+        
+        <rect width="100" height="80" rx="4" fill="url(#splitSky)"/>
+
+        <line x1="50" y1="10" x2="50" y2="70" stroke="rgba(255,255,255,0.03)" strokeWidth="0.5" strokeDasharray="2,2"/>
+
+        {/* LEFT SIDE: Closed Door */}
+        <g className="opacity-60">
+          <rect x="18" y="20" width="20" height="50" fill="#090d16" stroke="#334155" strokeWidth="0.5"/>
+          <rect x="18" y="20" width="20" height="50" fill="#020617" stroke="#1e293b" strokeWidth="0.3"/>
+          <line x1="28" y1="20" x2="28" y2="70" stroke="rgba(255,255,255,0.03)" strokeWidth="0.3"/>
+          <circle cx="34" cy="45" r="0.6" fill="#475569"/>
+        </g>
+        <span className="absolute bottom-5 left-10 font-space-mono text-[8px] text-slate-500 uppercase tracking-widest">
+          Elite
+        </span>
+
+        {/* RIGHT SIDE: Open Door */}
+        <g>
+          <polygon points="68,20 95,15 95,75 68,70" fill="url(#openDoorLight)"/>
+          <rect x="62" y="20" width="20" height="50" fill="#090d16" stroke="#b45309" strokeWidth="0.5"/>
+          <polygon points="62,20 74,16 74,66 62,70" fill="#1c1917" stroke="#fb923c" strokeWidth="0.5" className="animate-[float_5s_infinite]" style={{ transformOrigin: "62px 45px" }}/>
+          <circle cx="70" cy="43" r="0.6" fill="#fb923c"/>
+        </g>
+        <span className="absolute bottom-5 right-10 font-space-mono text-[8px] text-orange-400 uppercase tracking-widest">
+          Family
+        </span>
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#050508]/60 via-transparent to-transparent pointer-events-none" />
+    </div>
+  );
+}
+
+// 7. Teacher Blackboard (Moment 6)
+function WarmClassroomIllustration() {
+  return (
+    <div className="w-full max-w-[420px] aspect-[4/3] rounded-2xl border border-white/5 bg-[#170f07]/30 flex items-center justify-center p-6 shadow-inner relative overflow-hidden group">
+      <svg className="w-full h-full" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="warmClassroomSky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#451a03" stopOpacity="0.8"/>
+            <stop offset="60%" stopColor="#1c1917" stopOpacity="0.4"/>
+            <stop offset="100%" stopColor="#0c0a09" stopOpacity="0.1"/>
+          </linearGradient>
+          <radialGradient id="deskLampGlow" cx="50%" cy="20%" r="50%">
+            <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.4"/>
+            <stop offset="50%" stopColor="#d97706" stopOpacity="0.15"/>
+            <stop offset="100%" stopColor="transparent" stopOpacity="0"/>
+          </radialGradient>
+        </defs>
+        
+        <rect width="100" height="80" rx="4" fill="url(#warmClassroomSky)"/>
+        <circle cx="50" cy="20" r="35" fill="url(#deskLampGlow)" className="animate-[breathe_6s_infinite]"/>
+
+        <rect x="25" y="15" width="50" height="26" fill="#14532d" stroke="#f59e0b" strokeWidth="0.6" strokeOpacity="0.5" className="shadow-[0_0_15px_rgba(245,158,11,0.15)]"/>
+        <path d="M30 22 H50 M30 26 H45 M30 30 H60" stroke="#fef08a" strokeWidth="0.4" strokeLinecap="round" opacity="0.6"/>
+        <path d="M54 24 Q58 28 62 24 T70 24" stroke="#fef08a" strokeWidth="0.4" strokeLinecap="round" opacity="0.5"/>
+
+        <line x1="50" y1="0" x2="50" y2="12" stroke="#d97706" strokeWidth="0.8"/>
+        <polygon points="46,12 54,12 50,18" fill="#fbbf24"/>
+        
+        <g className="animate-[float_7s_infinite]" style={{ transformOrigin: "50px 38px", animationDelay: "1s" }}>
+          <circle cx="50" cy="46" r="2" fill="#fff" fillOpacity="0.8"/>
+          <path d="M46 54 C46 51 54 51 54 54 L52 68 H48 Z" fill="#d97706" fillOpacity="0.7"/>
+          <path d="M52 52.5 C55 50 56 46 56 46" stroke="#d97706" strokeWidth="1.2" strokeLinecap="round" fill="none" fillOpacity="0.7"/>
+        </g>
+
+        <line x1="10" y1="72" x2="90" y2="72" stroke="rgba(251,191,36,0.1)" strokeWidth="0.8"/>
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0c0a09]/60 via-transparent to-transparent pointer-events-none" />
+    </div>
+  );
+}
+
+// 8. Mentors structured grid (Moment 8)
+function MaverickMentorsIllustration() {
+  return (
+    <div className="w-full max-w-[420px] aspect-[4/3] rounded-2xl border border-white/5 bg-[#0b141a]/40 flex items-center justify-center p-6 shadow-inner relative overflow-hidden group">
+      <svg className="w-full h-full" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="coachingSky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#115e59" stopOpacity="0.5"/>
+            <stop offset="60%" stopColor="#0f172a" stopOpacity="0.3"/>
+            <stop offset="100%" stopColor="#020617" stopOpacity="0.1"/>
+          </linearGradient>
+          <radialGradient id="focusSpot" cx="50%" cy="40%" r="45%">
+            <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.2"/>
+            <stop offset="100%" stopColor="transparent" stopOpacity="0"/>
+          </radialGradient>
+        </defs>
+        
+        <rect width="100" height="80" rx="4" fill="url(#coachingSky)"/>
+        <circle cx="50" cy="40" r="32" fill="url(#focusSpot)"/>
+
+        <line x1="15" y1="15" x2="85" y2="15" stroke="rgba(255,255,255,0.02)" strokeWidth="0.4"/>
+        <line x1="15" y1="30" x2="85" y2="30" stroke="rgba(255,255,255,0.02)" strokeWidth="0.4"/>
+        <line x1="15" y1="45" x2="85" y2="45" stroke="rgba(255,255,255,0.02)" strokeWidth="0.4"/>
+        <line x1="15" y1="60" x2="85" y2="60" stroke="rgba(255,255,255,0.02)" strokeWidth="0.4"/>
+        <line x1="30" y1="10" x2="30" y2="65" stroke="rgba(255,255,255,0.02)" strokeWidth="0.4"/>
+        <line x1="50" y1="10" x2="50" y2="65" stroke="rgba(255,255,255,0.02)" strokeWidth="0.4"/>
+        <line x1="70" y1="10" x2="70" y2="65" stroke="rgba(255,255,255,0.02)" strokeWidth="0.4"/>
+
+        <path d="M42 22 L45 25 L50 20" stroke="#0ea5e9" strokeWidth="0.6" strokeLinecap="round" opacity="0.6" className="animate-pulse"/>
+        <path d="M52 24 H56 M52 26 H56" stroke="#0ea5e9" strokeWidth="0.6" opacity="0.6"/>
+        <ellipse cx="61" cy="23" rx="2.5" ry="1.5" stroke="#0ea5e9" strokeWidth="0.5" fill="none" opacity="0.6"/>
+
+        {/* Mentor 1 */}
+        <g className="animate-[float_5s_infinite]" style={{ transformOrigin: "42px 42px" }}>
+          <circle cx="42" cy="38" r="2.5" fill="#fff" fillOpacity="0.8"/>
+          <path d="M37 46 C37 43 47 43 47 46 L45 62 H39 Z" fill="#0d9488" fillOpacity="0.75"/>
+        </g>
+        {/* Mentor 2 */}
+        <g className="animate-[float_5s_infinite]" style={{ transformOrigin: "58px 42px", animationDelay: "1s" }}>
+          <circle cx="58" cy="38" r="2.5" fill="#fff" fillOpacity="0.9"/>
+          <path d="M53 46 C53 43 63 43 63 46 L61 62 H55 Z" fill="#0284c7" fillOpacity="0.8"/>
+        </g>
+
+        <ellipse cx="50" cy="62" rx="16" ry="2" fill="#0ea5e9" fillOpacity="0.2" className="blur-sm"/>
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/70 via-transparent to-transparent pointer-events-none" />
+    </div>
+  );
+}
+
 export default function JourneyPage() {
   const mainRef = useRef(null);
   const [currentChapter, setCurrentChapter] = useState({
@@ -670,6 +1000,22 @@ export default function JourneyPage() {
       },
     });
 
+    // ScrollTrigger to detect Chapter 3 in viewport
+    ScrollTrigger.create({
+      trigger: "#chapter3-container",
+      scroller: mainRef.current,
+      start: "top 40%",
+      end: "bottom 40%",
+      onToggle: (self) => {
+        if (self.isActive) {
+          setCurrentChapter({
+            title: "CHAPTER 3 — THE TRANSFORMATION",
+            subtitle: "Class 7 to Class 10",
+          });
+        }
+      },
+    });
+
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
@@ -706,6 +1052,27 @@ export default function JourneyPage() {
           0% { box-shadow: 0 0 5px rgba(251, 191, 36, 0.2); border-color: rgba(251, 191, 36, 0.2); }
           50% { box-shadow: 0 0 20px rgba(251, 191, 36, 0.5); border-color: rgba(251, 191, 36, 0.6); }
           100% { box-shadow: 0 0 5px rgba(251, 191, 36, 0.2); border-color: rgba(251, 191, 36, 0.2); }
+        }
+        @keyframes glitch {
+          0% { transform: translate(0, 0) skew(0deg); }
+          8% { transform: translate(-1.5px, 0.5px) skew(-2deg); }
+          12% { transform: translate(1.5px, -0.5px) skew(2deg); }
+          16% { transform: translate(0, 0) skew(0deg); }
+          100% { transform: translate(0, 0) skew(0deg); }
+        }
+        @keyframes staticLines {
+          0% { opacity: 0; transform: translateX(-10px); }
+          5% { opacity: 0.8; transform: translateX(5px); }
+          10% { opacity: 0; }
+          50% { opacity: 0; }
+          55% { opacity: 0.6; transform: translateX(-5px); }
+          60% { opacity: 0; }
+          100% { opacity: 0; }
+        }
+        @keyframes textShimmer {
+          0% { text-shadow: 0 0 4px rgba(168, 85, 247, 0.2); }
+          50% { text-shadow: 0 0 16px rgba(168, 85, 247, 0.7), 0 0 25px rgba(59, 130, 246, 0.4); }
+          100% { text-shadow: 0 0 4px rgba(168, 85, 247, 0.2); }
         }
       `}} />
 
@@ -1047,7 +1414,7 @@ export default function JourneyPage() {
           </section>
 
           {/* MOMENT 5 — Another Door Closes */}
-          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 relative">
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 border-b border-white/5 relative">
             {/* Neutral gray glow */}
             <div className="absolute inset-0 w-[500px] h-[350px] rounded-full bg-slate-500/3 blur-[120px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
 
@@ -1060,19 +1427,266 @@ export default function JourneyPage() {
                 <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed mt-2">
                   Just as I'd found my footing, my father saw something I couldn't yet — that the school's academic record wasn't strong enough heading into Class 10. He wanted a stronger foundation for what was coming, so he made the call to move me again, this time to a stricter, more academically rigorous school. I left behind a place where I had finally found success — not in the classroom, but on a track, clearing bars no one expected me to clear. The medal stayed with me. The school didn't.
                 </p>
+              </div>
+              {/* Illustration column - Right */}
+              <div className="flex items-center justify-center order-1 md:order-2 w-full">
+                <WindingRoadIllustration />
+              </div>
+            </div>
+          </section>
+        </div>
+
+        {/* ==========================================
+            CHAPTER 3: THE TRANSFORMATION
+            ========================================== */}
+        <div id="chapter3-container" className="w-full flex flex-col">
+          
+          {/* TITLE MOMENT: CHAPTER 3 */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col items-center justify-center text-center px-6 relative">
+            {/* Faint grey-to-purple background glow */}
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-500/3 to-[#A855F7]/3 blur-[100px] z-[-1] pointer-events-none rounded-full max-w-md mx-auto" />
+            
+            <div className="flex flex-col items-center gap-4 max-w-2xl">
+              <span className="font-space-mono text-xs md:text-sm tracking-[0.3em] text-[#A855F7] uppercase font-bold">
+                Chapter 3
+              </span>
+              <h1 className="font-orbitron text-5xl md:text-7xl font-black tracking-widest mt-1 text-transparent bg-clip-text bg-gradient-to-r from-slate-500 via-slate-100 to-[#A855F7] drop-shadow-[0_0_30px_rgba(168,85,247,0.2)]">
+                The Transformation
+              </h1>
+              <p className="font-inter text-xs md:text-sm text-slate-400 max-w-md mt-4 leading-relaxed italic">
+                Growth from quiet, flat beginnings to a vibrant cinematic awakening.
+              </p>
+            </div>
+            <div className="mt-12">
+              <Chapter3TitleIllustration />
+            </div>
+          </section>
+
+          {/* MOMENT 1 — Another New Beginning */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 border-b border-white/5 relative">
+            {/* Muted grey background glow */}
+            <div className="absolute inset-0 w-[500px] h-[350px] rounded-full bg-slate-700/3 blur-[120px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+            
+            <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
+              {/* Text column - Left */}
+              <div className="flex flex-col gap-5 order-2 md:order-1">
+                <h2 className="font-orbitron text-3xl md:text-4xl font-black tracking-wide text-white">
+                  Another New Beginning
+                </h2>
+                <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed mt-2">
+                  After changing schools again, I joined Ram-Eesh International School. Academically strong — but quiet in every other sense. No major events. No exciting student culture. No farewell traditions. Classes. Assignments. Home. Repeat. I wasn't unhappy. But I wasn't truly enjoying school either. For a long time, I simply felt like I was passing through.
+                </p>
+              </div>
+              {/* Illustration column - Right */}
+              <div className="flex items-center justify-center order-1 md:order-2 w-full">
+                <RamEeshClassroomIllustration />
+              </div>
+            </div>
+          </section>
+
+          {/* MOMENT 2 — The Friend Who Became Family */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 border-b border-white/5 relative">
+            {/* Minimal warm grey background glow */}
+            <div className="absolute inset-0 w-[500px] h-[350px] rounded-full bg-slate-600/3 blur-[120px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+
+            <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
+              {/* Illustration column - Left */}
+              <div className="flex items-center justify-center order-1 w-full">
+                <FriendshipIllustration />
+              </div>
+              {/* Text column - Right */}
+              <div className="flex flex-col gap-5 order-2">
+                <h2 className="font-orbitron text-3xl md:text-4xl font-black tracking-wide text-white">
+                  The Friend Who Became Family
+                </h2>
+                <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed mt-2">
+                  During this phase, I met Vibhor. There was nothing dramatic about our friendship. No movie-like beginning. No special moment. Just two students sharing the same classroom. But sometimes the most important people enter your life quietly. Years later, he would become far more than a school friend. He would become family. Back then, neither of us knew that.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* MOMENT 3 — When Time Stopped */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 border-b border-white/5 relative">
+            {/* Dark, cold desaturated background glow */}
+            <div className="absolute inset-0 w-[500px] h-[350px] rounded-full bg-[#030712]/5 blur-[120px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+
+            <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
+              {/* Text column - Left */}
+              <div className="flex flex-col gap-5 order-2 md:order-1">
+                <h2 className="font-orbitron text-3xl md:text-4xl font-black tracking-wide text-white">
+                  When Time Stopped
+                </h2>
+                <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed mt-2">
+                  COVID arrived. Schools closed. Classrooms disappeared. Conversations disappeared. Normal life disappeared. Class 8 became the strangest year of my life. No memories. No school life. No friendships forming. No events. No competitions. No real experiences. It felt as though someone had pressed a pause button on life. When I look back at that year, everything feels blurry. As if an entire chapter was skipped. Time moved forward. But life felt frozen.
+                </p>
+              </div>
+              {/* Illustration column - Right */}
+              <div className="flex items-center justify-center order-1 md:order-2 w-full">
+                <CovidClockIllustration />
+              </div>
+            </div>
+          </section>
+
+          {/* MOMENT 4 — The Birth of a Cinephile */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 border-b border-white/5 relative">
+            {/* Extremely warm amber/orange background glow */}
+            <div className="absolute inset-0 w-[550px] h-[400px] rounded-full bg-gradient-to-tr from-[#d97706]/10 to-[#b45309]/5 blur-[130px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+
+            <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
+              {/* Illustration column - Left */}
+              <div className="flex items-center justify-center order-1 w-full">
+                <CinephileIllustration />
+              </div>
+              {/* Text column - Right */}
+              <div className="flex flex-col gap-5 order-2">
+                <h2 className="font-orbitron text-3xl md:text-4xl font-black tracking-wide text-white">
+                  The Birth of a Cinephile
+                </h2>
+                <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed mt-2">
+                  While the world was locked inside homes, I found something unexpected. Stories. Movies. Shows. Characters. Worlds. What started as entertainment slowly became fascination. I wasn't watching because everyone else was watching. I was becoming interested in how stories were created. How characters were written. How directors made audiences feel something. Shows like Money Heist and Loki became gateways into a much larger universe. Without realizing it, this was the beginning of a lifelong obsession with cinema. An obsession that would later lead me toward writing and storytelling of my own.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* MOMENT 5 — Class 10 — The Year Everything Changed */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 border-b border-white/5 relative">
+            {/* Split cool-to-warm glow */}
+            <div className="absolute inset-0 w-[500px] h-[350px] rounded-full bg-gradient-to-tr from-[#1e293b]/5 to-[#7c2d12]/5 blur-[120px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+
+            <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
+              {/* Text column - Left */}
+              <div className="flex flex-col gap-5 order-2 md:order-1">
+                <h2 className="font-orbitron text-3xl md:text-4xl font-black tracking-wide text-white">
+                  Class 10 — The Year Everything Changed
+                </h2>
+                <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed mt-2">
+                  Before the session started, students were divided into different sections. The highest-performing students were placed into the 'elite' section — the section everyone wanted. I wasn't placed there. At first, I felt disappointed. I thought I deserved it. I questioned the decision. Years later, I realize that not being selected was one of the best things that ever happened to me. Because the class I joined became something far more valuable. It became a family.
+                </p>
+              </div>
+              {/* Illustration column - Right */}
+              <div className="flex items-center justify-center order-1 md:order-2 w-full">
+                <DoorsIllustration />
+              </div>
+            </div>
+          </section>
+
+          {/* MOMENT 6 — Shruti Ma'am */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 border-b border-white/5 relative">
+            {/* Warm classroom golden glow */}
+            <div className="absolute inset-0 w-[500px] h-[350px] rounded-full bg-[#f59e0b]/3 blur-[120px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+
+            <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
+              {/* Illustration column - Left */}
+              <div className="flex items-center justify-center order-1 w-full">
+                <WarmClassroomIllustration />
+              </div>
+              {/* Text column - Right */}
+              <div className="flex flex-col gap-5 order-2">
+                <h2 className="font-orbitron text-3xl md:text-4xl font-black tracking-wide text-white">
+                  Shruti Ma'am
+                </h2>
+                <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed mt-2">
+                  One of the biggest reasons for that was our class teacher, Shruti Ma'am. Young. Energetic. Supportive. Genuinely invested in her students. She wasn't just teaching a subject — she was helping us grow. She understood us. Guided us. Supported us. And slowly transformed an ordinary classroom into a place where people actually wanted to be. For the first time since moving schools, I felt like I belonged.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* MOMENT 7 — The Ego */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 border-b border-white/5 relative">
+            {/* Bright purple glow */}
+            <div className="absolute inset-0 w-[500px] h-[350px] rounded-full bg-[#A855F7]/5 blur-[120px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+
+            <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
+              {/* Text column - Left */}
+              <div className="flex flex-col gap-5 order-2 md:order-1">
+                <h2 className="font-orbitron text-3xl md:text-4xl font-black tracking-wide text-white animate-[textShimmer_3s_infinite]">
+                  The Ego
+                </h2>
+                <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed mt-2">
+                  English became my strongest subject. Exam after exam. Test after test. I continued performing exceptionally well. Even though Shruti Ma'am also taught the top-performing section, nobody managed to beat my scores. I still remember one particular moment. She announced my name in front of everyone. 'Aryan Chauhan scored the highest marks.' For a teenager, moments like that feel unforgettable. My confidence grew. My ego grew too. But looking back, it wasn't arrogance. It was the feeling that hard work was finally being noticed.
+                </p>
+              </div>
+              {/* Large Purple Stat Card Column - Right */}
+              <div className="flex items-center justify-center order-1 md:order-2 w-full max-w-[420px] mx-auto">
+                <div 
+                  className="w-full bg-[#0d0d1a]/55 border border-[#A855F7]/30 p-8 rounded-2xl flex flex-col gap-2 text-center shadow-[0_0_25px_rgba(168,85,247,0.1)] relative group overflow-hidden"
+                >
+                  <span className="font-orbitron font-black text-4xl text-[#A855F7] drop-shadow-[0_0_12px_rgba(168,85,247,0.3)]">
+                    HIGHEST MARKS
+                  </span>
+                  <span className="font-space-mono text-xs text-white/80 tracking-widest mt-1.5 uppercase font-bold">
+                    English Subject
+                  </span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* MOMENT 8 — Maverick Guru */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 border-b border-white/5 relative">
+            {/* Structured Teal/Blue glow */}
+            <div className="absolute inset-0 w-[500px] h-[350px] rounded-full bg-gradient-to-tr from-[#0d9488]/5 to-[#0284c7]/5 blur-[120px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+
+            <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
+              {/* Illustration column - Left */}
+              <div className="flex items-center justify-center order-1 w-full">
+                <MaverickMentorsIllustration />
+              </div>
+              {/* Text column - Right */}
+              <div className="flex flex-col gap-5 order-2">
+                <h2 className="font-orbitron text-3xl md:text-4xl font-black tracking-wide text-white">
+                  Maverick Guru
+                </h2>
+                <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed mt-2">
+                  Around the same time, I joined a coaching institute — Maverick Guru. Within walking distance of my home. Prince Sir and Shlok Sir didn't just teach Mathematics and Science. They taught discipline. Mindset. Character. Consistency. Success. Failure. Lessons that couldn't be found inside textbooks. Joining Maverick Guru became one of the best decisions of my school life. Because the biggest things I learned there weren't formulas. They were values.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* MOMENT 9 — The First Boards */}
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 relative">
+            {/* Optimistic open sky glow */}
+            <div className="absolute inset-0 w-[600px] h-[400px] rounded-full bg-gradient-to-tr from-[#A855F7]/10 via-[#3b82f6]/5 to-transparent blur-[140px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+
+            <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
+              {/* Stats Card - Left */}
+              <div className="flex items-center justify-center order-1 w-full max-w-[420px] mx-auto">
+                <div 
+                  className="w-full bg-[#0d0d1a]/55 border border-[#3b82f6]/30 p-8 rounded-2xl flex flex-col gap-2.5 text-center shadow-[0_0_25px_rgba(59,130,246,0.1)] relative group overflow-hidden"
+                >
+                  <span className="font-orbitron font-black text-6xl text-[#3b82f6] drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]">
+                    84%
+                  </span>
+                  <span className="font-inter text-xs text-slate-400 italic mt-1 leading-relaxed">
+                    "The marks weren't the achievement. The growth was."
+                  </span>
+                </div>
+              </div>
+              
+              {/* Text Column - Right */}
+              <div className="flex flex-col gap-5 order-2">
+                <h2 className="font-orbitron text-3xl md:text-4xl font-black tracking-wide text-white">
+                  The First Boards
+                </h2>
+                <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed mt-2">
+                  Eventually the year reached its final challenge — the Class 10 Board Examinations. I scored 84%. Not extraordinary. Not headline-worthy. But I was satisfied. Because I knew how much effort I had invested. More importantly: the marks were not the biggest achievement of that year. The growth was. The friendships were. The experiences were. The confidence was. The memories were.
+                </p>
+                <p className="font-inter text-slate-300 text-base md:text-lg leading-relaxed mt-1">
+                  I entered this phase as a student still trying to find his place. I left it with friendships that would last years, a growing love for storytelling, and a much better understanding of who I was becoming. For the first time, the future no longer felt distant. It felt like something waiting to be built.
+                </p>
                 
                 <div className="mt-8 flex flex-col gap-1.5 self-start">
-                  <span className="font-space-mono text-[9px] text-[#3B82F6] tracking-[0.25em] uppercase font-bold">
-                    Chapter 3
+                  <span className="font-space-mono text-[9px] text-[#A855F7] tracking-[0.25em] uppercase font-bold">
+                    Chapter 4
                   </span>
                   <span className="font-orbitron text-xs text-slate-500 uppercase tracking-widest font-black">
                     Coming Soon
                   </span>
                 </div>
-              </div>
-              {/* Illustration column - Right */}
-              <div className="flex items-center justify-center order-1 md:order-2 w-full">
-                <WindingRoadIllustration />
               </div>
             </div>
           </section>
