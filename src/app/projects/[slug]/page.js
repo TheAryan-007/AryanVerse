@@ -299,6 +299,12 @@ const projectsDetails = {
     ],
     gallery: [
       {
+        title: "AryanVerse Universe Map",
+        desc: "Interactive universe entry portal showing the central planetary node (Welcome chamber) and surrounding celestial orbit grids.",
+        type: "image",
+        url: "/aryanverse-showcase.png"
+      },
+      {
         title: "Hand Mockup Overlay",
         desc: "Stylized image representing the Creator Hand asset positioning the planetary chambers in the universe.",
         type: "image",
