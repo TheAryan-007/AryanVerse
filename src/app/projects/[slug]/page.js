@@ -102,16 +102,16 @@ const projectsDetails = {
     solution: "We constructed a Flask backend integrated with PyDub and FFmpeg. When an MP3 is uploaded, it is automatically transcoded into a WAV file. The steganography engine converts the text message into binary, replacing the least significant bit of each audio sample with a message bit. A custom binary terminating signature is appended to signal the end of the text. The decoder reverses this process, reading bits and reconstructing the text until the terminator sequence is resolved.",
     howWeMadeIt: "The project was built by team Devil Coders using Next.js and TypeScript on the frontend to provide a premium cybersecurity dashboard styled with soft green glows and typewriter reveal effects. The backend is a Python Flask server. Savyam Shukla led the core LSB manipulation scripts; Aryan Chauhan designed the transcoding backend using PyDub and FFmpeg; Harsh managed frontend navigation; Zaman handled the file upload routing; and Shaurya set up error handling and decrypted message reveals.",
     theme: {
-      bg: "bg-[#FAF7EE]",
-      text: "text-[#3D3425]",
-      subtext: "text-[#7C6A4B]",
-      border: "border-[#EADBBA]/70",
-      cardBg: "bg-white",
-      badge: "bg-amber-50 text-amber-800 border-amber-200",
+      bg: "bg-[#0A0905]",
+      text: "text-[#ECE5D8]",
+      subtext: "text-[#D4AF37]",
+      border: "border-[#3B2E15]/50",
+      cardBg: "bg-[#18150F]/80 backdrop-blur-md",
+      badge: "bg-amber-950/50 text-amber-300 border-amber-800/30",
       titleFont: "font-serif font-black tracking-tight",
-      bodyFont: "font-sans text-[#4A402E] text-[15px] leading-relaxed",
+      bodyFont: "font-sans text-[#D5CDBC] text-[15px] leading-relaxed font-light",
       accentColor: "#F59E0B",
-      isDark: false
+      isDark: true
     },
     techStack: [
       { name: "Python Flask", desc: "Coordinates file upload endpoints, transcoding requests, and steganography functions." },
