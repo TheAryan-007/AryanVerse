@@ -137,6 +137,15 @@ function LyfChangerIcon() {
   );
 }
 
+function StreetwearBrandIcon() {
+  return (
+    <svg className="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 50 20 C 53 20 55 22 55 25 C 55 26 54 28 52 29 L 52 35 L 78 50 C 81 52 82 56 80 59 C 78 62 74 63 71 61 L 62 56 L 62 78 C 62 82 58 85 54 85 L 46 85 C 42 85 38 82 38 78 L 38 56 L 29 61 C 26 63 22 62 20 59 C 18 56 19 52 22 50 L 48 35 L 48 29 C 46 28 45 26 45 25 C 45 22 47 20 50 20 Z" stroke="#E11D48" strokeWidth="2.5" strokeLinejoin="round" fill="none" />
+      <circle cx="50" cy="50" r="5" fill="#E11D48" className="animate-pulse" />
+    </svg>
+  );
+}
+
 function EchosIcon() {
   return (
     <svg className="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -197,13 +206,24 @@ const projectsData = [
   {
     slug: "lyfchanger",
     name: "LyfChanger",
-    description: "My first entrepreneurial journey started during Class 11. Generated approximately ₹84,000 while teaching me marketing, sales, branding, and business fundamentals.",
-    tags: ["Entrepreneurship", "Marketing", "Business"],
-    status: "COMPLETED",
+    description: "A premium startup plan in conceptual phase, designed as a digital-first lifestyle platform combining habit curation with high-end wellness merchandise ecosystems.",
+    tags: ["Startup Concept", "Branding", "Product Strategy"],
+    status: "PLANNED",
     color: "#F97316",
     glowColor: "rgba(249, 115, 22, 0.15)",
     badgeBg: "bg-orange-500/10 text-orange-400 border-orange-500/20",
     icon: <LyfChangerIcon />
+  },
+  {
+    slug: "streetwear-brand",
+    name: "Custom Streetwear Brand",
+    description: "My first real business venture bootstrapped in Class 11. Built organic marketing funnels and a print-on-demand supply chain to generate ₹84,000 in revenue.",
+    tags: ["E-Commerce", "Branding", "Organic Reels", "Hustle"],
+    status: "COMPLETED",
+    color: "#E11D48",
+    glowColor: "rgba(225, 29, 72, 0.15)",
+    badgeBg: "bg-rose-500/10 text-rose-400 border-rose-500/20",
+    icon: <StreetwearBrandIcon />
   },
   {
     slug: "echos",

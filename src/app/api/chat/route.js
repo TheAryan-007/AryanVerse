@@ -31,15 +31,16 @@ PROJECTS PORTFOLIO:
 2. AryanVerse (May 2026 - Present): Creator & Architect (Personal Project). Immersive WebGL sandbox portfolio styled as an interactive solar system galaxy. Syncs Three.js canvas with Next.js App Router using GSAP camera interpolations. Optimized geometry buffer.
 3. Movie Recommendation System (Planned Q3 2026): ML Developer. Hybrid recommendation engine using Content-Based filtering (TF-IDF vectorizer) and Collaborative Filtering (Singular Value Decomposition). Tech stack: Python, Scikit-Learn, Streamlit, Pandas.
 4. Unscripted Love (Dec 2025 - Present): Author / Creative Writer. Contemporary novel writing project. Maps external events to internal psychological shifts using Hero's Journey schema. Currently writing Chapter 3. Planned length: 12 chapters (~45k words).
-5. LyfChanger (Jul 2023 - Feb 2024): Founder. High-school drop-shipping streetwear and design brand. Utilized organic Instagram video campaigns, generating ₹84,000 in revenue with zero ad spend.
-6. Echos (Planned Q4 2026): Lead Creator. Semantic intelligence engine for notes and mind mapping. Embeds short text, clusters vectors using DBSCAN (OpenAI text-embedding-3-small), and renders constellation connections dynamically.
+5. LyfChanger (Planned Q4 2026): Founder. Premium conceptual startup plan designed as a digital-first lifestyle platform combining habit curation with wellness merchandise.
+6. Class 11 Streetwear Brand (Jul 2023 - Feb 2024): Founder. High-school print-on-demand streetwear brand. Utilized organic Instagram video campaigns, generating ₹84,000 in revenue with zero ad spend.
+7. Echos (Planned Q4 2026): Lead Creator. Semantic intelligence engine for notes and mind mapping. Embeds short text, clusters vectors using DBSCAN (OpenAI text-embedding-3-small), and renders constellation connections dynamically.
 
 TIMELINE CHAPTERS:
 - Chapter 1 (0-12 yrs): Roots in Meerut, move to Rajasthan, first stage speech in Class 3, 98/100 Hindi.
 - Chapter 2 (12-14 yrs): Moved to Noida, competed at Jawaharlal Nehru Stadium representing school at National High Jump Championship.
 - Chapter 3 (14-16 yrs): Top marks in school English, late-night whiteboard teaching sessions earning nickname "Maverick Guru".
 - Chapter 4 (16-17 yrs): Appointed School Head Boy, organized Sports Day.
-- Chapter 5 (17-18 yrs): Scored 81% CBSE Class 12, founded LyfChanger (₹84k revenue), 100/100 Fine Arts.
+- Chapter 5 (17-18 yrs): Scored 81% CBSE Class 12, bootstrapped Class 11 streetwear brand (₹84k revenue), 100/100 Fine Arts.
 - Chapter 6 (Ongoing): B.Tech CS at Bennett University, building AryanVerse, Interning at Unessa.
 
 CONTACT INFORMATION:
@@ -64,14 +65,14 @@ function getLocalResponse(query) {
   if (q.includes("skill") || q.includes("java") || q.includes("python") || q.includes("c++") || q.includes("programming") || q.includes("languages") || q.includes("tech")) {
     return "Aryan's technical skills include:\n\n* **Languages:** Java (strongest academic language), Python (machine learning, data science), HTML/CSS, JavaScript, and C++ (currently learning).\n* **Data Science:** Pandas, NumPy, Matplotlib, Scikit-Learn, Jupyter Notebook, Google Colab.\n* **Tools:** Git, GitHub, VS Code, Canva, MS Excel.\n* **Certificates:** MATLAB Machine Learning Certificate, Google Cloud Generative AI Studio badge.";
   }
-  if (q.includes("project") || q.includes("skysentry") || q.includes("lyfchanger") || q.includes("unscripted") || q.includes("echos") || q.includes("movie") || q.includes("recommend")) {
-    return "Here are Aryan's primary projects:\n\n1. **SkySentry AI:** Computer vision for false alert reduction in aerial feeds using YOLOv10 and Kalman filters (96.8% mAP, 48.7 FPS).\n2. **AryanVerse:** This interactive WebGL solar system portfolio built using Next.js, Three.js, and GSAP.\n3. **LyfChanger:** A streetwear drop-shipping startup founded in high school that generated **₹84,000** in revenue using organic social marketing.\n4. **Unscripted Love:** An ongoing contemporary novel project (writing Chapter 3).\n5. **Echos:** A planned semantic notes engine using vector embeddings and force graphs.";
+  if (q.includes("project") || q.includes("skysentry") || q.includes("lyfchanger") || q.includes("unscripted") || q.includes("echos") || q.includes("movie") || q.includes("recommend") || q.includes("streetwear")) {
+    return "Here are Aryan's primary projects:\n\n1. **SkySentry AI:** Computer vision for false alert reduction in aerial feeds using YOLOv10 and Kalman filters (96.8% mAP, 48.7 FPS).\n2. **AryanVerse:** This interactive WebGL solar system portfolio built using Next.js, Three.js, and GSAP.\n3. **LyfChanger:** A premium startup plan in conceptual phase, designed as a digital-first lifestyle platform combining habit curation with wellness merchandise.\n4. **Custom Streetwear Brand:** A streetwear brand bootstrapped in Class 11 that generated ₹84,000 in revenue using organic social marketing.\n5. **Unscripted Love:** An ongoing contemporary novel project (writing Chapter 3).\n6. **Echos:** A planned semantic notes engine using vector embeddings and graphs.\n7. **Movie Recommendation System:** Collaborative and content-based recommendation engine.";
   }
   if (q.includes("experience") || q.includes("intern") || q.includes("unessa") || q.includes("dawn") || q.includes("work")) {
-    return "Aryan's professional experience includes:\n\n* **Data Science Intern** at *Unessa Foundation* (June 2026 - Present): Applying analysis and machine learning workflows to real-world tasks.\n* **Graphic Design Intern** at *DAWN Foundation* (Class 12 post-milestone): Coordinated wellness marketing campaigns reaching 5,000+ students and designed layouts.";
+    return "Aryan's professional experience includes:\n\n* **Data Science Intern** at Unessa Foundation (June 2026 - Present): Applying analysis and machine learning workflows to real-world tasks.\n* **Graphic Design Intern** at DAWN Foundation: Coordinated wellness marketing campaigns reaching 5,000+ students and designed layouts.";
   }
   if (q.includes("achievement") || q.includes("award") || q.includes("milestone") || q.includes("high jump") || q.includes("head boy")) {
-    return "Aryan's major achievements include:\n\n* **National-Level Athlete:** Competed at the National High Jump Championship in Class 8.\n* **School Head Boy:** Appointed leader of the MDVM student council in Class 11.\n* **Perfect Art Score:** Scored 100/100 on his CBSE Class 12 Fine Arts Landscape project.\n* **Entrepreneurship:** Bootstrapped his brand LyfChanger to ₹84,000 in revenue in school.";
+    return "Aryan's major achievements include:\n\n* **National-Level Athlete:** Competed at the National High Jump Championship in Class 8.\n* **School Head Boy:** Appointed leader of the MDVM student council in Class 11.\n* **Perfect Art Score:** Scored 100/100 on his CBSE Class 12 Fine Arts Landscape project.\n* **Entrepreneurship:** Bootstrapped a custom streetwear clothing brand to ₹84,000 in revenue in school.";
   }
   if (q.includes("contact") || q.includes("email") || q.includes("phone") || q.includes("whatsapp") || q.includes("linkedin") || q.includes("social") || q.includes("instagram")) {
     return "Here are Aryan's contact coordinates:\n\n* **Email:** [aryanncr2@gmail.com](mailto:aryanncr2@gmail.com)\n* **WhatsApp/Call:** [+91 7827087385](https://wa.me/917827087385)\n* **LinkedIn:** [Aryan Chauhan](https://www.linkedin.com/in/aryan-chauhan-4284b32a7)\n* **GitHub:** [TheAryan-007](https://github.com/TheAryan-007)\n* **Instagram:** [@aryannxnn._.02](https://www.instagram.com/aryannxnn._.02)";

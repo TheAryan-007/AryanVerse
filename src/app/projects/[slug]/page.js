@@ -31,16 +31,25 @@ const projectsDetails = {
     description: "An intelligent visual verification engine optimized to classify flying objects and eliminate ambient noise in security feeds.",
     status: "COMPLETED",
     color: "#22C55E",
-    bgAccent: "bg-green-500/5",
-    borderAccent: "border-green-200",
-    textAccent: "text-green-600",
     timeline: "Jan 2026 - Mar 2026",
     role: "Lead ML Engineer",
-    context: "Research Project / Bennett University",
+    context: "Research Project // Bennett University",
     tags: ["Computer Vision", "YOLOv10", "PyTorch", "OpenCV"],
     overview: "SkySentry AI was born out of a critical gap in automated security: traditional motion detection cameras cannot distinguish between a high-threat drone, a harmless bird, or moving tree shadows. This project presents a full-stack computer vision pipeline designed to filter out environmental noise in real-time aerial feeds, focusing alerts only on actual objects of interest.",
     challenge: "Surveillance feeds are filled with 'false positives'—rapidly shifting clouds, bird migrations, or lens flares. Standard object detection models like YOLOv5 are often too heavy for edge deployment or suffer from high latency, making them impractical for split-second security verification. The challenge was maintaining a near-zero false-positive rate while operating at >45 FPS on standard hardware.",
     solution: "We implemented YOLOv10, a state-of-the-art detector that removes non-maximum suppression (NMS) latency by design. We trained it on a custom dataset containing over 12,000 annotated frames of low-altitude UAVs, birds, commercial planes, and background noise. We then overlaid an OpenCV Kalman filter tracking algorithm. This ensures that even if an object is temporarily blocked by a tree branch or cloud, the system holds its tracking lock and doesn't fire a duplicate alert.",
+    theme: {
+      bg: "bg-[#F4F4F6]",
+      text: "text-slate-900",
+      subtext: "text-slate-500",
+      border: "border-slate-300/60",
+      cardBg: "bg-white",
+      badge: "bg-green-50 text-green-700 border-green-200",
+      titleFont: "font-sans font-black tracking-tight",
+      bodyFont: "font-sans font-medium text-slate-700 leading-relaxed",
+      accentColor: "#22C55E",
+      isDark: false
+    },
     techStack: [
       { name: "YOLOv10", desc: "Real-time single-stage object detector using NMS-free training." },
       { name: "OpenCV", desc: "For video streaming pipeline, frame preprocessing, and multi-object tracking." },
@@ -57,13 +66,11 @@ const projectsDetails = {
             <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#333_1px,transparent_1px),linear-gradient(to_bottom,#333_1px,transparent_1px)] bg-[size:20px_20px]" />
             <div className="absolute top-4 left-4 text-[9px] uppercase tracking-wider text-green-500/60">SYS-CAMERA: FEED_01 // SECURE</div>
             <div className="w-3/4 h-2/3 border border-green-500/30 rounded relative flex items-center justify-center bg-black/40">
-              {/* Radar grid */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-48 h-48 rounded-full border border-green-500/10 flex items-center justify-center">
                   <div className="w-32 h-32 rounded-full border border-green-500/10" />
                 </div>
               </div>
-              {/* Target Bounding Box */}
               <div className="absolute top-10 left-16 border-2 border-green-500 w-28 h-20 animate-pulse">
                 <span className="absolute -top-5 left-0 bg-green-500 text-black text-[8px] px-1 py-0.5 font-bold">UAV: 94.2%</span>
                 <span className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-white" />
@@ -84,12 +91,9 @@ const projectsDetails = {
         render: () => (
           <div className="w-full h-full bg-slate-950 flex flex-col items-center justify-center p-6 relative rounded-xl border border-slate-800 font-space-mono text-slate-400">
             <div className="absolute top-4 left-4 text-[8px] uppercase tracking-wider text-slate-500">TRAINING METRICS // LOG</div>
-            {/* Chart */}
             <div className="w-5/6 h-1/2 border-b border-l border-slate-800 relative mt-4 flex items-end">
               <svg className="w-full h-full" viewBox="0 0 100 50">
-                {/* Loss Curve */}
                 <path d="M 0,5 Q 30,35 100,45" fill="none" stroke="#22C55E" strokeWidth="2" />
-                {/* Accuracy Curve */}
                 <path d="M 0,45 Q 40,10 100,8" fill="none" stroke="#3B82F6" strokeWidth="1.5" />
               </svg>
               <div className="absolute top-2 right-2 flex flex-col gap-1 text-[7px]">
@@ -117,9 +121,6 @@ const projectsDetails = {
     description: "An online personal universe merging interactive 3D solar maps, retro-futuristic chambers, and high-readability prose.",
     status: "IN PROGRESS",
     color: "#A855F7",
-    bgAccent: "bg-purple-50/40",
-    borderAccent: "border-purple-200",
-    textAccent: "text-purple-600",
     timeline: "May 2026 - Present",
     role: "Creator & Architect",
     context: "Personal Creative Hub",
@@ -127,6 +128,18 @@ const projectsDetails = {
     overview: "AryanVerse is not a standard developer website. It is designed to be a digital exhibit of the mind, where visitors enter a solar-system style galaxy containing glowing planetary chambers. Each chamber represents a core facet of my identity: my writings, developer logs, journey landmarks, and portfolio items. It combines rich design, dynamic physics, and high contrast reading states.",
     challenge: "Combining a canvas-based 3D scene (Three.js) with DOM elements can lead to memory leaks, slow page transitions, and disjointed states. Standard animations fail to sync when moving from WebGL coordinate spaces to standard screen space. Additionally, ensuring smooth performance on mobile browsers required strict geometry optimization.",
     solution: "I designed a state controller that acts as a single source of truth for both the Three.js canvas and the Next.js routing state. Transitioning between pages triggers a GSAP timeline that smoothly interpolates the 3D camera coordinates, zooms into a target planet, and fades in the text cards at the exact millisecond the camera reaches its destination. All 3D planetary spheres share a single geometry buffer to save GPU cycles.",
+    theme: {
+      bg: "bg-white",
+      text: "text-zinc-900",
+      subtext: "text-zinc-500",
+      border: "border-zinc-200",
+      cardBg: "bg-zinc-50",
+      badge: "bg-purple-50 text-purple-700 border-purple-200",
+      titleFont: "font-serif italic font-bold tracking-tight",
+      bodyFont: "font-sans text-zinc-700 leading-relaxed",
+      accentColor: "#A855F7",
+      isDark: false
+    },
     techStack: [
       { name: "Next.js", desc: "App Router structure for routing, static page generation, and search optimization." },
       { name: "Three.js", desc: "For WebGL scene compilation, shaders, mesh texturing, and camera paths." },
@@ -157,9 +170,6 @@ const projectsDetails = {
     description: "A machine learning system analyzing rating distributions and movie descriptive metadata to provide tailored viewing suggestions.",
     status: "PLANNED",
     color: "#3B82F6",
-    bgAccent: "bg-blue-50/40",
-    borderAccent: "border-blue-200",
-    textAccent: "text-blue-600",
     timeline: "Q3 2026 (Planned)",
     role: "ML Developer",
     context: "Academic Portfolio Piece",
@@ -167,6 +177,18 @@ const projectsDetails = {
     overview: "Designed to explore recommender architectures, this system blends multiple modeling approaches to solve the accuracy limits of standalone filters. By combining metadata text representations with raw user voting distributions, the project creates a stable, hybrid suggestion feed.",
     challenge: "The cold-start problem (suggesting movies to new users with zero history) and sparsity (most users only rate a tiny fraction of a massive database) cause traditional recommendation models to break or suggest only generic blockbusters.",
     solution: "The planned design uses content-based filtering (TF-IDF on summaries and genres) to build an initial user profile during onboarding. Once the user begins rating movies, a Collaborative Filtering engine using Singular Value Decomposition (SVD) dynamically recalculates similarity weights to surface niche recommendations, resolving both sparsity and cold-start hurdles.",
+    theme: {
+      bg: "bg-[#FAF5EC]",
+      text: "text-[#2B231D]",
+      subtext: "text-stone-500",
+      border: "border-stone-200",
+      cardBg: "bg-white",
+      badge: "bg-blue-50 text-blue-700 border-blue-200",
+      titleFont: "font-serif font-black tracking-tight",
+      bodyFont: "font-serif text-[#3E342E] leading-relaxed",
+      accentColor: "#3B82F6",
+      isDark: false
+    },
     techStack: [
       { name: "Python", desc: "Primary environment for data parsing, vector creation, and modeling." },
       { name: "Scikit-Learn", desc: "Used for TF-IDF vectorization, cosine similarity metrics, and SVD modeling." },
@@ -212,9 +234,6 @@ const projectsDetails = {
     description: "An original literary project following two individuals whose lives collide in a series of spontaneous, unscripted moments.",
     status: "IN PROGRESS",
     color: "#EF4444",
-    bgAccent: "bg-red-50/40",
-    borderAccent: "border-red-200",
-    textAccent: "text-red-600",
     timeline: "Dec 2025 - Present",
     role: "Author / Creative Writer",
     context: "Personal Novel Project",
@@ -222,6 +241,18 @@ const projectsDetails = {
     overview: "Unscripted Love is my debut creative writing project. Written as a contemporary novel, it captures the emotional friction between high-pressure ambitions and the unexpected, chaotic nature of human relationships. The book focuses on realistic dialogues, vulnerable internal monologues, and character growth.",
     challenge: "Structuring a compelling narrative arc that maintains reader momentum while ensuring character depth isn't sacrificed for plot speed. Traditional writing tools lack formatting adaptability for dynamic, multi-modal web presentations.",
     solution: "I developed a detailed chapter outline mapping external events to internal psychological shifts using the Hero's Journey schema. To present the novel digitally, I designed an editorial layout focusing on serif typography, wide margins, and CSS-driven reading cards to let readers experience snippets of the manuscript in a distraction-free space.",
+    theme: {
+      bg: "bg-[#FDFBF7]",
+      text: "text-slate-800",
+      subtext: "text-slate-500",
+      border: "border-slate-200/80",
+      cardBg: "bg-white",
+      badge: "bg-red-50 text-red-700 border-red-200",
+      titleFont: "font-serif italic font-black tracking-tight",
+      bodyFont: "font-serif text-slate-800 leading-loose",
+      accentColor: "#EF4444",
+      isDark: false
+    },
     techStack: [
       { name: "Creative Writing", desc: "Character development, narrative pacing, and deep thematic structure." },
       { name: "Google Docs", desc: "Draft tracking, editing loops, and manuscript version control." },
@@ -260,20 +291,61 @@ const projectsDetails = {
   },
   "lyfchanger": {
     name: "LyfChanger",
+    tagline: "A Premium Habit Curation and Curated Wellness Merchandise Concept.",
+    description: "An upcoming lifestyle ecosystem focused on bridging modern habit tracking with highly custom, premium organic wellness merchandise.",
+    status: "PLANNED",
+    color: "#F97316",
+    timeline: "Q4 2026 (Concept)",
+    role: "Founder & Strategic Director",
+    context: "Conceptual Startup Plan",
+    tags: ["Product Curation", "Branding Strategy", "Lifestyle Tech"],
+    overview: "LyfChanger is a future startup plan currently in its conceptual design phase. The goal is to build a premium, digital-first wellness ecosystem. Rather than just offering generic habits or products, LyfChanger aims to curate physical lifestyle merchandise (such as custom organic hoodies, smart water flasks, and sensory tools) that synchronize with a dedicated mindfulness tracking application.",
+    challenge: "Formulating a viable value proposition that stands out in the crowded wellness market, while structuring a lean manufacturing supply chain for premium custom materials.",
+    solution: "The startup model focuses on high-ticket, limited-run custom merchandise drops promoted through high-aesthetic cinematic storytelling on social media. The digital application acts as an exclusive membership gateway, where users receive custom habit-building challenges that pair with their physical wellness gear.",
+    theme: {
+      bg: "bg-[#091A17]",
+      text: "text-[#ECE5DA]",
+      subtext: "text-emerald-300/60",
+      border: "border-emerald-950/50",
+      cardBg: "bg-[#0C2420]",
+      badge: "bg-emerald-950/40 text-emerald-400 border-emerald-800/30",
+      titleFont: "font-serif italic font-bold tracking-wide",
+      bodyFont: "font-sans text-[#D4CBBF] font-light leading-relaxed",
+      accentColor: "#F97316",
+      isDark: true
+    },
+    techStack: [
+      { name: "Brand Curation", desc: "Designing premium visual identities and unique aesthetic guidelines for lifestyle products." },
+      { name: "Supply Chain Strategy", desc: "Structuring manufacturer relations for organic cotton fabrics and sustainable smart hardware." },
+      { name: "Ecosystem Design", desc: "Modeling a dual-channel ecosystem connecting physical wellness assets with digital behavioral analytics." }
+    ],
+    gallery: []
+  },
+  "streetwear-brand": {
+    name: "Custom Streetwear Brand",
     tagline: "E-Commerce, Branding, and Marketing Bootstrapping Experience in Class 11.",
     description: "My first real business venture, generating revenue while testing brand placement, logistics, and sales cycles.",
     status: "COMPLETED",
-    color: "#F97316",
-    bgAccent: "bg-orange-50/40",
-    borderAccent: "border-orange-200",
-    textAccent: "text-orange-600",
+    color: "#E11D48",
     timeline: "Jul 2023 - Feb 2024",
-    role: "Founder / Hustler",
-    context: "Independent Business Venture",
+    role: "Founder / E-Commerce Operator",
+    context: "High School Business Venture",
     tags: ["Entrepreneurship", "Digital Marketing", "Logistics", "Branding"],
-    overview: "Launched during high school (Class 11), LyfChanger was my entry point into entrepreneurship. The business model centered on custom print-on-demand streetwear apparel and providing organic social media marketing consultancies for local brands. It taught me key concepts in product positioning, price elasticity, and cash-flow management.",
+    overview: "Launched during high school (Class 11), this custom streetwear brand was my entry point into entrepreneurship. The business model centered on custom print-on-demand streetwear apparel and providing organic social media marketing consultancies for local brands. It taught me key concepts in product positioning, price elasticity, and cash-flow management.",
     challenge: "Having zero upfront capital to order inventory and no industry connections meant I had to figure out print supply chains and shipping logistics while balancing schoolwork.",
     solution: "I integrated a print-on-demand drop-shipping supplier network directly to a social media store page, removing the need for upfront warehousing costs. I ran organic reels campaigns on Instagram to acquire customers, generating approximately ₹84,000 in total sales with zero ad spend. I personally managed order entry, courier tracking, and customer support loops.",
+    theme: {
+      bg: "bg-[#FAF8F5]",
+      text: "text-stone-900",
+      subtext: "text-stone-500",
+      border: "border-stone-250/70",
+      cardBg: "bg-white",
+      badge: "bg-rose-50 text-rose-700 border-rose-200",
+      titleFont: "font-sans font-black tracking-wider uppercase",
+      bodyFont: "font-sans text-stone-700 leading-relaxed",
+      accentColor: "#E11D48",
+      isDark: false
+    },
     techStack: [
       { name: "Organic Marketing", desc: "Viral short-form video creation and targeted hashtags to drive storefront clicks." },
       { name: "Drop-shipping API", desc: "Connecting client orders directly to manufacturing partners for fulfillment." },
@@ -303,9 +375,6 @@ const projectsDetails = {
     description: "A digital knowledge system that organizes fragmented thoughts into structured relational semantic hubs.",
     status: "PLANNED",
     color: "#6366F1",
-    bgAccent: "bg-indigo-50/40",
-    borderAccent: "border-indigo-200",
-    textAccent: "text-indigo-600",
     timeline: "Q4 2026 (Planned)",
     role: "Lead Creator",
     context: "Hackaccino 4.0 Prototype Idea",
@@ -313,6 +382,18 @@ const projectsDetails = {
     overview: "Echos is a concept designed to bridge the gap between note-taking and knowledge graph discovery. Instead of sorting files into manual folders, Echos reads short textual ideas, embeds them using machine learning models, and maps links between them based on conceptual overlap, creating an automatic wiki of your thoughts.",
     challenge: "Parsing messy, unformatted human language in real-time and clustering it without producing massive, confusing node clusters that are hard to navigate.",
     solution: "The model will pass inputs through a text embedding model (e.g. OpenAI text-embedding-3-small) to project text into a high-dimensional vector space. Nodes are grouped using density-based spatial clustering (DBSCAN). The frontend maps these clusters as interactive, floating constellation stars using a Canvas-based coordinate layout.",
+    theme: {
+      bg: "bg-white",
+      text: "text-zinc-900",
+      subtext: "text-zinc-500",
+      border: "border-zinc-200",
+      cardBg: "bg-zinc-50",
+      badge: "bg-indigo-50 text-indigo-700 border-indigo-200",
+      titleFont: "font-sans font-bold tracking-tight",
+      bodyFont: "font-sans text-zinc-700 leading-relaxed",
+      accentColor: "#6366F1",
+      isDark: false
+    },
     techStack: [
       { name: "Vector Database", desc: "To store high-dimensional text vectors and perform rapid cosine distance checks." },
       { name: "Next.js App Router", desc: "For Server Actions handling background embedding calls." },
@@ -360,21 +441,26 @@ export default function ProjectDetailPage({ params }) {
     );
   }
 
-  const currentSlide = project.gallery ? project.gallery[activeSlide] : null;
+  const theme = project.theme;
+  const currentSlide = project.gallery && project.gallery.length > 0 ? project.gallery[activeSlide] : null;
 
   return (
-    <main className="fixed inset-0 z-40 bg-[#FAF9F6] text-slate-900 overflow-y-auto w-screen h-screen flex flex-col items-center justify-start select-text selection:bg-purple-100 antialiased pb-24">
+    <main className={`fixed inset-0 z-40 ${theme.bg} ${theme.text} overflow-y-auto w-screen h-screen flex flex-col items-center justify-start select-text selection:bg-purple-100 antialiased pb-24`}>
       
       {/* 1. Sticky/Fixed Top Navigation */}
       <div className="w-full max-w-4xl px-6 pt-10 pb-4 flex justify-between items-center relative z-20">
         <Link
           href="/projects"
-          className="flex items-center gap-2 px-4 py-2 border border-slate-200/80 bg-[#FAF9F6]/90 backdrop-blur-sm text-slate-600 hover:text-slate-900 hover:border-slate-400 hover:shadow-sm transition-all duration-300 rounded-lg font-space-mono text-xs tracking-wider cursor-pointer group"
+          className={`flex items-center gap-2 px-4 py-2 border ${
+            theme.isDark 
+              ? "border-white/10 bg-black/60 text-slate-300 hover:text-white hover:border-emerald-800/40" 
+              : "border-slate-200/80 bg-white/90 text-slate-600 hover:text-slate-900 hover:border-slate-350"
+          } hover:shadow-xs transition-all duration-300 rounded-lg font-space-mono text-xs tracking-wider cursor-pointer group`}
         >
           <span className="transform group-hover:-translate-x-1 transition-transform duration-200 text-[13px]">←</span> Back to Lab
         </Link>
-        <div className="flex items-center gap-2 font-space-mono text-[9px] uppercase tracking-[0.2em] text-slate-400 font-bold">
-          <span className="w-1.5 h-1.5 rounded-full bg-slate-300" />
+        <div className={`flex items-center gap-2 font-space-mono text-[9px] uppercase tracking-[0.2em] ${theme.isDark ? "text-slate-500" : "text-slate-400"} font-bold`}>
+          <span className={`w-1.5 h-1.5 rounded-full ${theme.isDark ? "bg-slate-750" : "bg-slate-300"}`} />
           CASE STUDY // {slug}
         </div>
       </div>
@@ -385,36 +471,30 @@ export default function ProjectDetailPage({ params }) {
         {/* HERO HEADER */}
         <div className="flex flex-col gap-4 text-left">
           <div className="flex items-center gap-3">
-            <span className={`px-2.5 py-0.5 rounded-full text-[9px] font-space-mono tracking-wider font-extrabold uppercase border ${
-              project.status === "COMPLETED" 
-                ? "bg-green-50 text-green-700 border-green-200" 
-                : project.status === "IN PROGRESS"
-                ? "bg-purple-50 text-purple-700 border-purple-200"
-                : "bg-blue-50 text-blue-700 border-blue-200"
-            }`}>
+            <span className={`px-2.5 py-0.5 rounded-full text-[9px] font-space-mono tracking-wider font-extrabold uppercase border ${theme.badge}`}>
               {project.status}
             </span>
-            <span className="text-[10px] text-slate-400 font-space-mono">{project.timeline}</span>
+            <span className={`text-[10px] ${theme.isDark ? "text-slate-500" : "text-slate-400"} font-space-mono`}>{project.timeline}</span>
           </div>
 
-          <h1 className="font-serif italic font-black text-4xl sm:text-5xl md:text-6xl text-slate-900 tracking-tight leading-none drop-shadow-[0_2px_4px_rgba(0,0,0,0.02)]">
+          <h1 className={`${theme.titleFont} text-4xl sm:text-5xl md:text-6xl ${theme.isDark ? "text-white" : "text-slate-900"} tracking-tight leading-none drop-shadow-[0_2px_4px_rgba(0,0,0,0.02)]`}>
             {project.name}
           </h1>
 
-          <p className="font-sans text-base md:text-lg text-slate-600 font-medium leading-relaxed max-w-2xl border-l-2 border-slate-200 pl-4 py-1 italic">
+          <p className={`font-sans text-base md:text-lg ${theme.isDark ? "text-emerald-300/70 border-emerald-950" : "text-slate-600 border-slate-200"} font-medium leading-relaxed max-w-2xl border-l-2 pl-4 py-1 italic`}>
             {project.tagline}
           </p>
         </div>
 
         {/* HERO ABSTRACT GRADIENT BLOCK */}
-        <div className="w-full aspect-[21/9] rounded-2xl relative overflow-hidden border border-slate-200/80 shadow-[0_4px_24px_rgba(0,0,0,0.03)] flex items-center justify-center">
+        <div className={`w-full aspect-[21/9] rounded-2xl relative overflow-hidden border ${theme.isDark ? "border-white/5 shadow-[0_4px_24px_rgba(0,0,0,0.5)]" : "border-slate-200/80 shadow-[0_4px_24px_rgba(0,0,0,0.03)]"} flex items-center justify-center`}>
           <div 
             className="absolute inset-0 opacity-40 blur-2xl pointer-events-none"
             style={{
               background: `radial-gradient(circle at 50% 50%, ${project.color}35, transparent 75%)`
             }}
           />
-          <div className="absolute inset-0 bg-linear-to-tr from-slate-100 via-transparent to-slate-50 opacity-80" />
+          <div className={`absolute inset-0 ${theme.isDark ? "bg-gradient-to-tr from-neutral-950 via-transparent to-neutral-900" : "bg-gradient-to-tr from-slate-100 via-transparent to-slate-50"} opacity-80`} />
           
           {/* Abstract mesh lines */}
           <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#808080_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
@@ -426,31 +506,31 @@ export default function ProjectDetailPage({ params }) {
           />
 
           {/* Project Details Badge */}
-          <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-xs px-3 py-1 rounded-md border border-slate-200/60 shadow-xs flex items-center gap-2">
+          <div className={`absolute bottom-4 right-4 ${theme.isDark ? "bg-black/90 border-white/5" : "bg-white/90 border-slate-200/60"} px-3 py-1 rounded-md border shadow-xs flex items-center gap-2`}>
             <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: project.color }} />
-            <span className="font-space-mono text-[9px] text-slate-500 font-bold uppercase tracking-wider">{project.role}</span>
+            <span className={`font-space-mono text-[9px] ${theme.isDark ? "text-slate-400" : "text-slate-500"} font-bold uppercase tracking-wider`}>{project.role}</span>
           </div>
         </div>
 
         {/* METADATA SUMMARY BAR */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 border-y border-slate-200 py-6 w-full">
+        <div className={`grid grid-cols-2 md:grid-cols-4 gap-6 border-y ${theme.isDark ? "border-white/10" : "border-slate-200"} py-6 w-full`}>
           <div>
-            <span className="block font-space-mono text-[9px] text-slate-400 uppercase tracking-widest font-black mb-1">TIMELINE</span>
-            <span className="font-sans text-sm font-semibold text-slate-700">{project.timeline}</span>
+            <span className={`block font-space-mono text-[9px] ${theme.isDark ? "text-slate-500" : "text-slate-400"} uppercase tracking-widest font-black mb-1`}>TIMELINE</span>
+            <span className={`font-sans text-sm font-semibold ${theme.isDark ? "text-slate-300" : "text-slate-700"}`}>{project.timeline}</span>
           </div>
           <div>
-            <span className="block font-space-mono text-[9px] text-slate-400 uppercase tracking-widest font-black mb-1">ROLE</span>
-            <span className="font-sans text-sm font-semibold text-slate-700">{project.role}</span>
+            <span className={`block font-space-mono text-[9px] ${theme.isDark ? "text-slate-500" : "text-slate-400"} uppercase tracking-widest font-black mb-1`}>ROLE</span>
+            <span className={`font-sans text-sm font-semibold ${theme.isDark ? "text-slate-300" : "text-slate-700"}`}>{project.role}</span>
           </div>
           <div>
-            <span className="block font-space-mono text-[9px] text-slate-400 uppercase tracking-widest font-black mb-1">CONTEXT</span>
-            <span className="font-sans text-sm font-semibold text-slate-700 truncate block">{project.context}</span>
+            <span className={`block font-space-mono text-[9px] ${theme.isDark ? "text-slate-500" : "text-slate-400"} uppercase tracking-widest font-black mb-1`}>CONTEXT</span>
+            <span className={`font-sans text-sm font-semibold ${theme.isDark ? "text-slate-300" : "text-slate-700"} truncate block`}>{project.context}</span>
           </div>
           <div>
-            <span className="block font-space-mono text-[9px] text-slate-400 uppercase tracking-widest font-black mb-1">TECH STACK</span>
+            <span className={`block font-space-mono text-[9px] ${theme.isDark ? "text-slate-500" : "text-slate-400"} uppercase tracking-widest font-black mb-1`}>TECH STACK</span>
             <div className="flex flex-wrap gap-1 mt-0.5">
               {project.tags.slice(0, 2).map((t) => (
-                <span key={t} className="px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 font-space-mono text-[8px] border border-slate-200/40">{t}</span>
+                <span key={t} className={`px-1.5 py-0.5 rounded ${theme.isDark ? "bg-[#0c2420] text-emerald-300 border-emerald-950/40" : "bg-slate-100 text-slate-600 border-slate-200/40"} font-space-mono text-[8px] border`}>{t}</span>
               ))}
             </div>
           </div>
@@ -461,33 +541,33 @@ export default function ProjectDetailPage({ params }) {
           
           {/* Overview */}
           <div className="flex flex-col gap-3">
-            <h2 className="font-sans font-bold text-xs uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2">
+            <h2 className={`font-sans font-bold text-xs uppercase tracking-[0.2em] ${theme.isDark ? "text-slate-500" : "text-slate-400"} flex items-center gap-2`}>
               <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: project.color }} />
               01 / OVERVIEW
             </h2>
-            <p className="font-serif text-lg leading-relaxed text-slate-800 antialiased">
+            <p className={`${theme.bodyFont} text-lg antialiased`}>
               {project.overview}
             </p>
           </div>
 
           {/* Challenge */}
           <div className="flex flex-col gap-3">
-            <h2 className="font-sans font-bold text-xs uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2">
+            <h2 className={`font-sans font-bold text-xs uppercase tracking-[0.2em] ${theme.isDark ? "text-slate-500" : "text-slate-400"} flex items-center gap-2`}>
               <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: project.color }} />
               02 / THE CHALLENGE
             </h2>
-            <p className="font-serif text-lg leading-relaxed text-slate-800 antialiased">
+            <p className={`${theme.bodyFont} text-lg antialiased`}>
               {project.challenge}
             </p>
           </div>
 
           {/* Solution */}
           <div className="flex flex-col gap-3">
-            <h2 className="font-sans font-bold text-xs uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2">
+            <h2 className={`font-sans font-bold text-xs uppercase tracking-[0.2em] ${theme.isDark ? "text-slate-500" : "text-slate-400"} flex items-center gap-2`}>
               <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: project.color }} />
               03 / THE SOLUTION
             </h2>
-            <p className="font-serif text-lg leading-relaxed text-slate-800 antialiased">
+            <p className={`${theme.bodyFont} text-lg antialiased`}>
               {project.solution}
             </p>
           </div>
@@ -495,18 +575,18 @@ export default function ProjectDetailPage({ params }) {
         </article>
 
         {/* SCREENSHOT / EVIDENCE GALLERY SHOWCASE */}
-        {project.gallery && project.gallery.length > 0 && (
-          <div className="flex flex-col gap-4 border-t border-slate-200 pt-10 mt-2">
+        {project.gallery && project.gallery.length > 0 && currentSlide && (
+          <div className={`flex flex-col gap-4 border-t ${theme.isDark ? "border-white/10" : "border-slate-200"} pt-10 mt-2`}>
             <div className="flex flex-col text-left gap-1">
-              <h2 className="font-sans font-bold text-xs uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2">
+              <h2 className={`font-sans font-bold text-xs uppercase tracking-[0.2em] ${theme.isDark ? "text-slate-500" : "text-slate-400"} flex items-center gap-2`}>
                 <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: project.color }} />
                 04 / GALLERY & METRICS
               </h2>
-              <p className="text-xs text-slate-500 font-sans">Click on the tabs below to switch viewports.</p>
+              <p className={`text-xs ${theme.isDark ? "text-slate-500" : "text-slate-550"} font-sans`}>Click on the tabs below to switch viewports.</p>
             </div>
 
             {/* Gallery viewport Frame */}
-            <div className="w-full rounded-2xl border border-slate-200 bg-white p-3 shadow-[0_4px_30px_rgba(0,0,0,0.02)] flex flex-col gap-3">
+            <div className={`w-full rounded-2xl border ${theme.isDark ? "border-white/5 bg-black/60 shadow-[0_4px_30px_rgba(0,0,0,0.3)]" : "border-slate-200 bg-white shadow-[0_4px_30px_rgba(0,0,0,0.02)]"} p-3 flex flex-col gap-3`}>
               <div className="w-full aspect-[16/10] rounded-xl overflow-hidden relative bg-slate-900 border border-slate-100/50 flex items-center justify-center">
                 {currentSlide.type === "image" ? (
                   <img
@@ -519,8 +599,8 @@ export default function ProjectDetailPage({ params }) {
                 )}
               </div>
               <div className="px-2 py-1 text-left flex flex-col gap-1">
-                <h3 className="font-sans font-bold text-sm text-slate-900">{currentSlide.title}</h3>
-                <p className="text-xs text-slate-500 leading-relaxed max-w-2xl">{currentSlide.desc}</p>
+                <h3 className={`font-sans font-bold text-sm ${theme.isDark ? "text-white" : "text-slate-900"}`}>{currentSlide.title}</h3>
+                <p className={`text-xs ${theme.isDark ? "text-slate-400" : "text-slate-500"} leading-relaxed max-w-2xl`}>{currentSlide.desc}</p>
               </div>
             </div>
 
@@ -532,8 +612,8 @@ export default function ProjectDetailPage({ params }) {
                   onClick={() => setActiveSlide(idx)}
                   className={`px-3 py-1.5 text-[10px] font-space-mono uppercase tracking-wider rounded-md border transition-all duration-300 ${
                     activeSlide === idx
-                      ? "bg-slate-900 text-white border-slate-900 shadow-xs"
-                      : "bg-white text-slate-500 border-slate-200 hover:border-slate-350 hover:text-slate-700"
+                      ? theme.isDark ? "bg-[#ECE5DA] text-black border-[#ECE5DA]" : "bg-slate-900 text-white border-slate-900 shadow-xs"
+                      : theme.isDark ? "bg-black/60 text-slate-400 border-white/5 hover:border-white/20" : "bg-white text-slate-500 border-slate-200 hover:border-slate-350 hover:text-slate-700"
                   }`}
                 >
                   {slide.title}
@@ -544,8 +624,8 @@ export default function ProjectDetailPage({ params }) {
         )}
 
         {/* DETAILED TECH STACK CARDS */}
-        <div className="flex flex-col gap-6 border-t border-slate-200 pt-10">
-          <h2 className="font-sans font-bold text-xs uppercase tracking-[0.2em] text-slate-400 text-left flex items-center gap-2">
+        <div className={`flex flex-col gap-6 border-t ${theme.isDark ? "border-white/10" : "border-slate-200"} pt-10`}>
+          <h2 className={`font-sans font-bold text-xs uppercase tracking-[0.2em] ${theme.isDark ? "text-slate-500" : "text-slate-400"} text-left flex items-center gap-2`}>
             <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: project.color }} />
             05 / SYSTEM COMPOSITION
           </h2>
@@ -554,21 +634,21 @@ export default function ProjectDetailPage({ params }) {
             {project.techStack.map((tech) => (
               <div 
                 key={tech.name} 
-                className="bg-white border border-slate-200 hover:border-slate-350 p-5 rounded-xl text-left flex flex-col gap-2 transition-all duration-300 shadow-xs hover:shadow-md"
+                className={`${theme.cardBg} border ${theme.isDark ? "border-white/5 hover:border-white/15" : "border-slate-200 hover:border-slate-350"} p-5 rounded-xl text-left flex flex-col gap-2 transition-all duration-300 shadow-xs hover:shadow-md`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-sans font-bold text-sm text-slate-800 uppercase tracking-wide">{tech.name}</span>
-                  <Code className="w-3.5 h-3.5 text-slate-300" />
+                  <span className={`font-sans font-bold text-sm ${theme.isDark ? "text-white" : "text-slate-800"} uppercase tracking-wide`}>{tech.name}</span>
+                  <Code className={`w-3.5 h-3.5 ${theme.isDark ? "text-slate-700" : "text-slate-300"}`} />
                 </div>
-                <p className="text-xs text-slate-500 leading-relaxed font-sans font-medium">{tech.desc}</p>
+                <p className={`text-xs ${theme.isDark ? "text-slate-400" : "text-slate-500"} leading-relaxed font-sans font-medium`}>{tech.desc}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* PREMIUM ACTION LINKS SECTION */}
-        <div className="flex flex-col gap-6 border-t border-slate-200 pt-10">
-          <h2 className="font-sans font-bold text-xs uppercase tracking-[0.2em] text-slate-400 text-left flex items-center gap-2">
+        <div className={`flex flex-col gap-6 border-t ${theme.isDark ? "border-white/10" : "border-slate-200"} pt-10`}>
+          <h2 className={`font-sans font-bold text-xs uppercase tracking-[0.2em] ${theme.isDark ? "text-slate-500" : "text-slate-400"} text-left flex items-center gap-2`}>
             <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: project.color }} />
             06 / RESOURCE INDEX
           </h2>
@@ -580,16 +660,24 @@ export default function ProjectDetailPage({ params }) {
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3 border border-slate-200 bg-white hover:border-slate-800 text-slate-700 hover:text-slate-900 rounded-xl transition-all duration-300 shadow-xs hover:shadow-md font-space-mono text-xs tracking-wider"
+                className={`inline-flex items-center gap-2 px-5 py-3 border ${
+                  theme.isDark 
+                    ? "border-white/10 bg-black/60 text-slate-300 hover:text-white hover:border-[#ECE5DA]" 
+                    : "border-slate-200 bg-white hover:border-slate-800 text-slate-700 hover:text-slate-900"
+                } rounded-xl transition-all duration-300 shadow-xs hover:shadow-md font-space-mono text-xs tracking-wider`}
               >
                 <SiGithub className="w-4 h-4 text-slate-500" /> GitHub Repository
               </a>
             ) : (
               <button 
                 disabled
-                className="inline-flex items-center gap-2 px-5 py-3 border border-slate-200 bg-slate-50 text-slate-400 rounded-xl font-space-mono text-xs tracking-wider cursor-not-allowed opacity-70 group relative"
+                className={`inline-flex items-center gap-2 px-5 py-3 border ${
+                  theme.isDark 
+                    ? "border-white/5 bg-black/40 text-slate-600" 
+                    : "border-slate-200 bg-slate-50 text-slate-400"
+                } rounded-xl font-space-mono text-xs tracking-wider cursor-not-allowed opacity-70 group relative`}
               >
-                <Lock className="w-3.5 h-3.5 text-slate-300" /> GitHub Repo 
+                <Lock className={`w-3.5 h-3.5 ${theme.isDark ? "text-slate-700" : "text-slate-300"}`} /> GitHub Repo 
                 <span className="ml-1 px-1.5 py-0.5 rounded bg-slate-200/60 text-slate-500 text-[8px] font-black tracking-widest uppercase">SOON</span>
               </button>
             )}
@@ -600,16 +688,24 @@ export default function ProjectDetailPage({ params }) {
                 href={project.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3 border border-slate-200 bg-white hover:border-slate-800 text-slate-700 hover:text-slate-900 rounded-xl transition-all duration-300 shadow-xs hover:shadow-md font-space-mono text-xs tracking-wider"
+                className={`inline-flex items-center gap-2 px-5 py-3 border ${
+                  theme.isDark 
+                    ? "border-white/10 bg-black/60 text-slate-300 hover:text-white hover:border-[#ECE5DA]" 
+                    : "border-slate-200 bg-white hover:border-slate-800 text-slate-700 hover:text-slate-900"
+                } rounded-xl transition-all duration-300 shadow-xs hover:shadow-md font-space-mono text-xs tracking-wider`}
               >
                 <Globe className="w-4 h-4 text-slate-500" /> Live Prototype <ExternalLink className="w-3 h-3 text-slate-400" />
               </a>
             ) : (
               <button 
                 disabled
-                className="inline-flex items-center gap-2 px-5 py-3 border border-slate-200 bg-slate-50 text-slate-400 rounded-xl font-space-mono text-xs tracking-wider cursor-not-allowed opacity-70 group"
+                className={`inline-flex items-center gap-2 px-5 py-3 border ${
+                  theme.isDark 
+                    ? "border-white/5 bg-black/40 text-slate-600" 
+                    : "border-slate-200 bg-slate-50 text-slate-400"
+                } rounded-xl font-space-mono text-xs tracking-wider cursor-not-allowed opacity-70 group`}
               >
-                <Globe className="w-3.5 h-3.5 text-slate-300" /> Live Demo 
+                <Globe className={`w-3.5 h-3.5 ${theme.isDark ? "text-slate-700" : "text-slate-300"}`} /> Live Demo 
                 <span className="ml-1 px-1.5 py-0.5 rounded bg-slate-200/60 text-slate-500 text-[8px] font-black tracking-widest uppercase">SOON</span>
               </button>
             )}
@@ -620,16 +716,24 @@ export default function ProjectDetailPage({ params }) {
                 href={project.docs}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3 border border-slate-200 bg-white hover:border-slate-800 text-slate-700 hover:text-slate-900 rounded-xl transition-all duration-300 shadow-xs hover:shadow-md font-space-mono text-xs tracking-wider"
+                className={`inline-flex items-center gap-2 px-5 py-3 border ${
+                  theme.isDark 
+                    ? "border-white/10 bg-black/60 text-slate-300 hover:text-white hover:border-[#ECE5DA]" 
+                    : "border-slate-200 bg-white hover:border-slate-800 text-slate-700 hover:text-slate-900"
+                } rounded-xl transition-all duration-300 shadow-xs hover:shadow-md font-space-mono text-xs tracking-wider`}
               >
                 <FileText className="w-4 h-4 text-slate-500" /> Documentation <ExternalLink className="w-3 h-3 text-slate-400" />
               </a>
             ) : (
               <button 
                 disabled
-                className="inline-flex items-center gap-2 px-5 py-3 border border-slate-200 bg-slate-50 text-slate-400 rounded-xl font-space-mono text-xs tracking-wider cursor-not-allowed opacity-70 group"
+                className={`inline-flex items-center gap-2 px-5 py-3 border ${
+                  theme.isDark 
+                    ? "border-white/5 bg-black/40 text-slate-600" 
+                    : "border-slate-200 bg-slate-50 text-slate-400"
+                } rounded-xl font-space-mono text-xs tracking-wider cursor-not-allowed opacity-70 group`}
               >
-                <FileText className="w-3.5 h-3.5 text-slate-300" /> Technical Docs 
+                <FileText className={`w-3.5 h-3.5 ${theme.isDark ? "text-slate-700" : "text-slate-300"}`} /> Technical Docs 
                 <span className="ml-1 px-1.5 py-0.5 rounded bg-slate-200/60 text-slate-500 text-[8px] font-black tracking-widest uppercase">SOON</span>
               </button>
             )}
