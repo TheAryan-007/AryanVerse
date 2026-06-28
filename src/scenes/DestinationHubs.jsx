@@ -1,15 +1,32 @@
-﻿import { useRef, useState, useMemo } from 'react';
+import { useRef, useState, useMemo } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-import { Html } from '@react-three/drei';
+import { Html, Box, Icosahedron, Octahedron, Dodecahedron, Cylinder, Sphere, meshBounds } from '@react-three/drei';
 import * as THREE from 'three';
 import { destinations, getNodePosition } from '../data/destinations';
 
-export default function DestinationHubs({ onNodeClick, transitionState }) {
+// Parametric Bernoulli Lemniscate (Infinity Loop) Curve class
+class LemniscateCurve extends THREE.Curve {
+  constructor(scale = 1) {
+    super();
+    this.scale = scale;
+  }
+  getPoint(t, optionalTarget = new THREE.Vector3()) {
+    const angle = t * Math.PI * 2;
+    const denom = 1 + Math.sin(angle) * Math.sin(angle);
+    const x = (this.scale * 1.5 * Math.cos(angle)) / denom;
+    const y = (this.scale * 1.8 * Math.sin(angle) * Math.cos(angle)) / denom;
+    const z = 0;
+    return optionalTarget.set(x, y, z);
+  }
+}
+
+export default function DestinationHubs({ onNodeClick, transitionState, selectedNode }) {
   const [hoveredNode, setHoveredNode] = useState(null);
   const size = useThree((state) => state.size);
   const camera = useThree((state) => state.camera);
 
-  if (transitionState !== "WORLD") return null;
+  // Render nodes only if in WORLD or LEAVING transition states
+  if (transitionState !== "WORLD" && transitionState !== "LEAVING") return null;
 
   const aspect = size.width / size.height;
   const fovRad = (camera.fov * Math.PI) / 360;
@@ -18,335 +35,491 @@ export default function DestinationHubs({ onNodeClick, transitionState }) {
 
   return (
     <group>
-      {destinations.map((node, index) => (
+      {destinations.map((node) => (
         <HubNode
           key={node.id}
           node={node}
           position={getNodePosition(node.id, referenceWidth, referenceHeight)}
           isHovered={hoveredNode === node.id}
+          isSelected={selectedNode && selectedNode.id === node.id}
           setHovered={(val) => setHoveredNode(val ? node.id : null)}
           onClick={() => onNodeClick(node)}
+          transitionState={transitionState}
         />
       ))}
     </group>
   );
 }
 
-function HubNode({ node, position, isHovered, setHovered, onClick }) {
+function HubNode({ node, position, isHovered, isSelected, setHovered, onClick, transitionState }) {
+  const outerGroupRef = useRef();
   const meshRef = useRef();
-  const subGroupRef = useRef();
   const floatGroupRef = useRef();
   const ring1Ref = useRef();
   const ring2Ref = useRef();
   const ring3Ref = useRef();
-  const particle1Ref = useRef();
-  const particle2Ref = useRef();
+  const sat1Ref = useRef();
+  const sat2Ref = useRef();
+  const particlesRef = useRef();
+  const pointLightRef = useRef();
 
-  const scale = isHovered ? 1.3 : 1.0;
+  const isLeaving = transitionState === "LEAVING";
 
-  // Compute base color and hover color (20% brighter)
+  // Compute base color and hover color (25% brighter)
   const baseColor = useMemo(() => new THREE.Color(node.color), [node.color]);
-  const hoverColor = useMemo(() => {
-    return new THREE.Color(node.color).multiplyScalar(1.2);
-  }, [node.color]);
+  const hoverColor = useMemo(() => new THREE.Color(node.color).multiplyScalar(1.25), [node.color]);
   const currentColor = isHovered ? hoverColor : baseColor;
   const hexColor = useMemo(() => '#' + currentColor.getHexString(), [currentColor]);
 
-  // Generate 3D CatmullRomCurve3 infinity loop curve for Future Command Center
-  const infinityCurve = useMemo(() => {
-    if (node.geometryType !== "spire") return null;
-    const points = [];
-    for (let i = 0; i < 64; i++) {
-      const t = (i / 64) * Math.PI * 2;
-      const scaleVal = 0.55;
-      const denom = 1 + Math.sin(t) * Math.sin(t);
-      const x = (scaleVal * Math.cos(t)) / denom;
-      const y = (scaleVal * Math.sin(t) * Math.cos(t)) / denom;
-      const z = scaleVal * 0.25 * Math.sin(t);
-      points.push(new THREE.Vector3(x, y, z));
-    }
-    return new THREE.CatmullRomCurve3(points);
-  }, [node.geometryType]);
+  // Bernoulli Lemniscate curve definition for infinity loop
+  const loopCurve = useMemo(() => new LemniscateCurve(0.24), []);
 
-  // Handle local rotation, floating animation, and custom shader/flow simulations
+  // Generate 35 tiny stars/dust particles in a sphere shell around the gem
+  const localStars = useMemo(() => {
+    const count = 35;
+    const pos = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
+      const r = 0.3 + Math.random() * 0.4;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      pos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+      pos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+      pos[i * 3 + 2] = r * Math.cos(phi);
+    }
+    return pos;
+  }, []);
+
+  // Handle slow gem rotations, floating idle cycles, and ring acceleration
   useFrame((state) => {
     const elapsed = state.clock.getElapsedTime();
-    
-    // Spin main mesh / cluster core
+
+    // 0. Smooth outer group scale animation (handles hover scaling and exit transition shrinking)
+    if (outerGroupRef.current) {
+      let targetScaleVal = isHovered ? 1.25 : 1.0;
+      if (isLeaving) {
+        targetScaleVal = isSelected ? 1.0 : 0.0;
+      }
+      const s = outerGroupRef.current.scale;
+      const lerpSpeed = isLeaving ? 0.15 : 0.08;
+      s.x = THREE.MathUtils.lerp(s.x, targetScaleVal, lerpSpeed);
+      s.y = THREE.MathUtils.lerp(s.y, targetScaleVal, lerpSpeed);
+      s.z = THREE.MathUtils.lerp(s.z, targetScaleVal, lerpSpeed);
+
+      // If scale is practically zero, turn off visibility to remove drawing overhead completely
+      if (isLeaving && !isSelected && s.x < 0.01) {
+        outerGroupRef.current.visible = false;
+      }
+    }
+
+    if (isLeaving) return; // Freeze rotation and motion on route exit
+
+    // 1. Slow Y-axis rotation
     if (meshRef.current) {
-      if (node.geometryType === "spire") {
-        // Infinity loop: dynamic roll rotation
-        meshRef.current.rotation.y = elapsed * 0.4;
-        meshRef.current.rotation.x = Math.sin(elapsed * 0.5) * 0.25;
-      } else {
-        meshRef.current.rotation.y = elapsed * 0.5;
-        meshRef.current.rotation.x = elapsed * 0.2;
-      }
-    }
-    
-    // Secondary subgroup spinner
-    if (subGroupRef.current) {
-      subGroupRef.current.rotation.z = -elapsed * 0.8;
-      subGroupRef.current.rotation.y = elapsed * 0.4;
+      meshRef.current.rotation.y = elapsed * 0.35;
+      meshRef.current.rotation.x = Math.sin(elapsed * 0.2) * 0.15;
     }
 
-    // Timeline concentric rings rotation
-    if (ring1Ref.current) {
-      ring1Ref.current.rotation.z = elapsed * 0.35;
-    }
-    if (ring2Ref.current) {
-      ring2Ref.current.rotation.x = elapsed * 0.25;
-      ring2Ref.current.rotation.y = elapsed * 0.2;
-    }
-    if (ring3Ref.current) {
-      ring3Ref.current.rotation.y = -elapsed * 0.45;
-      ring3Ref.current.rotation.z = elapsed * 0.3;
-    }
-
-    // Infinity loop flowing particles animation
-    if (node.geometryType === "spire" && infinityCurve) {
-      const t1 = (elapsed * 0.12) % 1.0;
-      const pt1 = infinityCurve.getPointAt(t1);
-      if (particle1Ref.current) {
-        particle1Ref.current.position.copy(pt1);
-      }
-
-      const t2 = (elapsed * 0.12 + 0.5) % 1.0;
-      const pt2 = infinityCurve.getPointAt(t2);
-      if (particle2Ref.current) {
-        particle2Ref.current.position.copy(pt2);
-      }
-    }
-
-    // Subtle desynchronized floating idle animations per landmark
+    // 2. Slow desynchronized floating cycle
     if (floatGroupRef.current) {
-      const freq = 1.2 + (node.label.length % 4) * 0.18;
-      const amp = 0.05;
+      const freq = 1.0 + (node.label.length % 3) * 0.15;
+      const amp = 0.04;
       floatGroupRef.current.position.y = Math.sin(elapsed * freq) * amp;
+    }
+
+    // 3. Relic specific rotations and path animations (speed up on hover)
+    const speedMult = isHovered ? 2.5 : 1.0;
+
+    if (node.geometryType === "teardrop") {
+      // ABOUT HEADQUARTERS
+      if (ring1Ref.current) {
+        ring1Ref.current.rotation.z = -elapsed * 0.18 * speedMult;
+      }
+      if (ring2Ref.current) {
+        // Spindle vertical pulse
+        ring2Ref.current.position.y = Math.sin(elapsed * 3.0 * speedMult) * 0.02;
+      }
+    }
+    else if (node.geometryType === "oval") {
+      // SKILLS DISTRICT
+      if (ring1Ref.current) {
+        ring1Ref.current.rotation.z = elapsed * 0.3 * speedMult;
+      }
+      if (particlesRef.current) {
+        particlesRef.current.rotation.y = -elapsed * 0.2 * speedMult;
+      }
+    }
+    else if (node.geometryType === "oblong") {
+      // PROJECTS LAB
+      if (sat1Ref.current) {
+        sat1Ref.current.position.y = 0.24 + Math.sin(elapsed * 2.5 * speedMult) * 0.02;
+        sat1Ref.current.rotation.y = elapsed * 1.2 * speedMult;
+      }
+      if (sat2Ref.current) {
+        sat2Ref.current.position.y = -0.24 - Math.sin(elapsed * 2.5 * speedMult) * 0.02;
+        sat2Ref.current.rotation.y = -elapsed * 1.2 * speedMult;
+      }
+    }
+    else if (node.geometryType === "emeraldCut") {
+      // JOURNEY ARCHIVE
+      if (ring1Ref.current) ring1Ref.current.rotation.x = elapsed * 0.5 * speedMult;
+      if (ring2Ref.current) ring2Ref.current.rotation.y = elapsed * 0.7 * speedMult;
+      if (ring3Ref.current) ring3Ref.current.rotation.z = elapsed * 0.4 * speedMult;
+      if (sat1Ref.current) {
+        const angle = elapsed * 1.5 * speedMult;
+        sat1Ref.current.position.set(Math.cos(angle) * 0.28, Math.sin(angle) * 0.28, 0);
+      }
+    }
+    else if (node.geometryType === "rubyShard") {
+      // THE ARCHIVE
+      if (ring1Ref.current) {
+        ring1Ref.current.rotation.z = elapsed * 0.6 * speedMult;
+      }
+      if (particlesRef.current) {
+        particlesRef.current.rotation.y = elapsed * 0.3 * speedMult;
+      }
+    }
+    else if (node.geometryType === "cube") {
+      // COLLABORATION HUB
+      if (sat1Ref.current) {
+        const t1 = (elapsed * 0.12 * speedMult) % 1.0;
+        const pt = loopCurve.getPoint(t1);
+        sat1Ref.current.position.copy(pt);
+      }
+      if (sat2Ref.current) {
+        const t2 = (elapsed * 0.12 * speedMult + 0.5) % 1.0;
+        const pt = loopCurve.getPoint(t2);
+        sat2Ref.current.position.copy(pt);
+      }
+    }
+
+    // Dynamic point light intensity modulation (breathing energy pulse)
+    if (pointLightRef.current) {
+      pointLightRef.current.intensity = (isLeaving ? 6.0 : (isHovered ? 2.5 : 1.2)) + Math.sin(elapsed * 4.5) * 0.25;
     }
   });
 
-  // Render specific premium sci-fi wireframe landmark geometry
+  // Calculate dynamic emissive intensity
+  const currentEmissive = isLeaving ? 4.5 : (isHovered ? 1.6 : 0.8);
+
+  // Consolidated pointer event handlers to be attached strictly to the visible crystal meshes
+  const pointerHandlers = {
+    onPointerOver: (e) => {
+      if (isLeaving) return;
+      e.stopPropagation();
+      setHovered(true);
+      document.body.style.cursor = 'pointer';
+    },
+    onPointerOut: (e) => {
+      if (isLeaving) return;
+      e.stopPropagation();
+      setHovered(false);
+      document.body.style.cursor = 'default';
+    },
+    onClick: (e) => {
+      if (isLeaving) return;
+      e.stopPropagation();
+      console.log("DestinationHubs.jsx Clicked ID:", node.id);
+      console.log("DestinationHubs.jsx Clicked Route:", node.route);
+      onClick();
+    }
+  };
+
+  // Render specific gemstone characteristics (outer physical shell, inner glowing core, wireframe lattice)
   const renderGeometry = () => {
     switch (node.geometryType) {
-      case "sphere": // About Headquarters: Holographic human avatar
+      case "teardrop": // ABOUT HEADQUARTERS (Soul Stone - Orange)
         return (
           <group>
-            {/* Circular Energy Base */}
-            <mesh position={[0, -0.25, 0]} rotation={[Math.PI / 2, 0, 0]}>
-              <torusGeometry args={[0.28, 0.015, 8, 32]} />
-              <meshBasicMaterial color={currentColor} transparent opacity={0.6} />
+            {/* 1. Outer Glass Cage */}
+            <Icosahedron args={[0.16, 0]} ref={meshRef} {...pointerHandlers}>
+              <meshPhysicalMaterial 
+                color={currentColor} 
+                emissive={currentColor} 
+                emissiveIntensity={currentEmissive} 
+                roughness={0.02} 
+                metalness={0.05}
+                transmission={0.95}
+                thickness={1.8}
+                ior={2.2}
+                flatShading={true}
+                clearcoat={1.0}
+                clearcoatRoughness={0.02}
+              />
+            </Icosahedron>
+            {/* 2. Inner Glowing Spindle Spire */}
+            <mesh ref={ring2Ref} raycast={() => null}>
+              <Cylinder args={[0.012, 0.012, 0.22, 6]}>
+                <meshBasicMaterial color={node.color} />
+              </Cylinder>
             </mesh>
-            <mesh position={[0, -0.25, 0]} rotation={[Math.PI / 2, 0, 0]}>
-              <ringGeometry args={[0, 0.25, 32]} />
-              <meshBasicMaterial color={currentColor} transparent opacity={0.15} side={THREE.DoubleSide} />
-            </mesh>
-            
-            {/* Humanoid Hologram mesh */}
-            <group ref={meshRef} position={[0, 0.05, 0]}>
-              {/* Head */}
-              <mesh position={[0, 0.14, 0]}>
-                <sphereGeometry args={[0.06, 16, 16]} />
-                <meshStandardMaterial color={currentColor} wireframe emissive={currentColor} emissiveIntensity={0.8} />
-              </mesh>
-              {/* Torso */}
-              <mesh position={[0, -0.02, 0]}>
-                <coneGeometry args={[0.07, 0.20, 4]} />
-                <meshStandardMaterial color={currentColor} wireframe emissive={currentColor} emissiveIntensity={0.5} />
-              </mesh>
-              {/* Arms */}
-              <mesh position={[0.1, 0.05, 0]} rotation={[0, 0, -Math.PI / 4]}>
-                <cylinderGeometry args={[0.012, 0.012, 0.12, 4]} />
-                <meshBasicMaterial color={currentColor} wireframe />
-              </mesh>
-              <mesh position={[-0.1, 0.05, 0]} rotation={[0, 0, Math.PI / 4]}>
-                <cylinderGeometry args={[0.012, 0.012, 0.12, 4]} />
-                <meshBasicMaterial color={currentColor} wireframe />
-              </mesh>
-              
-              {/* Outer cylinder grid scanner */}
-              <mesh>
-                <cylinderGeometry args={[0.2, 0.2, 0.45, 8, 3]} />
-                <meshStandardMaterial color={currentColor} wireframe transparent opacity={0.25} />
-              </mesh>
-            </group>
-          </group>
-        );
-
-      case "torusKnot": // Skills District: Crystalline diamond cluster
-        return (
-          <group>
-            {/* Holographic grid base */}
-            <mesh position={[0, -0.22, 0]} rotation={[Math.PI / 2, 0, 0]}>
-              <torusGeometry args={[0.3, 0.012, 8, 32]} />
-              <meshBasicMaterial color={currentColor} transparent opacity={0.5} />
-            </mesh>
-            <mesh position={[0, -0.22, 0]} rotation={[Math.PI / 2, 0, 0]}>
-              <ringGeometry args={[0.25, 0.29, 6]} />
-              <meshBasicMaterial color={currentColor} transparent opacity={0.2} side={THREE.DoubleSide} />
-            </mesh>
-
-            {/* Clusters */}
-            <group ref={meshRef}>
-              {/* Main Diamond Core */}
-              <mesh>
-                <octahedronGeometry args={[0.22]} />
-                <meshStandardMaterial color={currentColor} wireframe emissive={currentColor} emissiveIntensity={0.8} />
-              </mesh>
-              {/* Secondary Shards */}
-              <mesh position={[0.16, 0.08, 0.1]} rotation={[0.4, 0.2, 0.8]}>
-                <octahedronGeometry args={[0.09]} />
-                <meshStandardMaterial color={currentColor} wireframe emissive={currentColor} emissiveIntensity={0.4} />
-              </mesh>
-              <mesh position={[-0.16, -0.08, -0.1]} rotation={[-0.4, -0.2, -0.8]}>
-                <octahedronGeometry args={[0.09]} />
-                <meshStandardMaterial color={currentColor} wireframe emissive={currentColor} emissiveIntensity={0.4} />
-              </mesh>
-              <mesh position={[0.1, -0.12, -0.15]} rotation={[0.2, 0.9, 0.1]}>
-                <octahedronGeometry args={[0.07]} />
-                <meshStandardMaterial color={currentColor} wireframe />
-              </mesh>
-              <mesh position={[-0.1, 0.12, 0.15]} rotation={[-0.2, -0.9, -0.1]}>
-                <octahedronGeometry args={[0.07]} />
-                <meshStandardMaterial color={currentColor} wireframe />
-              </mesh>
-            </group>
-          </group>
-        );
-
-      case "dodecahedron": // Projects Lab: Dodecahedron Core with active probe sensors (rebalanced/retained)
-        return (
-          <group>
-            {/* Main Core */}
-            <mesh ref={meshRef}>
-              <dodecahedronGeometry args={[0.25]} />
-              <meshStandardMaterial color={currentColor} wireframe emissive={currentColor} emissiveIntensity={0.5} />
-            </mesh>
-            {/* Orbiting Probes */}
-            <group ref={subGroupRef}>
-              <mesh position={[0.42, 0, 0]}>
-                <boxGeometry args={[0.06, 0.06, 0.06]} />
-                <meshBasicMaterial color={currentColor} />
-              </mesh>
-              <mesh position={[-0.42, 0, 0]}>
-                <boxGeometry args={[0.06, 0.06, 0.06]} />
-                <meshBasicMaterial color={currentColor} />
-              </mesh>
-            </group>
-          </group>
-        );
-
-      case "cylinder": // Journey Archive: Floating Timeline Rings
-        return (
-          <group>
-            {/* 3 Rings rotating at different tilts */}
-            <mesh ref={ring1Ref} rotation={[0.3, 0.1, 0]}>
-              <torusGeometry args={[0.38, 0.006, 8, 48]} />
-              <meshBasicMaterial color={currentColor} />
-              {/* Milestone node */}
-              <mesh position={[0.38, 0, 0]}>
-                <sphereGeometry args={[0.032, 8, 8]} />
-                <meshBasicMaterial color="#ffffff" />
-              </mesh>
-            </mesh>
-            <mesh ref={ring2Ref} rotation={[0.5, 0.5, 0]}>
-              <torusGeometry args={[0.28, 0.006, 8, 48]} />
-              <meshBasicMaterial color={currentColor} />
-              {/* Milestone node */}
-              <mesh position={[0, 0.28, 0]}>
-                <sphereGeometry args={[0.032, 8, 8]} />
-                <meshBasicMaterial color="#ffffff" />
-              </mesh>
-            </mesh>
-            <mesh ref={ring3Ref} rotation={[-0.4, 0.3, 0]}>
-              <torusGeometry args={[0.18, 0.006, 8, 48]} />
-              <meshBasicMaterial color="#ffffff" />
-              {/* Milestone node */}
-              <mesh position={[-0.18, 0, 0]}>
-                <sphereGeometry args={[0.026, 8, 8]} />
-                <meshBasicMaterial color={currentColor} />
-              </mesh>
-            </mesh>
-          </group>
-        );
-
-      case "octahedron": // Blog Library: Futuristic Knowledge Tree
-        return (
-          <group>
-            {/* Tree Canopy Ring */}
-            <mesh ref={subGroupRef} position={[0, 0.22, 0]} rotation={[Math.PI / 2, 0, 0]}>
-              <torusGeometry args={[0.26, 0.008, 8, 32]} />
+            {/* 3. Cage Wireframe overlay */}
+            <Icosahedron args={[0.16, 0]} scale={[1.015, 1.015, 1.015]} raycast={() => null}>
+              <meshBasicMaterial 
+                color={currentColor} 
+                wireframe={true} 
+                transparent={true} 
+                opacity={0.25} 
+              />
+            </Icosahedron>
+            {/* Under Ring */}
+            <mesh ref={ring1Ref} position={[0, -0.15, 0]} rotation={[Math.PI / 2, 0, 0]} raycast={() => null}>
+              <torusGeometry args={[0.25, 0.006, 8, 32]} />
               <meshBasicMaterial color={currentColor} transparent opacity={0.3} />
             </mesh>
+          </group>
+        );
 
-            {/* Tree Body */}
-            <group ref={meshRef}>
-              {/* Trunk */}
-              <mesh position={[0, -0.05, 0]}>
-                <coneGeometry args={[0.04, 0.35, 6]} />
-                <meshStandardMaterial color={currentColor} wireframe emissive={currentColor} emissiveIntensity={0.6} />
-              </mesh>
-              {/* Branch structures */}
-              <mesh position={[0.08, 0.12, 0]} rotation={[0, 0, -Math.PI / 6]}>
-                <cylinderGeometry args={[0.015, 0.008, 0.2, 5]} />
-                <meshBasicMaterial color={currentColor} wireframe />
-              </mesh>
-              <mesh position={[-0.08, 0.12, 0]} rotation={[0, 0, Math.PI / 6]}>
-                <cylinderGeometry args={[0.015, 0.008, 0.2, 5]} />
-                <meshBasicMaterial color={currentColor} wireframe />
-              </mesh>
-              <mesh position={[0, 0.16, 0.08]} rotation={[Math.PI / 6, 0, 0]}>
-                <cylinderGeometry args={[0.015, 0.008, 0.2, 5]} />
-                <meshBasicMaterial color={currentColor} wireframe />
-              </mesh>
+      case "oval": // SKILLS DISTRICT (Mind Stone - Yellow)
+        return (
+          <group>
+            {/* 1. Outer Glass Double-Pyramid */}
+            <Octahedron args={[0.16, 0]} scale={[1.0, 1.3, 1.0]} ref={meshRef} {...pointerHandlers}>
+              <meshPhysicalMaterial 
+                color={currentColor} 
+                emissive={currentColor} 
+                emissiveIntensity={currentEmissive} 
+                roughness={0.02} 
+                metalness={0.05}
+                transmission={0.95}
+                thickness={1.8}
+                ior={2.2}
+                flatShading={true}
+                clearcoat={1.0}
+                clearcoatRoughness={0.02}
+              />
+            </Octahedron>
+            {/* 2. Inner Glowing Core */}
+            <Octahedron args={[0.16, 0]} scale={[0.4, 0.52, 0.4]} raycast={() => null}>
+              <meshBasicMaterial color={node.color} />
+            </Octahedron>
+            {/* 3. Double-Pyramid Wireframe overlay */}
+            <Octahedron args={[0.16, 0]} scale={[1.015, 1.32, 1.015]} raycast={() => null}>
+              <meshBasicMaterial 
+                color={currentColor} 
+                wireframe={true} 
+                transparent={true} 
+                opacity={0.25} 
+              />
+            </Octahedron>
+            {/* Equatorial Ring */}
+            <mesh ref={ring1Ref} rotation={[Math.PI / 2, 0.1, 0]} raycast={() => null}>
+              <torusGeometry args={[0.26, 0.005, 8, 36]} />
+              <meshBasicMaterial color={currentColor} transparent opacity={0.3} />
+            </mesh>
+          </group>
+        );
 
-              {/* Floating Leaf Particles */}
-              <mesh position={[0.15, 0.20, 0]}>
-                <sphereGeometry args={[0.024, 6, 6]} />
-                <meshBasicMaterial color="#ffffff" />
+      case "oblong": // PROJECTS LAB (Power Stone - Purple)
+        return (
+          <group>
+            {/* 1. Outer Glass Polyhedron Core */}
+            <Dodecahedron args={[0.15, 0]} ref={meshRef} {...pointerHandlers}>
+              <meshPhysicalMaterial 
+                color={currentColor} 
+                emissive={currentColor} 
+                emissiveIntensity={currentEmissive} 
+                roughness={0.02} 
+                metalness={0.05}
+                transmission={0.95}
+                thickness={1.8}
+                ior={2.2}
+                flatShading={true}
+                clearcoat={1.0}
+                clearcoatRoughness={0.02}
+              />
+            </Dodecahedron>
+            {/* 2. Inner Glowing Core */}
+            <Dodecahedron args={[0.15, 0]} scale={[0.4, 0.4, 0.4]} raycast={() => null}>
+              <meshBasicMaterial color={node.color} />
+            </Dodecahedron>
+            {/* 3. Wireframe Overlay */}
+            <Dodecahedron args={[0.15, 0]} scale={[1.015, 1.015, 1.015]} raycast={() => null}>
+              <meshBasicMaterial 
+                color={currentColor} 
+                wireframe={true} 
+                transparent={true} 
+                opacity={0.25} 
+              />
+            </Dodecahedron>
+            {/* Floating Top Cube */}
+            <mesh ref={sat1Ref} raycast={() => null}>
+              <Box args={[0.045, 0.045, 0.045]}>
+                <meshPhysicalMaterial 
+                  color={currentColor} 
+                  emissive={currentColor} 
+                  roughness={0.02} 
+                  transmission={0.9} 
+                  thickness={0.5} 
+                  flatShading={true}
+                />
+              </Box>
+            </mesh>
+            {/* Floating Bottom Cube */}
+            <mesh ref={sat2Ref} raycast={() => null}>
+              <Box args={[0.045, 0.045, 0.045]}>
+                <meshPhysicalMaterial 
+                  color={currentColor} 
+                  emissive={currentColor} 
+                  roughness={0.02} 
+                  transmission={0.9} 
+                  thickness={0.5} 
+                  flatShading={true}
+                />
+              </Box>
+            </mesh>
+          </group>
+        );
+
+      case "emeraldCut": // JOURNEY ARCHIVE (Time Stone - Green)
+        return (
+          <group>
+            {/* 1. Outer Glass Sphere Core */}
+            <Sphere args={[0.16, 16, 16]} ref={meshRef} {...pointerHandlers}>
+              <meshPhysicalMaterial 
+                color={currentColor} 
+                emissive={currentColor} 
+                emissiveIntensity={currentEmissive} 
+                roughness={0.02} 
+                metalness={0.05}
+                transmission={0.95}
+                thickness={1.8}
+                ior={2.2}
+                flatShading={true}
+                clearcoat={1.0}
+                clearcoatRoughness={0.02}
+              />
+            </Sphere>
+            {/* 2. Inner Glowing Core */}
+            <Sphere args={[0.16, 16, 16]} scale={[0.4, 0.4, 0.4]} raycast={() => null}>
+              <meshBasicMaterial color={node.color} />
+            </Sphere>
+            {/* Nesting Gyro Ring 1 (X rotation) */}
+            <mesh ref={ring1Ref} raycast={() => null}>
+              <torusGeometry args={[0.28, 0.005, 8, 48]} />
+              <meshBasicMaterial color={currentColor} transparent opacity={0.35} />
+              {/* Orbiter node along ring 1 */}
+              <mesh ref={sat1Ref} raycast={() => null}>
+                <sphereGeometry args={[0.015, 8, 8]} />
+                <meshBasicMaterial color="#FFFFFF" />
               </mesh>
-              <mesh position={[-0.15, 0.20, 0]}>
-                <sphereGeometry args={[0.024, 6, 6]} />
+            </mesh>
+            {/* Nesting Gyro Ring 2 (Y rotation) */}
+            <mesh ref={ring2Ref} raycast={() => null}>
+              <torusGeometry args={[0.24, 0.004, 8, 48]} />
+              <meshBasicMaterial color={currentColor} transparent opacity={0.25} />
+            </mesh>
+            {/* Nesting Gyro Ring 3 (Z rotation) */}
+            <mesh ref={ring3Ref} raycast={() => null}>
+              <torusGeometry args={[0.20, 0.004, 8, 48]} />
+              <meshBasicMaterial color="#FFFFFF" transparent opacity={0.2} />
+            </mesh>
+          </group>
+        );
+
+      case "rubyShard": // THE ARCHIVE (Reality Stone - Red)
+        return (
+          <group>
+            {/* Group tilted down-left by -45 degrees */}
+            <group rotation={[0, 0, -Math.PI / 4]} ref={meshRef}>
+              {/* 1. Tapered Cylinder Spire */}
+              <Cylinder args={[0.015, 0.065, 0.32, 6]} {...pointerHandlers}>
+                <meshPhysicalMaterial 
+                  color={currentColor} 
+                  emissive={currentColor} 
+                  emissiveIntensity={currentEmissive} 
+                  roughness={0.02} 
+                  metalness={0.05}
+                  transmission={0.95}
+                  thickness={1.8}
+                  ior={2.2}
+                  flatShading={true}
+                  clearcoat={1.0}
+                  clearcoatRoughness={0.02}
+                />
+              </Cylinder>
+              {/* 2. Inner Glowing Core */}
+              <Cylinder args={[0.005, 0.02, 0.30, 6]} scale={[1.0, 1.0, 1.0]} raycast={() => null}>
+                <meshBasicMaterial color={node.color} />
+              </Cylinder>
+              {/* 3. Wireframe Overlay */}
+              <Cylinder args={[0.0155, 0.066, 0.322, 6]} raycast={() => null}>
+                <meshBasicMaterial color={currentColor} wireframe transparent opacity={0.25} />
+              </Cylinder>
+              {/* Neck Ring */}
+              <mesh position={[0, 0.08, 0]} rotation={[Math.PI / 2, 0, 0]} raycast={() => null}>
+                <torusGeometry args={[0.09, 0.005, 6, 24]} />
+                <meshBasicMaterial color={currentColor} transparent opacity={0.3} />
+              </mesh>
+            </group>
+
+            {/* Orbiting base nodes */}
+            <group ref={particlesRef} raycast={() => null}>
+              <mesh position={[0.12, -0.15, 0.06]}>
+                <sphereGeometry args={[0.015, 8, 8]} />
                 <meshBasicMaterial color={currentColor} />
               </mesh>
-              <mesh position={[0, 0.30, 0]}>
-                <sphereGeometry args={[0.030, 6, 6]} />
+              <mesh position={[-0.12, -0.15, -0.06]}>
+                <sphereGeometry args={[0.012, 8, 8]} />
+                <meshBasicMaterial color="#FFFFFF" />
+              </mesh>
+              <mesh position={[0, -0.15, -0.12]}>
+                <sphereGeometry args={[0.013, 8, 8]} />
                 <meshBasicMaterial color={currentColor} />
               </mesh>
-              <mesh position={[0.07, 0.26, 0.07]}>
-                <sphereGeometry args={[0.020, 6, 6]} />
-                <meshBasicMaterial color="#ffffff" />
-              </mesh>
-              <mesh position={[-0.07, 0.26, -0.07]}>
-                <sphereGeometry args={[0.020, 6, 6]} />
-                <meshBasicMaterial color={currentColor} />
+              {/* reality halo ring */}
+              <mesh ref={ring1Ref} position={[0, -0.05, 0]} rotation={[Math.PI / 2, 0, 0]} raycast={() => null}>
+                <torusGeometry args={[0.26, 0.005, 8, 24]} />
+                <meshBasicMaterial color={currentColor} transparent opacity={0.2} />
               </mesh>
             </group>
           </group>
         );
 
-      case "spire": // Future Command Center: Massive 3D wireframe infinity loop
+      case "cube": // COLLABORATION HUB (Space Stone - Blue)
         return (
           <group>
-            {/* Infinity Tube */}
-            <mesh ref={meshRef}>
-              <tubeGeometry args={[infinityCurve, 64, 0.022, 8, true]} />
-              <meshStandardMaterial color="#ffffff" wireframe emissive={currentColor} emissiveIntensity={0.7} />
+            {/* Click/Hover Target Sphere (Invisible, 15-20% larger than symbol boundary) */}
+            <mesh {...pointerHandlers}>
+              <sphereGeometry args={[0.42, 32, 32]} />
+              <meshBasicMaterial transparent={true} opacity={0} depthWrite={false} />
             </mesh>
-
-            {/* Orbiting / Flowing particles */}
-            {infinityCurve && (
-              <group>
-                <mesh ref={particle1Ref}>
-                  <sphereGeometry args={[0.038, 8, 8]} />
-                  <meshBasicMaterial color={currentColor} />
-                </mesh>
-                <mesh ref={particle2Ref}>
-                  <sphereGeometry args={[0.038, 8, 8]} />
-                  <meshBasicMaterial color="#ffffff" />
-                </mesh>
-              </group>
-            )}
+            {/* 1. Outer Glass Lemniscate Infinity Tube */}
+            <mesh ref={meshRef} raycast={() => null}>
+              <tubeGeometry args={[loopCurve, 64, 0.03, 8, true]} />
+              <meshPhysicalMaterial 
+                color={currentColor} 
+                emissive={currentColor} 
+                emissiveIntensity={currentEmissive} 
+                roughness={0.02} 
+                metalness={0.05}
+                transmission={0.95}
+                thickness={1.8}
+                ior={2.2}
+                flatShading={true}
+                clearcoat={1.0}
+                clearcoatRoughness={0.02}
+              />
+            </mesh>
+            {/* 2. Inner Glowing Core Tube */}
+            <mesh raycast={() => null}>
+              <tubeGeometry args={[loopCurve, 64, 0.012, 6, true]} />
+              <meshBasicMaterial color="#00FFFF" />
+            </mesh>
+            {/* 3. Wireframe Overlay */}
+            <mesh raycast={() => null}>
+              <tubeGeometry args={[loopCurve, 64, 0.0315, 8, true]} />
+              <meshBasicMaterial color={currentColor} wireframe transparent opacity={0.25} />
+            </mesh>
+            {/* Satellite 1 orbiting along infinity path */}
+            <mesh ref={sat1Ref} raycast={() => null}>
+              <sphereGeometry args={[0.016, 8, 8]} />
+              <meshBasicMaterial color="#FFFFFF" />
+            </mesh>
+            {/* Satellite 2 orbiting along infinity path */}
+            <mesh ref={sat2Ref} raycast={() => null}>
+              <sphereGeometry args={[0.016, 8, 8]} />
+              <meshBasicMaterial color={currentColor} />
+            </mesh>
           </group>
         );
 
@@ -357,68 +530,101 @@ function HubNode({ node, position, isHovered, setHovered, onClick }) {
 
   return (
     <group
+      ref={outerGroupRef}
       position={position}
-      scale={[scale, scale, scale]}
-      onPointerOver={(e) => {
-        e.stopPropagation();
-        setHovered(true);
-        document.body.style.cursor = 'pointer';
-      }}
-      onPointerOut={(e) => {
-        e.stopPropagation();
-        setHovered(false);
-        document.body.style.cursor = 'default';
-      }}
-      onClick={(e) => {
-        e.stopPropagation();
-        onClick();
-      }}
     >
-      {/* Light glow point source in center */}
-      <pointLight color={currentColor} intensity={isHovered ? 2.5 : 1.0} distance={1.5} />
+      {/* Local Ambient Light Coloring */}
+      <pointLight 
+        ref={pointLightRef} 
+        color={currentColor} 
+        intensity={isLeaving ? 6.0 : (isHovered ? 2.5 : 1.2)} 
+        distance={2.5} 
+        decay={2}
+      />
 
-      {/* Render the core 3D geometry shape inside floating group */}
+      {/* Floating local group */}
       <group ref={floatGroupRef}>
         {renderGeometry()}
+        
+        {/* Soft, glowing atmospheric halo */}
+        {isHovered && (
+          <mesh scale={[1.15, 1.15, 1.15]} raycast={() => null}>
+            <sphereGeometry args={[0.16, 16, 16]} />
+            <meshBasicMaterial color={currentColor} transparent opacity={0.08} blending={THREE.AdditiveBlending} />
+          </mesh>
+        )}
+
+        {/* Local Stars/Dust System */}
+        <points raycast={() => null}>
+          <bufferGeometry>
+            <bufferAttribute
+              attach="attributes-position"
+              args={[localStars, 3]}
+            />
+          </bufferGeometry>
+          <pointsMaterial
+            color={currentColor}
+            size={0.015}
+            sizeAttenuation={true}
+            transparent
+            opacity={isHovered ? 0.95 : 0.4}
+            blending={THREE.AdditiveBlending}
+            depthWrite={false}
+          />
+        </points>
       </group>
 
       {/* 2D HTML Label overlay projected above the structure */}
-      <Html
-        position={[0, 0.65, 0]}
-        center
-        distanceFactor={6}
-        className="pointer-events-none select-none"
-      >
-        <div 
-          className={`flex flex-col items-center justify-center transition-all duration-300 ${
-            isHovered ? 'scale-110 opacity-100' : 'scale-95 opacity-80'
-          }`}
-          style={{ width: '10vw', minWidth: '140px', maxWidth: '200px' }}
+      {!isLeaving && (
+        <Html
+          position={[0, 0.42, 0]}
+          center
+          distanceFactor={6}
+          pointerEvents="none"
+          style={{ pointerEvents: 'none' }}
+          className="pointer-events-none select-none"
         >
-          {/* Neon Grid Border Title */}
           <div 
-            className="px-3 py-1 font-mono text-[10px] font-bold text-center tracking-wider border uppercase rounded shadow-lg transition-colors duration-300"
-            style={{
-              borderColor: hexColor,
-              color: isHovered ? '#FFFFFF' : hexColor,
-              backgroundColor: isHovered ? hexColor + '4D' : 'rgba(5, 5, 8, 0.85)',
-              boxShadow: isHovered ? `0 0 15px ${hexColor}` : 'none'
-            }}
+            className={`flex flex-col items-center justify-center transition-all duration-500 ease-out ${
+              isHovered ? 'scale-105 opacity-100' : 'scale-95 opacity-75'
+            }`}
+            style={{ width: '12vw', minWidth: '150px', maxWidth: '220px' }}
           >
-            {node.label}
-          </div>
-          
-          {/* Action indicator */}
-          {isHovered && (
+            {/* Glassmorphic Capsule Label */}
             <div 
-              className="mt-1 font-mono text-[8px] tracking-widest text-white/90 animate-pulse"
-              style={{ textShadow: `0 0 5px ${hexColor}` }}
+              className="px-4 py-1.5 font-sans text-[10px] md:text-[11px] font-semibold text-center tracking-[0.2em] uppercase rounded-full shadow-xl transition-all duration-500 border"
+              style={{
+                borderColor: isHovered ? hexColor : 'rgba(255, 255, 255, 0.05)',
+                color: '#FFFFFF',
+                backgroundColor: isHovered ? 'rgba(5, 5, 8, 0.9)' : 'rgba(5, 5, 8, 0.7)',
+                backdropFilter: 'blur(12px)',
+                boxShadow: isHovered ? `0 0 20px ${hexColor}33, inset 0 0 12px ${hexColor}22` : '0 10px 30px rgba(0,0,0,0.5)'
+              }}
             >
-              [ CLICK TO ENTER ]
+              {node.label}
             </div>
-          )}
-        </div>
-      </Html>
+            
+            {/* Pointer Stem connecting label to the 3D element */}
+            <div 
+              className="w-[1px] h-4 mt-2 transition-all duration-500"
+              style={{
+                backgroundColor: isHovered ? hexColor : 'rgba(255, 255, 255, 0.15)',
+                boxShadow: isHovered ? `0 0 8px ${hexColor}` : 'none'
+              }}
+            />
+
+            {/* Action indicator */}
+            {isHovered && (
+              <div 
+                className="mt-1 font-sans text-[8px] font-medium tracking-[0.25em] text-white/70 uppercase animate-pulse"
+                style={{ textShadow: `0 0 4px ${hexColor}` }}
+              >
+                Click to Enter
+              </div>
+            )}
+          </div>
+        </Html>
+      )}
     </group>
   );
 }

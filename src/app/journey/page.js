@@ -1614,62 +1614,213 @@ function FinalBellIllustration() {
 function WalkingBoy() {
   return (
     <g>
-      {/* Head */}
-      <circle cx="10" cy="5" r="2.2" fill="#fff" />
-      {/* Backpack */}
-      <rect x="2.5" y="8" width="4" height="9" rx="1.2" fill="#1e1b4b" stroke="#a855f7" strokeWidth="0.8" />
-      {/* Torso */}
-      <path d="M 8.5 7.5 H 11.5 V 17 H 8.5 Z" fill="#090d16" stroke="#3b82f6" strokeWidth="0.8" />
-      
-      {/* Legs walking cycle frames */}
-      {/* Frame 1: Left Leg back, right leg forward */}
-      <g className="animate-[walkF1_0.8s_infinite]">
-        <path d="M 9 17 L 6 25" stroke="#a855f7" strokeWidth="1.5" strokeLinecap="round" />
-        <path d="M 11 17 L 14 25" stroke="#3b82f6" strokeWidth="1.5" strokeLinecap="round" />
-      </g>
-      
-      {/* Frame 2: Legs passing straight */}
-      <g className="animate-[walkF2_0.8s_infinite]">
-        <path d="M 9 17 L 9.5 25" stroke="#a855f7" strokeWidth="1.5" strokeLinecap="round" />
-        <path d="M 11 17 L 10.5 25" stroke="#3b82f6" strokeWidth="1.5" strokeLinecap="round" />
-      </g>
-      
-      {/* Frame 3: Left leg forward, right leg back */}
-      <g className="animate-[walkF3_0.8s_infinite]">
-        <path d="M 9 17 L 13 25" stroke="#a855f7" strokeWidth="1.5" strokeLinecap="round" />
-        <path d="M 11 17 L 7 25" stroke="#3b82f6" strokeWidth="1.5" strokeLinecap="round" />
+      <defs>
+        {/* Subtle gradient for the body/torso */}
+        <linearGradient id="boyBodyGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#1a1a4e" />
+          <stop offset="100%" stopColor="#0d0d2b" />
+        </linearGradient>
+        {/* Backpack gradient (blue/purple accent) */}
+        <linearGradient id="boyBackpackGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#3B82F6" />
+          <stop offset="100%" stopColor="#A855F7" />
+        </linearGradient>
+        {/* Helmet/Head radial gradient for 3D effect */}
+        <radialGradient id="boyHeadGrad" cx="30%" cy="30%" r="70%">
+          <stop offset="0%" stopColor="#475569" />
+          <stop offset="100%" stopColor="#0f172a" />
+        </radialGradient>
+        {/* Blur filter for the drop shadow */}
+        <filter id="shadowBlur" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="0.8" />
+        </filter>
+      </defs>
+
+      {/* Subtle drop shadow/glow underneath the character */}
+      <ellipse cx="10" cy="25.5" rx="5" ry="0.8" fill="#a855f7" fillOpacity="0.3" filter="url(#shadowBlur)" />
+
+      {/* The bobbing group wraps everything else */}
+      <g className="boy-bob-group">
+        {/* Far Leg (Left Leg) pivoted at hip joint (9, 17) */}
+        <g style={{ transformOrigin: "9px 17px" }} className="left-leg-group">
+          <line x1="9" y1="17" x2="9" y2="25" stroke="#0d0d2b" strokeWidth="1.8" strokeLinecap="round" opacity="0.75" />
+          <circle cx="9" cy="25" r="0.7" fill="#3B82F6" opacity="0.75" />
+        </g>
+
+        {/* Backpack group */}
+        <g style={{ transformOrigin: "4.75px 12.25px" }} className="boy-backpack-group">
+          <rect x="2.5" y="8" width="4.5" height="8.5" rx="1.5" fill="url(#boyBackpackGrad)" />
+          <rect x="3.5" y="9.5" width="2.5" height="5.5" rx="0.5" fill="#0d0d2b" fillOpacity="0.3" />
+          <line x1="2.5" y1="11" x2="7" y2="11" stroke="#ffffff" strokeWidth="0.4" opacity="0.4" />
+          <line x1="2.5" y1="14" x2="7" y2="14" stroke="#ffffff" strokeWidth="0.4" opacity="0.4" />
+        </g>
+
+        {/* Torso */}
+        <path d="M 7.5 7.5 Q 6.5 12 7.8 17 H 11.5 Q 12 12 11 7.5 Z" fill="url(#boyBodyGrad)" />
+
+        {/* Near Leg (Right Leg) pivoted at hip joint (11, 17) */}
+        <g style={{ transformOrigin: "11px 17px" }} className="right-leg-group">
+          <line x1="11" y1="17" x2="11" y2="25" stroke="#1a1a4e" strokeWidth="2" strokeLinecap="round" />
+          <circle cx="11" cy="25" r="0.8" fill="#A855F7" />
+        </g>
+
+        {/* Head/Helmet group */}
+        <g style={{ transformOrigin: "10px 4.5px" }} className="boy-helmet-group">
+          <circle cx="10" cy="4.5" r="2.5" fill="url(#boyHeadGrad)" />
+          <path d="M 11 3.2 Q 12.5 4.2 12.5 5.2 Q 12.5 6.2 11.2 6.7 Z" fill="#93c5fd" fillOpacity="0.85" />
+        </g>
+
+        <path d="M 6.5 8 Q 8 8 9 9 Q 8 12 7.5 14" stroke="#3b82f6" strokeWidth="0.6" fill="none" opacity="0.8" />
+
+        {/* Arm group */}
+        <g style={{ transformOrigin: "10px 9px" }} className="arm-group">
+          <line x1="10" y1="9" x2="12" y2="14.5" stroke="#1a1a4e" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1="10.3" y1="9.8" x2="11.8" y2="14" stroke="#3b82f6" strokeWidth="0.5" strokeLinecap="round" />
+          <circle cx="12" cy="14.5" r="0.7" fill="#ffffff" />
+        </g>
       </g>
 
-      {/* Arm swinging */}
-      <line x1="10" y1="10" x2="13" y2="15" stroke="#e2e8f0" strokeWidth="1" strokeLinecap="round" className="animate-[float_4s_infinite]" />
+      {/* Ambient foot particles group */}
+      <g className="foot-particles-group">
+        <circle cx="7" cy="25" r="0.4" fill="#a855f7" className="foot-p-1" />
+        <circle cx="10" cy="25.5" r="0.3" fill="#3b82f6" className="foot-p-2" />
+        <circle cx="13" cy="25" r="0.5" fill="#a855f7" className="foot-p-3" />
+      </g>
     </g>
   );
 }
 
 // Journey Map Selector
-function JourneyMap({ onNodeClick }) {
-  const nodes = [
-    { num: "Ch.1", name: "Foundations", id: "chapter-1", cx: 100, cy: 520, mcx: 200, mcy: 520 },
-    { num: "Ch.2", name: "The Shift", id: "chapter-2", cx: 300, cy: 440, mcx: 200, mcy: 410 },
-    { num: "Ch.3", name: "The Transformation", id: "chapter-3", cx: 500, cy: 360, mcx: 200, mcy: 300 },
-    { num: "Ch.4", name: "The Leader", id: "chapter-4", cx: 700, cy: 240, mcx: 200, mcy: 190 },
-    { num: "Ch.5", name: "The Crossroads", id: "chapter-5", cx: 900, cy: 120, mcx: 200, mcy: 80 },
+function JourneyMap({ activeChapterIdx, hoveredChapterIdx, setHoveredChapterIdx, onNodeClick, activeModalFragment, setActiveModalFragment }) {
+  const [isMobile, setIsMobile] = useState(false);
+  const [hoveredFragmentIdx, setHoveredFragmentIdx] = useState(null);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const bgColors = [
+    "radial-gradient(circle at 30% 40%, rgba(251, 191, 36, 0.07) 0%, #050508 70%)",
+    "radial-gradient(circle at 70% 30%, rgba(59, 130, 246, 0.07) 0%, #030712 70%)",
+    "radial-gradient(circle at 50% 50%, rgba(16, 163, 127, 0.07) 0%, #020617 70%)",
+    "radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.07) 0%, #05050b 70%)",
+    "radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.07) 0%, #030712 70%)",
+    "radial-gradient(circle at 90% 10%, rgba(255, 255, 255, 0.05) 0%, #020204 70%)"
   ];
 
+  const nodes = [
+    { 
+      num: "Ch.1", 
+      name: "Foundations", 
+      id: "chapter-1", 
+      cx: 150, cy: 480, mcx: 35, mcy: 60,
+      ageRange: "0–12 Years",
+      theme: "Roots, family values, and early speech presence.",
+      milestones: ["Born in Meerut", "Moving to Rajasthan Society", "First Stage Speech (Class 3)"],
+      quote: "Every foundation has a beginning, and mine began with love, values, and dreams.",
+      fragments: [
+        { id: "hindi-98", label: "98/100 Hindi", hoverText: "Achieved an outstanding score of 98/100 in Hindi, establishing early academic excellence.", isModal: false },
+        { id: "early-speech", label: "Stage Performance", hoverText: "Early experiences speaking and performing in front of audiences, building confidence.", isModal: false }
+      ]
+    },
+    { 
+      num: "Ch.2", 
+      name: "The Shift", 
+      id: "chapter-2", 
+      cx: 320, cy: 390, mcx: 100, mcy: 72,
+      ageRange: "12–14 Years",
+      theme: "Moving to Noida, discovering athletics, and adapting to change.",
+      milestones: ["Discovering high jump training", "Jawaharlal Nehru Stadium representation"],
+      quote: "Change is the only constant, and the best way to handle it is to jump right in.",
+      fragments: [
+        { id: "national-high-jump", label: "National High Jump ↗", hoverText: "Click to explore the full story of representing my school at the National High Jump Championship.", isModal: true },
+        { id: "stadium", label: "Jawaharlal Nehru Stadium", hoverText: "Competing at New Delhi's iconic Jawaharlal Nehru Stadium, learning to perform under pressure.", isModal: false }
+      ]
+    },
+    { 
+      num: "Ch.3", 
+      name: "Transformation", 
+      id: "chapter-3", 
+      cx: 490, cy: 320, mcx: 165, mcy: 75,
+      ageRange: "14–16 Years",
+      theme: "Academic comebacks, film culture, and lifelong friendships.",
+      milestones: ["Highest marks in school English exam", "Solving physics problems with Vibhor", "COVID Board preparation days"],
+      quote: "It is during our quietest moments of transformation that we find our true strength.",
+      fragments: [
+        { id: "vibhor", label: "Vibhor", hoverText: "My high school bench partner and best friend who challenged me to grow intellectually.", isModal: false },
+        { id: "money-heist", label: "Money Heist Days", hoverText: "Late night movie talks and codename assignments with my high school section circle.", isModal: false },
+        { id: "class-10-fam", label: "Class 10 Section", hoverText: "The tight-knit high school family that survived virtual board preparation and pandemic challenges.", isModal: false },
+        { id: "maverick", label: "Maverick Guru", hoverText: "Earning my nickname for hosting late night study whiteboard explanation sessions.", isModal: false }
+      ]
+    },
+    { 
+      num: "Ch.4", 
+      name: "The Leader", 
+      id: "chapter-4", 
+      cx: 650, cy: 240, mcx: 230, mcy: 55,
+      ageRange: "16–17 Years",
+      theme: "Student government responsibility, public service, and Sports Day revival.",
+      milestones: ["Appointed School Head Boy", "Led student council of 30+", "Organized first Sports Day in 3 years"],
+      quote: "A leader is not defined by their title, but by the fire they light in others.",
+      fragments: [
+        { id: "head-boy", label: "Head Boy Office ↗", hoverText: "Click to read about leading the student body and organizing the major Sports Day event.", isModal: true },
+        { id: "dawn", label: "DAWN Foundation ↗", hoverText: "Click to read about coordinating graphic design campaigns for student wellness programs.", isModal: true },
+        { id: "academic-74", label: "Academic 74%", hoverText: "A hard lesson in balancing leadership duties with high school final board preparations.", isModal: false }
+      ]
+    },
+    { 
+      num: "Ch.5", 
+      name: "Crossroads", 
+      id: "chapter-5", 
+      cx: 800, cy: 160, mcx: 295, mcy: 45,
+      ageRange: "17–18 Years",
+      theme: "CBSE board examinations, creative escapes, and freelance projects.",
+      milestones: ["Scored 81% in CBSE Board exams", "A perfect 100/100 in Fine Arts Landscape project", "Earned first freelance web dev income"],
+      quote: "When paths diverge, the hardest choice is usually the one that sets you free.",
+      fragments: [
+        { id: "first-business", label: "First Business (₹84k) ↗", hoverText: "Click to read about graphic branding and web development projects that earned my first ₹84k.", isModal: true },
+        { id: "fine-arts-100", label: "100/100 Fine Arts ↗", hoverText: "Click to see details on my perfect score Class 12 landscape artwork validation.", isModal: true },
+        { id: "physics-paper", label: "Physics Exam", hoverText: "Overcoming CBSE Class 12's notoriously difficult physics paper under high pressure.", isModal: false },
+        { id: "boards-81", label: "81% CBSE Boards", hoverText: "Conquering CBSE Class 12 graduation board exams after high-stress coffee prep nights.", isModal: false }
+      ]
+    },
+    { 
+      num: "Ch.6", 
+      name: "Future", 
+      id: "chapter-6-future", 
+      cx: 920, cy: 80, mcx: 365, mcy: 60,
+      ageRange: "Ongoing",
+      theme: "College, coding, stealth companies, and the untold next pages.",
+      milestones: ["Building AryanVerse digital ecosystem", "Studying B.Tech Computer Science at Bennett University"],
+      quote: "The next chapter is yours to write, and yours to live.",
+      fragments: []
+    }
+  ];
+
+  const handleNodeClick = (id) => {
+    onNodeClick(id);
+  };
+
   return (
-    <section id="journey-map-section" className="w-full min-h-screen flex flex-col justify-between items-center py-16 px-6 relative border-b border-white/5 select-none overflow-hidden z-10">
-      {/* Title block */}
-      <div id="map-header" className="text-center flex flex-col gap-2.5 opacity-0">
-        <h1 className="font-orbitron text-4xl md:text-5xl font-black tracking-widest text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.15)]">
-          JOURNEY ARCHIVE
+    <div 
+      className="relative w-full h-full flex flex-col justify-between items-center py-6 lg:py-12 px-4 select-none overflow-hidden"
+      style={{ background: bgColors[activeChapterIdx] || bgColors[0], transition: "background 1.5s ease-in-out" }}
+    >
+      <div id="map-header" className="text-center flex flex-col gap-2.5 opacity-100 z-10">
+        <h1 className="font-orbitron text-2xl lg:text-3xl font-black tracking-widest text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.15)] uppercase">
+          JOURNEY MAP
         </h1>
-        <p className="font-inter text-sm md:text-base text-slate-400 italic">
-          The story of how AryanVerse came to be.
+        <p className="font-inter text-[10px] lg:text-xs text-slate-400 italic">
+          The story of our universe's hero — Aryan.
         </p>
       </div>
 
-      {/* Desktop Map (Winding Path) */}
-      <div className="hidden md:block w-full max-w-5xl aspect-[5/3] relative my-6">
+      <div className="hidden lg:block w-full max-w-5xl aspect-[5/3] relative my-6">
         <svg className="w-full h-full overflow-visible" viewBox="0 0 1000 600" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <filter id="purpleGlow" x="-20%" y="-20%" width="140%" height="140%">
@@ -1683,154 +1834,737 @@ function JourneyMap({ onNodeClick }) {
             </linearGradient>
           </defs>
 
-          {/* Dash winding path */}
+          {/* Elevated terrains */}
+          <g transform="translate(0,0)">
+            <path d="M 100 510 Q 150 535 200 510 Q 150 485 100 510" fill="#090d16" stroke="#3b82f6" strokeWidth="0.5" strokeOpacity="0.4" />
+            <path d="M 125 500 L 132 493 L 139 500 Z" fill="#1e1b4b" stroke="#3b82f6" strokeWidth="0.4" />
+            <rect x="127" y="500" width="10" height="8" fill="#1e1b4b" stroke="#3b82f6" strokeWidth="0.4" />
+            <path d="M 141 497 L 146 492 L 151 497 Z" fill="#1e1b4b" stroke="#3b82f6" strokeWidth="0.4" />
+            <rect x="143" y="497" width="7" height="6" fill="#1e1b4b" stroke="#3b82f6" strokeWidth="0.4" />
+            <rect x="156" y="498" width="10" height="2" rx="0.5" fill="#3b82f6" fillOpacity="0.8" />
+            <rect x="155" y="501" width="12" height="2" rx="0.5" fill="#a855f7" fillOpacity="0.8" />
+          </g>
+
+          <g transform="translate(0,0)">
+            <path d="M 270 420 Q 320 440 370 420 Q 320 400 270 420" fill="#090d16" stroke="#3b82f6" strokeWidth="0.5" strokeOpacity="0.4" />
+            <polygon points="290,420 310,380 330,420" fill="#1e1b4b" stroke="#3b82f6" strokeWidth="0.4" />
+            <polygon points="315,420 335,370 355,420" fill="#1e1b4b" stroke="#3b82f6" strokeWidth="0.4" />
+            <path d="M 285 395 Q 292 388 299 395 Q 306 395 303 402 Z" fill="#0f172a" opacity="0.3" />
+            <path d="M 335 385 Q 341 379 347 385 Q 353 385 350 391 Z" fill="#0f172a" opacity="0.3" />
+          </g>
+
+          <g transform="translate(0,0)">
+            <path d="M 440 350 Q 490 370 540 350 Q 490 330 440 350" fill="#090d16" stroke="#3b82f6" strokeWidth="0.5" strokeOpacity="0.4" />
+            <rect x="465" y="305" width="8" height="40" fill="#1e1b4b" stroke="#3b82f6" strokeWidth="0.4" />
+            <rect x="477" y="295" width="12" height="50" fill="#1e1b4b" stroke="#3b82f6" strokeWidth="0.4" />
+            <rect x="495" y="312" width="8" height="33" fill="#1e1b4b" stroke="#3b82f6" strokeWidth="0.4" />
+            <circle cx="473" cy="336" r="5" stroke="#a855f7" strokeWidth="0.4" />
+            <circle cx="503" cy="336" r="4" stroke="#3b82f6" strokeWidth="0.4" />
+          </g>
+
+          <g transform="translate(0,0)">
+            <path d="M 600 270 Q 650 290 700 270 Q 650 250 600 270" fill="#090d16" stroke="#3b82f6" strokeWidth="0.5" strokeOpacity="0.4" />
+            <rect x="622" y="225" width="8" height="35" fill="#1e1b4b" stroke="#a855f7" strokeWidth="0.4" />
+            <polygon points="620,225 626,217 632,225" fill="#1e1b4b" stroke="#a855f7" strokeWidth="0.4" />
+            <rect x="655" y="225" width="8" height="35" fill="#1e1b4b" stroke="#a855f7" strokeWidth="0.4" />
+            <polygon points="653,225 659,217 665,225" fill="#1e1b4b" stroke="#a855f7" strokeWidth="0.4" />
+            <rect x="630" y="235" width="25" height="25" fill="#1e1b4b" stroke="#a855f7" strokeWidth="0.4" />
+            <path d="M 637 260 L 637 250 Q 642 245 647 250 L 647 260 Z" fill="#0d0d1a" stroke="#a855f7" strokeWidth="0.4" />
+            <path d="M 636 210 L 639 215 L 642 210 L 645 215 L 648 210 L 648 218 L 636 218 Z" fill="#fbbf24" stroke="#d97706" strokeWidth="0.4" />
+          </g>
+
+          <g transform="translate(0,0)">
+            <path d="M 750 190 Q 800 210 850 190 Q 800 170 750 190" fill="#090d16" stroke="#3b82f6" strokeWidth="0.5" strokeOpacity="0.4" />
+            <line x1="785" y1="190" x2="785" y2="165" stroke="#94a3b8" strokeWidth="0.5" />
+            <rect x="774" y="167" width="11" height="6" rx="0.5" fill="#1e1b4b" stroke="#94a3b8" strokeWidth="0.4" />
+            <rect x="785" y="174" width="12" height="6" rx="0.5" fill="#1e1b4b" stroke="#94a3b8" strokeWidth="0.4" />
+            <rect x="805" y="176" width="14" height="9" rx="0.5" fill="#1e1b4b" stroke="#3b82f6" strokeWidth="0.4" />
+          </g>
+
+          <g transform="translate(0,0)">
+            <path d="M 870 110 Q 920 130 970 110 Q 920 90 870 110" fill="#090d16" stroke="#fbbf24" strokeWidth="0.5" strokeOpacity="0.3" />
+            <circle cx="920" cy="80" r="16" stroke="#fbbf24" strokeWidth="0.5" strokeDasharray="3 3" className="animate-[spin_40s_linear_infinite]" style={{ transformOrigin: "920px 80px" }} />
+            <circle cx="920" cy="80" r="11" stroke="#a855f7" strokeWidth="0.6" strokeDasharray="2 2" className="animate-[spin_25s_linear_infinite_reverse]" style={{ transformOrigin: "920px 80px" }} />
+            <circle cx="920" cy="80" r="3" fill="#fbbf24" className="animate-pulse" />
+          </g>
+
+          <path
+            d="M 150 480 C 230 470, 260 400, 320 390 C 400 370, 430 310, 490 320 C 560 290, 590 260, 650 240 C 720 210, 750 180, 800 160 C 860 130, 890 100, 920 80"
+            stroke="url(#pathGrad)"
+            strokeWidth="6"
+            strokeLinecap="round"
+            strokeOpacity="0.45"
+            filter="url(#purpleGlow)"
+          />
+
+          <path
+            d="M 150 480 C 230 470, 260 400, 320 390 C 400 370, 430 310, 490 320 C 560 290, 590 260, 650 240 C 720 210, 750 180, 800 160 C 860 130, 890 100, 920 80"
+            stroke="url(#pathGrad)"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+            strokeDasharray="6 20"
+            className="animate-[flowParticles_3.5s_linear_infinite]"
+            opacity="0.95"
+            filter="url(#purpleGlow)"
+          />
+
           <path
             id="desktop-path"
-            d="M 100 520 C 220 520, 220 440, 300 440 C 380 440, 420 360, 500 360 C 580 360, 620 240, 700 240 C 780 240, 780 120, 900 120"
+            d="M 150 480 C 230 470, 260 400, 320 390 C 400 370, 430 310, 490 320 C 560 290, 590 260, 650 240 C 720 210, 750 180, 800 160 C 860 130, 890 100, 920 80"
             stroke="url(#pathGrad)"
             strokeWidth="3.5"
             strokeLinecap="round"
             strokeDasharray="8 8"
-            strokeOpacity="0.85"
-            filter="url(#purpleGlow)"
+            strokeOpacity="0.35"
           />
 
-          {/* Glowing node connections */}
-          {nodes.map((node) => (
-            <g
-              key={node.id}
-              className="map-node-group opacity-0 cursor-pointer group"
-              onClick={() => onNodeClick(node.id)}
-            >
-              {/* Glowing hover circle */}
-              <circle
-                cx={node.cx}
-                cy={node.cy}
-                r="20"
-                className="fill-[#050508] stroke-[#a855f7] strokeWidth-2 transition-all duration-300 group-hover:stroke-white group-hover:scale-110"
-                style={{ transformOrigin: `${node.cx}px ${node.cy}px` }}
-              />
-              <circle
-                cx={node.cx}
-                cy={node.cy}
-                r="6"
-                className="fill-[#a855f7] group-hover:fill-white transition-colors duration-300"
-              />
-              
-              {/* Labels */}
-              <text
-                x={node.cx}
-                y={node.cy - 28}
-                textAnchor="middle"
-                className="font-space-mono text-[10px] fill-slate-400 font-bold uppercase tracking-wider"
-              >
-                {node.num}
-              </text>
-              <text
-                x={node.cx}
-                y={node.cy + 34}
-                textAnchor="middle"
-                className="font-orbitron text-[11px] font-black fill-white tracking-widest uppercase transition-colors duration-300 group-hover:text-[#a855f7]"
-              >
-                {node.name}
-              </text>
-            </g>
-          ))}
+          <path
+            d="M 800 160 C 840 170, 880 180, 920 185"
+            stroke="url(#pathGrad)"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+            strokeDasharray="6 8"
+            strokeOpacity="0.2"
+          />
+          <text x="925" y="190" fill="#a855f7" className="font-space-mono text-xs font-bold animate-pulse">?</text>
 
-          {/* Walking Boy */}
-          <g id="desktop-boy" opacity="0">
-            <WalkingBoy />
+          {/* Walking Boy Character Desktop */}
+          <g id="desktop-boy">
+            <g transform="scale(2.5)">
+              <WalkingBoy />
+            </g>
           </g>
+
+          {nodes.map((node, cIdx) => {
+            const isFuturePortal = node.id === "chapter-6-future";
+            const isActive = activeChapterIdx === cIdx;
+            const isCompleted = activeChapterIdx > cIdx;
+            
+            if (isFuturePortal) {
+              return (
+                <g
+                  key={node.id}
+                  className="map-node-group-future cursor-pointer group"
+                  onClick={() => handleNodeClick("chapter-6-future")}
+                  onMouseEnter={() => setHoveredChapterIdx(cIdx)}
+                  onMouseLeave={() => setHoveredChapterIdx(null)}
+                >
+                  <circle cx={node.cx} cy={node.cy} r="25" className="stroke-[#fbbf24]/30 stroke-dasharray-4 strokeWidth-1 fill-none animate-[spin_30s_linear_infinite]" style={{ transformOrigin: `${node.cx}px ${node.cy}px` }} />
+                  <circle cx={node.cx} cy={node.cy} r="18" className="stroke-[#fbbf24]/50 stroke-dasharray-3 strokeWidth-1.5 fill-none animate-[spin_20s_linear_infinite_reverse]" style={{ transformOrigin: `${node.cx}px ${node.cy}px` }} />
+                  <circle cx={node.cx} cy={node.cy} r="12" className="stroke-[#fbbf24] strokeWidth-1 fill-none animate-pulse" />
+                  <circle cx={node.cx} cy={node.cy} r="5" className="fill-[#fbbf24] shadow-[0_0_10px_#fbbf24]" />
+                  <text x={node.cx} y={node.cy - 30} textAnchor="middle" className="font-space-mono text-[9px] fill-[#fbbf24] font-bold uppercase tracking-wider animate-pulse">{node.num}</text>
+                  <text x={node.cx} y={node.cy + 34} textAnchor="middle" className="font-orbitron text-[10px] font-black fill-white tracking-widest uppercase transition-colors duration-300 group-hover:text-[#fbbf24]">{node.name}</text>
+                </g>
+              );
+            }
+
+            return (
+              <g
+                key={node.id}
+                className="map-node-group cursor-pointer group"
+                onClick={() => handleNodeClick(node.id)}
+                onMouseEnter={() => setHoveredChapterIdx(cIdx)}
+                onMouseLeave={() => setHoveredChapterIdx(null)}
+              >
+                {isCompleted && (
+                  <circle cx={node.cx} cy={node.cy} r="16" fill="none" stroke="#a855f7" strokeWidth="1.5" className="completed-node-ring" style={{ transformOrigin: `${node.cx}px ${node.cy}px` }} />
+                )}
+                <circle
+                  cx={node.cx}
+                  cy={node.cy}
+                  r="16"
+                  className={`fill-[#050508] stroke-[#a855f7] strokeWidth-2 transition-all duration-300 group-hover:stroke-white ${
+                    isActive ? "stroke-white scale-110" : ""
+                  }`}
+                  style={{ transformOrigin: `${node.cx}px ${node.cy}px` }}
+                />
+                <circle
+                  cx={node.cx}
+                  cy={node.cy}
+                  r="5"
+                  className={`${isCompleted ? "fill-[#10A37F]" : isActive ? "fill-white" : "fill-[#a855f7] group-hover:fill-white"} transition-colors duration-300`}
+                />
+                <text x={node.cx} y={node.cy - 24} textAnchor="middle" className={`font-space-mono text-[9px] font-bold uppercase tracking-wider ${isActive ? "fill-white" : "fill-slate-400"}`}>{node.num}</text>
+                <text x={node.cx} y={node.cy + 30} textAnchor="middle" className={`font-orbitron text-[10px] font-black tracking-widest uppercase transition-colors duration-300 ${isActive ? "text-purple-400" : isCompleted ? "text-[#10A37F]" : "text-white group-hover:text-purple-400"}`}>{node.name}</text>
+              </g>
+            );
+          })}
         </svg>
       </div>
 
-      {/* Mobile Map (Vertical Path) */}
-      <div className="block md:hidden w-full max-w-sm aspect-[2/3] relative my-6">
-        <svg className="w-full h-full overflow-visible" viewBox="0 0 400 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-          {/* Vertical straight line */}
-          <line
+      <div className="block lg:hidden w-full max-w-sm aspect-[2/1] relative my-2">
+        <svg className="w-full h-full overflow-visible" viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
             id="mobile-path"
-            x1="200"
-            y1="520"
-            x2="200"
-            y2="80"
+            d="M 35 60 Q 115 80 200 60 Q 280 40 365 60"
             stroke="#a855f7"
-            strokeWidth="3"
+            strokeWidth="2.5"
             strokeLinecap="round"
             strokeDasharray="6 6"
-            strokeOpacity="0.8"
+            strokeOpacity="0.5"
+            fill="none"
           />
 
-          {/* Glowing node connections */}
-          {nodes.map((node) => (
-            <g
-              key={node.id}
-              className="map-node-group-mobile opacity-0 cursor-pointer group"
-              onClick={() => onNodeClick(node.id)}
-            >
-              {/* Glowing hover circle */}
-              <circle
-                cx={node.mcx}
-                cy={node.mcy}
-                r="18"
-                className="fill-[#050508] stroke-[#a855f7] strokeWidth-2 transition-all duration-300 group-hover:stroke-white group-hover:scale-110"
-                style={{ transformOrigin: `${node.mcx}px ${node.mcy}px` }}
-              />
-              <circle
-                cx={node.mcx}
-                cy={node.mcy}
-                r="5"
-                className="fill-[#a855f7] group-hover:fill-white"
-              />
-              
-              {/* Labels (Left Chapter Num, Right Chapter Name) */}
-              <text
-                x={node.mcx - 28}
-                y={node.mcy + 4}
-                textAnchor="end"
-                className="font-space-mono text-[9px] fill-slate-400 font-bold"
-              >
-                {node.num}
-              </text>
-              <text
-                x={node.mcx + 28}
-                y={node.mcy + 4}
-                textAnchor="start"
-                className="font-orbitron text-[10px] font-black fill-white tracking-wider uppercase transition-colors duration-300 group-hover:text-[#a855f7]"
-              >
-                {node.name}
-              </text>
+          {/* Walking Boy Character Mobile */}
+          <g id="mobile-boy">
+            <g transform="scale(2.5)">
+              <WalkingBoy />
             </g>
-          ))}
-
-          {/* Walking Boy */}
-          <g id="mobile-boy" opacity="0">
-            <WalkingBoy />
           </g>
+
+          {nodes.map((node, cIdx) => {
+            const mx = node.mcx;
+            const my = node.mcy;
+            
+            const isFuturePortal = node.id === "chapter-6-future";
+            const isActive = activeChapterIdx === cIdx;
+            const isCompleted = activeChapterIdx > cIdx;
+            
+            if (isFuturePortal) {
+              return (
+                <g
+                  key={node.id}
+                  className="map-node-group-mobile cursor-pointer group"
+                  onClick={() => handleNodeClick("chapter-6-future")}
+                  onMouseEnter={() => setHoveredChapterIdx(cIdx)}
+                  onMouseLeave={() => setHoveredChapterIdx(null)}
+                >
+                  <circle cx={mx} cy={my} r="10" className="stroke-[#fbbf24] strokeWidth-1 fill-none animate-pulse" />
+                  <circle cx={mx} cy={my} r="3" className="fill-[#fbbf24]" />
+                  <text x={mx} y={my - 16} textAnchor="middle" className="font-space-mono text-[8px] fill-[#fbbf24] font-bold">{node.num}</text>
+                  <text x={mx} y={my + 20} textAnchor="middle" className="font-orbitron text-[8px] font-black fill-white uppercase tracking-wider">{node.name}</text>
+                </g>
+              );
+            }
+
+            return (
+              <g
+                key={node.id}
+                className="map-node-group-mobile cursor-pointer group"
+                onClick={() => handleNodeClick(node.id)}
+                onMouseEnter={() => setHoveredChapterIdx(cIdx)}
+                onMouseLeave={() => setHoveredChapterIdx(null)}
+              >
+                <circle
+                  cx={mx}
+                  cy={my}
+                  r="12"
+                  className={`fill-[#050508] stroke-[#a855f7] strokeWidth-1.5 transition-all duration-300 group-hover:stroke-white ${
+                    isActive ? "stroke-white scale-110" : ""
+                  }`}
+                />
+                <circle cx={mx} cy={my} r="4" className={`${isCompleted ? "fill-[#10A37F]" : isActive ? "fill-white" : "fill-[#a855f7]"}`} />
+                <text x={mx} y={my - 18} textAnchor="middle" className={`font-space-mono text-[8px] font-bold ${isActive ? "fill-white" : "fill-slate-400"}`}>{node.num}</text>
+                <text x={mx} y={my + 22} textAnchor="middle" className={`font-orbitron text-[8px] font-black tracking-wider uppercase ${isActive ? "text-purple-400" : isCompleted ? "text-[#10A37F]" : "text-white"}`}>{node.name}</text>
+              </g>
+            );
+          })}
         </svg>
       </div>
 
-      {/* Bottom Scroll Down indicator */}
-      <div id="map-scroll-indicator" className="flex flex-col items-center gap-1.5 opacity-0 animate-[bounce_2s_infinite] cursor-pointer" onClick={() => onNodeClick("chapter-1")}>
-        <span className="font-space-mono text-[10px] md:text-xs text-[#a855f7] tracking-[0.25em] uppercase font-bold">
-          ↓ Scroll to explore
+      {hoveredChapterIdx !== null && (
+        <div 
+          className="absolute z-40 pointer-events-none transition-all duration-300 ease-out"
+          style={{
+            left: isMobile ? "50%" : `${(nodes[hoveredChapterIdx].cx > 500) ? (nodes[hoveredChapterIdx].cx - 300) : (nodes[hoveredChapterIdx].cx + 20)}px`,
+            top: isMobile ? "auto" : `${nodes[hoveredChapterIdx].cy - 110}px`,
+            bottom: isMobile ? "10px" : "auto",
+            transform: isMobile ? "translateX(-50%)" : "none",
+            width: "260px"
+          }}
+        >
+          <div className="bg-slate-950/80 backdrop-blur-xl border border-purple-500/30 rounded-xl p-4 shadow-[0_0_30px_rgba(168,85,247,0.25)] flex flex-col gap-2">
+            <div className="flex justify-between items-start">
+              <span className="font-space-mono text-[8px] text-purple-400 font-bold uppercase tracking-wider">{nodes[hoveredChapterIdx].num}</span>
+              <span className="font-space-mono text-[8px] text-slate-500 font-bold uppercase">{nodes[hoveredChapterIdx].ageRange}</span>
+            </div>
+            <h3 className="font-orbitron text-xs font-black text-white tracking-widest uppercase">{nodes[hoveredChapterIdx].name}</h3>
+            <div className="h-[1px] bg-white/10 my-0.5" />
+            <div className="flex flex-col gap-0.5">
+              <span className="font-space-mono text-[7px] text-slate-500 uppercase font-bold">Theme</span>
+              <p className="font-inter text-[10px] text-slate-300 leading-normal">{nodes[hoveredChapterIdx].theme}</p>
+            </div>
+            <div className="flex flex-col gap-0.5">
+              <span className="font-space-mono text-[7px] text-slate-500 uppercase font-bold">Milestones</span>
+              <ul className="list-none flex flex-col gap-0.5">
+                {nodes[hoveredChapterIdx].milestones.slice(0, 2).map((m, i) => (
+                  <li key={i} className="font-inter text-[9px] text-slate-400 flex items-center gap-1.5">
+                    <span className="w-1 h-1 rounded-full bg-purple-500" />
+                    {m}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <p className="font-inter text-[9px] text-slate-400 italic border-l border-purple-500/40 pl-2 py-0.5 mt-1 leading-normal">
+              "{nodes[hoveredChapterIdx].quote}"
+            </p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+const importantMemories = {
+  "national-high-jump": {
+    title: "National High Jump Championship",
+    subtitle: "Class 8 Athletics Achievement",
+    image: "/certificates/cert-1.jpg",
+    story: "After moving to Rajasthan, I discovered sports. The high jump became my obsession. I spent hours practicing landing techniques on sandbeds. In Class 8, I qualified for the National High Jump Championship, representing my school and region, proving that adaptability is key to success.",
+    achievements: ["National Level Athlete Qualification", "Inter-School High Jump Gold", "Rajasthan Regional Representative"],
+    context: "Class 8 Athletics, Rajasthan Campus"
+  },
+  "head-boy": {
+    title: "Appointed School Head Boy",
+    subtitle: "Student Council Leadership",
+    image: "/headboy-photo.jpg",
+    story: "Being appointed Head Boy was the peak of my school journey. I was responsible for leading a student council of 30, organizing morning assemblies, and coordinating inter-school meets. It taught me that real leadership is about empathy, service, and lifting others.",
+    achievements: ["Student Council leadership of 30+ peers", "Revival and organization of Sports Day", "CBSE leadership medal recipient"],
+    context: "Class 11, Student Council Noida"
+  },
+  "fine-arts-100": {
+    title: "100/100 Perfect Fine Arts Score",
+    subtitle: "CBSE Class 12 Creativity Milestone",
+    image: "/certificates/cert-5.jpg",
+    story: "Art has always been my escape. For my Class 12 Fine Arts project, I painted a detailed landscape capturing the theme of perspective and horizon. The external examiner awarded me a perfect score of 100/100, a proud moment validating my creative soul.",
+    achievements: ["Perfect score in CBSE Class 12 Board", "Best landscape painting award"],
+    context: "Class 12 Boards, Noida"
+  },
+  "first-business": {
+    title: "First Independent Income: Freelance Web Development",
+    subtitle: "Earning ₹84k from Scratch",
+    image: "/certificates/cert-2.jpg",
+    story: "During the high school transitions, I started designing graphic assets and coding websites for small businesses. Working late nights, I successfully completed a set of branding and development projects, earning my first major independent income of ₹84,000. It proved to me that the ability to create value out of nothing is the ultimate skill.",
+    achievements: ["Developed 5 client websites", "Earned ₹84,000 independent income", "Mastered UI design and web stacks"],
+    context: "Class 12 Crossroads"
+  },
+  "dawn-foundation": {
+    title: "Volunteering with DAWN Foundation",
+    subtitle: "Graphic Design Campaign Lead",
+    image: "/certificates/cert-3.jpg",
+    story: "I joined the DAWN Foundation as a graphic designer to help coordinate digital campaigns and raise awareness for student wellness programs. Designing visual narratives taught me how to communicate powerful messages through layout, typography, and color, bridging design and social impact.",
+    achievements: ["Designed campaigns reaching 5,000+ students", "Created educational social flyers", "Appreciation award from organization trustees"],
+    context: "Class 11-12 Community Service"
+  }
+};
+
+function MemoryModal({ fragmentId, onClose }) {
+  const data = importantMemories[fragmentId];
+  if (!data) return null;
+
+  return (
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-2xl transition-all duration-300 animate-fadeIn"
+      onClick={onClose}
+    >
+      <div 
+        className="relative max-w-2xl w-full bg-[#090d16]/90 border border-purple-500/30 p-6 md:p-8 rounded-3xl shadow-[0_0_50px_rgba(168,85,247,0.3)] overflow-y-auto max-h-[90vh] flex flex-col gap-6"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button 
+          onClick={onClose}
+          className="absolute top-4 right-4 text-slate-400 hover:text-white p-2 transition-colors cursor-pointer font-space-mono text-xs border border-white/5 bg-white/5 rounded-full w-8 h-8 flex items-center justify-center hover:border-purple-500/30"
+        >
+          ✕
+        </button>
+
+        <div className="flex flex-col gap-1 text-left">
+          <span className="font-space-mono text-[9px] text-purple-400 font-bold uppercase tracking-widest">
+            {data.context}
+          </span>
+          <h3 className="font-orbitron text-xl md:text-2xl font-black text-white uppercase tracking-wider">
+            {data.title}
+          </h3>
+          <span className="font-space-mono text-[10px] text-slate-500 font-bold uppercase mt-0.5">
+            {data.subtitle}
+          </span>
+        </div>
+
+        <div className="h-[1px] bg-white/10" />
+
+        <div className="grid md:grid-cols-2 gap-6 items-start">
+          <div className="flex flex-col gap-4 text-left">
+            <p className="font-inter text-sm text-slate-300 leading-relaxed">
+              {data.story}
+            </p>
+            
+            <div className="flex flex-col gap-2 mt-2">
+              <span className="font-space-mono text-[9px] text-slate-500 uppercase tracking-wider font-bold">Key Achievements</span>
+              <ul className="list-none flex flex-col gap-1.5">
+                {data.achievements.map((item, idx) => (
+                  <li key={idx} className="font-inter text-xs text-slate-400 flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-purple-500 mt-1.5 shrink-0 shadow-[0_0_4px_#a855f7]" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-4 items-center">
+            {data.image && (
+              <div className="w-full aspect-[4/3] rounded-2xl border border-white/10 overflow-hidden bg-slate-900 flex items-center justify-center relative group">
+                <img 
+                  src={data.image} 
+                  alt={data.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function FuturePortalModal({ onClose }) {
+  const missions = [
+    { name: "AryanVerse", desc: "Crafting the immersive, next-gen virtual universe." },
+    { name: "Data Science", desc: "Analyzing high-dimensional neural networks and patterns." },
+    { name: "Unessa Foundation", desc: "Leading tech and design infrastructure for positive social impact." },
+    { name: "Unscripted Love", desc: "Writing the emotional script of life, code, and relationship notes." },
+    { name: "Future Company", desc: "Laying foundations for a stealth startup team." }
+  ];
+
+  return (
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-2xl transition-all duration-300 animate-fadeIn"
+      onClick={onClose}
+    >
+      <div 
+        className="relative max-w-xl w-full bg-[#050508]/95 border border-[#fbbf24]/30 p-6 md:p-8 rounded-3xl shadow-[0_0_50px_rgba(251,191,36,0.2)] flex flex-col gap-6"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button 
+          onClick={onClose}
+          className="absolute top-4 right-4 text-slate-400 hover:text-white p-2 transition-colors cursor-pointer font-space-mono text-xs border border-white/5 bg-white/5 rounded-full w-8 h-8 flex items-center justify-center hover:border-[#fbbf24]/30"
+        >
+          ✕
+        </button>
+
+        <div className="flex flex-col gap-1 text-left">
+          <span className="font-space-mono text-[9px] text-[#fbbf24] font-bold uppercase tracking-widest">
+            Future Beacon Active
+          </span>
+          <h3 className="font-orbitron text-xl md:text-2xl font-black text-white uppercase tracking-wider">
+            "The story is still being written."
+          </h3>
+          <span className="font-space-mono text-[10px] text-slate-500 font-bold uppercase mt-0.5">
+            Chapter 6 Missions & Objectives
+          </span>
+        </div>
+
+        <div className="h-[1px] bg-white/10" />
+
+        <div className="flex flex-col gap-4 text-left">
+          <span className="font-space-mono text-[9px] text-slate-400 uppercase tracking-wider font-bold">Current Missions</span>
+          <div className="flex flex-col gap-3">
+            {missions.map((m, idx) => (
+              <div key={idx} className="bg-white/5 border border-white/5 p-3.5 rounded-xl flex flex-col gap-1 hover:border-[#fbbf24]/20 transition-all duration-300">
+                <span className="font-orbitron text-xs font-black text-white tracking-widest uppercase">
+                  {m.name}
+                </span>
+                <p className="font-inter text-[11px] text-slate-400 leading-normal">
+                  {m.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <p className="font-inter text-xs text-slate-500 italic text-center mt-2 leading-relaxed">
+          "The best way to predict the future is to build it."
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function ChapterStats({ age, location, themes, achievement, mentors }) {
+  return (
+    <div className="scroll-animate-moment w-full py-6 px-6 md:px-16 border-b border-white/5 bg-[#05050b]/20 relative z-10">
+      <div className="max-w-4xl mx-auto bg-slate-950/60 border border-white/5 backdrop-blur-xl p-5 rounded-2xl grid grid-cols-2 md:grid-cols-5 gap-4 text-center shadow-[0_0_20px_rgba(255,255,255,0.02)]">
+        <div className="flex flex-col gap-1 justify-center">
+          <span className="font-space-mono text-[8px] text-slate-500 uppercase tracking-widest font-bold">Age</span>
+          <span className="font-orbitron text-base font-black text-white">{age}</span>
+        </div>
+        <div className="flex flex-col gap-1 justify-center border-l border-white/5">
+          <span className="font-space-mono text-[8px] text-slate-500 uppercase tracking-widest font-bold">Key Location</span>
+          <span className="font-orbitron text-xs font-black text-white leading-normal">{location}</span>
+        </div>
+        <div className="flex flex-col gap-1 justify-center border-l border-white/5 col-span-2 md:col-span-1">
+          <span className="font-space-mono text-[8px] text-slate-500 uppercase tracking-widest font-bold">Major Themes</span>
+          <span className="font-inter text-[10px] text-slate-300 leading-normal">{themes}</span>
+        </div>
+        <div className="flex flex-col gap-1 justify-center border-l border-white/5">
+          <span className="font-space-mono text-[8px] text-slate-500 uppercase tracking-widest font-bold">Key Achievement</span>
+          <span className="font-inter text-[10px] text-[#fbbf24] font-bold leading-normal">{achievement}</span>
+        </div>
+        <div className="flex flex-col gap-1 justify-center border-l border-white/5">
+          <span className="font-space-mono text-[8px] text-slate-500 uppercase tracking-widest font-bold">Key People</span>
+          <span className="font-inter text-[10px] text-slate-400 leading-normal">{mentors}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ChapterCompletionCard({ title, lessons, quote, onNextClick }) {
+  return (
+    <div className="scroll-animate-moment w-full py-12 px-6 md:px-16 border-b border-white/5 bg-[#05050b]/35 relative z-10">
+      <div className="max-w-xl mx-auto bg-gradient-to-br from-[#0d0d1a]/80 to-[#1e1b4b]/20 border border-purple-500/20 backdrop-blur-2xl p-6 rounded-3xl flex flex-col gap-4 shadow-[0_0_30px_rgba(168,85,247,0.1)] text-center relative overflow-hidden">
+        <div className="absolute -top-10 -right-10 w-24 h-24 bg-purple-500/10 rounded-full blur-xl" />
+        <div className="absolute -bottom-10 -left-10 w-24 h-24 bg-[#fbbf24]/5 rounded-full blur-xl" />
+
+        <span className="font-space-mono text-[9px] text-purple-400 tracking-[0.25em] uppercase font-bold">
+          Chapter Completed
         </span>
+        <h3 className="font-orbitron text-xl md:text-2xl font-black text-white tracking-widest uppercase">
+          {title}
+        </h3>
+        
+        <div className="h-[1px] bg-white/10 w-20 mx-auto" />
+        
+        <div className="flex flex-col gap-1.5">
+          <span className="font-space-mono text-[8px] text-slate-500 uppercase tracking-widest font-bold">
+            Lessons Learned
+          </span>
+          <div className="flex flex-wrap gap-2 justify-center mt-1">
+            {lessons.map((lesson, i) => (
+              <span key={i} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full font-inter text-[10px] text-slate-300 font-medium">
+                {lesson}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <p className="font-inter text-xs text-slate-400 italic mt-2 leading-relaxed border-l-2 border-purple-500/30 pl-4 py-1 text-left max-w-md mx-auto">
+          "{quote}"
+        </p>
+
+        {onNextClick && (
+          <button 
+            onClick={onNextClick}
+            className="mt-3 mx-auto flex items-center gap-2 px-4 py-2 border border-purple-500/30 bg-purple-500/10 hover:bg-purple-500/20 text-white rounded-xl font-space-mono text-[10px] tracking-wider transition-all duration-300 hover:border-purple-400/50 group cursor-pointer"
+          >
+            CONTINUE STORY <span className="transform group-hover:translate-x-1 transition-transform duration-200">→</span>
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function TheAryanLayer({ onBeginClick }) {
+  return (
+    <section id="intro-section" className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-12 px-6 md:px-16 border-b border-white/5 relative z-10">
+      <div className="absolute inset-0 w-[500px] h-[350px] rounded-full bg-gradient-to-tr from-[#3b82f6]/5 via-[#a855f7]/5 to-transparent blur-[140px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+      
+      <div className="max-w-3xl mx-auto flex flex-col gap-5 w-full text-left">
+        <span className="font-space-mono text-xs tracking-[0.3em] text-[#3B82F6] uppercase font-bold">
+          Introduction
+        </span>
+        <h1 className="font-orbitron text-4xl md:text-6xl font-black tracking-widest text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.15)] leading-tight">
+          ARYAN CHAUHAN
+        </h1>
+        <div className="flex flex-wrap gap-x-3 gap-y-1 font-space-mono text-[10px] md:text-xs text-slate-400 uppercase tracking-widest font-bold">
+          <span>Builder</span>
+          <span className="text-[#a855f7]">•</span>
+          <span>Storyteller</span>
+          <span className="text-[#a855f7]">•</span>
+          <span>Student</span>
+          <span className="text-[#a855f7]">•</span>
+          <span>Future Founder</span>
+        </div>
+        
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 bg-slate-950/60 border border-white/5 p-5 rounded-xl backdrop-blur-xl shadow-inner">
+          <div className="flex flex-col gap-1 border-r border-white/5 pr-4">
+            <span className="font-space-mono text-[8px] text-slate-500 uppercase tracking-wider font-bold">Age</span>
+            <span className="font-orbitron text-lg font-black text-white">18</span>
+          </div>
+          <div className="flex flex-col gap-1 md:border-r border-white/5 px-2">
+            <span className="font-space-mono text-[8px] text-slate-500 uppercase tracking-wider font-bold">Mission</span>
+            <span className="font-orbitron text-xs font-black text-[#fbbf24] leading-normal uppercase">Building AryanVerse</span>
+          </div>
+          <div className="flex flex-col gap-1 border-r border-white/5 px-2 col-span-2 md:col-span-1 mt-2 md:mt-0">
+            <span className="font-space-mono text-[8px] text-slate-500 uppercase tracking-wider font-bold">Location</span>
+            <span className="font-orbitron text-xs font-black text-white leading-normal uppercase">Bennett University</span>
+          </div>
+          <div className="flex flex-col gap-1 pl-4 mt-2 md:mt-0">
+            <span className="font-space-mono text-[8px] text-slate-500 uppercase tracking-wider font-bold">Obsession</span>
+            <span className="font-inter text-xs text-slate-300 font-semibold leading-normal">Creating from scratch</span>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-3 max-w-2xl mt-6 border-l-2 border-[#3b82f6]/40 pl-5 py-1.5">
+          <p className="font-inter text-sm md:text-base text-slate-300 leading-relaxed italic">
+            "I don't believe people are defined by a resume."
+          </p>
+          <p className="font-inter text-sm md:text-base text-slate-300 leading-relaxed italic">
+            "I believe they are defined by the stories they collect, the people they become, and the things they choose to build."
+          </p>
+          <p className="font-inter text-sm md:text-base text-slate-300 leading-relaxed italic">
+            "This archive is my story so far."
+          </p>
+        </div>
+
+        <div className="mt-6">
+          <button
+            onClick={onBeginClick}
+            className="flex items-center gap-2 px-5 py-2.5 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-[#3b82f6] text-white rounded-xl font-space-mono text-[10px] tracking-widest uppercase transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.02)] group cursor-pointer"
+          >
+            BEGIN JOURNEY <span className="transform group-hover:translate-x-1 transition-transform duration-200">→</span>
+          </button>
+        </div>
       </div>
     </section>
   );
 }
 
+function JourneyProgress({ activeIdx }) {
+  const chs = [
+    { num: 1, name: "Foundations" },
+    { num: 2, name: "The Shift" },
+    { num: 3, name: "Transformation" },
+    { num: 4, name: "The Leader" },
+    { num: 5, name: "Crossroads" },
+    { num: 6, name: "Future" }
+  ];
+
+  return (
+    <div className="fixed top-8 right-8 z-40 hidden xl:flex flex-col gap-2 bg-slate-950/60 backdrop-blur-xl border border-white/5 p-4.5 rounded-2xl shadow-[0_0_25px_rgba(0,0,0,0.5)] select-none">
+      <span className="font-space-mono text-[8px] text-slate-500 uppercase tracking-widest font-black text-center border-b border-white/5 pb-2">
+        Journey Progress
+      </span>
+      <div className="flex flex-col gap-1.5 mt-2">
+        {chs.map((c, i) => {
+          const isActive = activeIdx === i;
+          const isCompleted = activeIdx > i;
+          
+          return (
+            <div key={i} className="flex items-center gap-2.5">
+              <span className={`w-3.5 h-3.5 rounded-full flex items-center justify-center font-space-mono text-[8px] font-bold border transition-all duration-300 ${
+                isActive 
+                  ? "bg-purple-500/20 border-purple-400 text-purple-200 shadow-[0_0_8px_rgba(168,85,247,0.4)]"
+                  : isCompleted
+                    ? "bg-[#10A37F]/10 border-[#10A37F]/40 text-[#10A37F]"
+                    : "bg-slate-900/40 border-white/5 text-slate-500"
+              }`}>
+                {isCompleted ? "✓" : c.num}
+              </span>
+              <span className={`font-orbitron text-[8px] font-bold uppercase tracking-wider transition-colors duration-300 ${
+                isActive 
+                  ? "text-purple-300 font-extrabold"
+                  : isCompleted
+                    ? "text-slate-400"
+                    : "text-slate-600"
+              }`}>
+                Ch.{c.num} {c.name}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// Left Side biography profile card
+function LeftProfileCard() {
+  return (
+    <div className="w-full h-full flex flex-col justify-between p-6 lg:p-8 bg-[#050508]/40 backdrop-blur-md relative overflow-hidden select-none">
+      <div className="flex flex-col gap-6 items-start">
+        {/* Styled Profile Image */}
+        <div className="relative w-28 h-28 rounded-2xl overflow-hidden border border-purple-500/20 shadow-[0_0_20px_rgba(168,85,247,0.15)] group shrink-0">
+          <img 
+            src="/aryan-photo.jpg" 
+            alt="Aryan Chauhan" 
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            onError={(e) => {
+              e.target.src = "/headboy-photo.jpg";
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+        </div>
+
+        {/* Name and Roles */}
+        <div className="flex flex-col gap-2.5 text-left">
+          <h1 className="font-orbitron text-2xl lg:text-3xl font-black tracking-widest text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] uppercase">
+            Aryan Chauhan
+          </h1>
+          <div className="flex flex-wrap gap-x-2 gap-y-1 font-space-mono text-[9px] text-[#A855F7] uppercase tracking-widest font-bold">
+            <span>Builder</span>
+            <span>•</span>
+            <span>Storyteller</span>
+            <span>•</span>
+            <span>Explorer</span>
+            <span>•</span>
+            <span>Future Founder</span>
+          </div>
+        </div>
+
+        <div className="h-[1px] bg-white/10 w-full" />
+
+        {/* Small personal description */}
+        <p className="font-inter text-xs text-slate-400 leading-relaxed text-left italic">
+          "I don't believe people are defined by a resume. I believe they are defined by the stories they collect, the people they become, and the things they choose to build."
+        </p>
+
+        {/* Quick Stats Grid */}
+        <div className="grid grid-cols-2 gap-3.5 w-full mt-2">
+          <div className="flex flex-col gap-0.5 bg-white/5 border border-white/5 p-2.5 rounded-xl text-left">
+            <span className="font-space-mono text-[7px] text-slate-500 uppercase tracking-wider font-bold">Age</span>
+            <span className="font-orbitron text-xs font-black text-white">18</span>
+          </div>
+          <div className="flex flex-col gap-0.5 bg-white/5 border border-white/5 p-2.5 rounded-xl text-left">
+            <span className="font-space-mono text-[7px] text-slate-500 uppercase tracking-wider font-bold">Location</span>
+            <span className="font-orbitron text-[9px] font-black text-white leading-normal uppercase">Bennett University</span>
+          </div>
+          <div className="flex flex-col gap-0.5 bg-white/5 border border-white/5 p-2.5 rounded-xl text-left col-span-2">
+            <span className="font-space-mono text-[7px] text-slate-500 uppercase tracking-wider font-bold">Current Mission</span>
+            <span className="font-orbitron text-[9px] font-black text-[#fbbf24] leading-normal uppercase">Building AryanVerse</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-8 text-left">
+        <span className="font-space-mono text-[8px] text-slate-500 uppercase tracking-widest font-bold">
+          Select a destination landmark on the map
+        </span>
+      </div>
+    </div>
+  );
+}
+
 export default function JourneyPage() {
   const mainRef = useRef(null);
+  const [viewMode, setViewMode] = useState("MAP"); // "MAP" or "CHAPTER"
   const [currentChapter, setCurrentChapter] = useState({
     title: "CHAPTER 1 — FOUNDATIONS",
     subtitle: "Birth to Class 6",
   });
+  const [activeChapterIdx, setActiveChapterIdx] = useState(0);
+  const [hoveredChapterIdx, setHoveredChapterIdx] = useState(null);
+  const [activeModalFragment, setActiveModalFragment] = useState(null);
+  const prevIdxRef = useRef(0);
 
   const handleNodeClick = (id) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+    const chNodes = [
+      "chapter-1", "chapter-2", "chapter-3", "chapter-4", "chapter-5", "chapter-6-future"
+    ];
+    const idx = chNodes.indexOf(id);
+    if (idx !== -1) {
+      setActiveChapterIdx(idx);
+      // Wait for walking boy travel before zooming in
+      setTimeout(() => {
+        setViewMode("CHAPTER");
+      }, 1200);
     }
   };
 
@@ -1857,94 +2591,13 @@ export default function JourneyPage() {
       );
     });
 
-    // ScrollTrigger to detect Chapter 1 in viewport
-    ScrollTrigger.create({
-      trigger: "#chapter-1",
-      scroller: mainRef.current,
-      start: "top 40%",
-      end: "bottom 40%",
-      onToggle: (self) => {
-        if (self.isActive) {
-          setCurrentChapter({
-            title: "CHAPTER 1 — FOUNDATIONS",
-            subtitle: "Birth to Class 6",
-          });
-        }
-      },
-    });
-
-    // ScrollTrigger to detect Chapter 2 in viewport
-    ScrollTrigger.create({
-      trigger: "#chapter-2",
-      scroller: mainRef.current,
-      start: "top 40%",
-      end: "bottom 40%",
-      onToggle: (self) => {
-        if (self.isActive) {
-          setCurrentChapter({
-            title: "CHAPTER 2 — THE SHIFT",
-            subtitle: "Class 7 to Class 9",
-          });
-        }
-      },
-    });
-
-    // ScrollTrigger to detect Chapter 3 in viewport
-    ScrollTrigger.create({
-      trigger: "#chapter-3",
-      scroller: mainRef.current,
-      start: "top 40%",
-      end: "bottom 40%",
-      onToggle: (self) => {
-        if (self.isActive) {
-          setCurrentChapter({
-            title: "CHAPTER 3 — THE TRANSFORMATION",
-            subtitle: "Class 7 to Class 10",
-          });
-        }
-      },
-    });
-
-    // ScrollTrigger to detect Chapter 4 in viewport
-    ScrollTrigger.create({
-      trigger: "#chapter-4",
-      scroller: mainRef.current,
-      start: "top 40%",
-      end: "bottom 40%",
-      onToggle: (self) => {
-        if (self.isActive) {
-          setCurrentChapter({
-            title: "CHAPTER 4 — THE LEADER",
-            subtitle: "Class 11 Milestone",
-          });
-        }
-      },
-    });
-
-    // ScrollTrigger to detect Chapter 5 in viewport
-    ScrollTrigger.create({
-      trigger: "#chapter-5",
-      scroller: mainRef.current,
-      start: "top 40%",
-      end: "bottom 40%",
-      onToggle: (self) => {
-        if (self.isActive) {
-          setCurrentChapter({
-            title: "CHAPTER 5 — THE CROSSROADS",
-            subtitle: "Class 12 Milestone",
-          });
-        }
-      },
-    });
-
-    // Winding path animations and walking boy timeline
     // Initial positions setup
-    gsap.set("#desktop-boy", { x: 90, y: 494, opacity: 0 });
-    gsap.set("#mobile-boy", { x: 190, y: 494, opacity: 0 });
+    gsap.set("#desktop-boy", { x: 125, y: 417.5, opacity: 0 }); // Node 1 (150, 480) -> (125, 417.5)
+    gsap.set("#mobile-boy", { x: 10, y: -4, opacity: 0 }); // Mobile Node 1 horizontal: (35, 60) -> (10, -4)
     gsap.set(".map-node-group", { opacity: 0, scale: 0, transformOrigin: "center center" });
     gsap.set(".map-node-group-mobile", { opacity: 0, scale: 0, transformOrigin: "center center" });
+    gsap.set(".map-node-group-future", { opacity: 0, scale: 0, transformOrigin: "center center" });
     gsap.set("#map-header", { opacity: 0, y: -20 });
-    gsap.set("#map-scroll-indicator", { opacity: 0 });
 
     const desktopPath = document.getElementById("desktop-path");
     const mobilePath = document.getElementById("mobile-path");
@@ -1976,45 +2629,103 @@ export default function JourneyPage() {
     // Boy fades in at start
     loadTimeline.to(["#desktop-boy", "#mobile-boy"], { opacity: 1, duration: 0.2 }, "-=0.2");
 
-    // Add walking label
-    loadTimeline.add("walk-start");
-
-    // Desktop walking animation
-    loadTimeline.to("#desktop-boy", { x: 90, y: 494, duration: 0.1 }, "walk-start") // Node 1
-                .to(gsap.utils.toArray(".map-node-group")[0], { opacity: 1, scale: 1, duration: 0.3, ease: "elastic.out(1, 0.7)" }, "walk-start")
-                .to("#desktop-boy", { x: 290, y: 414, duration: 0.5, ease: "power1.inOut" }, "walk-start+=0.1") // Node 2
-                .to(gsap.utils.toArray(".map-node-group")[1], { opacity: 1, scale: 1, duration: 0.3, ease: "elastic.out(1, 0.7)" }, "walk-start+=0.6")
-                .to("#desktop-boy", { x: 490, y: 334, duration: 0.5, ease: "power1.inOut" }, "walk-start+=0.6") // Node 3
-                .to(gsap.utils.toArray(".map-node-group")[2], { opacity: 1, scale: 1, duration: 0.3, ease: "elastic.out(1, 0.7)" }, "walk-start+=1.1")
-                .to("#desktop-boy", { x: 690, y: 214, duration: 0.5, ease: "power1.inOut" }, "walk-start+=1.1") // Node 4
-                .to(gsap.utils.toArray(".map-node-group")[3], { opacity: 1, scale: 1, duration: 0.3, ease: "elastic.out(1, 0.7)" }, "walk-start+=1.6")
-                .to("#desktop-boy", { x: 890, y: 94, duration: 0.5, ease: "power1.inOut" }, "walk-start+=1.6") // Node 5
-                .to(gsap.utils.toArray(".map-node-group")[4], { opacity: 1, scale: 1, duration: 0.3, ease: "elastic.out(1, 0.7)" }, "walk-start+=2.1");
-
-    // Mobile walking animation
-    loadTimeline.to("#mobile-boy", { x: 190, y: 494, duration: 0.1 }, "walk-start") // Node 1
-                .to(gsap.utils.toArray(".map-node-group-mobile")[0], { opacity: 1, scale: 1, duration: 0.3, ease: "elastic.out(1, 0.7)" }, "walk-start")
-                .to("#mobile-boy", { x: 190, y: 384, duration: 0.5, ease: "power1.inOut" }, "walk-start+=0.1") // Node 2
-                .to(gsap.utils.toArray(".map-node-group-mobile")[1], { opacity: 1, scale: 1, duration: 0.3, ease: "elastic.out(1, 0.7)" }, "walk-start+=0.6")
-                .to("#mobile-boy", { x: 190, y: 274, duration: 0.5, ease: "power1.inOut" }, "walk-start+=0.6") // Node 3
-                .to(gsap.utils.toArray(".map-node-group-mobile")[2], { opacity: 1, scale: 1, duration: 0.3, ease: "elastic.out(1, 0.7)" }, "walk-start+=1.1")
-                .to("#mobile-boy", { x: 190, y: 164, duration: 0.5, ease: "power1.inOut" }, "walk-start+=1.1") // Node 4
-                .to(gsap.utils.toArray(".map-node-group-mobile")[3], { opacity: 1, scale: 1, duration: 0.3, ease: "elastic.out(1, 0.7)" }, "walk-start+=1.6")
-                .to("#mobile-boy", { x: 190, y: 54, duration: 0.5, ease: "power1.inOut" }, "walk-start+=1.6") // Node 5
-                .to(gsap.utils.toArray(".map-node-group-mobile")[4], { opacity: 1, scale: 1, duration: 0.3, ease: "elastic.out(1, 0.7)" }, "walk-start+=2.1");
-
-    // Scroll indicator fades in at end
-    loadTimeline.to("#map-scroll-indicator", { opacity: 1, duration: 0.5 }, "walk-start+=2.3");
+    // Nodes pop/stagger in
+    loadTimeline.to(gsap.utils.toArray(".map-node-group"), { opacity: 1, scale: 1, duration: 0.5, stagger: 0.1, ease: "elastic.out(1, 0.7)" });
+    loadTimeline.to(gsap.utils.toArray(".map-node-group-mobile"), { opacity: 1, scale: 1, duration: 0.5, stagger: 0.1, ease: "elastic.out(1, 0.7)" }, "<");
+    loadTimeline.to(gsap.utils.toArray(".map-node-group-future"), { opacity: 1, scale: 1, duration: 0.5, ease: "elastic.out(1, 0.7)" }, "<");
 
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 
+  // Update chapter details when activeChapterIdx changes
+  useEffect(() => {
+    const chNames = [
+      { title: "CHAPTER 1 — FOUNDATIONS", subtitle: "Birth to Class 6" },
+      { title: "CHAPTER 2 — THE SHIFT", subtitle: "Class 7 to Class 9" },
+      { title: "CHAPTER 3 — THE TRANSFORMATION", subtitle: "Class 7 to Class 10" },
+      { title: "CHAPTER 4 — THE LEADER", subtitle: "Class 11 Milestone" },
+      { title: "CHAPTER 5 — THE CROSSROADS", subtitle: "Class 12 Milestone" },
+      { title: "CHAPTER 6 — THE FUTURE", subtitle: "College and Beyond" }
+    ];
+    const info = chNames[activeChapterIdx];
+    if (info) {
+      setCurrentChapter(info);
+    }
+  }, [activeChapterIdx]);
+
+  // Refresh ScrollTrigger when entering a chapter
+  useEffect(() => {
+    if (viewMode === "CHAPTER") {
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+        if (mainRef.current) mainRef.current.scrollTop = 0;
+      }, 100);
+    }
+  }, [viewMode, activeChapterIdx]);
+
+  // Effect to animate the boy between nodes during chapter transitions
+  useEffect(() => {
+    const prevIdx = prevIdxRef.current;
+    prevIdxRef.current = activeChapterIdx;
+    
+    const chNodes = [
+      { cx: 150, cy: 480, mcx: 35, mcy: 60 },
+      { cx: 320, cy: 390, mcx: 100, mcy: 72 },
+      { cx: 490, cy: 320, mcx: 165, mcy: 75 },
+      { cx: 650, cy: 240, mcx: 230, mcy: 55 },
+      { cx: 800, cy: 160, mcx: 295, mcy: 45 },
+      { cx: 920, cy: 80, mcx: 365, mcy: 60 }
+    ];
+
+    const targetNode = chNodes[activeChapterIdx];
+    if (!targetNode) return;
+    const isMovingForward = activeChapterIdx >= prevIdx;
+    
+    // Desktop boy animation
+    gsap.killTweensOf("#desktop-boy");
+    gsap.to("#desktop-boy", {
+      x: targetNode.cx - 25,
+      y: targetNode.cy - 62.5,
+      rotation: isMovingForward ? -20 : 10,
+      scaleX: isMovingForward ? 1 : -1,
+      duration: 1.2,
+      ease: "power2.inOut",
+      onStart: () => {
+        const el = document.getElementById("desktop-boy");
+        if (el) el.classList.add("is-walking");
+      },
+      onComplete: () => {
+        const el = document.getElementById("desktop-boy");
+        if (el) el.classList.remove("is-walking");
+        gsap.to("#desktop-boy", { rotation: 0, duration: 0.3 });
+      }
+    });
+    
+    // Mobile boy animation
+    gsap.killTweensOf("#mobile-boy");
+    gsap.to("#mobile-boy", {
+      x: targetNode.mcx - 25,
+      y: targetNode.mcy - 64,
+      scaleX: isMovingForward ? 1 : -1,
+      duration: 1.2,
+      ease: "power2.inOut",
+      onStart: () => {
+        const el = document.getElementById("mobile-boy");
+        if (el) el.classList.add("is-walking");
+      },
+      onComplete: () => {
+        const el = document.getElementById("mobile-boy");
+        if (el) el.classList.remove("is-walking");
+      }
+    });
+  }, [activeChapterIdx]);
+
   return (
     <main
       ref={mainRef}
-      className="relative w-screen h-screen overflow-y-auto overflow-x-hidden bg-[#050508] text-white flex flex-col items-center justify-start select-none scrollbar-thin"
+      className="relative w-screen h-screen overflow-y-auto overflow-x-hidden bg-[#050508] text-white flex flex-col justify-start select-none scrollbar-thin"
     >
       <CanvasStarfield />
       <style dangerouslySetInnerHTML={{__html: `
@@ -2077,22 +2788,106 @@ export default function JourneyPage() {
           0% { opacity: 0; transform: translateY(12px); }
           100% { opacity: 1; transform: translateY(0); }
         }
-        @keyframes walkF1 {
-          0%, 33.3% { opacity: 1; }
-          33.4%, 100% { opacity: 0; }
+        @keyframes leftLegWalk {
+          0%, 100% { transform: rotate(-22deg); }
+          25% { transform: rotate(0deg); }
+          50% { transform: rotate(22deg); }
+          75% { transform: rotate(0deg); }
         }
-        @keyframes walkF2 {
-          0%, 33.3% { opacity: 0; }
-          33.4%, 66.6% { opacity: 1; }
-          66.7%, 100% { opacity: 0; }
+        @keyframes rightLegWalk {
+          0%, 100% { transform: rotate(22deg); }
+          25% { transform: rotate(0deg); }
+          50% { transform: rotate(-22deg); }
+          75% { transform: rotate(0deg); }
         }
-        @keyframes walkF3 {
-          0%, 66.6% { opacity: 0; }
-          66.7%, 100% { opacity: 1; }
+        @keyframes armSwing {
+          0%, 100% { transform: rotate(20deg); }
+          25% { transform: rotate(0deg); }
+          50% { transform: rotate(-20deg); }
+          75% { transform: rotate(0deg); }
         }
         @keyframes bounce {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-6px); }
+        }
+        .is-walking .left-leg-group {
+          animation: leftLegWalk 0.8s infinite ease-in-out;
+        }
+        .is-walking .right-leg-group {
+          animation: rightLegWalk 0.8s infinite ease-in-out;
+        }
+        .is-walking .arm-group {
+          animation: armSwing 0.8s infinite ease-in-out;
+        }
+        :not(.is-walking) .boy-bob-group {
+          animation: idleBob 3s infinite ease-in-out;
+        }
+        :not(.is-walking) .boy-backpack-group {
+          animation: backpackSway 4s infinite ease-in-out;
+        }
+        :not(.is-walking) .boy-helmet-group {
+          animation: headNod 5s infinite ease-in-out;
+        }
+        .is-walking .foot-particles-group {
+          display: none;
+        }
+        .foot-p-1 {
+          transform-origin: 7px 25px;
+          animation: footP1 2s infinite ease-out;
+        }
+        .foot-p-2 {
+          transform-origin: 10px 25.5px;
+          animation: footP2 1.6s infinite ease-out 0.4s;
+        }
+        .foot-p-3 {
+          transform-origin: 13px 25px;
+          animation: footP3 2.4s infinite ease-out 0.8s;
+        }
+        @keyframes idleBob {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-0.8px); }
+        }
+        @keyframes backpackSway {
+          0%, 100% { transform: rotate(0deg); }
+          50% { transform: rotate(-2deg); }
+        }
+        @keyframes headNod {
+          0%, 100% { transform: rotate(0deg) translateY(0); }
+          50% { transform: rotate(1.5deg) translateY(0.2px); }
+        }
+        @keyframes footP1 {
+          0% { transform: translate(0, 0) scale(1); opacity: 0; }
+          50% { opacity: 0.8; }
+          100% { transform: translate(-3px, -5px) scale(0.3); opacity: 0; }
+        }
+        @keyframes footP2 {
+          0% { transform: translate(0, 0) scale(1); opacity: 0; }
+          50% { opacity: 0.8; }
+          100% { transform: translate(1px, -4px) scale(0.2); opacity: 0; }
+        }
+        @keyframes footP3 {
+          0% { transform: translate(0, 0) scale(1); opacity: 0; }
+          50% { opacity: 0.8; }
+          100% { transform: translate(3px, -6px) scale(0.4); opacity: 0; }
+        }
+        @keyframes completed-node-ring {
+          0% { transform: scale(0.95); opacity: 0.8; }
+          50% { transform: scale(1.2); opacity: 0.4; }
+          100% { transform: scale(1.4); opacity: 0; }
+        }
+        .completed-node-ring {
+          animation: completed-node-ring 2s infinite ease-out;
+        }
+        @keyframes flowParticles {
+          from { stroke-dashoffset: 320; }
+          to { stroke-dashoffset: 0; }
+        }
+        @keyframes cursorBlink {
+          0%, 100% { opacity: 0; }
+          50% { opacity: 1; }
+        }
+        .cursor-blink {
+          animation: cursorBlink 1.5s infinite;
         }
       `}} />
 
@@ -2111,26 +2906,110 @@ export default function JourneyPage() {
         <span className="transform group-hover:-translate-x-1 transition-transform duration-200">←</span> Back to Universe
       </Link>
 
-      <div className="fixed top-8 right-8 z-50 flex items-center gap-4 bg-black/40 backdrop-blur-md px-4 py-2 border border-white/5 rounded shadow-lg pointer-events-auto">
-        <span className="font-space-mono text-[10px] tracking-[0.2em] text-[#A855F7] uppercase font-bold">
-          {currentChapter.title}
-        </span>
-        <div className="w-[1px] h-3 bg-white/10" />
-        <span className="font-space-mono text-[9px] tracking-wider text-slate-500 uppercase">
-          {currentChapter.subtitle}
-        </span>
-      </div>
+      {/* Map Mode Header Info */}
+      {viewMode === "MAP" && (
+        <div className="fixed top-8 right-8 z-50 flex items-center gap-4 bg-black/40 backdrop-blur-md px-4 py-2 border border-white/5 rounded shadow-lg pointer-events-auto">
+          <span className="font-space-mono text-[10px] tracking-[0.2em] text-[#A855F7] uppercase font-bold">
+            {currentChapter.title}
+          </span>
+          <div className="w-[1px] h-3 bg-white/10" />
+          <span className="font-space-mono text-[9px] tracking-wider text-slate-500 uppercase">
+            {currentChapter.subtitle}
+          </span>
+        </div>
+      )}
 
-      {/* MOMENT STRUCTURE CONTAINER */}
-      <div className="w-full flex flex-col z-10">
+      {/* Chapter Mode Sticky Header Controls */}
+      {viewMode === "CHAPTER" && (
+        <div className="fixed top-8 left-8 right-8 z-50 flex justify-between items-center bg-black/60 backdrop-blur-md px-4.5 py-2 border border-white/10 rounded shadow-lg pointer-events-auto max-w-5xl mx-auto w-[calc(100%-4rem)]">
+          <button 
+            onClick={() => setViewMode("MAP")}
+            className="flex items-center gap-1.5 px-3.5 py-1.5 border border-white/15 bg-white/5 hover:bg-white/10 text-white rounded font-space-mono text-[9px] tracking-wider cursor-pointer transition-colors"
+          >
+            🗺️ Return to Map
+          </button>
 
-        {/* Journey Map Chapter Selector at the top */}
-        <JourneyMap onNodeClick={handleNodeClick} />
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={() => {
+                if (activeChapterIdx > 0) {
+                  setActiveChapterIdx(activeChapterIdx - 1);
+                }
+              }}
+              disabled={activeChapterIdx === 0}
+              className="px-2.5 py-1 border border-white/5 bg-white/5 text-[9px] font-space-mono text-white rounded hover:bg-white/10 transition-colors disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
+            >
+              ← Prev
+            </button>
 
-        {/* ==========================================
-            CHAPTER 1: FOUNDATIONS
-            ========================================== */}
-        <div id="chapter-1" className="w-full flex flex-col">
+            <span className="font-space-mono text-[9px] text-[#A855F7] uppercase font-black px-2">
+              Ch.{activeChapterIdx + 1} / 6
+            </span>
+
+            <button 
+              onClick={() => {
+                if (activeChapterIdx < 5) {
+                  setActiveChapterIdx(activeChapterIdx + 1);
+                }
+              }}
+              disabled={activeChapterIdx === 5}
+              className="px-2.5 py-1 border border-white/5 bg-white/5 text-[9px] font-space-mono text-white rounded hover:bg-white/10 transition-colors disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
+            >
+              Next →
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Two-State Containers Wrapper */}
+      <div className="w-full relative z-10 flex flex-col">
+        
+        {/* STATE 1: World Map View */}
+        <div 
+          className={`w-full flex flex-col lg:flex-row transition-all duration-700 ease-in-out ${
+            viewMode === "MAP" 
+              ? "opacity-100 scale-100 pointer-events-auto" 
+              : "opacity-0 scale-125 pointer-events-none absolute inset-0"
+          }`}
+        >
+          {/* Left Column: Profile Card */}
+          <div className="w-full lg:w-[28%] lg:h-screen lg:sticky lg:top-0 border-b lg:border-b-0 lg:border-r border-white/5">
+            <LeftProfileCard />
+          </div>
+
+          {/* Right Column: World Map */}
+          <div className="w-full lg:w-[72%] h-[70vh] lg:h-screen relative flex items-center justify-center p-4">
+            <JourneyMap 
+              activeChapterIdx={activeChapterIdx}
+              hoveredChapterIdx={hoveredChapterIdx}
+              setHoveredChapterIdx={setHoveredChapterIdx}
+              onNodeClick={handleNodeClick}
+              activeModalFragment={activeModalFragment}
+              setActiveModalFragment={setActiveModalFragment}
+            />
+          </div>
+        </div>
+
+        {/* STATE 2: Immersive Chapter View */}
+        <div 
+          className={`flex flex-col relative transition-all duration-700 ease-in-out ${
+            viewMode === "CHAPTER" 
+              ? "opacity-100 scale-100 pointer-events-auto w-full min-h-screen px-4 md:px-12 py-16" 
+              : "opacity-0 scale-95 pointer-events-none absolute inset-0 w-0 h-0 overflow-hidden"
+          }`}
+        >
+          
+          {/* ==========================================
+              CHAPTER 1: FOUNDATIONS
+              ========================================== */}
+          <div id="chapter-1" className={`w-full flex flex-col ${activeChapterIdx === 0 ? "" : "hidden"}`}>
+            <ChapterStats
+              age="0–12 Years"
+              location="Meerut & Noida"
+              themes="Roots, family values, and public speaking"
+              achievement="98/100 Hindi"
+              mentors="Grandparents & Parents"
+            />
           
           {/* OPENING MOMENT: CHAPTER TITLE */}
           <section className="scroll-animate-moment w-full min-h-screen flex flex-col items-center justify-center text-center px-6 relative">
@@ -2306,12 +3185,26 @@ export default function JourneyPage() {
               </div>
             </div>
           </section>
+          
+          <ChapterCompletionCard
+            title="Foundations Complete"
+            lessons={["Curiosity", "Discipline", "Confidence"]}
+            quote="Every journey begins before we realize we're on one."
+            onNextClick={() => handleNodeClick("chapter-2")}
+          />
         </div>
 
         {/* ==========================================
             CHAPTER 2: THE SHIFT
             ========================================== */}
-        <div id="chapter-2" className="w-full flex flex-col">
+        <div id="chapter-2" className={`w-full flex flex-col ${activeChapterIdx === 1 ? "" : "hidden"}`}>
+          <ChapterStats
+            age="12–14 Years"
+            location="Noida & Delhi"
+            themes="High jump, sports stadiums, new surroundings"
+            achievement="National High Jump"
+            mentors="Coaches & Peers"
+          />
           
           {/* TITLE MOMENT: CHAPTER 2 */}
           <section className="scroll-animate-moment w-full min-h-screen flex flex-col items-center justify-center text-center px-6 relative">
@@ -2457,12 +3350,26 @@ export default function JourneyPage() {
               </div>
             </div>
           </section>
+          
+          <ChapterCompletionCard
+            title="The Shift Complete"
+            lessons={["Adaptability", "Resilience", "Competitive Drive"]}
+            quote="Adaptability is not just surviving change, but finding your stride in it."
+            onNextClick={() => handleNodeClick("chapter-3")}
+          />
         </div>
 
         {/* ==========================================
             CHAPTER 3: THE TRANSFORMATION
             ========================================== */}
-        <div id="chapter-3" className="w-full flex flex-col">
+        <div id="chapter-3" className={`w-full flex flex-col ${activeChapterIdx === 2 ? "" : "hidden"}`}>
+          <ChapterStats
+            age="14–16 Years"
+            location="Noida (Class 10)"
+            themes="Academic comeback, film obsession, whiteboard circles"
+            achievement="Maverick Explanations"
+            mentors="Vibhor & Teachers"
+          />
           
           {/* TITLE MOMENT: CHAPTER 3 */}
           <section className="scroll-animate-moment w-full min-h-screen flex flex-col items-center justify-center text-center px-6 relative">
@@ -2704,12 +3611,26 @@ export default function JourneyPage() {
               </div>
             </div>
           </section>
+          
+          <ChapterCompletionCard
+            title="Transformation Complete"
+            lessons={["Intellectual Curiosity", "Deep Friendship", "Persistence"]}
+            quote="True transformation happens silently, in late-night study sessions and shared dreams."
+            onNextClick={() => handleNodeClick("chapter-4")}
+          />
         </div>
 
         {/* ==========================================
             CHAPTER 4: THE LEADER
             ========================================== */}
-        <div id="chapter-4" className="w-full flex flex-col">
+        <div id="chapter-4" className={`w-full flex flex-col ${activeChapterIdx === 3 ? "" : "hidden"}`}>
+          <ChapterStats
+            age="16–17 Years"
+            location="Noida (Class 11)"
+            themes="Student Council, Sports Day, community campaigns"
+            achievement="School Head Boy"
+            mentors="Principal & Council"
+          />
           
           {/* TITLE MOMENT: CHAPTER 4 */}
           <section className="scroll-animate-moment w-full min-h-screen flex flex-col items-center justify-center text-center px-6 relative">
@@ -2976,12 +3897,26 @@ export default function JourneyPage() {
               </div>
             </div>
           </section>
+          
+          <ChapterCompletionCard
+            title="Leadership Chapter Complete"
+            lessons={["Responsibility", "Empathy", "Public Speaking"]}
+            quote="To lead is to serve, to inspire, and to build pathways for others."
+            onNextClick={() => handleNodeClick("chapter-5")}
+          />
         </div>
 
         {/* ==========================================
             CHAPTER 5: THE CROSSROADS
             ========================================== */}
-        <div id="chapter-5" className="w-full flex flex-col">
+        <div id="chapter-5" className={`w-full flex flex-col ${activeChapterIdx === 4 ? "" : "hidden"}`}>
+          <ChapterStats
+            age="17–18 Years"
+            location="Noida (Class 12)"
+            themes="Board exams, freelance coding, creative arts"
+            achievement="100/100 Fine Arts"
+            mentors="Parents & Self"
+          />
           
           {/* TITLE MOMENT: CHAPTER 5 */}
           <section className="scroll-animate-moment w-full min-h-screen flex flex-col items-center justify-center text-center px-6 relative">
@@ -3224,9 +4159,77 @@ export default function JourneyPage() {
               </div>
             </div>
           </section>
+          
+          <ChapterCompletionCard
+            title="Crossroads Complete"
+            lessons={["Independence", "Focus", "Creative Integrity"]}
+            quote="When paths diverge, the choices we make define the horizons we see."
+            onNextClick={() => handleNodeClick("chapter-6-future")}
+          />
+        </div>
+
+        {/* ==========================================
+            CHAPTER 6: THE FUTURE
+            ========================================== */}
+        <div id="chapter-6-future" className={`w-full flex flex-col ${activeChapterIdx === 5 ? "" : "hidden"}`}>
+          <section className="scroll-animate-moment w-full min-h-screen flex flex-col justify-center py-20 px-6 md:px-20 relative">
+            <div className="absolute inset-0 w-[550px] h-[380px] rounded-full bg-gradient-to-tr from-[#fbbf24]/5 via-[#a855f7]/3 to-transparent blur-[130px] z-[-1] pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+            
+            <div className="max-w-3xl w-full mx-auto flex flex-col gap-6 text-left">
+              <span className="font-space-mono text-xs tracking-[0.3em] text-[#fbbf24] uppercase font-bold">
+                Chapter 6 & Beyond
+              </span>
+              <h1 className="font-orbitron text-4xl md:text-5xl font-black tracking-widest text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.15)] uppercase leading-tight">
+                THE STORY CONTINUES...
+              </h1>
+              
+              <div className="h-[1px] bg-white/10 my-2" />
+              
+              <div className="flex flex-col gap-4">
+                <span className="font-space-mono text-[9px] text-slate-500 uppercase tracking-wider font-bold">Current Objectives</span>
+                <ul className="list-none flex flex-col gap-3 max-w-md">
+                  {[
+                    "Complete B.Tech in Computer Science at Bennett University",
+                    "Become a Data Scientist studying neural networks",
+                    "Finish the book 'Unscripted Love'",
+                    "Build the AryanVerse digital ecosystem",
+                    "Found and build a stealth technology startup"
+                  ].map((obj, i) => (
+                    <li key={i} className="font-inter text-sm text-slate-300 flex items-start gap-3">
+                      <span className="w-2 h-2 rounded-full bg-[#fbbf24] mt-2 shrink-0 shadow-[0_0_6px_#fbbf24]" />
+                      <span>{obj}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <blockquote className="border-l-2 border-[#fbbf24] pl-4 font-inter text-slate-400 italic text-sm leading-relaxed mt-6 max-w-xl">
+                "Every chapter above is history. Everything below is possibility."
+              </blockquote>
+
+              <div className="mt-8 flex items-center gap-2 font-space-mono text-sm text-slate-400">
+                <span>Chapter 7: Loading</span>
+                <span className="w-1.5 h-4 bg-white cursor-blink" />
+              </div>
+            </div>
+          </section>
         </div>
 
       </div>
+    </div>
+      
+      {/* Modal Overlays */}
+      {activeModalFragment && activeModalFragment !== "chapter-6-future" && (
+        <MemoryModal 
+          fragmentId={activeModalFragment} 
+          onClose={() => setActiveModalFragment(null)} 
+        />
+      )}
+      {activeModalFragment === "chapter-6-future" && (
+        <FuturePortalModal 
+          onClose={() => setActiveModalFragment(null)} 
+        />
+      )}
     </main>
   );
 }

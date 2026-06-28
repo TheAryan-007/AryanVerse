@@ -1,33 +1,34 @@
-@import "tailwindcss";
-
-@theme {
-  --font-orbitron: var(--font-orbitron);
-  --font-space-mono: var(--font-space-mono);
-  --font-inter: var(--font-inter);
-  --font-dancing-script: var(--font-dancing-script);
-  
-  --color-brand-bg: #050508;
-  --color-card-bg: rgba(13, 13, 26, 0.6);
-  --color-primary-purple: #7b2fbe;
-  --color-accent-purple: #a855f7;
-  --color-glow-purple: #c084fc;
-  --color-electric-blue: #3b82f6;
-  --color-status-green: #22c55e;
-  --color-muted-text: #94a3b8;
-}
-
-body {
-  background-color: #050508;
-  color: #ffffff;
-  overflow: hidden;
-  user-select: none;
-}
-
-@keyframes rotatePlanet {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+@import "tailwindcss";
+
+@theme {
+  --font-orbitron: var(--font-orbitron);
+  --font-space-mono: var(--font-space-mono);
+  --font-inter: var(--font-inter);
+  --font-dancing-script: var(--font-dancing-script);
+  --font-serif: var(--font-serif);
+  
+  --color-brand-bg: #050508;
+  --color-card-bg: rgba(13, 13, 26, 0.6);
+  --color-primary-purple: #7b2fbe;
+  --color-accent-purple: #a855f7;
+  --color-glow-purple: #c084fc;
+  --color-electric-blue: #3b82f6;
+  --color-status-green: #22c55e;
+  --color-muted-text: #94a3b8;
+}
+
+body {
+  background-color: #050508;
+  color: #ffffff;
+  overflow: hidden;
+  user-select: none;
+}
+
+@keyframes rotatePlanet {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

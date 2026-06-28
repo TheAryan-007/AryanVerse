@@ -140,7 +140,7 @@ export default function SkillsPage() {
       level: "Strongest Academic Language",
       desc: "My strongest academic programming language. Used extensively in university coursework, object-oriented programming, and software development concepts.",
       color: "#ED8B00",
-      icon: <FaJava className="w-8 h-8 transition-transform duration-300" style={{ color: "#ED8B00" }} />
+      icon: <FaJava className="w-10 h-10 transition-transform duration-300 drop-shadow-[0_0_10px_currentColor] brightness-125" style={{ color: "#ED8B00" }} />
     },
     {
       id: "python",
@@ -148,7 +148,7 @@ export default function SkillsPage() {
       level: "Comfortable, Actively Learning",
       desc: "Used for AI, automation, data science, machine learning exploration, and problem solving.",
       color: "#3776AB",
-      icon: <SiPython className="w-8 h-8 transition-transform duration-300" style={{ color: "#3776AB" }} />
+      icon: <SiPython className="w-10 h-10 transition-transform duration-300 drop-shadow-[0_0_10px_currentColor] brightness-125" style={{ color: "#3776AB" }} />
     },
     {
       id: "html",
@@ -156,7 +156,7 @@ export default function SkillsPage() {
       level: "Foundation",
       desc: "Foundation of web development. Used for creating structure and layouts for web applications.",
       color: "#E34F26",
-      icon: <SiHtml5 className="w-8 h-8 transition-transform duration-300" style={{ color: "#E34F26" }} />
+      icon: <SiHtml5 className="w-10 h-10 transition-transform duration-300 drop-shadow-[0_0_10px_currentColor] brightness-125" style={{ color: "#E34F26" }} />
     },
     {
       id: "css",
@@ -164,7 +164,7 @@ export default function SkillsPage() {
       level: "Comfortable",
       desc: "Used to create modern, responsive, and visually appealing user interfaces.",
       color: "#1572B6",
-      icon: <SiCss className="w-8 h-8 transition-transform duration-300" style={{ color: "#1572B6" }} />
+      icon: <SiCss className="w-10 h-10 transition-transform duration-300 drop-shadow-[0_0_10px_currentColor] brightness-125" style={{ color: "#1572B6" }} />
     },
     {
       id: "javascript",
@@ -172,7 +172,7 @@ export default function SkillsPage() {
       level: "Expanding Knowledge",
       desc: "Currently expanding my knowledge of frontend development and interactive web experiences.",
       color: "#F7DF1E",
-      icon: <SiJavascript className="w-8 h-8 transition-transform duration-300" style={{ color: "#F7DF1E" }} />
+      icon: <SiJavascript className="w-10 h-10 transition-transform duration-300 drop-shadow-[0_0_10px_currentColor] brightness-125" style={{ color: "#F7DF1E" }} />
     },
     {
       id: "cpp",
@@ -180,7 +180,7 @@ export default function SkillsPage() {
       level: "Currently Learning",
       desc: "Exploring data structures, algorithms, and performance-oriented programming concepts.",
       color: "#00599C",
-      icon: <SiCplusplus className="w-8 h-8 transition-transform duration-300" style={{ color: "#00599C" }} />
+      icon: <SiCplusplus className="w-10 h-10 transition-transform duration-300 drop-shadow-[0_0_10px_currentColor] brightness-125" style={{ color: "#00599C" }} />
     },
     {
       id: "git",
@@ -188,7 +188,7 @@ export default function SkillsPage() {
       level: "Daily Use",
       desc: "Version control, project collaboration, and code management.",
       color: "#F05032",
-      icon: <SiGit className="w-8 h-8 transition-transform duration-300" style={{ color: "#F05032" }} />
+      icon: <SiGit className="w-10 h-10 transition-transform duration-300 drop-shadow-[0_0_10px_currentColor] brightness-125" style={{ color: "#F05032" }} />
     }
   ];
 
@@ -212,7 +212,7 @@ export default function SkillsPage() {
       level: "Data Cleaning & Analysis",
       desc: "Used for data cleaning, manipulation, and analysis.",
       color: "#150458",
-      icon: <SiPandas className="w-8 h-8 transition-transform duration-300" style={{ color: "#150458" }} />
+      icon: <SiPandas className="w-10 h-10 transition-transform duration-300 drop-shadow-[0_0_10px_currentColor] brightness-125" style={{ color: "#150458" }} />
     },
     {
       id: "numpy",
@@ -220,7 +220,7 @@ export default function SkillsPage() {
       level: "Numerical Computing",
       desc: "Used for numerical computing and efficient array operations.",
       color: "#4D77CF",
-      icon: <SiNumpy className="w-8 h-8 transition-transform duration-300" style={{ color: "#4D77CF" }} />
+      icon: <SiNumpy className="w-10 h-10 transition-transform duration-300 drop-shadow-[0_0_10px_currentColor] brightness-125" style={{ color: "#4D77CF" }} />
     },
     {
       id: "matplotlib",
@@ -228,7 +228,7 @@ export default function SkillsPage() {
       level: "Data Visualization",
       desc: "Used for data visualization and understanding patterns.",
       color: "#3B82F6",
-      icon: <SiPlotly className="w-8 h-8 transition-transform duration-300" style={{ color: "#3B82F6" }} />
+      icon: <SiPlotly className="w-10 h-10 transition-transform duration-300 drop-shadow-[0_0_10px_currentColor] brightness-125" style={{ color: "#3B82F6" }} />
     },
     {
       id: "jupyter",
@@ -236,7 +236,7 @@ export default function SkillsPage() {
       level: "Preferred Environment",
       desc: "My preferred environment for experimenting with data science workflows.",
       color: "#F37626",
-      icon: <SiJupyter className="w-8 h-8 transition-transform duration-300" style={{ color: "#F37626" }} />
+      icon: <SiJupyter className="w-10 h-10 transition-transform duration-300 drop-shadow-[0_0_10px_currentColor] brightness-125" style={{ color: "#F37626" }} />
     },
     {
       id: "googlecolab",
@@ -244,7 +244,7 @@ export default function SkillsPage() {
       level: "Cloud Experimentation",
       desc: "Used for cloud-based experimentation and machine learning projects.",
       color: "#F9AB00",
-      icon: <SiGooglecolab className="w-8 h-8 transition-transform duration-300" style={{ color: "#F9AB00" }} />
+      icon: <SiGooglecolab className="w-10 h-10 transition-transform duration-300 drop-shadow-[0_0_10px_currentColor] brightness-125" style={{ color: "#F9AB00" }} />
     },
     {
       id: "scikitlearn",
@@ -252,7 +252,7 @@ export default function SkillsPage() {
       level: "Machine Learning",
       desc: "Building and evaluating machine learning models.",
       color: "#F7931E",
-      icon: <SiScikitlearn className="w-8 h-8 transition-transform duration-300" style={{ color: "#F7931E" }} />
+      icon: <SiScikitlearn className="w-10 h-10 transition-transform duration-300 drop-shadow-[0_0_10px_currentColor] brightness-125" style={{ color: "#F7931E" }} />
     },
     {
       id: "excel",
@@ -260,7 +260,7 @@ export default function SkillsPage() {
       level: "Data Organization",
       desc: "Used for quick data organization and analysis.",
       color: "#107C41",
-      icon: <PiMicrosoftExcelLogo className="w-8 h-8 transition-transform duration-300" style={{ color: "#107C41" }} />
+      icon: <PiMicrosoftExcelLogo className="w-10 h-10 transition-transform duration-300 drop-shadow-[0_0_10px_currentColor] brightness-125" style={{ color: "#107C41" }} />
     }
   ];
 
@@ -270,61 +270,61 @@ export default function SkillsPage() {
       name: "VS Code",
       purpose: "Primary development environment.",
       color: "#007ACC",
-      icon: <VscVscode className="w-8 h-8 transition-transform duration-300" style={{ color: "#007ACC" }} />
+      icon: <VscVscode className="w-10 h-10 transition-transform duration-300 drop-shadow-[0_0_10px_currentColor] brightness-125" style={{ color: "#007ACC" }} />
     },
     {
       name: "GitHub",
       purpose: "Project hosting and version control.",
       color: "#ffffff",
-      icon: <SiGithub className="w-8 h-8 transition-transform duration-300" style={{ color: "#ffffff" }} />
+      icon: <SiGithub className="w-10 h-10 transition-transform duration-300 drop-shadow-[0_0_10px_currentColor] brightness-125" style={{ color: "#ffffff" }} />
     },
     {
       name: "LeetCode",
       purpose: "Problem solving and algorithm practice.",
       color: "#FFA116",
-      icon: <SiLeetcode className="w-8 h-8 transition-transform duration-300" style={{ color: "#FFA116" }} />
+      icon: <SiLeetcode className="w-10 h-10 transition-transform duration-300 drop-shadow-[0_0_10px_currentColor] brightness-125" style={{ color: "#FFA116" }} />
     },
     {
       name: "ChatGPT",
       purpose: "AI-assisted development and learning.",
       color: "#10A37F",
-      icon: <SiOpenai className="w-8 h-8 transition-transform duration-300" style={{ color: "#10A37F" }} />
+      icon: <SiOpenai className="w-10 h-10 transition-transform duration-300 drop-shadow-[0_0_10px_currentColor] brightness-125" style={{ color: "#10A37F" }} />
     },
     {
       name: "Kaggle",
       purpose: "Data science competitions and datasets.",
       color: "#20BEFF",
-      icon: <SiKaggle className="w-8 h-8 transition-transform duration-300" style={{ color: "#20BEFF" }} />
+      icon: <SiKaggle className="w-10 h-10 transition-transform duration-300 drop-shadow-[0_0_10px_currentColor] brightness-125" style={{ color: "#20BEFF" }} />
     },
     {
       name: "LinkedIn",
       purpose: "Professional networking and personal branding.",
       color: "#0A66C2",
-      icon: <FaLinkedin className="w-8 h-8 transition-transform duration-300" style={{ color: "#0A66C2" }} />
+      icon: <FaLinkedin className="w-10 h-10 transition-transform duration-300 drop-shadow-[0_0_10px_currentColor] brightness-125" style={{ color: "#0A66C2" }} />
     },
     {
       name: "Canva",
       purpose: "Design and visual content creation.",
       color: "#00C4CC",
-      icon: <SiCanva className="w-8 h-8 transition-transform duration-300" style={{ color: "#00C4CC" }} />
+      icon: <SiCanva className="w-10 h-10 transition-transform duration-300 drop-shadow-[0_0_10px_currentColor] brightness-125" style={{ color: "#00C4CC" }} />
     },
     {
       name: "Google Colab",
       purpose: "Cloud-based coding and experimentation.",
       color: "#F9AB00",
-      icon: <SiGooglecolab className="w-8 h-8 transition-transform duration-300" style={{ color: "#F9AB00" }} />
+      icon: <SiGooglecolab className="w-10 h-10 transition-transform duration-300 drop-shadow-[0_0_10px_currentColor] brightness-125" style={{ color: "#F9AB00" }} />
     },
     {
       name: "Google Skills",
       purpose: "Platform for Google certifications, badges, and learning.",
       color: "#4285F4",
-      icon: <SiGoogle className="w-8 h-8 transition-transform duration-300" style={{ color: "#4285F4" }} />
+      icon: <SiGoogle className="w-10 h-10 transition-transform duration-300 drop-shadow-[0_0_10px_currentColor] brightness-125" style={{ color: "#4285F4" }} />
     },
     {
       name: "Claude",
       purpose: "Advanced AI research, writing, and coding assistant.",
       color: "#CC9B7A",
-      icon: <SiClaude className="w-8 h-8 transition-transform duration-300" style={{ color: "#CC9B7A" }} />
+      icon: <SiClaude className="w-10 h-10 transition-transform duration-300 drop-shadow-[0_0_10px_currentColor] brightness-125" style={{ color: "#CC9B7A" }} />
     }
   ];
 
@@ -404,11 +404,19 @@ export default function SkillsPage() {
       </Link>
 
       <div className="text-center flex flex-col items-center gap-2 mt-8 md:mt-12 w-full max-w-4xl scroll-animate-section">
-        <span className="font-space-mono text-xs md:text-sm uppercase tracking-[0.25em] text-[#3B82F6]">
-          WHAT I CAN DO
-        </span>
-        <h1 className="font-orbitron text-4xl md:text-6xl font-black tracking-wider text-white mt-2 drop-shadow-[0_0_20px_rgba(59,130,246,0.3)]">
-          Skills District
+        <h1 className="font-orbitron text-4xl md:text-6xl font-black tracking-wider text-white mt-4 drop-shadow-[0_0_20px_rgba(59,130,246,0.3)] flex justify-center gap-6 md:gap-10">
+          <span 
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="cursor-pointer hover:text-[#3B82F6] transition-colors duration-300"
+          >
+            Skills
+          </span>
+          <span 
+            onClick={() => document.getElementById('experience-section')?.scrollIntoView({ behavior: 'smooth' })}
+            className="cursor-pointer hover:text-[#A855F7] transition-colors duration-300"
+          >
+            Experience
+          </span>
         </h1>
         <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#3B82F6]/60 to-transparent mt-8" />
       </div>
@@ -437,7 +445,7 @@ export default function SkillsPage() {
               
               {/* Center Core: Developer Engine */}
               <div 
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-36 h-36 rounded-full bg-[#050508]/90 border border-[#A855F7]/30 flex flex-col items-center justify-center text-center shadow-[0_0_40px_rgba(168,85,247,0.2)] z-10 transition-all duration-300 relative group overflow-hidden"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-36 h-36 rounded-full bg-[#050508]/90 border border-[#A855F7]/30 flex flex-col items-center justify-center text-center shadow-[0_0_40px_rgba(168,85,247,0.2)] z-10 transition-all duration-300 group overflow-hidden"
               >
                 {/* Glow ring backdrop overlay */}
                 <div className="absolute inset-0 bg-[#A855F7]/5 blur-sm opacity-50 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
@@ -455,12 +463,19 @@ export default function SkillsPage() {
                     </span>
                   </div>
                 ) : (
-                  <div className="flex flex-col items-center p-3 z-10 animate-[pulse_3s_infinite]">
-                    <span className="font-orbitron font-black text-sm tracking-widest text-[#A855F7]">
-                      DEV ENGINE
+                  <div className="flex flex-col items-center p-3 z-10 gap-2">
+                    <span 
+                      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                      className="font-orbitron font-black text-sm tracking-widest text-[#A855F7] hover:text-white hover:scale-110 transition-all cursor-pointer"
+                    >
+                      SKILLS
                     </span>
-                    <span className="font-space-mono text-[8px] text-slate-500 mt-1 uppercase tracking-wider">
-                      ACTIVE CORE
+                    <div className="w-8 h-[1px] bg-[#A855F7]/30" />
+                    <span 
+                      onClick={() => document.getElementById('experience-section')?.scrollIntoView({ behavior: 'smooth' })}
+                      className="font-orbitron font-black text-sm tracking-widest text-[#A855F7] hover:text-white hover:scale-110 transition-all cursor-pointer"
+                    >
+                      EXPERIENCE
                     </span>
                   </div>
                 )}
@@ -511,9 +526,19 @@ export default function SkillsPage() {
             {/* Responsive Grid Layout (Mobile/Tablet View) */}
             <div className="grid md:hidden grid-cols-2 gap-4 w-full">
               {/* Banner Core placeholder */}
-              <div className="col-span-2 bg-[#0d0d1a]/60 border border-[#A855F7]/30 rounded-xl p-4 flex flex-col items-center text-center shadow-lg backdrop-blur-sm">
-                <span className="font-orbitron font-black text-sm tracking-widest text-[#A855F7] animate-pulse">DEVELOPER ENGINE</span>
-                <span className="font-space-mono text-[8px] text-slate-500 mt-1 uppercase tracking-wider">ACTIVE / HYBRID GRID CORE</span>
+              <div className="col-span-2 bg-[#0d0d1a]/60 border border-[#A855F7]/30 rounded-xl p-4 flex flex-row justify-center gap-6 items-center text-center shadow-lg backdrop-blur-sm">
+                <span 
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                  className="font-orbitron font-black text-sm tracking-widest text-[#A855F7] hover:text-white cursor-pointer transition-colors"
+                >
+                  SKILLS
+                </span>
+                <span 
+                  onClick={() => document.getElementById('experience-section')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="font-orbitron font-black text-sm tracking-widest text-[#A855F7] hover:text-white cursor-pointer transition-colors"
+                >
+                  EXPERIENCE
+                </span>
               </div>
 
               {nodes.map((node) => {
@@ -703,7 +728,7 @@ export default function SkillsPage() {
         </section>
 
         {/* SECTION 5 — Current Mission (Internship) */}
-        <section className="scroll-animate-section flex flex-col items-start w-full">
+        <section id="experience-section" className="scroll-animate-section flex flex-col items-start w-full mt-8">
           <div className="mb-8">
             <h2 className="font-orbitron text-2xl md:text-3xl font-black tracking-wider text-white">
               Current Mission

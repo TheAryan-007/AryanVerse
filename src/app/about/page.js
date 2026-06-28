@@ -597,38 +597,80 @@ export default function AboutPage() {
           Connect in Orbit
         </span>
         <div className="flex items-center gap-6">
+          {/* LinkedIn */}
           <a
             href="https://www.linkedin.com/in/aryan-chauhan-4284b32a7"
             target="_blank"
             rel="noopener noreferrer"
-            className="group/social p-3 bg-[#0d0d1a] border border-[rgba(168,85,247,0.2)] hover:border-[#C084FC] rounded-full transition-all duration-300 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:translate-y-[-4px]"
+            className="group/social p-3 bg-[#0d0d1a] border border-[#0A66C2]/30 hover:border-[#0A66C2] rounded-full transition-all duration-300 hover:shadow-[0_0_20px_rgba(10,102,194,0.5)] hover:translate-y-[-4px]"
+            title="LinkedIn"
           >
-            <svg className="w-5 h-5 text-[#94A3B8] group-hover/social:text-white transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg className="w-5 h-5 text-[#0A66C2] transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
               <rect x="2" y="9" width="4" height="12"></rect>
               <circle cx="4" cy="4" r="2"></circle>
             </svg>
           </a>
+
+          {/* GitHub */}
           <a
             href="https://github.com/TheAryan-007"
             target="_blank"
             rel="noopener noreferrer"
-            className="group/social p-3 bg-[#0d0d1a] border border-[rgba(168,85,247,0.2)] hover:border-[#C084FC] rounded-full transition-all duration-300 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:translate-y-[-4px]"
+            className="group/social p-3 bg-[#0d0d1a] border border-[rgba(255,255,255,0.15)] hover:border-white rounded-full transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.25)] hover:translate-y-[-4px]"
+            title="GitHub"
           >
-            <svg className="w-5 h-5 text-[#94A3B8] group-hover/social:text-white transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg className="w-5 h-5 text-[#E6edf3] transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
             </svg>
           </a>
+
+          {/* Instagram */}
           <a
             href="https://www.instagram.com/aryannxnn._.02"
             target="_blank"
             rel="noopener noreferrer"
-            className="group/social p-3 bg-[#0d0d1a] border border-[rgba(168,85,247,0.2)] hover:border-[#C084FC] rounded-full transition-all duration-300 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:translate-y-[-4px]"
+            className="group/social p-3 bg-[#0d0d1a] border border-[#d6249f]/30 hover:border-[#d6249f] rounded-full transition-all duration-300 hover:shadow-[0_0_20px_rgba(214,36,159,0.5)] hover:translate-y-[-4px]"
+            title="Instagram"
           >
-            <svg className="w-5 h-5 text-[#94A3B8] group-hover/social:text-white transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg className="w-5 h-5 transition-all duration-300" viewBox="0 0 24 24" fill="none" stroke="url(#instaGrad)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <defs>
+                <linearGradient id="instaGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#fdf497" />
+                  <stop offset="5%" stopColor="#fdf497" />
+                  <stop offset="45%" stopColor="#fd5949" />
+                  <stop offset="60%" stopColor="#d6249f" />
+                  <stop offset="100%" stopColor="#285AEB" />
+                </linearGradient>
+              </defs>
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
               <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
               <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+
+          {/* Gmail */}
+          <a
+            href="mailto:aryanncr2@gmail.com"
+            className="group/social p-3 bg-[#0d0d1a] border border-[#EA4335]/30 hover:border-[#EA4335] rounded-full transition-all duration-300 hover:shadow-[0_0_20px_rgba(234,67,53,0.5)] hover:translate-y-[-4px]"
+            title="Gmail"
+          >
+            <svg className="w-5 h-5 text-[#EA4335] transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </a>
+
+          {/* WhatsApp */}
+          <a
+            href="https://wa.me/917827087385"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group/social p-3 bg-[#0d0d1a] border border-[#25D366]/30 hover:border-[#25D366] rounded-full transition-all duration-300 hover:shadow-[0_0_20px_rgba(37,211,102,0.5)] hover:translate-y-[-4px]"
+            title="WhatsApp"
+          >
+            <svg className="w-5 h-5 text-[#25D366] transition-colors duration-300" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.97C16.479 1.968 14.017.94 11.4.94 5.966.94 1.54 5.311 1.536 10.74c-.001 1.67.439 3.3 1.272 4.737L1.819 21.1l5.828-1.528zM17.51 14.51c-.307-.154-1.82-.9-2.1-.998-.28-.1-.485-.154-.689.154-.204.307-.79.998-.968 1.2-.178.204-.356.23-.663.077-1.127-.565-1.967-1.004-2.753-2.353-.207-.355.207-.33.593-1.1.077-.154.038-.288-.019-.41-.057-.122-.485-1.17-.663-1.602-.175-.42-.35-.362-.485-.369h-.415c-.154 0-.395.057-.601.282-.206.225-.785.767-.785 1.87 0 1.1.8 2.167.912 2.321.112.154 1.574 2.404 3.814 3.374 1.24.537 1.889.65 2.56.55.772-.115 1.82-.743 2.078-1.427.257-.684.257-1.274.18-1.393-.077-.12-.28-.175-.588-.33z"/>
             </svg>
           </a>
         </div>
