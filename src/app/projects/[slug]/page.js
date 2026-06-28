@@ -591,7 +591,7 @@ export default function ProjectDetailPage({ params }) {
                   <img
                     src={currentSlide.url}
                     alt={currentSlide.title}
-                    className="w-full h-full object-cover transition-all duration-300"
+                    className="w-full h-full object-contain transition-all duration-300"
                   />
                 ) : (
                   currentSlide.render()
