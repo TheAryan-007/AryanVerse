@@ -394,16 +394,16 @@ const projectsDetails = {
     solution: "I designed a chapter outline that maps character shifts to the Hero's Journey schema. To present the novel online, I created an editorial layout focusing on serif typography, wide margins, and clean reading cards.",
     howWeMadeIt: "The novel is drafted and edited in Google Docs, using version histories to track character drafts. We mapped external events to internal psychological shifts using the Hero's Journey schema, exporting selected snippets to web editorial layouts.",
     theme: {
-      bg: "bg-[#FDFBF7]",
-      text: "text-slate-800",
-      subtext: "text-slate-500",
-      border: "border-slate-200/80",
-      cardBg: "bg-white",
-      badge: "bg-red-50 text-red-700 border-red-200",
+      bg: "bg-[#1E0808]",
+      text: "text-[#F5EFEB]",
+      subtext: "text-[#C2A99B]",
+      border: "border-[#4C1C1C]/50",
+      cardBg: "bg-[#2D0F0F]/80 backdrop-blur-md",
+      badge: "bg-red-950/50 text-red-300 border-red-800/30",
       titleFont: "font-serif italic font-black tracking-tight",
-      bodyFont: "font-serif text-slate-800 text-[15px] leading-loose",
+      bodyFont: "font-serif text-[#ECE5DA] text-[15px] leading-loose",
       accentColor: "#EF4444",
-      isDark: false
+      isDark: true
     },
     techStack: [
       { name: "Creative Writing", desc: "Character development, narrative pacing, and deep thematic structure." },
