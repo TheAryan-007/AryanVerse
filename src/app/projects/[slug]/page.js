@@ -350,6 +350,11 @@ const projectsDetails = {
       accentColor: "#059669",
       isDark: false
     },
+    techStack: [
+      { name: "Brand Curation", desc: "Designing premium visual outlines and color guidelines for physical items." },
+      { name: "Supply Chain Strategy", desc: "Structuring relation maps for organic cotton mills and sustainable containers." },
+      { name: "Ecosystem Design", desc: "Modeling a platform connecting physical clothing assets with digital analytics." }
+    ],
     gallery: []
   },
   "cafe-marketing": {
