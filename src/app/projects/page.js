@@ -86,12 +86,12 @@ function InternEaseIcon() {
 function EchoesWithinIcon() {
   return (
     <svg className="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="35" y="45" width="30" height="25" rx="3" stroke="#10B981" strokeWidth="2.5" />
-      <path d="M 42 45 C 42 30 58 30 58 45" stroke="#10B981" strokeWidth="2.5" strokeLinecap="round" />
-      <line x1="15" y1="50" x2="15" y2="60" stroke="#10B981" strokeWidth="1.5" opacity="0.3" />
-      <line x1="25" y1="40" x2="25" y2="70" stroke="#10B981" strokeWidth="1.5" opacity="0.4" />
-      <line x1="75" y1="40" x2="75" y2="70" stroke="#10B981" strokeWidth="1.5" opacity="0.4" />
-      <line x1="85" y1="50" x2="85" y2="60" stroke="#10B981" strokeWidth="1.5" opacity="0.3" />
+      <rect x="35" y="45" width="30" height="25" rx="3" stroke="#F59E0B" strokeWidth="2.5" />
+      <path d="M 42 45 C 42 30 58 30 58 45" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" />
+      <line x1="15" y1="50" x2="15" y2="60" stroke="#F59E0B" strokeWidth="1.5" opacity="0.3" />
+      <line x1="25" y1="40" x2="25" y2="70" stroke="#F59E0B" strokeWidth="1.5" opacity="0.4" />
+      <line x1="75" y1="40" x2="75" y2="70" stroke="#F59E0B" strokeWidth="1.5" opacity="0.4" />
+      <line x1="85" y1="50" x2="85" y2="60" stroke="#F59E0B" strokeWidth="1.5" opacity="0.3" />
     </svg>
   );
 }
@@ -99,8 +99,8 @@ function EchoesWithinIcon() {
 function BubbleBlastIcon() {
   return (
     <svg className="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="50" cy="82" r="10" fill="#E11D48" />
-      <line x1="50" y1="82" x2="50" y2="58" stroke="#E11D48" strokeWidth="5" strokeLinecap="round" />
+      <circle cx="50" cy="82" r="10" fill="#F97316" />
+      <line x1="50" y1="82" x2="50" y2="58" stroke="#F97316" strokeWidth="5" strokeLinecap="round" />
       <circle cx="35" cy="30" r="7" stroke="#F59E0B" strokeWidth="2" className="animate-pulse" />
       <circle cx="65" cy="25" r="9" stroke="#3B82F6" strokeWidth="2" className="animate-bounce" style={{ animationDuration: "3s" }} />
       <circle cx="50" cy="45" r="5" stroke="#10B981" strokeWidth="1.5" />
@@ -122,15 +122,15 @@ function UnscriptedLoveIcon() {
 function LyfChangerIcon() {
   return (
     <svg className="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <line x1="20" y1="80" x2="80" y2="80" stroke="#F97316" strokeWidth="3.5" strokeLinecap="round" />
-      <polygon points="40,80 50,68 60,80" fill="#EA580C" stroke="#F97316" strokeWidth="1.5" />
+      <line x1="20" y1="80" x2="80" y2="80" stroke="#059669" strokeWidth="3.5" strokeLinecap="round" />
+      <polygon points="40,80 50,68 60,80" fill="#047857" stroke="#059669" strokeWidth="1.5" />
       <g className="animate-float-soft">
-        <path d="M 45 70 Q 50 82 55 70 Z" fill="#F97316" className="animate-pulse" />
-        <polygon points="34,64 42,50 42,64" fill="#EA580C" stroke="#F97316" strokeWidth="1.5" />
-        <polygon points="66,64 58,50 58,64" fill="#EA580C" stroke="#F97316" strokeWidth="1.5" />
-        <rect x="42" y="32" width="16" height="32" rx="3" fill="#111" stroke="#F97316" strokeWidth="2.5" />
-        <path d="M 42 33 Q 50 15 58 33 Z" fill="#EA580C" stroke="#F97316" strokeWidth="2" />
-        <circle cx="50" cy="44" r="3.5" fill="#FFEDD5" stroke="#F97316" strokeWidth="1.2" />
+        <path d="M 45 70 Q 50 82 55 70 Z" fill="#059669" className="animate-pulse" />
+        <polygon points="34,64 42,50 42,64" fill="#047857" stroke="#059669" strokeWidth="1.5" />
+        <polygon points="66,64 58,50 58,64" fill="#047857" stroke="#059669" strokeWidth="1.5" />
+        <rect x="42" y="32" width="16" height="32" rx="3" fill="#111" stroke="#059669" strokeWidth="2.5" />
+        <path d="M 42 33 Q 50 15 58 33 Z" fill="#047857" stroke="#059669" strokeWidth="2" />
+        <circle cx="50" cy="44" r="3.5" fill="#DCFCE7" stroke="#059669" strokeWidth="1.2" />
       </g>
     </svg>
   );
@@ -152,6 +152,7 @@ const projectsData = [
   {
     slug: "skysentry-ai",
     name: "SkySentry AI",
+    timeline: "2026 Hackachino 4.0",
     description: "Visual Verification Layer for Intelligent Aerial Surveillance. Integrates with radar and camera feeds to classify threats (Drones, Birds, Aircraft) using YOLOv10 and OpenCV.",
     tags: ["AI", "Computer Vision", "YOLOv10", "Spring Boot"],
     status: "COMPLETED",
@@ -161,41 +162,21 @@ const projectsData = [
     icon: <SkySentryIcon />
   },
   {
-    slug: "echoes-within",
-    name: "Echoes Within",
-    description: "A premium Audio Steganography cybersecurity product enabling secure hiding and extraction of secret text inside audio using the LSB (Least Significant Bit) algorithm.",
-    tags: ["Next.js", "Python", "Flask", "Cybersecurity"],
-    status: "COMPLETED",
-    color: "#10B981",
-    glowColor: "rgba(16, 185, 129, 0.15)",
-    badgeBg: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
-    icon: <EchoesWithinIcon />
-  },
-  {
-    slug: "intern-ease",
-    name: "Intern-Ease",
-    description: "AI-powered internship recommendation engine built for the PM Internship Scheme, matching student parameters with ideal opportunities. Developed for the SIH internal rounds.",
-    tags: ["Recommendation Engine", "Algorithms", "Database", "Collaboration"],
-    status: "COMPLETED",
-    color: "#3B82F6",
-    glowColor: "rgba(59, 130, 246, 0.15)",
-    badgeBg: "bg-blue-500/10 text-blue-400 border-blue-500/20",
-    icon: <InternEaseIcon />
-  },
-  {
     slug: "bubble-blast",
     name: "Bubble Blast",
+    timeline: "2026 Semester 2",
     description: "A polished 2D Android arcade shooter built in Java using SurfaceView and a custom game loop thread. Optimized for 400+ active objects with modular classes.",
     tags: ["Android Studio", "Java", "Game Loop", "Trigonometry"],
     status: "COMPLETED",
-    color: "#E11D48",
-    glowColor: "rgba(225, 29, 72, 0.15)",
-    badgeBg: "bg-rose-500/10 text-rose-400 border-rose-500/20",
+    color: "#F97316",
+    glowColor: "rgba(249, 115, 22, 0.15)",
+    badgeBg: "bg-orange-500/10 text-orange-400 border-orange-500/20",
     icon: <BubbleBlastIcon />
   },
   {
     slug: "aryanverse",
     name: "AryanVerse",
+    timeline: "2026 Summer Break May",
     description: "My personal digital universe combining storytelling, projects, skills, and journey archives into an interactive WebGL solar system digital map.",
     tags: ["Next.js", "Three.js", "GSAP", "WebGL"],
     status: "IN PROGRESS",
@@ -205,19 +186,45 @@ const projectsData = [
     icon: <AryanVerseIcon />
   },
   {
+    slug: "intern-ease",
+    name: "Intern-Ease",
+    timeline: "2025 September SIH",
+    description: "AI-powered internship recommendation engine built for the PM Internship Scheme, matching student parameters with ideal opportunities. Developed for the SIH internal rounds.",
+    tags: ["Recommendation Engine", "Algorithms", "Database", "Collaboration"],
+    status: "COMPLETED",
+    color: "#3B82F6",
+    glowColor: "rgba(59, 130, 246, 0.15)",
+    badgeBg: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+    icon: <InternEaseIcon />
+  },
+  {
+    slug: "echoes-within",
+    name: "Echoes Within",
+    timeline: "2025 Semester 1",
+    description: "A premium Audio Steganography cybersecurity product enabling secure hiding and extraction of secret text inside audio using the LSB (Least Significant Bit) algorithm.",
+    tags: ["Next.js", "Python", "Flask", "Cybersecurity"],
+    status: "COMPLETED",
+    color: "#F59E0B",
+    glowColor: "rgba(245, 158, 11, 0.15)",
+    badgeBg: "bg-amber-500/10 text-amber-400 border-amber-500/20",
+    icon: <EchoesWithinIcon />
+  },
+  {
     slug: "lyfchanger",
     name: "LyfChanger",
+    timeline: "2025 Planned",
     description: "A youth-driven lifestyle and creator brand concept designed to create an ecosystem for young people to express themselves, grow, and build meaningful lives.",
     tags: ["Startup Concept", "Branding Strategy", "Community"],
     status: "PLANNED",
-    color: "#F97316",
-    glowColor: "rgba(249, 115, 22, 0.15)",
-    badgeBg: "bg-orange-500/10 text-orange-400 border-orange-500/20",
+    color: "#059669",
+    glowColor: "rgba(5, 150, 105, 0.15)",
+    badgeBg: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
     icon: <LyfChangerIcon />
   },
   {
     slug: "cafe-marketing",
     name: "Local Cafe Web & Marketing Service",
+    timeline: "2024",
     description: "An unnamed business venture managing digital assets for local Greater Noida restaurants. Led a team of juniors to create custom websites and run social campaigns.",
     tags: ["Leadership", "Web Dev", "Marketing", "Hustle"],
     status: "COMPLETED",
@@ -229,6 +236,7 @@ const projectsData = [
   {
     slug: "unscripted-love",
     name: "Unscripted Love",
+    timeline: "2024",
     description: "Original literary contemporary novel outline following character growth, vulnerable dialogues, and internal monologues through the Hero's Journey.",
     tags: ["Creative Writing", "Novel", "Storytelling"],
     status: "IN PROGRESS",
@@ -303,9 +311,14 @@ export default function ProjectsLabPage() {
 
               {/* CENTER: Project Details */}
               <div className="flex flex-col gap-2 text-left flex-1 w-full">
-                <h2 className="font-orbitron text-lg md:text-xl font-bold uppercase tracking-wider text-white group-hover:text-white transition-colors">
-                  {project.name}
-                </h2>
+                <div className="flex flex-wrap items-center gap-3">
+                  <h2 className="font-orbitron text-lg md:text-xl font-bold uppercase tracking-wider text-white group-hover:text-white transition-colors">
+                    {project.name}
+                  </h2>
+                  <span className="text-[9px] text-[#A855F7] font-space-mono bg-purple-950/20 px-2 py-0.5 rounded border border-purple-900/30 uppercase tracking-widest font-black">
+                    {project.timeline}
+                  </span>
+                </div>
                 <p className="text-slate-400 font-sans text-sm leading-relaxed max-w-2xl">
                   {project.description}
                 </p>
