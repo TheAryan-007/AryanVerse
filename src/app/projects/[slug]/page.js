@@ -104,13 +104,13 @@ const projectsDetails = {
     theme: {
       bg: "bg-[#030303]",
       text: "text-[#F4EFE6]",
-      subtext: "text-[#FFC80A]",
+      subtext: "text-[#FAB800]",
       border: "border-[#1A1A1C]",
       cardBg: "bg-[#0C0C0D]/90 backdrop-blur-md",
-      badge: "bg-amber-950/40 text-[#FFC80A] border-amber-800/20",
+      badge: "bg-[#FAB800]/10 text-[#FAB800] border-[#FAB800]/20",
       titleFont: "font-serif font-black tracking-tight",
       bodyFont: "font-sans text-[#E4E4E7] text-[15px] leading-relaxed font-light",
-      accentColor: "#FFC80A",
+      accentColor: "#FAB800",
       isDark: true
     },
     techStack: [
