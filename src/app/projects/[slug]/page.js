@@ -121,6 +121,12 @@ const projectsDetails = {
     ],
     gallery: [
       {
+        title: "Echos App Interface & Concept Mockup",
+        desc: "Interactive view of Echos application flow showing the Encoder, Encoding Complete, Decoder, and Decoded Message screens using advanced Least Significant Bit steganography.",
+        type: "image",
+        url: "/echos-showcase.jpg"
+      },
+      {
         title: "Team Structure & Role Allocations",
         desc: "Role division: Savyam Shukla (LSB logic), Aryan Chauhan (FFmpeg backend transcoding), Harsh (UI routing), Zaman (Encode uploads), Shaurya (Decode reveal).",
         type: "vector",
