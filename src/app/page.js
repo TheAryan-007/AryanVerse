@@ -287,11 +287,7 @@ export default function Home() {
       const params = new URLSearchParams(window.location.search);
       if (params.get("state") === "WORLD") {
         setTransitionState("WORLD");
-        const nodeId = params.get("node");
-        if (nodeId) {
-          const found = destinations.find(n => n.id === nodeId);
-          if (found) setSelectedNode(found);
-        }
+        setSelectedNode(null);
         window.history.replaceState({}, document.title, window.location.pathname);
       }
     }
