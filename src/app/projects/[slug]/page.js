@@ -35,17 +35,18 @@ const projectsDetails = {
     overview: "SkySentry AI was designed to solve a critical limitation in modern automated aerial defense: traditional radar and motion detection feeds trigger massive volumes of false alarms. Security systems frequently misclassify birds, clouds, tree shadows, and ambient noise as threats, causing operator alert fatigue. This project establishes an intelligent visual verification layer that operates alongside existing radar infrastructure, verifying radar-flagged targets using state-of-the-art computer vision models.",
     challenge: "Developing a visual verification pipeline that processes real-time low-altitude video streams with near-zero latency while maintaining high precision. Small drones have an extremely low radar cross-section, making them hard to distinguish from birds in varying weather conditions. Standard heavy object detection architectures fail to run on consumer-grade edge devices at the necessary frame rate of over 45 frames per second.",
     solution: "We trained and deployed YOLOv10, a state-of-the-art object detector that eliminates non-maximum suppression latency during inference. The model was trained on a custom dataset containing over 12,000 annotated aerial frames of UAVs, aircraft, birds, and weather artifacts. To guarantee stable target retention, we integrated an OpenCV-based tracking algorithm. This combination filters out environmental disturbances, maintaining a validated target lock even if the object is briefly obscured.",
+    howWeMadeIt: "The visual verification system was constructed using a Java Spring Boot backend for the core APIs, communicating via REST and WebSockets for real-time dashboard updates. The Python AI module runs YOLOv10 and OpenCV for frame preprocessing, keeping inference times under 15ms on an NVIDIA RTX GPU. Detections are logged in a MySQL database containing details like target type, confidence score, time, camera location, and a snapshot. The frontend is built with HTML, CSS, and vanilla JS, styled with a high-fidelity cyber-defense look, featuring real-time radar panels and threat tables.",
     theme: {
-      bg: "bg-[#F3F4F6]",
-      text: "text-slate-900",
-      subtext: "text-slate-500",
-      border: "border-slate-350/60",
-      cardBg: "bg-white",
-      badge: "bg-green-50 text-green-700 border-green-200",
+      bg: "bg-[#050C0A]",
+      text: "text-[#ECE5DA]",
+      subtext: "text-emerald-300/60",
+      border: "border-emerald-950/60",
+      cardBg: "bg-[#0A1A17]/85",
+      badge: "bg-emerald-950/40 text-emerald-400 border-emerald-800/30",
       titleFont: "font-serif font-black tracking-tight",
-      bodyFont: "font-sans text-slate-700 text-[15px] leading-relaxed",
+      bodyFont: "font-sans text-[#D4CBBF] text-[15px] leading-relaxed font-light",
       accentColor: "#22C55E",
-      isDark: false
+      isDark: true
     },
     techStack: [
       { name: "YOLOv10 AI Model", desc: "Real-time object detector optimized for zero NMS latency during inference." },
@@ -91,7 +92,7 @@ const projectsDetails = {
     tagline: "Invisible Communication Through Audio Steganography.",
     description: "A premium cybersecurity web product enabling secure hiding and extraction of secret text inside audio files using the LSB algorithm.",
     status: "COMPLETED",
-    color: "#10B981",
+    color: "#F59E0B",
     timeline: "Class Project Batch 18",
     role: "Transcoding & Bit Manipulation Engineer",
     context: "Cybersecurity Development at Bennett University",
@@ -99,17 +100,18 @@ const projectsDetails = {
     overview: "Echoes Within is an advanced steganography application designed to facilitate covert digital communication. The system allows users to securely embed secret text messages within standard audio files without producing noticeable distortion. Unlike encryption, which translates text into unreadable strings and invites investigation, steganography conceals the presence of the data, transmitting hidden signals invisibly.",
     challenge: "Audio compression formats like MP3 compress files lossily, making bit-level modifications unstable. While WAV files preserve PCM sample arrays, converting compressed MP3s to WAV streams and modifying bits without altering audio quality or introducing noise remains a complex challenge. The system also requires a clean, robust delimiter to signal the exact termination of the message.",
     solution: "We constructed a Flask backend integrated with PyDub and FFmpeg. When an MP3 is uploaded, it is automatically transcoded into a WAV file. The steganography engine converts the text message into binary, replacing the least significant bit of each audio sample with a message bit. A custom binary terminating signature is appended to signal the end of the text. The decoder reverses this process, reading bits and reconstructing the text until the terminator sequence is resolved.",
+    howWeMadeIt: "The project was built by team Devil Coders using Next.js and TypeScript on the frontend to provide a premium cybersecurity dashboard styled with soft green glows and typewriter reveal effects. The backend is a Python Flask server. Savyam Shukla led the core LSB manipulation scripts; Aryan Chauhan designed the transcoding backend using PyDub and FFmpeg; Harsh managed frontend navigation; Zaman handled the file upload routing; and Shaurya set up error handling and decrypted message reveals.",
     theme: {
-      bg: "bg-[#050C0A]",
-      text: "text-[#ECE5DA]",
-      subtext: "text-emerald-300/60",
-      border: "border-emerald-950/60",
-      cardBg: "bg-[#0A1A17]/85",
-      badge: "bg-emerald-950/40 text-emerald-400 border-emerald-800/30",
+      bg: "bg-[#FAF7EE]",
+      text: "text-[#3D3425]",
+      subtext: "text-[#7C6A4B]",
+      border: "border-[#EADBBA]/70",
+      cardBg: "bg-white",
+      badge: "bg-amber-50 text-amber-800 border-amber-200",
       titleFont: "font-serif font-black tracking-tight",
-      bodyFont: "font-sans text-[#D4CBBF] text-[15px] leading-relaxed font-light",
-      accentColor: "#10B981",
-      isDark: true
+      bodyFont: "font-sans text-[#4A402E] text-[15px] leading-relaxed",
+      accentColor: "#F59E0B",
+      isDark: false
     },
     techStack: [
       { name: "Python Flask", desc: "Coordinates file upload endpoints, transcoding requests, and steganography functions." },
@@ -123,22 +125,22 @@ const projectsDetails = {
         desc: "Role division: Savyam Shukla (LSB logic), Aryan Chauhan (FFmpeg backend transcoding), Harsh (UI routing), Zaman (Encode uploads), Shaurya (Decode reveal).",
         type: "vector",
         render: () => (
-          <div className="w-full h-full bg-[#030907] flex flex-col items-center justify-center p-6 relative rounded-xl border border-emerald-500/20 font-space-mono text-emerald-400">
-            <div className="absolute top-4 left-4 text-[8px] uppercase tracking-wider text-emerald-400/50">SYS-TEAM // DEVIL CODERS</div>
+          <div className="w-full h-full bg-[#050D0A] flex flex-col items-center justify-center p-6 relative rounded-xl border border-amber-500/20 font-space-mono text-amber-600">
+            <div className="absolute top-4 left-4 text-[8px] uppercase tracking-wider text-amber-500/50">SYS-TEAM // DEVIL CODERS</div>
             <div className="w-full grid grid-cols-2 gap-3 mt-4 text-[9px]">
-              <div className="border border-emerald-950 p-2 rounded bg-black/40">
+              <div className="border border-amber-100 p-2 rounded bg-white">
                 <span className="block font-bold">Savyam Shukla</span>
                 <span className="text-[7.5px] text-slate-500">Core LSB Logic</span>
               </div>
-              <div className="border border-emerald-950 p-2 rounded bg-black/40">
-                <span className="block font-bold text-white">Aryan Chauhan</span>
-                <span className="text-[7.5px] text-emerald-400">Transcoding Backend</span>
+              <div className="border border-amber-100 p-2 rounded bg-white">
+                <span className="block font-bold text-amber-650">Aryan Chauhan</span>
+                <span className="text-[7.5px] text-amber-800">Transcoding Backend</span>
               </div>
-              <div className="border border-emerald-950 p-2 rounded bg-black/40">
+              <div className="border border-amber-100 p-2 rounded bg-white">
                 <span className="block font-bold">Harsh</span>
                 <span className="text-[7.5px] text-slate-500">Frontend Navigation</span>
               </div>
-              <div className="border border-emerald-950 p-2 rounded bg-black/40">
+              <div className="border border-amber-100 p-2 rounded bg-white">
                 <span className="block font-bold">Zaman & Shaurya</span>
                 <span className="text-[7.5px] text-slate-500">Backend Routes</span>
               </div>
@@ -164,15 +166,16 @@ const projectsDetails = {
     overview: "Intern-Ease was designed by team Hack Houdini for the Smart India Hackathon internal rounds. The platform serves as a modern internship search portal under the PM Internship Scheme, matching student profiles to listings based on location, academic specializations, and skills using a custom point-based ranking algorithm.",
     challenge: "Students often struggle to filter through thousands of internship listings to find relevant placements near them. Moreover, regional language barriers prevent candidates from rural areas from easily understanding national scheme listings.",
     solution: "We created a localized student portal supporting 5 languages: English, Hindi, Bangla, Tamil, and Telugu. On the backend, we engineered a point-based recommendation algorithm that ranks internships based on proximity coordinates and qualification profiles, returning a relevant opportunities feed.",
+    howWeMadeIt: "The system was built during the hackathon using Python and Flask for the recommendation engine. The student frontend was developed by Nandini Mishra and Samriddhi Vishnoi. The backend matching algorithms and multi-lingual route logic were built by Prithul Jaiswal, Savyam Shukla, and Aryan Chauhan. Krishna Chaitanya managed the database schema and query connections. The team collaborated to structure these ideas into a real-world prototype.",
     theme: {
-      bg: "bg-[#FAF5EC]",
-      text: "text-[#2B231D]",
-      subtext: "text-stone-500",
-      border: "border-stone-250/70",
+      bg: "bg-[#EEF4FB]",
+      text: "text-[#1E293B]",
+      subtext: "text-[#64748B]",
+      border: "border-[#CBD5E1]/70",
       cardBg: "bg-white",
-      badge: "bg-blue-50 text-blue-700 border-blue-200",
+      badge: "bg-blue-50 text-blue-805 border-blue-200",
       titleFont: "font-serif font-black tracking-tight",
-      bodyFont: "font-sans text-stone-700 text-[15px] leading-relaxed",
+      bodyFont: "font-sans text-[#334155] text-[15px] leading-relaxed",
       accentColor: "#3B82F6",
       isDark: false
     },
@@ -217,7 +220,7 @@ const projectsDetails = {
     tagline: "High-Performance 2D Android Arcade Shooter.",
     description: "A fast-paced mobile game built in Java using SurfaceView and a custom game loop thread, featuring trigonometric physics and particle systems.",
     status: "COMPLETED",
-    color: "#E11D48",
+    color: "#F97316",
     timeline: "November 2025 to December 2025",
     role: "Game Loop & Optimization Developer",
     context: "Mobile Game Project",
@@ -225,16 +228,17 @@ const projectsDetails = {
     overview: "Bubble Blast is a high-speed 2D arcade game built specifically for the Android OS. The player directs a bottom-aligned cannon by dragging on the screen. The physics engine uses trigonometric coordinates to direct ammunition towards target bubbles descending from the top of the canvas.",
     challenge: "Rendering hundreds of moving entities (bubbles, custom ammunition, trail smoke, and shards) on standard mobile devices without dropping frames or triggering execution spikes.",
     solution: "We established a dedicated game loop thread that draws directly onto an Android SurfaceView canvas. By implementing pre-allocated objects in memory pools, we avoided garbage collector latency. Projectile vectors are calculated in real time using trigonometric functions, supporting standard Bullets, Grenades with explosive splash damage, Missiles with trail particles, and an expanding shockwave Pulsar.",
+    howWeMadeIt: "The project was written in Java in Android Studio using modular class design (game engine, collision detectors, weapon classes, particle handlers, and game objects). Collision is resolved using high-efficiency Euclidean distance calculations, allowing the system to run smoothly at 60 FPS even with 400+ active elements on screen. Sound effects, health tracking, and increasing difficulty over time are integrated.",
     theme: {
-      bg: "bg-[#FAF8F5]",
-      text: "text-stone-900",
-      subtext: "text-stone-500",
-      border: "border-stone-250/70",
+      bg: "bg-[#FFF8F2]",
+      text: "text-[#4A2D19]",
+      subtext: "text-[#8C5E3C]",
+      border: "border-[#F3D7C4]/70",
       cardBg: "bg-white",
-      badge: "bg-rose-50 text-rose-700 border-rose-200",
+      badge: "bg-orange-50 text-orange-800 border-orange-200",
       titleFont: "font-serif font-black tracking-tight",
-      bodyFont: "font-sans text-stone-700 text-[15px] leading-relaxed",
-      accentColor: "#E11D48",
+      bodyFont: "font-sans text-[#5C3B24] text-[15px] leading-relaxed",
+      accentColor: "#F97316",
       isDark: false
     },
     techStack: [
@@ -261,6 +265,7 @@ const projectsDetails = {
     overview: "AryanVerse is an immersive digital space designed to showcase projects, skills, and timeline landmarks in a solar-system style galaxy. Visitors travel through planetary chambers, experiencing interactive WebGL environments combined with high-contrast text views.",
     challenge: "Integrating WebGL scenes with traditional Next.js routes can cause memory leaks and slow transitions. Standard animation libraries struggle to coordinate Three.js cameras with DOM scrolling.",
     solution: "We designed a unified state controller that links the Three.js canvas with Next.js page state. Transitioning between routes triggers a GSAP timeline that interpolates the 3D camera coordinates, zooming into a chosen planet and displaying case details as the camera arrives.",
+    howWeMadeIt: "The landing universe scene is built using React Three Fiber and Three.js running inside Next.js. We developed custom shaders for planetary atmospheres and wrote GSAP transition paths that interpolate WebGL camera parameters and link them to Next.js page mounts.",
     theme: {
       bg: "bg-white",
       text: "text-zinc-900",
@@ -302,7 +307,7 @@ const projectsDetails = {
     tagline: "A Premium Habit Curation and Curated Wellness Merchandise Concept.",
     description: "An upcoming lifestyle ecosystem focused on bridging modern habit tracking with highly custom, premium organic wellness merchandise.",
     status: "PLANNED",
-    color: "#F97316",
+    color: "#059669",
     timeline: "Future Concept",
     role: "Founder & Strategic Director",
     context: "Conceptual Startup Plan",
@@ -310,23 +315,19 @@ const projectsDetails = {
     overview: "LyfChanger is a youth-driven lifestyle brand concept designed to support personal self-improvement. The model bridges a dedicated mindfulness tracking application with premium physical merchandise, helping students, creators, and entrepreneurs establish healthy habits.",
     challenge: "Formulating a distinct value proposition in the self-improvement space, and structuring custom manufacturing pipelines for organic textiles.",
     solution: "The startup plan relies on limited-run custom merchandise drops paired with digital application challenges. The application acts as a portal, where users complete habit challenges that correspond with their physical wellness gear.",
+    howWeMadeIt: "The platform is designed around a dual physical-digital ecosystem. The branding and visual identity focus on high-aesthetic minimalist designs. We structured the startup plan around drop models, e-commerce networks, and a community hub, serving as a blueprint for a modern creator-focused lifestyle brand.",
     theme: {
-      bg: "bg-[#091A17]",
-      text: "text-[#ECE5DA]",
-      subtext: "text-emerald-300/60",
-      border: "border-emerald-950/50",
-      cardBg: "bg-[#0C2420]",
-      badge: "bg-emerald-950/40 text-emerald-400 border-emerald-800/30",
-      titleFont: "font-serif italic font-bold tracking-wide",
-      bodyFont: "font-sans text-[#D4CBBF] text-[15px] leading-relaxed font-light",
-      accentColor: "#F97316",
-      isDark: true
+      bg: "bg-[#F0FDF4]",
+      text: "text-[#155E75]",
+      subtext: "text-[#0891B2]",
+      border: "border-[#CCFBF1]/70",
+      cardBg: "bg-white",
+      badge: "bg-[#DCFCE7] text-[#166534] border-[#BBF7D0]",
+      titleFont: "font-serif font-black tracking-tight",
+      bodyFont: "font-sans text-[#155E75] text-[15px] leading-relaxed",
+      accentColor: "#059669",
+      isDark: false
     },
-    techStack: [
-      { name: "Brand Curation", desc: "Designing premium visual outlines and color guidelines for physical items." },
-      { name: "Supply Chain Strategy", desc: "Structuring relation maps for organic cotton mills and sustainable containers." },
-      { name: "Ecosystem Design", desc: "Modeling a platform connecting physical clothing assets with digital analytics." }
-    ],
     gallery: []
   },
   "cafe-marketing": {
@@ -342,6 +343,7 @@ const projectsDetails = {
     overview: "This business was a local web design and marketing service started during Class 11. Our team pitched local cafes in Greater Noida, establishing custom web pages and managing social media accounts.",
     challenge: "Securing contracts, delivering clean websites under tight high school schedules, and leading a team of junior developers.",
     solution: "I managed client contracts and coordinated operations, assigning development pipelines to junior developers. We designed responsive promotional templates and established content schedules for client Instagram pages, building early experience in project management.",
+    howWeMadeIt: "The landing pages were built using HTML, CSS, and basic JavaScript. I set up organic campaign calendars on Instagram to drive traffic to the cafes. By organizing features among junior developers, I practiced team leadership, delegation, and sales negotiation.",
     theme: {
       bg: "bg-[#FAF9F5]",
       text: "text-stone-900",
@@ -377,6 +379,7 @@ const projectsDetails = {
     overview: "Unscripted Love is a contemporary novel exploring the emotional balance between ambition and the unplanned nature of human connections. The writing prioritizes realistic dialogues, character growth, and vulnerable internal monologues.",
     challenge: "Structuring character growth arcs that maintain pacing while preserving character depth in an interactive online presentation format.",
     solution: "I designed a chapter outline that maps character shifts to the Hero's Journey schema. To present the novel online, I created an editorial layout focusing on serif typography, wide margins, and clean reading cards.",
+    howWeMadeIt: "The novel is drafted and edited in Google Docs, using version histories to track character drafts. We mapped external events to internal psychological shifts using the Hero's Journey schema, exporting selected snippets to web editorial layouts.",
     theme: {
       bg: "bg-[#FDFBF7]",
       text: "text-slate-800",
@@ -466,7 +469,7 @@ export default function ProjectDetailPage({ params }) {
           href="/projects"
           className={`flex items-center gap-2 px-5 py-2.5 border ${
             theme.isDark 
-              ? "border-white/10 bg-black/60 text-slate-350 hover:text-white hover:border-[#ECE5DA]" 
+              ? "border-white/10 bg-black/60 text-slate-300 hover:text-white hover:border-[#ECE5DA]" 
               : "border-slate-200/80 bg-white/90 text-slate-600 hover:text-slate-900 hover:border-slate-350"
           } hover:shadow-xs transition-all duration-300 rounded-xl font-space-mono text-xs tracking-wider cursor-pointer group`}
         >
@@ -490,11 +493,11 @@ export default function ProjectDetailPage({ params }) {
             <span className={`text-[10px] ${theme.isDark ? "text-slate-500" : "text-slate-400"} font-space-mono`}>{project.timeline}</span>
           </div>
 
-          <h1 className={`${theme.titleFont} text-5xl sm:text-6xl md:text-7xl font-bold ${theme.isDark ? "text-white" : "text-slate-900"} tracking-tight leading-none`}>
+          <h1 className={`${theme.titleFont} text-5xl sm:text-6xl md:text-7xl font-bold ${theme.isDark ? "text-white" : "text-[#1F2022]"} tracking-tight leading-none`}>
             {project.name}
           </h1>
 
-          <p className={`font-sans text-lg md:text-xl ${theme.isDark ? "text-[#D4CBBF] border-emerald-950/60" : "text-slate-600 border-slate-200"} font-medium leading-relaxed max-w-2xl border-l-4 pl-5 py-1 italic`}>
+          <p className={`font-sans text-lg md:text-xl ${theme.isDark ? "text-[#D4CBBF] border-emerald-950/60" : "text-slate-650 border-slate-200"} font-medium leading-relaxed max-w-2xl border-l-4 pl-5 py-1 italic`}>
             {project.tagline}
           </p>
 
@@ -512,7 +515,7 @@ export default function ProjectDetailPage({ params }) {
               <span className={`block font-space-mono text-[8px] ${theme.isDark ? "text-slate-500" : "text-slate-400"} uppercase tracking-widest font-black mb-1`}>TECH STACK</span>
               <div className="flex flex-wrap gap-1 mt-0.5">
                 {project.tags.slice(0, 2).map((t) => (
-                  <span key={t} className={`px-2 py-0.5 rounded ${theme.isDark ? "bg-[#0c2420] text-emerald-300 border-emerald-950/40" : "bg-slate-100 text-slate-600 border-slate-200/40"} font-space-mono text-[8px] border`}>{t}</span>
+                  <span key={t} className={`px-2 py-0.5 rounded ${theme.isDark ? "bg-[#0c2420] text-emerald-305 border-emerald-950/40" : "bg-slate-100 text-slate-600 border-slate-200/40"} font-space-mono text-[8px] border`}>{t}</span>
                 ))}
               </div>
             </div>
@@ -592,6 +595,16 @@ export default function ProjectDetailPage({ params }) {
             </p>
           </div>
 
+          {/* How We Made It */}
+          {project.howWeMadeIt && (
+            <div className="flex flex-col gap-4 border-t border-slate-200/50 pt-8">
+              <h2 className="font-serif text-3xl font-bold tracking-tight">Development & Implementation</h2>
+              <p className={`${theme.bodyFont} text-[16px] font-medium leading-relaxed`}>
+                {project.howWeMadeIt}
+              </p>
+            </div>
+          )}
+
           {/* Gallery selector if there are multiple slides */}
           {project.gallery && project.gallery.length > 1 && (
             <div className="flex flex-col gap-4 border-t border-slate-200/50 pt-8">
@@ -627,7 +640,7 @@ export default function ProjectDetailPage({ params }) {
                   key={tech.name} 
                   className={`${theme.cardBg} border ${theme.isDark ? "border-white/5 hover:border-white/10" : "border-slate-200 hover:border-slate-300"} p-4 rounded-xl flex flex-col gap-1 transition-all duration-300 shadow-xs`}
                 >
-                  <span className={`font-sans font-bold text-xs ${theme.isDark ? "text-white" : "text-slate-800"} uppercase tracking-wide`}>{tech.name}</span>
+                  <span className={`font-sans font-bold text-xs ${theme.isDark ? "text-white" : "text-[#1F2022]"} uppercase tracking-wide`}>{tech.name}</span>
                   <p className={`text-[11px] ${theme.isDark ? "text-slate-400" : "text-slate-500"} leading-relaxed font-sans`}>{tech.desc}</p>
                 </div>
               ))}
