@@ -237,16 +237,16 @@ const projectsDetails = {
     solution: "We established a dedicated game loop thread that draws directly onto an Android SurfaceView canvas. By implementing pre-allocated objects in memory pools, we avoided garbage collector latency. Projectile vectors are calculated in real time using trigonometric functions, supporting standard Bullets, Grenades with explosive splash damage, Missiles with trail particles, and an expanding shockwave Pulsar.",
     howWeMadeIt: "The project was written in Java in Android Studio using modular class design (game engine, collision detectors, weapon classes, particle handlers, and game objects). Collision is resolved using high-efficiency Euclidean distance calculations, allowing the system to run smoothly at 60 FPS even with 400+ active elements on screen. Sound effects, health tracking, and increasing difficulty over time are integrated.",
     theme: {
-      bg: "bg-[#FFF8F2]",
-      text: "text-[#4A2D19]",
-      subtext: "text-[#8C5E3C]",
-      border: "border-[#F3D7C4]/70",
-      cardBg: "bg-white",
-      badge: "bg-orange-50 text-orange-800 border-orange-200",
+      bg: "bg-[#0B0806]",
+      text: "text-[#ECE5DA]",
+      subtext: "text-[#E2A87C]",
+      border: "border-[#3B2314]/50",
+      cardBg: "bg-[#1A1410]/80 backdrop-blur-md",
+      badge: "bg-orange-950/50 text-orange-300 border-orange-800/30",
       titleFont: "font-serif font-black tracking-tight",
-      bodyFont: "font-sans text-[#5C3B24] text-[15px] leading-relaxed",
+      bodyFont: "font-sans text-[#E5DCD3] text-[15px] leading-relaxed font-light",
       accentColor: "#F97316",
-      isDark: false
+      isDark: true
     },
     techStack: [
       { name: "Android SurfaceView", desc: "Coordinates low-level drawing buffers directly to screen canvases." },
