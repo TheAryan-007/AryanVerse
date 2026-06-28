@@ -282,16 +282,16 @@ const projectsDetails = {
     solution: "We designed a unified state controller that links the Three.js canvas with Next.js page state. Transitioning between routes triggers a GSAP timeline that interpolates the 3D camera coordinates, zooming into a chosen planet and displaying case details as the camera arrives.",
     howWeMadeIt: "The landing universe scene is built using React Three Fiber and Three.js running inside Next.js. We developed custom shaders for planetary atmospheres and wrote GSAP transition paths that interpolate WebGL camera parameters and link them to Next.js page mounts.",
     theme: {
-      bg: "bg-white",
-      text: "text-zinc-900",
-      subtext: "text-zinc-500",
-      border: "border-zinc-200",
-      cardBg: "bg-zinc-50",
-      badge: "bg-purple-50 text-purple-700 border-purple-200",
+      bg: "bg-[#0D031A]",
+      text: "text-[#F5EEFD]",
+      subtext: "text-[#C084FC]",
+      border: "border-[#3B1D5F]/50",
+      cardBg: "bg-[#1E0D36]/80 backdrop-blur-md",
+      badge: "bg-purple-950/50 text-purple-300 border-purple-800/30",
       titleFont: "font-serif italic font-bold tracking-tight",
-      bodyFont: "font-sans text-zinc-700 text-[15px] leading-relaxed",
+      bodyFont: "font-sans text-[#ECE5FA] text-[15px] leading-relaxed font-light",
       accentColor: "#A855F7",
-      isDark: false
+      isDark: true
     },
     techStack: [
       { name: "Next.js App Router", desc: "Coordinates routing parameters and static page generations." },
