@@ -175,16 +175,16 @@ const projectsDetails = {
     solution: "We created a localized student portal supporting 5 languages: English, Hindi, Bangla, Tamil, and Telugu. On the backend, we engineered a point-based recommendation algorithm that ranks internships based on proximity coordinates and qualification profiles, returning a relevant opportunities feed.",
     howWeMadeIt: "The system was built during the hackathon using Python and Flask for the recommendation engine. The student frontend was developed by Nandini Mishra and Samriddhi Vishnoi. The backend matching algorithms and multi-lingual route logic were built by Prithul Jaiswal, Savyam Shukla, and Aryan Chauhan. Krishna Chaitanya managed the database schema and query connections. The team collaborated to structure these ideas into a real-world prototype.",
     theme: {
-      bg: "bg-[#EEF4FB]",
-      text: "text-[#1E293B]",
-      subtext: "text-[#64748B]",
-      border: "border-[#CBD5E1]/70",
-      cardBg: "bg-white",
-      badge: "bg-blue-50 text-blue-805 border-blue-200",
+      bg: "bg-[#030712]",
+      text: "text-[#F1F5F9]",
+      subtext: "text-[#93C5FD]",
+      border: "border-[#1E293B]/60",
+      cardBg: "bg-[#0B1528]/85 backdrop-blur-md",
+      badge: "bg-blue-950/60 text-blue-300 border-blue-800/30",
       titleFont: "font-serif font-black tracking-tight",
-      bodyFont: "font-sans text-[#334155] text-[15px] leading-relaxed",
+      bodyFont: "font-sans text-[#CBD5E1] text-[15px] leading-relaxed font-light",
       accentColor: "#3B82F6",
-      isDark: false
+      isDark: true
     },
     techStack: [
       { name: "Backend Routes", desc: "Constructed Python Flask endpoints to evaluate user profiles and match locations." },
