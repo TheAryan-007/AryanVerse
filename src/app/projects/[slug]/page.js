@@ -124,7 +124,8 @@ const projectsDetails = {
         title: "Echos App Interface & Concept Mockup",
         desc: "Interactive view of Echos application flow showing the Encoder, Encoding Complete, Decoder, and Decoded Message screens using advanced Least Significant Bit steganography.",
         type: "image",
-        url: "/echos-showcase.jpg"
+        url: "/echos-showcase.jpg",
+        aspect: "aspect-[16/10]"
       },
       {
         title: "Team Structure & Role Allocations",
@@ -258,7 +259,8 @@ const projectsDetails = {
         title: "Bubble Blast Gameplay Showcase",
         desc: "Screenshot of the Bubble Blast Android interface showing aim assist rendering vectors, bubble grid layout, level metrics, and weapon selections.",
         type: "image",
-        url: "/bubble-blast-showcase.jpg"
+        url: "/bubble-blast-showcase.jpg",
+        aspect: "aspect-[2/3]"
       }
     ],
     github: null,
@@ -302,7 +304,8 @@ const projectsDetails = {
         title: "AryanVerse Universe Map",
         desc: "Interactive universe entry portal showing the central planetary node (Welcome chamber) and surrounding celestial orbit grids.",
         type: "image",
-        url: "/aryanverse-showcase.png"
+        url: "/aryanverse-showcase.png",
+        aspect: "aspect-[1005/472]"
       },
       {
         title: "Hand Mockup Overlay",
@@ -586,12 +589,12 @@ export default function ProjectDetailPage({ params }) {
         <div className="lg:col-span-5 w-full flex items-center justify-center">
           {project.gallery && project.gallery.length > 0 && currentSlide ? (
             <div className={`w-full rounded-2xl border ${theme.isDark ? "border-white/5 bg-black/60 shadow-[0_10px_40px_rgba(0,0,0,0.5)]" : "border-slate-200 bg-white shadow-[0_10px_40px_rgba(0,0,0,0.03)]"} p-3 flex flex-col gap-3`}>
-              <div className="w-full aspect-[4/3] rounded-xl overflow-hidden relative bg-slate-950 border border-slate-100/50 flex items-center justify-center">
+              <div className={`w-full ${currentSlide.aspect || "aspect-[4/3]"} rounded-xl overflow-hidden relative bg-slate-950 border border-slate-100/50 flex items-center justify-center`}>
                 {currentSlide.type === "image" ? (
                   <img
                     src={currentSlide.url}
                     alt={currentSlide.title}
-                    className="w-full h-full object-contain transition-all duration-300"
+                    className="w-full h-full object-cover transition-all duration-300"
                   />
                 ) : (
                   currentSlide.render()
