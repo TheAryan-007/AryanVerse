@@ -16,7 +16,6 @@ function SkySentryIcon() {
       <circle cx="50" cy="50" r="10" stroke="#22C55E" strokeWidth="1.5" opacity="0.2" />
       <line x1="50" y1="10" x2="50" y2="90" stroke="#22C55E" strokeWidth="1.2" opacity="0.3" />
       <line x1="10" y1="50" x2="90" y2="50" stroke="#22C55E" strokeWidth="1.2" opacity="0.3" />
-      {/* Sweep line */}
       <line 
         x1="50" 
         y1="50" 
@@ -28,7 +27,6 @@ function SkySentryIcon() {
         className="animate-spin-slow" 
         style={{ transformOrigin: "50px 50px" }} 
       />
-      {/* Target Blips */}
       <circle cx="72" cy="32" r="3" fill="#22C55E" className="animate-pulse" />
       <circle cx="32" cy="68" r="2" fill="#22C55E" opacity="0.5" />
     </svg>
@@ -44,9 +42,7 @@ function AryanVerseIcon() {
           <stop offset="100%" stopColor="#7E22CE" />
         </radialGradient>
       </defs>
-      {/* Planet Spherical Body */}
       <circle cx="50" cy="50" r="22" fill="url(#planetBody)" stroke="#111" strokeWidth="1.5" />
-      {/* Orbital Rings */}
       <ellipse 
         cx="50" 
         cy="50" 
@@ -74,27 +70,40 @@ function AryanVerseIcon() {
   );
 }
 
-function MovieSystemIcon() {
+function InternEaseIcon() {
   return (
     <svg className="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* Film Strip Outline frame */}
-      <rect x="15" y="25" width="70" height="50" rx="4" stroke="#3B82F6" strokeWidth="2.5" />
-      <line x1="25" y1="25" x2="25" y2="75" stroke="#3B82F6" strokeWidth="1.5" />
-      <line x1="75" y1="25" x2="75" y2="75" stroke="#3B82F6" strokeWidth="1.5" />
-      
-      {/* Film notches */}
-      <rect x="18" y="30" width="4" height="4" rx="0.5" fill="#3B82F6" opacity="0.7" />
-      <rect x="18" y="42" width="4" height="4" rx="0.5" fill="#3B82F6" opacity="0.7" />
-      <rect x="18" y="54" width="4" height="4" rx="0.5" fill="#3B82F6" opacity="0.7" />
-      <rect x="18" y="66" width="4" height="4" rx="0.5" fill="#3B82F6" opacity="0.7" />
-      
-      <rect x="78" y="30" width="4" height="4" rx="0.5" fill="#3B82F6" opacity="0.7" />
-      <rect x="78" y="42" width="4" height="4" rx="0.5" fill="#3B82F6" opacity="0.7" />
-      <rect x="78" y="54" width="4" height="4" rx="0.5" fill="#3B82F6" opacity="0.7" />
-      <rect x="78" y="66" width="4" height="4" rx="0.5" fill="#3B82F6" opacity="0.7" />
+      <rect x="22" y="22" width="56" height="56" rx="6" stroke="#3B82F6" strokeWidth="2.5" />
+      <line x1="32" y1="36" x2="68" y2="36" stroke="#3B82F6" strokeWidth="2" />
+      <line x1="32" y1="48" x2="58" y2="48" stroke="#3B82F6" strokeWidth="2" />
+      <line x1="32" y1="60" x2="50" y2="60" stroke="#3B82F6" strokeWidth="2" />
+      <circle cx="65" cy="58" r="7" stroke="#10B981" strokeWidth="2" />
+      <path d="M 65 65 L 65 72" stroke="#10B981" strokeWidth="2" />
+    </svg>
+  );
+}
 
-      {/* Play icon in center */}
-      <polygon points="42,40 64,50 42,60" fill="#3B82F6" stroke="#93C5FD" strokeWidth="1.5" className="animate-pulse" />
+function EchoesWithinIcon() {
+  return (
+    <svg className="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="35" y="45" width="30" height="25" rx="3" stroke="#10B981" strokeWidth="2.5" />
+      <path d="M 42 45 C 42 30 58 30 58 45" stroke="#10B981" strokeWidth="2.5" strokeLinecap="round" />
+      <line x1="15" y1="50" x2="15" y2="60" stroke="#10B981" strokeWidth="1.5" opacity="0.3" />
+      <line x1="25" y1="40" x2="25" y2="70" stroke="#10B981" strokeWidth="1.5" opacity="0.4" />
+      <line x1="75" y1="40" x2="75" y2="70" stroke="#10B981" strokeWidth="1.5" opacity="0.4" />
+      <line x1="85" y1="50" x2="85" y2="60" stroke="#10B981" strokeWidth="1.5" opacity="0.3" />
+    </svg>
+  );
+}
+
+function BubbleBlastIcon() {
+  return (
+    <svg className="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="82" r="10" fill="#E11D48" />
+      <line x1="50" y1="82" x2="50" y2="58" stroke="#E11D48" strokeWidth="5" strokeLinecap="round" />
+      <circle cx="35" cy="30" r="7" stroke="#F59E0B" strokeWidth="2" className="animate-pulse" />
+      <circle cx="65" cy="25" r="9" stroke="#3B82F6" strokeWidth="2" className="animate-bounce" style={{ animationDuration: "3s" }} />
+      <circle cx="50" cy="45" r="5" stroke="#10B981" strokeWidth="1.5" />
     </svg>
   );
 }
@@ -102,12 +111,9 @@ function MovieSystemIcon() {
 function UnscriptedLoveIcon() {
   return (
     <svg className="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* Open Book pages */}
       <path d="M 15 65 Q 32 60 50 65 Q 68 60 85 65 L 85 35 Q 68 30 50 35 Q 32 30 15 35 Z" fill="#2d0a0a" stroke="#EF4444" strokeWidth="2.5" />
       <line x1="50" y1="35" x2="50" y2="65" stroke="#EF4444" strokeWidth="2" />
-      {/* Floating pages */}
       <rect x="25" y="18" width="14" height="18" rx="1" fill="#111" stroke="#EF4444" strokeWidth="1.5" transform="rotate(-15 32 27)" className="animate-float-soft" />
-      {/* Glowing heart/sparkle */}
       <path d="M 68 22 C 66 18 61 18 59 21 C 57 18 52 18 50 22 C 50 25 59 30 59 30 C 59 30 68 25 68 22 Z" fill="#EF4444" className="animate-pulse-soft" />
     </svg>
   );
@@ -116,44 +122,28 @@ function UnscriptedLoveIcon() {
 function LyfChangerIcon() {
   return (
     <svg className="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* Platform */}
       <line x1="20" y1="80" x2="80" y2="80" stroke="#F97316" strokeWidth="3.5" strokeLinecap="round" />
       <polygon points="40,80 50,68 60,80" fill="#EA580C" stroke="#F97316" strokeWidth="1.5" />
-      {/* Rocket fuselage */}
       <g className="animate-float-soft">
-        {/* Flames */}
         <path d="M 45 70 Q 50 82 55 70 Z" fill="#F97316" className="animate-pulse" />
-        {/* Fins */}
         <polygon points="34,64 42,50 42,64" fill="#EA580C" stroke="#F97316" strokeWidth="1.5" />
         <polygon points="66,64 58,50 58,64" fill="#EA580C" stroke="#F97316" strokeWidth="1.5" />
-        {/* Body */}
         <rect x="42" y="32" width="16" height="32" rx="3" fill="#111" stroke="#F97316" strokeWidth="2.5" />
-        {/* Nose cone */}
         <path d="M 42 33 Q 50 15 58 33 Z" fill="#EA580C" stroke="#F97316" strokeWidth="2" />
-        {/* Window */}
         <circle cx="50" cy="44" r="3.5" fill="#FFEDD5" stroke="#F97316" strokeWidth="1.2" />
       </g>
     </svg>
   );
 }
 
-function StreetwearBrandIcon() {
+function CafeMarketingIcon() {
   return (
     <svg className="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M 50 20 C 53 20 55 22 55 25 C 55 26 54 28 52 29 L 52 35 L 78 50 C 81 52 82 56 80 59 C 78 62 74 63 71 61 L 62 56 L 62 78 C 62 82 58 85 54 85 L 46 85 C 42 85 38 82 38 78 L 38 56 L 29 61 C 26 63 22 62 20 59 C 18 56 19 52 22 50 L 48 35 L 48 29 C 46 28 45 26 45 25 C 45 22 47 20 50 20 Z" stroke="#E11D48" strokeWidth="2.5" strokeLinejoin="round" fill="none" />
-      <circle cx="50" cy="50" r="5" fill="#E11D48" className="animate-pulse" />
-    </svg>
-  );
-}
-
-function EchosIcon() {
-  return (
-    <svg className="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="50" cy="50" r="8" fill="#6366F1" className="animate-pulse-soft" />
-      {/* Wave rings */}
-      <circle cx="50" cy="50" r="18" stroke="#6366F1" strokeWidth="1.5" className="animate-wave-expand" style={{ animationDelay: "0s" }} />
-      <circle cx="50" cy="50" r="28" stroke="#6366F1" strokeWidth="1.2" className="animate-wave-expand" style={{ animationDelay: "0.8s" }} />
-      <circle cx="50" cy="50" r="38" stroke="#4F46E5" strokeWidth="1" className="animate-wave-expand" style={{ animationDelay: "1.6s" }} />
+      <path d="M 30 40 L 70 40 L 65 70 C 64 75 60 78 55 78 L 45 78 C 40 78 36 75 35 70 Z" stroke="#FF8F00" strokeWidth="2.5" />
+      <path d="M 70 46 C 76 46 76 58 70 58" stroke="#FF8F00" strokeWidth="2" />
+      <path d="M 40 32 Q 44 24 40 18" stroke="#FF8F00" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M 50 32 Q 54 24 50 18" stroke="#FF8F00" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M 60 32 Q 64 24 60 18" stroke="#FF8F00" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 }
@@ -162,8 +152,8 @@ const projectsData = [
   {
     slug: "skysentry-ai",
     name: "SkySentry AI",
-    description: "AI-powered visual verification system designed for aerial surveillance. Built to reduce false alerts by distinguishing drones, birds, aircraft, and other flying objects.",
-    tags: ["AI", "Computer Vision", "YOLOv10", "OpenCV"],
+    description: "Visual Verification Layer for Intelligent Aerial Surveillance. Integrates with radar and camera feeds to classify threats (Drones, Birds, Aircraft) using YOLOv10 and OpenCV.",
+    tags: ["AI", "Computer Vision", "YOLOv10", "Spring Boot"],
     status: "COMPLETED",
     color: "#22C55E",
     glowColor: "rgba(34, 197, 94, 0.15)",
@@ -171,10 +161,43 @@ const projectsData = [
     icon: <SkySentryIcon />
   },
   {
+    slug: "echoes-within",
+    name: "Echoes Within",
+    description: "A premium Audio Steganography cybersecurity product enabling secure hiding and extraction of secret text inside audio using the LSB (Least Significant Bit) algorithm.",
+    tags: ["Next.js", "Python", "Flask", "Cybersecurity"],
+    status: "COMPLETED",
+    color: "#10B981",
+    glowColor: "rgba(16, 185, 129, 0.15)",
+    badgeBg: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+    icon: <EchoesWithinIcon />
+  },
+  {
+    slug: "intern-ease",
+    name: "Intern-Ease",
+    description: "AI-powered internship recommendation engine built for the PM Internship Scheme, matching student parameters with ideal opportunities. Developed for the SIH internal rounds.",
+    tags: ["Recommendation Engine", "Algorithms", "Database", "Collaboration"],
+    status: "COMPLETED",
+    color: "#3B82F6",
+    glowColor: "rgba(59, 130, 246, 0.15)",
+    badgeBg: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+    icon: <InternEaseIcon />
+  },
+  {
+    slug: "bubble-blast",
+    name: "Bubble Blast",
+    description: "A polished 2D Android arcade shooter built in Java using SurfaceView and a custom game loop thread. Optimized for 400+ active objects with modular classes.",
+    tags: ["Android Studio", "Java", "Game Loop", "Trigonometry"],
+    status: "COMPLETED",
+    color: "#E11D48",
+    glowColor: "rgba(225, 29, 72, 0.15)",
+    badgeBg: "bg-rose-500/10 text-rose-400 border-rose-500/20",
+    icon: <BubbleBlastIcon />
+  },
+  {
     slug: "aryanverse",
     name: "AryanVerse",
-    description: "My personal digital universe combining storytelling, projects, skills, journey archives, and interactive experiences into one immersive portfolio.",
-    tags: ["Next.js", "React", "Three.js", "Storytelling"],
+    description: "My personal digital universe combining storytelling, projects, skills, and journey archives into an interactive WebGL solar system digital map.",
+    tags: ["Next.js", "Three.js", "GSAP", "WebGL"],
     status: "IN PROGRESS",
     color: "#A855F7",
     glowColor: "rgba(168, 85, 247, 0.15)",
@@ -182,32 +205,10 @@ const projectsData = [
     icon: <AryanVerseIcon />
   },
   {
-    slug: "movie-recommendation",
-    name: "Movie Recommendation System",
-    description: "Recommendation engine designed to suggest movies based on viewing patterns, ratings, genres, and user preferences.",
-    tags: ["Python", "Machine Learning", "Data Science"],
-    status: "PLANNED",
-    color: "#3B82F6",
-    glowColor: "rgba(59, 130, 246, 0.15)",
-    badgeBg: "bg-blue-500/10 text-blue-400 border-blue-500/20",
-    icon: <MovieSystemIcon />
-  },
-  {
-    slug: "unscripted-love",
-    name: "Unscripted Love",
-    description: "Original novel project exploring relationships, emotions, and the unscripted moments that shape people's lives.",
-    tags: ["Writing", "Storytelling", "Creative Project"],
-    status: "IN PROGRESS",
-    color: "#EF4444",
-    glowColor: "rgba(239, 68, 68, 0.15)",
-    badgeBg: "bg-red-500/10 text-red-400 border-red-500/20",
-    icon: <UnscriptedLoveIcon />
-  },
-  {
     slug: "lyfchanger",
     name: "LyfChanger",
-    description: "A premium startup plan in conceptual phase, designed as a digital-first lifestyle platform combining habit curation with high-end wellness merchandise ecosystems.",
-    tags: ["Startup Concept", "Branding", "Product Strategy"],
+    description: "A youth-driven lifestyle and creator brand concept designed to create an ecosystem for young people to express themselves, grow, and build meaningful lives.",
+    tags: ["Startup Concept", "Branding Strategy", "Community"],
     status: "PLANNED",
     color: "#F97316",
     glowColor: "rgba(249, 115, 22, 0.15)",
@@ -215,26 +216,26 @@ const projectsData = [
     icon: <LyfChangerIcon />
   },
   {
-    slug: "streetwear-brand",
-    name: "Custom Streetwear Brand",
-    description: "My first real business venture bootstrapped in Class 11. Built organic marketing funnels and a print-on-demand supply chain to generate ₹84,000 in revenue.",
-    tags: ["E-Commerce", "Branding", "Organic Reels", "Hustle"],
+    slug: "cafe-marketing",
+    name: "Local Cafe Web & Marketing Service",
+    description: "An unnamed business venture managing digital assets for local Greater Noida restaurants. Led a team of juniors to create custom websites and run social campaigns.",
+    tags: ["Leadership", "Web Dev", "Marketing", "Hustle"],
     status: "COMPLETED",
-    color: "#E11D48",
-    glowColor: "rgba(225, 29, 72, 0.15)",
-    badgeBg: "bg-rose-500/10 text-rose-400 border-rose-500/20",
-    icon: <StreetwearBrandIcon />
+    color: "#FF8F00",
+    glowColor: "rgba(255, 143, 0, 0.15)",
+    badgeBg: "bg-amber-500/10 text-amber-400 border-amber-500/20",
+    icon: <CafeMarketingIcon />
   },
   {
-    slug: "echos",
-    name: "Echos",
-    description: "A creative concept focused on ideas, stories, reflections, and experiences that leave a lasting impact.",
-    tags: ["Creative Project", "Storytelling", "Ideas"],
-    status: "PLANNED",
-    color: "#6366F1",
-    glowColor: "rgba(99, 102, 241, 0.15)",
-    badgeBg: "bg-indigo-500/10 text-indigo-400 border-indigo-500/20",
-    icon: <EchosIcon />
+    slug: "unscripted-love",
+    name: "Unscripted Love",
+    description: "Original literary contemporary novel outline following character growth, vulnerable dialogues, and internal monologues through the Hero's Journey.",
+    tags: ["Creative Writing", "Novel", "Storytelling"],
+    status: "IN PROGRESS",
+    color: "#EF4444",
+    glowColor: "rgba(239, 68, 68, 0.15)",
+    badgeBg: "bg-red-500/10 text-red-400 border-red-500/20",
+    icon: <UnscriptedLoveIcon />
   }
 ];
 

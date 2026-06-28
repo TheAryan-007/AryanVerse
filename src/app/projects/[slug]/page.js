@@ -21,7 +21,7 @@ import {
 import { SiGithub } from "react-icons/si";
 
 // ==========================================
-// Projects Case Studies Database
+// Projects Case Studies Database (8 Projects)
 // ==========================================
 
 const projectsDetails = {
@@ -46,7 +46,7 @@ const projectsDetails = {
       cardBg: "bg-white",
       badge: "bg-green-50 text-green-700 border-green-200",
       titleFont: "font-sans font-black tracking-tight",
-      bodyFont: "font-sans font-medium text-slate-700 leading-relaxed",
+      bodyFont: "font-sans font-medium text-slate-750 leading-relaxed",
       accentColor: "#22C55E",
       isDark: false
     },
@@ -83,37 +83,175 @@ const projectsDetails = {
             <div className="mt-4 text-[9px] text-center max-w-sm">TARGET LOCK ACQUIRED // 48.7 FPS // ENTRANCE ZONE 03</div>
           </div>
         )
-      },
-      {
-        title: "Training Performance Curve",
-        desc: "Epoch progression indicating the reduction in bounding box loss and classification error over 80 training epochs.",
-        type: "vector",
-        render: () => (
-          <div className="w-full h-full bg-slate-950 flex flex-col items-center justify-center p-6 relative rounded-xl border border-slate-800 font-space-mono text-slate-400">
-            <div className="absolute top-4 left-4 text-[8px] uppercase tracking-wider text-slate-500">TRAINING METRICS // LOG</div>
-            <div className="w-5/6 h-1/2 border-b border-l border-slate-800 relative mt-4 flex items-end">
-              <svg className="w-full h-full" viewBox="0 0 100 50">
-                <path d="M 0,5 Q 30,35 100,45" fill="none" stroke="#22C55E" strokeWidth="2" />
-                <path d="M 0,45 Q 40,10 100,8" fill="none" stroke="#3B82F6" strokeWidth="1.5" />
-              </svg>
-              <div className="absolute top-2 right-2 flex flex-col gap-1 text-[7px]">
-                <div className="flex items-center gap-1"><span className="w-2 h-1 bg-green-500" /> LOSS</div>
-                <div className="flex items-center gap-1"><span className="w-2 h-1 bg-blue-500" /> mAP@0.5</div>
-              </div>
-            </div>
-            <div className="flex justify-between w-5/6 text-[8px] text-slate-500 mt-1">
-              <span>Epoch 0</span>
-              <span>Epoch 40</span>
-              <span>Epoch 80</span>
-            </div>
-            <p className="text-[9px] text-slate-500 text-center mt-3">Final Validation mAP@0.5: 96.8% // Box Loss: 0.042</p>
-          </div>
-        )
       }
     ],
     github: "https://github.com/TheAryan-007/SkySentry-AI",
     demo: null,
     docs: "https://github.com/TheAryan-007/SkySentry-AI/blob/main/README.md"
+  },
+  "echoes-within": {
+    name: "Echoes Within",
+    tagline: "Invisible Communication Through Audio Steganography.",
+    description: "A premium cybersecurity web product enabling secure hiding and extraction of secret text inside audio files using the LSB algorithm.",
+    status: "COMPLETED",
+    color: "#10B981",
+    timeline: "Class Project // Batch 18",
+    role: "Conversion Engine & Bit Planner",
+    context: "Cybersecurity Lab // Bennett University",
+    tags: ["Audio Steganography", "Least Significant Bit", "Python Flask", "FFmpeg"],
+    overview: "Echoes Within is an advanced Audio Steganography application designed as a professional cybersecurity product. The system embeds secret, binary-converted text strings directly inside the least significant bits of audio samples. This approach hides the very existence of the message itself, making it highly secure for covert, attention-free digital communication.",
+    challenge: "Audio formats like MP3 compress frames lossily, destroying bit-level steganography structures. The challenge was supporting MP3 uploads, automatically converting them to uncompressed WAV streams without data loss, and implementing a highly optimized LSB algorithm that appends a clean ###END### delimiter without altering sound fidelity.",
+    solution: "We engineered a Flask backend integrated with PyDub and FFmpeg. When an MP3 is uploaded, it is converted into a standard 16-bit PCM WAV. The steganography logic iterates through the raw audio bytes, replacing the last bit of each sample with a binary message bit. During decoding, it extracts LSBs and reconstructs the original string, stopping immediately when the ###END### delimiter is parsed.",
+    theme: {
+      bg: "bg-[#040A08]",
+      text: "text-[#ECE5DA]",
+      subtext: "text-emerald-300/60",
+      border: "border-emerald-950/60",
+      cardBg: "bg-[#061411]",
+      badge: "bg-emerald-950/50 text-emerald-400 border-emerald-800/30",
+      titleFont: "font-mono font-bold tracking-wider uppercase",
+      bodyFont: "font-sans text-[#D4CBBF] font-light leading-relaxed",
+      accentColor: "#10B981",
+      isDark: true
+    },
+    techStack: [
+      { name: "Python Flask", desc: "Core backend server handling file uploads, processing routes, and stego execution." },
+      { name: "PyDub & FFmpeg", desc: "Used to decode MP3 bitstreams, resample rate markers, and write PCM WAV containers." },
+      { name: "Least Significant Bit", desc: "Algorithmic bitwise modification of raw audio sample indices." },
+      { name: "TypeScript & React", desc: "Premium cybersecurity style frontend with soundwave animations and copy widgets." }
+    ],
+    gallery: [
+      {
+        title: "Team Structure & Role Allocations",
+        desc: "Role division: Savyam Shukla (Lead, LSB logic), Aryan Chauhan (MP3/WAV FFmpeg backend), Harsh (UI routing), Zaman (Encode uploads), Shaurya (Decode reveal).",
+        type: "vector",
+        render: () => (
+          <div className="w-full h-full bg-[#050D0A] flex flex-col items-center justify-center p-6 relative rounded-xl border border-emerald-500/20 font-space-mono text-emerald-400">
+            <div className="absolute top-4 left-4 text-[8px] uppercase tracking-wider text-emerald-400/50">SYS-TEAM // ROLES</div>
+            <div className="w-full grid grid-cols-2 gap-3 mt-4 text-[9px]">
+              <div className="border border-emerald-950 p-2 rounded bg-black/40">
+                <span className="block font-bold">Savyam Shukla</span>
+                <span className="text-[7.5px] text-slate-500">Core LSB Logic</span>
+              </div>
+              <div className="border border-emerald-950 p-2 rounded bg-black/40">
+                <span className="block font-bold text-white">Aryan Chauhan</span>
+                <span className="text-[7.5px] text-emerald-400">MP3 to WAV Conversion</span>
+              </div>
+              <div className="border border-emerald-950 p-2 rounded bg-black/40">
+                <span className="block font-bold">Harsh</span>
+                <span className="text-[7.5px] text-slate-500">Frontend Routing</span>
+              </div>
+              <div className="border border-emerald-950 p-2 rounded bg-black/40">
+                <span className="block font-bold">Zaman & Shaurya</span>
+                <span className="text-[7.5px] text-slate-500">Encode/Decode Routes</span>
+              </div>
+            </div>
+            <div className="mt-4 text-[8px] text-emerald-500/50">DEVIL CODERS // BATCH 18</div>
+          </div>
+        )
+      }
+    ],
+    github: null,
+    demo: null,
+    docs: null
+  },
+  "intern-ease": {
+    name: "Intern-Ease",
+    tagline: "AI-Based Internship Recommendation Engine for PM Internship Scheme.",
+    description: "An intelligent, multilingual matching engine developed for the SIH internal rounds, pairing students with local opportunities.",
+    status: "COMPLETED",
+    color: "#3B82F6",
+    timeline: "Aug 2024",
+    role: "Backend Architect & Localization Lead",
+    context: "Smart India Hackathon // Internal Rounds",
+    tags: ["Recommendation Engine", "Algorithms", "Multilingual", "Database"],
+    overview: "Intern-Ease was created by team Hack Houdini during the Smart India Hackathon (SIH) internal rounds. It is an intelligent web prototype designed to recommend the most suitable internship opportunities under the PM Internship Scheme by matching student profiles, preferences, and geolocations.",
+    challenge: "Navigating thousands of national listings is overwhelming for students. Furthermore, language barriers often lock out qualified candidates from diverse regional backgrounds. The system needed to process criteria instantly and support regional languages.",
+    solution: "We implemented a point-based recommendation algorithm that ranks internships based on proximity coordinates and qualification profiles. We built a localized frontend supporting 5 major languages: English, Hindi, Bangla, Tamil, and Telugu, powered by modular backend localization parameters.",
+    theme: {
+      bg: "bg-[#FAF5EC]",
+      text: "text-[#2B231D]",
+      subtext: "text-stone-500",
+      border: "border-stone-250/70",
+      cardBg: "bg-white",
+      badge: "bg-blue-50 text-blue-700 border-blue-200",
+      titleFont: "font-serif font-black tracking-tight",
+      bodyFont: "font-sans text-stone-700 leading-relaxed",
+      accentColor: "#3B82F6",
+      isDark: false
+    },
+    techStack: [
+      { name: "Backend Architecture", desc: "Constructing Flask routes to parse coordinates and calculate matching points." },
+      { name: "Localization engine", desc: "Mapping UI assets to English, Hindi, Bangla, Tamil, and Telugu." },
+      { name: "Point Matching System", desc: "A customizable scoring script weighing profile tags, degrees, and radius." },
+      { name: "Database Integration", desc: "SQLite setup handled by Krishna Chaitanya for query execution." }
+    ],
+    gallery: [
+      {
+        title: "Hack Houdini Team Structure",
+        desc: "Frontend: Nandini Mishra, Samriddhi Vishnoi. Backend Architecture: Prithul Jaiswal, Savyam Shukla, Aryan Chauhan. Database Management: Krishna Chaitanya.",
+        type: "vector",
+        render: () => (
+          <div className="w-full h-full bg-slate-950 flex flex-col items-center justify-center p-6 relative rounded-xl border border-blue-500/20 font-space-mono text-blue-400">
+            <div className="absolute top-4 left-4 text-[8px] uppercase tracking-wider text-blue-400/50">HACK HOUDINI STRUCTURE</div>
+            <div className="w-5/6 flex flex-col gap-2 mt-4 text-[9px]">
+              <div className="border border-blue-900/40 p-2 rounded flex justify-between bg-black/40">
+                <span>Frontend Developers</span>
+                <span className="text-blue-400/80">Nandini & Samriddhi</span>
+              </div>
+              <div className="border border-blue-900/40 p-2 rounded flex justify-between bg-black/40">
+                <span>Backend Architects</span>
+                <span className="text-blue-400/80">Prithul, Savyam, Aryan</span>
+              </div>
+              <div className="border border-blue-900/40 p-2 rounded flex justify-between bg-black/40">
+                <span>Database Manager</span>
+                <span className="text-blue-400/80">Krishna Chaitanya</span>
+              </div>
+            </div>
+            <div className="mt-4 text-[8px] text-slate-500 text-center">Smart India Hackathon Internal Rounds</div>
+          </div>
+        )
+      }
+    ],
+    github: null,
+    demo: null,
+    docs: null
+  },
+  "bubble-blast": {
+    name: "Bubble Blast",
+    tagline: "High-Performance 2D Android Arcade Shooter.",
+    description: "A fast-paced mobile game built in Java using SurfaceView and a custom game loop thread, featuring trigonometric physics and particle systems.",
+    status: "COMPLETED",
+    color: "#E11D48",
+    timeline: "Nov 2025 - Dec 2025",
+    role: "Game Loop & Optimization Developer",
+    context: "Mobile Game Project",
+    tags: ["Java", "Android Studio", "SurfaceView", "Trigonometry"],
+    overview: "Bubble Blast is a custom-built 2D Android arcade shooter designed for high-performance 60 FPS gameplay. The player controls a cannon at the bottom of the screen, aiming and firing projectiles to pop descending colored bubbles. It includes a custom particle physics engine and Euclidean boundary calculations.",
+    challenge: "Standard Android Views undergo layout passes that limit frame rate and trigger massive garbage collection spikes. Managing 400+ concurrent game objects (bubbles, multiple projectiles, trail smoke, and explosion shards) on Android mobile devices required optimized resource loops.",
+    solution: "We structured a dedicated Game Loop thread writing directly to an Android SurfaceView canvas. To avoid memory fragmentation, we utilized optimized pre-allocated ArrayList collections. Trigonometric calculations (`atan2`, `sin`, `cos`) drive the shooting vector, supporting fast Bullets, Grenades (250px damage radius), Missiles (450px splash damage with smoke trails), and a fullscreen Pulsar shockwave.",
+    theme: {
+      bg: "bg-[#FAF8F5]",
+      text: "text-stone-900",
+      subtext: "text-stone-500",
+      border: "border-stone-250/70",
+      cardBg: "bg-white",
+      badge: "bg-rose-50 text-rose-700 border-rose-200",
+      titleFont: "font-sans font-black tracking-wider uppercase",
+      bodyFont: "font-sans text-stone-700 leading-relaxed",
+      accentColor: "#E11D48",
+      isDark: false
+    },
+    techStack: [
+      { name: "Android SurfaceView", desc: "Enables low-level pixel drawing directly to screen buffers outside standard UI layouts." },
+      { name: "Game Loop Thread", desc: "Synchronized frame updates matching physics calculations at constant tick rates." },
+      { name: "Euclidean Collision", desc: "High-performance coordinate calculations determining overlapping bounding shells." },
+      { name: "Particle Systems", desc: "Custom-drawn vector points representing trailing smoke and circular blast shockwaves." }
+    ],
+    gallery: [],
+    github: null,
+    demo: null,
+    docs: null
   },
   "aryanverse": {
     name: "AryanVerse",
@@ -164,66 +302,69 @@ const projectsDetails = {
     demo: "https://aryanverse.vercel.app",
     docs: null
   },
-  "movie-recommendation": {
-    name: "Movie Recommendation System",
-    tagline: "Collaborative and Content-Based Filtering Movie Engine.",
-    description: "A machine learning system analyzing rating distributions and movie descriptive metadata to provide tailored viewing suggestions.",
+  "lyfchanger": {
+    name: "LyfChanger",
+    tagline: "A Premium Habit Curation and Curated Wellness Merchandise Concept.",
+    description: "An upcoming lifestyle ecosystem focused on bridging modern habit tracking with highly custom, premium organic wellness merchandise.",
     status: "PLANNED",
-    color: "#3B82F6",
-    timeline: "Q3 2026 (Planned)",
-    role: "ML Developer",
-    context: "Academic Portfolio Piece",
-    tags: ["Machine Learning", "Python", "Scikit-Learn", "Pandas"],
-    overview: "Designed to explore recommender architectures, this system blends multiple modeling approaches to solve the accuracy limits of standalone filters. By combining metadata text representations with raw user voting distributions, the project creates a stable, hybrid suggestion feed.",
-    challenge: "The cold-start problem (suggesting movies to new users with zero history) and sparsity (most users only rate a tiny fraction of a massive database) cause traditional recommendation models to break or suggest only generic blockbusters.",
-    solution: "The planned design uses content-based filtering (TF-IDF on summaries and genres) to build an initial user profile during onboarding. Once the user begins rating movies, a Collaborative Filtering engine using Singular Value Decomposition (SVD) dynamically recalculates similarity weights to surface niche recommendations, resolving both sparsity and cold-start hurdles.",
+    color: "#F97316",
+    timeline: "Q4 2026 (Concept)",
+    role: "Founder & Strategic Director",
+    context: "Conceptual Startup Plan",
+    tags: ["Product Curation", "Branding Strategy", "Lifestyle Tech"],
+    overview: "LyfChanger is a future startup plan currently in its conceptual design phase. The goal is to build a premium, digital-first wellness ecosystem. Rather than just offering generic habits or products, LyfChanger aims to curate physical lifestyle merchandise (such as custom organic hoodies, smart water flasks, and sensory tools) that synchronize with a dedicated mindfulness tracking application.",
+    challenge: "Formulating a viable value proposition that stands out in the crowded wellness market, while structuring a lean manufacturing supply chain for premium custom materials.",
+    solution: "The startup model focuses on high-ticket, limited-run custom merchandise drops promoted through high-aesthetic cinematic storytelling on social media. The digital application acts as an exclusive membership gateway, where users receive custom habit-building challenges that pair with their physical wellness gear.",
     theme: {
-      bg: "bg-[#FAF5EC]",
-      text: "text-[#2B231D]",
+      bg: "bg-[#091A17]",
+      text: "text-[#ECE5DA]",
+      subtext: "text-emerald-350/60",
+      border: "border-emerald-950/50",
+      cardBg: "bg-[#0C2420]",
+      badge: "bg-emerald-950/40 text-emerald-400 border-emerald-800/30",
+      titleFont: "font-serif italic font-bold tracking-wide",
+      bodyFont: "font-sans text-[#D4CBBF] font-light leading-relaxed",
+      accentColor: "#F97316",
+      isDark: true
+    },
+    techStack: [
+      { name: "Brand Curation", desc: "Designing premium visual identities and unique aesthetic guidelines for lifestyle products." },
+      { name: "Supply Chain Strategy", desc: "Structuring manufacturer relations for organic cotton fabrics and sustainable smart hardware." },
+      { name: "Ecosystem Design", desc: "Modeling a dual-channel ecosystem connecting physical wellness assets with digital behavioral analytics." }
+    ],
+    gallery: []
+  },
+  "cafe-marketing": {
+    name: "Local Cafe Web & Marketing Service",
+    tagline: "Web Development and Brand Placement in Greater Noida.",
+    description: "An unnamed business venture managing digital assets for local Greater Noida restaurants, directing junior developers.",
+    status: "COMPLETED",
+    color: "#FF8F00",
+    timeline: "Jul 2023 - Feb 2024",
+    role: "Founder & Team Leader",
+    context: "High School Business Venture",
+    tags: ["Project Management", "Web Dev", "Marketing Retainers"],
+    overview: "This business was a local web design and digital marketing service bootstrapped in Class 11. Our team visited local Greater Noida restaurants and cafes to pitch web contracts, helping establish responsive, modern websites and managing social channels.",
+    challenge: "Delivering clean, custom responsive websites and high-engagement content for local businesses under high school schedules, while directing a team of junior developers.",
+    solution: "I managed client contracts and coordinated operations, assigning development pipelines to talented junior developers. We designed responsive promotional templates and established organic content schedules for client Instagram pages, building valuable early leadership and sales experience.",
+    theme: {
+      bg: "bg-[#FAF9F5]",
+      text: "text-stone-900",
       subtext: "text-stone-500",
-      border: "border-stone-200",
+      border: "border-stone-250/70",
       cardBg: "bg-white",
-      badge: "bg-blue-50 text-blue-700 border-blue-200",
-      titleFont: "font-serif font-black tracking-tight",
-      bodyFont: "font-serif text-[#3E342E] leading-relaxed",
-      accentColor: "#3B82F6",
+      badge: "bg-amber-50 text-amber-700 border-amber-200",
+      titleFont: "font-sans font-black tracking-tight",
+      bodyFont: "font-sans text-stone-700 leading-relaxed",
+      accentColor: "#FF8F00",
       isDark: false
     },
     techStack: [
-      { name: "Python", desc: "Primary environment for data parsing, vector creation, and modeling." },
-      { name: "Scikit-Learn", desc: "Used for TF-IDF vectorization, cosine similarity metrics, and SVD modeling." },
-      { name: "Pandas & NumPy", desc: "For loading, cleaning, and indexing the 45,000-movie dataset." },
-      { name: "Streamlit", desc: "To construct a quick, responsive dashboard mockup for testing predictions." }
+      { name: "Project Management", desc: "Coordinating schedules, client reviews, and milestones for junior developers." },
+      { name: "Web Development", desc: "HTML, CSS, and basic JavaScript layouts built for local business landing pages." },
+      { name: "Local Brand Marketing", desc: "Setting up organic campaign calendars and targeting local Greater Noida students." }
     ],
-    gallery: [
-      {
-        title: "Recommendation Matrix Flowchart",
-        desc: "Process diagram showing how content-based similarity lists are merged with collaborative user-user matrices.",
-        type: "vector",
-        render: () => (
-          <div className="w-full h-full bg-slate-950 flex flex-col items-center justify-center p-6 relative rounded-xl border border-blue-500/20 font-space-mono text-blue-400">
-            <div className="absolute top-4 left-4 text-[8px] uppercase tracking-wider text-blue-400/50">MODEL FLOW ARCS</div>
-            <div className="flex gap-4 items-center justify-center w-full mt-4">
-              <div className="border border-blue-500/30 p-2.5 rounded text-center text-[9px] w-24 bg-black">
-                <span>USER INPUT</span>
-                <span className="block text-[7px] text-slate-500 mt-1">Movie Ratings</span>
-              </div>
-              <span className="text-[12px]">→</span>
-              <div className="flex flex-col gap-2">
-                <div className="border border-blue-500/30 p-1.5 rounded text-center text-[8px] bg-slate-900">TF-IDF Vectorizer</div>
-                <div className="border border-blue-500/30 p-1.5 rounded text-center text-[8px] bg-slate-900">SVD Collaborative</div>
-              </div>
-              <span className="text-[12px]">→</span>
-              <div className="border border-blue-500/30 p-2.5 rounded text-center text-[9px] w-24 bg-black">
-                <span>HYBRID LIST</span>
-                <span className="block text-[7px] text-slate-500 mt-1">Top-10 Scores</span>
-              </div>
-            </div>
-            <div className="mt-6 text-[9px] text-slate-500 text-center">Calculates cosine similarity in under 12ms.</div>
-          </div>
-        )
-      }
-    ],
+    gallery: [],
     github: null,
     demo: null,
     docs: null
@@ -288,128 +429,6 @@ const projectsDetails = {
     github: null,
     demo: null,
     docs: null
-  },
-  "lyfchanger": {
-    name: "LyfChanger",
-    tagline: "A Premium Habit Curation and Curated Wellness Merchandise Concept.",
-    description: "An upcoming lifestyle ecosystem focused on bridging modern habit tracking with highly custom, premium organic wellness merchandise.",
-    status: "PLANNED",
-    color: "#F97316",
-    timeline: "Q4 2026 (Concept)",
-    role: "Founder & Strategic Director",
-    context: "Conceptual Startup Plan",
-    tags: ["Product Curation", "Branding Strategy", "Lifestyle Tech"],
-    overview: "LyfChanger is a future startup plan currently in its conceptual design phase. The goal is to build a premium, digital-first wellness ecosystem. Rather than just offering generic habits or products, LyfChanger aims to curate physical lifestyle merchandise (such as custom organic hoodies, smart water flasks, and sensory tools) that synchronize with a dedicated mindfulness tracking application.",
-    challenge: "Formulating a viable value proposition that stands out in the crowded wellness market, while structuring a lean manufacturing supply chain for premium custom materials.",
-    solution: "The startup model focuses on high-ticket, limited-run custom merchandise drops promoted through high-aesthetic cinematic storytelling on social media. The digital application acts as an exclusive membership gateway, where users receive custom habit-building challenges that pair with their physical wellness gear.",
-    theme: {
-      bg: "bg-[#091A17]",
-      text: "text-[#ECE5DA]",
-      subtext: "text-emerald-300/60",
-      border: "border-emerald-950/50",
-      cardBg: "bg-[#0C2420]",
-      badge: "bg-emerald-950/40 text-emerald-400 border-emerald-800/30",
-      titleFont: "font-serif italic font-bold tracking-wide",
-      bodyFont: "font-sans text-[#D4CBBF] font-light leading-relaxed",
-      accentColor: "#F97316",
-      isDark: true
-    },
-    techStack: [
-      { name: "Brand Curation", desc: "Designing premium visual identities and unique aesthetic guidelines for lifestyle products." },
-      { name: "Supply Chain Strategy", desc: "Structuring manufacturer relations for organic cotton fabrics and sustainable smart hardware." },
-      { name: "Ecosystem Design", desc: "Modeling a dual-channel ecosystem connecting physical wellness assets with digital behavioral analytics." }
-    ],
-    gallery: []
-  },
-  "streetwear-brand": {
-    name: "Custom Streetwear Brand",
-    tagline: "E-Commerce, Branding, and Marketing Bootstrapping Experience in Class 11.",
-    description: "My first real business venture, generating revenue while testing brand placement, logistics, and sales cycles.",
-    status: "COMPLETED",
-    color: "#E11D48",
-    timeline: "Jul 2023 - Feb 2024",
-    role: "Founder / E-Commerce Operator",
-    context: "High School Business Venture",
-    tags: ["Entrepreneurship", "Digital Marketing", "Logistics", "Branding"],
-    overview: "Launched during high school (Class 11), this custom streetwear brand was my entry point into entrepreneurship. The business model centered on custom print-on-demand streetwear apparel and providing organic social media marketing consultancies for local brands. It taught me key concepts in product positioning, price elasticity, and cash-flow management.",
-    challenge: "Having zero upfront capital to order inventory and no industry connections meant I had to figure out print supply chains and shipping logistics while balancing schoolwork.",
-    solution: "I integrated a print-on-demand drop-shipping supplier network directly to a social media store page, removing the need for upfront warehousing costs. I ran organic reels campaigns on Instagram to acquire customers, generating approximately ₹84,000 in total sales with zero ad spend. I personally managed order entry, courier tracking, and customer support loops.",
-    theme: {
-      bg: "bg-[#FAF8F5]",
-      text: "text-stone-900",
-      subtext: "text-stone-500",
-      border: "border-stone-250/70",
-      cardBg: "bg-white",
-      badge: "bg-rose-50 text-rose-700 border-rose-200",
-      titleFont: "font-sans font-black tracking-wider uppercase",
-      bodyFont: "font-sans text-stone-700 leading-relaxed",
-      accentColor: "#E11D48",
-      isDark: false
-    },
-    techStack: [
-      { name: "Organic Marketing", desc: "Viral short-form video creation and targeted hashtags to drive storefront clicks." },
-      { name: "Drop-shipping API", desc: "Connecting client orders directly to manufacturing partners for fulfillment." },
-      { name: "Financial Tracking", desc: "Managing profit margins, shipping fees, returns, and net cash flows." }
-    ],
-    gallery: [
-      {
-        title: "Entrepreneurship Certificate",
-        desc: "Credential verifying project completion, business logic validation, and financial milestone achievements.",
-        type: "image",
-        url: "/certificates/cert-1.jpg"
-      },
-      {
-        title: "Matlab Performance Modeling",
-        desc: "Certificate showing study of data structures and modeling, applied to inventory forecasts.",
-        type: "image",
-        url: "/certificates/cert-6.jpg"
-      }
-    ],
-    github: null,
-    demo: null,
-    docs: null
-  },
-  "echos": {
-    name: "Echos",
-    tagline: "Semantic Intelligence Engine for Personal Notes and Mind Mapping.",
-    description: "A digital knowledge system that organizes fragmented thoughts into structured relational semantic hubs.",
-    status: "PLANNED",
-    color: "#6366F1",
-    timeline: "Q4 2026 (Planned)",
-    role: "Lead Creator",
-    context: "Hackaccino 4.0 Prototype Idea",
-    tags: ["Vector Databases", "Semantic Search", "Next.js", "AI APIs"],
-    overview: "Echos is a concept designed to bridge the gap between note-taking and knowledge graph discovery. Instead of sorting files into manual folders, Echos reads short textual ideas, embeds them using machine learning models, and maps links between them based on conceptual overlap, creating an automatic wiki of your thoughts.",
-    challenge: "Parsing messy, unformatted human language in real-time and clustering it without producing massive, confusing node clusters that are hard to navigate.",
-    solution: "The model will pass inputs through a text embedding model (e.g. OpenAI text-embedding-3-small) to project text into a high-dimensional vector space. Nodes are grouped using density-based spatial clustering (DBSCAN). The frontend maps these clusters as interactive, floating constellation stars using a Canvas-based coordinate layout.",
-    theme: {
-      bg: "bg-white",
-      text: "text-zinc-900",
-      subtext: "text-zinc-500",
-      border: "border-zinc-200",
-      cardBg: "bg-zinc-50",
-      badge: "bg-indigo-50 text-indigo-700 border-indigo-200",
-      titleFont: "font-sans font-bold tracking-tight",
-      bodyFont: "font-sans text-zinc-700 leading-relaxed",
-      accentColor: "#6366F1",
-      isDark: false
-    },
-    techStack: [
-      { name: "Vector Database", desc: "To store high-dimensional text vectors and perform rapid cosine distance checks." },
-      { name: "Next.js App Router", desc: "For Server Actions handling background embedding calls." },
-      { name: "D3 Force Graph", desc: "To render dynamic, physics-based connection layouts on the client browser." }
-    ],
-    gallery: [
-      {
-        title: "Hackaccino Hackathon Backdrop",
-        desc: "Certificate representing my development roots during the Hackaccino 4.0 hackathon.",
-        type: "image",
-        url: "/hackathons/hackaccino.jpg"
-      }
-    ],
-    github: null,
-    demo: null,
-    docs: null
   }
 };
 
@@ -460,7 +479,7 @@ export default function ProjectDetailPage({ params }) {
           <span className="transform group-hover:-translate-x-1 transition-transform duration-200 text-[13px]">←</span> Back to Lab
         </Link>
         <div className={`flex items-center gap-2 font-space-mono text-[9px] uppercase tracking-[0.2em] ${theme.isDark ? "text-slate-500" : "text-slate-400"} font-bold`}>
-          <span className={`w-1.5 h-1.5 rounded-full ${theme.isDark ? "bg-slate-750" : "bg-slate-300"}`} />
+          <span className={`w-1.5 h-1.5 rounded-full ${theme.isDark ? "bg-slate-700" : "bg-slate-300"}`} />
           CASE STUDY // {slug}
         </div>
       </div>
@@ -530,7 +549,7 @@ export default function ProjectDetailPage({ params }) {
             <span className={`block font-space-mono text-[9px] ${theme.isDark ? "text-slate-500" : "text-slate-400"} uppercase tracking-widest font-black mb-1`}>TECH STACK</span>
             <div className="flex flex-wrap gap-1 mt-0.5">
               {project.tags.slice(0, 2).map((t) => (
-                <span key={t} className={`px-1.5 py-0.5 rounded ${theme.isDark ? "bg-[#0c2420] text-emerald-300 border-emerald-950/40" : "bg-slate-100 text-slate-600 border-slate-200/40"} font-space-mono text-[8px] border`}>{t}</span>
+                <span key={t} className={`px-1.5 py-0.5 rounded ${theme.isDark ? "bg-[#0c2420] text-emerald-305 border-emerald-950/40" : "bg-slate-100 text-slate-600 border-slate-200/40"} font-space-mono text-[8px] border`}>{t}</span>
               ))}
             </div>
           </div>
