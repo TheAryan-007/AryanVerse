@@ -58,10 +58,11 @@ function CanvasStarfield() {
     window.addEventListener("resize", resizeCanvas);
 
     // Populate stars & floating particles
-    const particlesCount = 80;
+    const isMobile = window.innerWidth < 768;
+    const particlesCount = isMobile ? 15 : 80;
     const particles = [];
     for (let i = 0; i < particlesCount; i++) {
-      const isFloating = Math.random() > 0.4;
+      const isFloating = !isMobile && Math.random() > 0.4;
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,

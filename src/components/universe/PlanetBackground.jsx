@@ -511,8 +511,9 @@ export default function PlanetBackground({ transitionState, onPlanetClick }) {
       return;
     }
 
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
     // Star data buffer generation
-    const N = 800;
+    const N = isMobile ? 250 : 800;
     const starPos = new Float32Array(N * 2);
     const starSizes = new Float32Array(N);
     const starColors = new Float32Array(N * 3);
@@ -599,7 +600,8 @@ export default function PlanetBackground({ transitionState, onPlanetClick }) {
     const resize = () => {
       W = window.innerWidth;
       H = window.innerHeight;
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const isMobile = W < 768;
+      const dpr = isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = W * dpr;
       canvas.height = H * dpr;
       gl.viewport(0, 0, canvas.width, canvas.height);

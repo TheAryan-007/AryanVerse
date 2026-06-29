@@ -60,7 +60,8 @@ function CanvasStarfield() {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    const particlesCount = 60;
+    const isMobile = window.innerWidth < 768;
+    const particlesCount = isMobile ? 15 : 60;
     const particles = [];
     for (let i = 0; i < particlesCount; i++) {
       particles.push({
@@ -68,8 +69,8 @@ function CanvasStarfield() {
         y: Math.random() * canvas.height,
         radius: Math.random() * 1.2 + 0.3,
         alpha: Math.random() * 0.4 + 0.1,
-        speedX: (Math.random() - 0.5) * 0.04,
-        speedY: -Math.random() * 0.06 - 0.01,
+        speedX: isMobile ? 0 : (Math.random() - 0.5) * 0.04,
+        speedY: isMobile ? 0 : -Math.random() * 0.06 - 0.01,
         twinkleSpeed: Math.random() * 0.005 + 0.001,
         factor: Math.random() > 0.5 ? 1 : -1,
       });
@@ -947,6 +948,7 @@ export default function ArchivePage() {
   const [hoveredHotspotIdx, setHoveredHotspotIdx] = useState(null);
   const [showMystery, setShowMystery] = useState(false);
   const [selectedTheme, setSelectedTheme] = useState("All");
+  const [showAllReviews, setShowAllReviews] = useState(false);
 
   const [customEntries, setCustomEntries] = useState(() => {
     if (typeof window !== "undefined") {
@@ -989,7 +991,8 @@ export default function ArchivePage() {
   const [newTitle, setNewTitle] = useState("");
   const [newCategory, setNewCategory] = useState("Movies");
   const [newDate, setNewDate] = useState("");
-  const [newRating, setNewRating] = useState(5);
+  const [newRating, setNewRating] = useState(9.0);
+  const [editingEntry, setEditingEntry] = useState(null);
   const [newDescription, setNewDescription] = useState("");
   const [newImage, setNewImage] = useState("");
   const [newImageUrl, setNewImageUrl] = useState("");
@@ -1000,6 +1003,7 @@ export default function ArchivePage() {
   const [selectedBlogEntry, setSelectedBlogEntry] = useState(null);
 
   const openAddModal = (categoryName) => {
+    setEditingEntry(null);
     setNewTitle("");
     const defaultCat = 
       activeChamberIdx === 0 
@@ -1009,9 +1013,10 @@ export default function ArchivePage() {
           : activeChamberIdx === 4 
             ? "Novel" 
             : "Current Missions";
-    setNewCategory(categoryName || defaultCat);
+    const selectedCat = categoryName || defaultCat;
+    setNewCategory(selectedCat);
     setNewDate(new Date().toISOString().split("T")[0]);
-    setNewRating(5);
+    setNewRating(selectedCat === "Current Missions" ? 5 : 9.0);
     setNewDescription("");
     setNewImage("");
     setNewImageUrl("");
@@ -1019,6 +1024,22 @@ export default function ArchivePage() {
     setNewBlogImageFit("cover");
     setNewBlogImagePos(50);
     setNewBlogImageZoom(100);
+    setIsAddModalOpen(true);
+  };
+
+  const openEditModal = (entry) => {
+    setEditingEntry(entry);
+    setNewTitle(entry.title);
+    setNewCategory(entry.category);
+    setNewDate(entry.date);
+    setNewRating(entry.rating);
+    setNewDescription(entry.description);
+    setNewImage(entry.thumbnailCode);
+    setNewImageUrl(entry.imageUrl || "");
+    setNewBlogContent(entry.content || "");
+    setNewBlogImageFit(entry.imageFit || "cover");
+    setNewBlogImagePos(entry.imagePosition || 50);
+    setNewBlogImageZoom(entry.imageZoom || 100);
     setIsAddModalOpen(true);
   };
 
@@ -1034,29 +1055,63 @@ export default function ArchivePage() {
   };
 
   const handleAddEntry = () => {
-    const newEntry = {
-      title: newTitle,
-      thumbnailCode: newImage || "interstellar",
-      tag: newCategory === "Favorite Films" ? "Favorite Film" : newCategory,
-      category: newCategory,
-      date: newDate,
-      rating: newRating,
-      description: newDescription,
-      content: activeChamberIdx === 3 ? newBlogContent : "",
-      imageFit: activeChamberIdx === 3 ? newBlogImageFit : "cover",
-      imagePosition: activeChamberIdx === 3 ? newBlogImagePos : 50,
-      imageZoom: activeChamberIdx === 3 ? newBlogImageZoom : 100,
-      isCustom: true
-    };
+    if (editingEntry) {
+      const chamberCustoms = customEntries[activeChamberIdx] || [];
+      const updatedChamberCustoms = chamberCustoms.map((entry) => {
+        if (entry === editingEntry || (entry.title === editingEntry.title && entry.description === editingEntry.description && entry.date === editingEntry.date)) {
+          return {
+            ...entry,
+            title: newTitle,
+            thumbnailCode: newImage || "interstellar",
+            tag: newCategory === "Favorite Films" ? "Favorite Film" : newCategory,
+            category: newCategory,
+            date: newDate,
+            rating: newRating,
+            description: newDescription,
+            content: activeChamberIdx === 3 ? newBlogContent : "",
+            imageFit: activeChamberIdx === 3 ? newBlogImageFit : "cover",
+            imagePosition: activeChamberIdx === 3 ? newBlogImagePos : 50,
+            imageZoom: activeChamberIdx === 3 ? newBlogImageZoom : 100,
+          };
+        }
+        return entry;
+      });
 
-    const updated = {
-      ...customEntries,
-      [activeChamberIdx]: [newEntry, ...(customEntries[activeChamberIdx] || [])]
-    };
+      const updated = {
+        ...customEntries,
+        [activeChamberIdx]: updatedChamberCustoms
+      };
 
-    setCustomEntries(updated);
-    if (typeof window !== "undefined") {
-      localStorage.setItem("aryan_archive_custom_entries", JSON.stringify(updated));
+      setCustomEntries(updated);
+      if (typeof window !== "undefined") {
+        localStorage.setItem("aryan_archive_custom_entries", JSON.stringify(updated));
+      }
+      setEditingEntry(null);
+    } else {
+      const newEntry = {
+        title: newTitle,
+        thumbnailCode: newImage || "interstellar",
+        tag: newCategory === "Favorite Films" ? "Favorite Film" : newCategory,
+        category: newCategory,
+        date: newDate,
+        rating: newRating,
+        description: newDescription,
+        content: activeChamberIdx === 3 ? newBlogContent : "",
+        imageFit: activeChamberIdx === 3 ? newBlogImageFit : "cover",
+        imagePosition: activeChamberIdx === 3 ? newBlogImagePos : 50,
+        imageZoom: activeChamberIdx === 3 ? newBlogImageZoom : 100,
+        isCustom: true
+      };
+
+      const updated = {
+        ...customEntries,
+        [activeChamberIdx]: [newEntry, ...(customEntries[activeChamberIdx] || [])]
+      };
+
+      setCustomEntries(updated);
+      if (typeof window !== "undefined") {
+        localStorage.setItem("aryan_archive_custom_entries", JSON.stringify(updated));
+      }
     }
     setIsAddModalOpen(false);
   };
@@ -1079,35 +1134,79 @@ export default function ArchivePage() {
     }
   };
 
-  const renderStars = (ratingVal) => {
-    let starsCount = 5;
-    if (typeof ratingVal === "string" && ratingVal.includes("/")) {
-      const parts = ratingVal.split("/");
-      const val = parseFloat(parts[0]);
-      const max = parseFloat(parts[1]) || 10;
-      starsCount = Math.round((val / max) * 5);
+  const getRatingStyle = (ratingVal) => {
+    let num = 10;
+    if (typeof ratingVal === "string") {
+      if (ratingVal.includes("/")) {
+        num = parseFloat(ratingVal.split("/")[0]) || 10;
+      } else {
+        num = parseFloat(ratingVal) || 10;
+      }
     } else {
-      starsCount = Math.round(parseFloat(ratingVal)) || 5;
+      num = parseFloat(ratingVal) || 10;
     }
 
-    return (
-      <div className="flex items-center gap-0.5 mt-0.5">
-        {[1, 2, 3, 4, 5].map((star) => (
-          <Star 
-            key={star} 
-            className={`w-3.5 h-3.5 ${
-              star <= starsCount 
-                ? "text-yellow-400 fill-yellow-400 filter drop-shadow-[0_0_4px_rgba(250,204,21,0.6)]" 
-                : "text-slate-600"
-            }`} 
-          />
-        ))}
-      </div>
-    );
+    if (num >= 10.0) {
+      return {
+        text: `${num}/10`,
+        label: "Beyond Universe",
+        color: "#c084fc",
+        bg: "rgba(192,132,252,0.15)",
+        border: "rgba(192,132,252,0.4)",
+        glow: "0 0 15px rgba(192,132,252,0.3)"
+      };
+    } else if (num >= 9.0) {
+      return {
+        text: `${num}/10`,
+        label: "Masterpiece",
+        color: "#00ff88",
+        bg: "rgba(0,255,136,0.1)",
+        border: "rgba(0,255,136,0.3)",
+        glow: "0 0 12px rgba(0,255,136,0.2)"
+      };
+    } else if (num >= 7.0) {
+      return {
+        text: `${num}/10`,
+        label: "Highly Recommended",
+        color: "#a3e635",
+        bg: "rgba(163,230,53,0.1)",
+        border: "rgba(163,230,53,0.3)",
+        glow: "0 0 10px rgba(163,230,53,0.15)"
+      };
+    } else if (num >= 5.0) {
+      return {
+        text: `${num}/10`,
+        label: "Decent / Good",
+        color: "#fbbf24",
+        bg: "rgba(251,191,36,0.1)",
+        border: "rgba(251,191,36,0.3)",
+        glow: "0 0 10px rgba(251,191,36,0.15)"
+      };
+    } else if (num >= 3.0) {
+      return {
+        text: `${num}/10`,
+        label: "Mediocre",
+        color: "#fb923c",
+        bg: "rgba(251,146,60,0.1)",
+        border: "rgba(251,146,60,0.3)",
+        glow: "0 0 10px rgba(251,146,60,0.15)"
+      };
+    } else {
+      return {
+        text: `${num}/10`,
+        label: "Avoid",
+        color: "#ef4444",
+        bg: "rgba(239,68,68,0.1)",
+        border: "rgba(239,68,68,0.3)",
+        glow: "0 0 10px rgba(239,68,68,0.15)"
+      };
+    }
   };
 
   const [suggestTitle, setSuggestTitle] = useState("");
   const [suggestSender, setSuggestSender] = useState("");
+  const [suggestRating, setSuggestRating] = useState("");
+  const [suggestReview, setSuggestReview] = useState("");
   const [suggestions, setSuggestions] = useState(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("aryan_archive_suggestions");
@@ -1142,6 +1241,8 @@ export default function ArchivePage() {
     const newSuggestion = {
       title: suggestTitle,
       sender: suggestSender,
+      rating: suggestRating,
+      review: suggestReview,
       date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
     };
     
@@ -1172,6 +1273,8 @@ export default function ArchivePage() {
     }
     setSuggestTitle("");
     setSuggestSender("");
+    setSuggestRating("");
+    setSuggestReview("");
   };
 
   const mainRef = useRef(null);
@@ -1179,6 +1282,7 @@ export default function ArchivePage() {
 
   useEffect(() => {
     setSelectedTheme(activeChamberIdx === 5 ? "Current Missions" : "All");
+    setShowAllReviews(false);
   }, [activeChamberIdx]);
 
   // Mouse Parallax movements
@@ -1245,14 +1349,31 @@ export default function ArchivePage() {
   };
   const activeChamber = chambersConfig[activeChamberIdx];
 
+  const getRatingValue = (ratingVal) => {
+    if (typeof ratingVal === "number") return ratingVal;
+    if (typeof ratingVal === "string") {
+      if (ratingVal.includes("/")) {
+        return parseFloat(ratingVal.split("/")[0]) || 0;
+      }
+      return parseFloat(ratingVal) || 0;
+    }
+    return 0;
+  };
+
   const chamberEntries = [
     ...(customEntries[activeChamberIdx] || []),
     ...activeChamber.entries
   ];
 
-  const filteredEntries = chamberEntries.filter(
-    (entry) => selectedTheme === "All" || entry.category === selectedTheme
-  );
+  const filteredEntries = chamberEntries.filter((entry) => {
+    if (selectedTheme === "Favourites") {
+      const ratingVal = getRatingValue(entry.rating);
+      return entry.category === "Favourites" || (activeChamberIdx === 0 && ratingVal > 9);
+    }
+    return selectedTheme === "All" || entry.category === selectedTheme;
+  });
+
+  const displayedEntries = showAllReviews ? filteredEntries : filteredEntries.slice(0, 4);
 
   return (
     <main
@@ -1797,6 +1918,14 @@ export default function ArchivePage() {
                             >
                               {entry.tag}
                             </span>
+                            {activeChamberIdx === 0 && getRatingValue(entry.rating) > 9 && (
+                              <span 
+                                className="absolute top-4 right-4 font-space-mono text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded border text-yellow-400 z-20 flex items-center gap-1 bg-yellow-500/20 border-yellow-500/40 shadow-[0_0_10px_rgba(234,179,8,0.25)]"
+                              >
+                                <Star className="w-3 h-3 fill-yellow-400 animate-pulse" />
+                                Favourite
+                              </span>
+                            )}
                           </div>
 
                           <div className="flex flex-col justify-between flex-grow px-6 pb-6 gap-4">
@@ -1818,15 +1947,26 @@ export default function ArchivePage() {
                               </span>
 
                               {entry.isCustom && isAdmin && (
-                                <button
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    handleDeleteEntry(entry);
-                                  }}
-                                  className="font-space-mono text-[9px] font-black uppercase tracking-wider text-red-500 hover:text-red-400 cursor-pointer hover:underline transition-colors"
-                                >
-                                  Delete Post
-                                </button>
+                                <div className="flex items-center gap-3">
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      openEditModal(entry);
+                                    }}
+                                    className="font-space-mono text-[9px] font-black uppercase tracking-wider text-emerald-400 hover:text-emerald-300 cursor-pointer hover:underline transition-colors"
+                                  >
+                                    Edit Post
+                                  </button>
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      handleDeleteEntry(entry);
+                                    }}
+                                    className="font-space-mono text-[9px] font-black uppercase tracking-wider text-red-500 hover:text-red-400 cursor-pointer hover:underline transition-colors"
+                                  >
+                                    Delete Post
+                                  </button>
+                                </div>
                               )}
                             </div>
                           </div>
@@ -1836,7 +1976,7 @@ export default function ArchivePage() {
                   ) : (
                     /* Existing vertical list for other chambers */
                     <div className="flex flex-col gap-6 w-full">
-                      {filteredEntries.map((entry, idx) => (
+                      {displayedEntries.map((entry, idx) => (
                         <div
                           key={idx}
                           onClick={() => {
@@ -1890,10 +2030,27 @@ export default function ArchivePage() {
                                     {entry.rating === 5 ? "High Priority" : entry.rating === 3 ? "Medium Priority" : "Low Priority"}
                                   </div>
                                 ) : (
-                                  <>
-                                    {renderStars(entry.rating)}
-                                    <span className="font-space-mono text-[7px] text-slate-500 uppercase tracking-widest mt-0.5">My Rating</span>
-                                  </>
+                                  (() => {
+                                    const style = getRatingStyle(entry.rating);
+                                    return (
+                                      <div className="flex flex-col items-end gap-1.5">
+                                        <div 
+                                          className="font-orbitron text-xs font-black px-2.5 py-1 rounded border tracking-wider shadow-sm flex items-center gap-1.5"
+                                          style={{
+                                            color: style.color,
+                                            borderColor: style.border,
+                                            backgroundColor: style.bg,
+                                            boxShadow: style.glow
+                                          }}
+                                        >
+                                          {style.text}
+                                        </div>
+                                        <span className="font-space-mono text-[7px] text-slate-500 uppercase tracking-widest mt-0.5">
+                                          {style.label}
+                                        </span>
+                                      </div>
+                                    );
+                                  })()
                                 )}
                               </div>
                             </div>
@@ -1916,18 +2073,56 @@ export default function ArchivePage() {
                               </span>
 
                               {entry.isCustom && isAdmin && (
-                                <button
-                                  onClick={() => handleDeleteEntry(entry)}
-                                  className="font-space-mono text-[9px] font-black uppercase tracking-wider text-red-500 hover:text-red-400 cursor-pointer hover:underline transition-colors"
-                                  style={{ textShadow: "0 0 10px rgba(239, 68, 68, 0.4)" }}
-                                >
-                                  Delete Entry
-                                </button>
+                                <div className="flex items-center gap-3">
+                                  <button
+                                    onClick={() => openEditModal(entry)}
+                                    className="font-space-mono text-[9px] font-black uppercase tracking-wider text-emerald-400 hover:text-emerald-300 cursor-pointer hover:underline transition-colors"
+                                    style={{ textShadow: "0 0 10px rgba(16, 185, 129, 0.4)" }}
+                                  >
+                                    Edit Entry
+                                  </button>
+                                  <button
+                                    onClick={() => handleDeleteEntry(entry)}
+                                    className="font-space-mono text-[9px] font-black uppercase tracking-wider text-red-500 hover:text-red-400 cursor-pointer hover:underline transition-colors"
+                                    style={{ textShadow: "0 0 10px rgba(239, 68, 68, 0.4)" }}
+                                  >
+                                    Delete Entry
+                                  </button>
+                                </div>
                               )}
                             </div>
                           </div>
                         </div>
                       ))}
+                      
+                      {!showAllReviews && filteredEntries.length > 4 && (
+                        <div className="flex justify-center mt-6 w-full shrink-0">
+                          <button
+                            onClick={() => setShowAllReviews(true)}
+                            className="px-6 py-2.5 rounded-xl font-space-mono text-xs font-black uppercase tracking-wider border border-white/10 bg-white/5 hover:bg-white/10 text-white cursor-pointer transition-all hover:border-emerald-500/30 hover:scale-[1.03]"
+                            style={{
+                              boxShadow: `0 0 15px rgba(255,255,255,0.05)`,
+                              textShadow: `0 0 8px rgba(255,255,255,0.3)`
+                            }}
+                          >
+                            Show All ({filteredEntries.length} Reviews)
+                          </button>
+                        </div>
+                      )}
+                      
+                      {showAllReviews && filteredEntries.length > 4 && (
+                        <div className="flex justify-center mt-6 w-full shrink-0">
+                          <button
+                            onClick={() => setShowAllReviews(false)}
+                            className="px-6 py-2.5 rounded-xl font-space-mono text-xs font-black uppercase tracking-wider border border-white/10 bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white cursor-pointer transition-all hover:border-red-500/20 hover:scale-[1.03]"
+                            style={{
+                              boxShadow: `0 0 15px rgba(255,255,255,0.02)`
+                            }}
+                          >
+                            Show Less
+                          </button>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
@@ -2141,6 +2336,31 @@ export default function ArchivePage() {
                           className="w-full bg-[#050508] border border-white/10 rounded-lg p-2.5 text-slate-200 outline-none focus:border-white/30"
                         />
                       </div>
+
+                      <div className="flex flex-col gap-1.5">
+                        <label className="text-slate-400 font-bold uppercase tracking-wider">Your Rating (1 - 10)</label>
+                        <input 
+                          type="number" 
+                          min="1"
+                          max="10"
+                          step="0.1"
+                          value={suggestRating} 
+                          onChange={(e) => setSuggestRating(e.target.value)} 
+                          placeholder="e.g. 9.0 (Optional)"
+                          className="w-full bg-[#050508] border border-white/10 rounded-lg p-2.5 text-slate-200 outline-none focus:border-white/30 font-orbitron font-bold"
+                        />
+                      </div>
+                      
+                      <div className="flex flex-col gap-1.5">
+                        <label className="text-slate-400 font-bold uppercase tracking-wider">Your Review / Thoughts</label>
+                        <textarea 
+                          value={suggestReview} 
+                          onChange={(e) => setSuggestReview(e.target.value)} 
+                          placeholder="e.g. A masterpiece of cinematography... (Optional)"
+                          rows={3}
+                          className="w-full bg-[#050508] border border-white/10 rounded-lg p-2.5 text-slate-200 outline-none focus:border-white/30 resize-none font-inter"
+                        />
+                      </div>
                       
                       <button
                         onClick={handleSuggestSubmit}
@@ -2184,14 +2404,43 @@ export default function ArchivePage() {
                         ).map((s, idx) => (
                           <div 
                             key={idx} 
-                            className="bg-white/5 border border-white/10 p-4 rounded-xl flex items-center justify-between transition-all hover:border-white/20"
+                            className="bg-white/5 border border-white/10 p-5 rounded-xl flex flex-col gap-3 transition-all hover:border-white/20 text-left"
                             style={{ borderColor: `${activeChamber.color}15` }}
                           >
-                            <div className="flex flex-col gap-1 text-left w-full overflow-hidden">
-                              <span className="font-orbitron text-sm font-black text-white truncate">{s.title}</span>
-                              <span className="font-space-mono text-[9px] uppercase tracking-wider font-bold" style={{ color: activeChamber.color }}>Suggested by: {s.sender}</span>
+                            <div className="flex items-start justify-between w-full gap-4">
+                              <div className="flex flex-col gap-1 overflow-hidden">
+                                <span className="font-orbitron text-sm font-black text-white">{s.title}</span>
+                                <span className="font-space-mono text-[9px] uppercase tracking-wider font-bold" style={{ color: activeChamber.color }}>
+                                  Suggested by: {s.sender}
+                                </span>
+                              </div>
+                              <div className="flex items-center gap-2 shrink-0">
+                                {s.rating && (
+                                  (() => {
+                                    const style = getRatingStyle(s.rating);
+                                    return (
+                                      <div 
+                                        className="font-orbitron text-[10px] font-black px-2 py-0.5 rounded border tracking-wider shadow-sm"
+                                        style={{
+                                          color: style.color,
+                                          borderColor: style.border,
+                                          backgroundColor: style.bg,
+                                          boxShadow: style.glow
+                                        }}
+                                      >
+                                        {style.text}
+                                      </div>
+                                    );
+                                  })()
+                                )}
+                                <span className="font-space-mono text-[8px] text-slate-500">{s.date}</span>
+                              </div>
                             </div>
-                            <span className="font-space-mono text-[8px] text-slate-500 shrink-0">{s.date}</span>
+                            {s.review && (
+                              <p className="font-inter text-slate-300 text-xs italic leading-relaxed border-l-2 border-white/10 pl-3 py-0.5 bg-white/[0.01]">
+                                "{s.review}"
+                              </p>
+                            )}
                           </div>
                         ))}
                       </div>
@@ -2392,15 +2641,17 @@ export default function ArchivePage() {
             {/* Header */}
             <div className="flex justify-between items-center px-6 py-4 border-b border-white/10 shrink-0">
               <h3 className="font-orbitron text-sm font-black text-white uppercase tracking-widest">
-                {activeChamberIdx === 0 
-                  ? "Add Movie Entry" 
-                  : activeChamberIdx === 1 
-                    ? "Add Story Entry" 
-                    : activeChamberIdx === 3
-                      ? "Add Blog Post"
-                      : activeChamberIdx === 4 
-                        ? "Add Book Entry" 
-                        : "Add Future Ambition"}
+                {editingEntry 
+                  ? "Edit Review Entry" 
+                  : activeChamberIdx === 0 
+                    ? "Add Movie Entry" 
+                    : activeChamberIdx === 1 
+                      ? "Add Story Entry" 
+                      : activeChamberIdx === 3
+                        ? "Add Blog Post"
+                        : activeChamberIdx === 4 
+                          ? "Add Book Entry" 
+                          : "Add Future Ambition"}
               </h3>
               <button
                 onClick={() => setIsAddModalOpen(false)}
@@ -2527,23 +2778,45 @@ export default function ArchivePage() {
                         </button>
                       </div>
                     ) : (
-                      <div className="flex items-center gap-1.5 h-10 mt-1">
-                        {[1, 2, 3, 4, 5].map((num) => (
-                          <button
-                            key={num}
-                            type="button"
-                            onClick={() => setNewRating(num)}
-                            className="p-1 focus:outline-none transition-transform hover:scale-125 cursor-pointer"
-                          >
-                            <Star 
-                              className={`w-6 h-6 transition-all ${
-                                num <= newRating 
-                                  ? "text-yellow-400 fill-yellow-400 filter drop-shadow-[0_0_6px_rgba(250,204,21,0.8)]" 
-                                  : "text-slate-600 hover:text-yellow-400/50"
-                              }`}
-                            />
-                          </button>
-                        ))}
+                      <div className="flex items-center gap-3 mt-1.5">
+                        <input
+                          type="number"
+                          min="1"
+                          max="10"
+                          step="0.1"
+                          value={newRating}
+                          onChange={(e) => {
+                            const val = parseFloat(e.target.value);
+                            if (!isNaN(val)) {
+                              setNewRating(Math.max(1, Math.min(10, val)));
+                            } else {
+                              setNewRating("");
+                            }
+                          }}
+                          placeholder="e.g. 9.5"
+                          className="w-24 bg-[#050508] border border-white/10 rounded-lg p-2 text-slate-200 outline-none focus:border-white/30 font-orbitron font-bold text-center"
+                        />
+                        {newRating !== "" && (() => {
+                          const style = getRatingStyle(newRating);
+                          return (
+                            <div className="flex items-center gap-2">
+                              <div 
+                                className="font-orbitron text-xs font-black px-2.5 py-0.5 rounded border tracking-wider shadow-sm"
+                                style={{
+                                  color: style.color,
+                                  borderColor: style.border,
+                                  backgroundColor: style.bg,
+                                  boxShadow: style.glow
+                                }}
+                              >
+                                {style.text}
+                              </div>
+                              <span className="font-space-mono text-[8px] text-slate-400 uppercase tracking-widest">
+                                — {style.label}
+                              </span>
+                            </div>
+                          );
+                        })()}
                       </div>
                     )}
                   </div>
@@ -2757,15 +3030,17 @@ export default function ArchivePage() {
                   boxShadow: `0 0 15px ${activeChamber.color}60`
                 }}
               >
-                {activeChamberIdx === 0 
-                  ? "Add Movie" 
-                  : activeChamberIdx === 1 
-                    ? "Add Story" 
-                    : activeChamberIdx === 3
-                      ? "Publish Blog"
-                      : activeChamberIdx === 4 
-                        ? "Add Book" 
-                        : "Add Ambition"}
+                {editingEntry 
+                  ? "Save Changes" 
+                  : activeChamberIdx === 0 
+                    ? "Add Movie" 
+                    : activeChamberIdx === 1 
+                      ? "Add Story" 
+                      : activeChamberIdx === 3
+                        ? "Publish Blog"
+                        : activeChamberIdx === 4 
+                          ? "Add Book" 
+                          : "Add Ambition"}
               </button>
             </div>
           </div>

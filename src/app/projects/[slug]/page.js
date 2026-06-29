@@ -56,6 +56,13 @@ const projectsDetails = {
     ],
     gallery: [
       {
+        title: "SkySentry AI Dashboard Overview",
+        desc: "Advanced threat classification overview interface showing Live Radar feeds, AI classification breakdowns, and multi-camera live feeds.",
+        type: "image",
+        url: "/skysentry-showcase.jpg",
+        aspect: "aspect-[16/10]"
+      },
+      {
         title: "Detection Interface Mockup",
         desc: "YOLOv10 model overlay classifying an incoming drone with high confidence and tracking indices.",
         type: "vector",
@@ -83,9 +90,10 @@ const projectsDetails = {
         )
       }
     ],
-    github: "https://github.com/TheAryan-007/SkySentry-AI",
+    github: "https://github.com/SavyamShukla/SkySentry",
     demo: null,
-    docs: "https://github.com/TheAryan-007/SkySentry-AI/blob/main/README.md"
+    docs: "https://github.com/SavyamShukla/SkySentry/blob/main/README.md",
+    pptUrl: "/Skysentry.pdf"
   },
   "echoes-within": {
     name: "Echoes Within",
@@ -156,9 +164,10 @@ const projectsDetails = {
         )
       }
     ],
-    github: null,
+    github: "https://github.com/SavyamShukla/EchosWithin",
     demo: null,
-    docs: null
+    docs: null,
+    pptUrl: "/Echos-Within-Presentation.pdf"
   },
   "intern-ease": {
     name: "Intern-Ease",
@@ -193,6 +202,21 @@ const projectsDetails = {
       { name: "Database Schema", desc: "SQLite database connections handled by Krishna Chaitanya for query execution." }
     ],
     gallery: [
+      {
+        title: "Intern-Ease Student Dashboard Overview",
+        desc: "AI-based internship matches feed, profile matching strength tracker, skills snapshot radar, and trending internship categories.",
+        type: "image",
+        url: "/intern-ease-dashboard.jpg",
+        aspect: "aspect-[16/10]"
+      },
+      {
+        title: "Intern-Ease Portal Header",
+        desc: "AI-based internship recommendation engine dashboard for the PM Internship Scheme, built for the Smart India Hackathon.",
+        type: "image",
+        url: "/intern-ease-showcase.png",
+        aspect: "aspect-[16/5]",
+        contain: true
+      },
       {
         title: "Hack Houdini Team Structure",
         desc: "Frontend: Nandini Mishra, Samriddhi Vishnoi. Backend: Prithul Jaiswal, Savyam Shukla, Aryan Chauhan. Database: Krishna Chaitanya.",
@@ -265,7 +289,8 @@ const projectsDetails = {
     ],
     github: null,
     demo: null,
-    docs: null
+    docs: null,
+    pptUrl: "/Bubble-Blast.pdf"
   },
   "aryanverse": {
     name: "AryanVerse",
@@ -355,7 +380,18 @@ const projectsDetails = {
       { name: "Supply Chain Strategy", desc: "Structuring relation maps for organic cotton mills and sustainable containers." },
       { name: "Ecosystem Design", desc: "Modeling a platform connecting physical clothing assets with digital analytics." }
     ],
-    gallery: []
+    gallery: [
+      {
+        title: "LyfChanger Visual Brand Identity",
+        desc: "High-fidelity brand logo design featuring a minimalist butterfly contour that symbolizes personal transformation and growth.",
+        type: "image",
+        url: "/lyfchanger-logo.png",
+        aspect: "aspect-[1/1]"
+      }
+    ],
+    github: null,
+    demo: null,
+    docs: null
   },
   "cafe-marketing": {
     name: "Local Cafe Web & Marketing Service",
@@ -388,7 +424,15 @@ const projectsDetails = {
       { name: "Web Development", desc: "Responsive layouts built using HTML and CSS for restaurant pages." },
       { name: "Brand Marketing", desc: "Setting up organic campaign calendars and targeting local Greater Noida students." }
     ],
-    gallery: [],
+    gallery: [
+      {
+        title: "Local Cafe Website Homepage",
+        desc: "High-fidelity landing page designed for local cafe business clients, optimizing services showcase, ratings, and call-to-action blocks.",
+        type: "image",
+        url: "/cafe-marketing-showcase.jpg",
+        aspect: "aspect-[16/10]"
+      }
+    ],
     github: null,
     demo: null,
     docs: null
@@ -494,6 +538,187 @@ const projectsDetails = {
     github: null,
     demo: null,
     docs: null
+  },
+  "project-nexus": {
+    name: "Project Nexus",
+    tagline: "Autonomous Multi-Agent Developer Swarms.",
+    description: "An upcoming developer sandbox designed to coordinate multiple independent AI coding agents to plan and build software pipelines.",
+    status: "CONCEPT",
+    color: "#E11D48",
+    timeline: "2027 Vision",
+    role: "Research Architect",
+    context: "Autonomous Coding Explorations",
+    tags: ["AI Agents", "Automated Coding", "AGI", "Next.js"],
+    overview: "Project Nexus is a conceptual sandbox designed to test multi-agent collaboration in software engineering. Instead of a single model writing code, Nexus coordinates specialized agents (e.g., Codebase Researcher, Database Planner, UI Builder, Linter & Tester) working in parallel within a secure sandbox directory to resolve software prompts.",
+    challenge: "Managing race conditions when multiple agents attempt to modify code simultaneously, maintaining context sync across different files, and optimizing loop diagnostics to prevent agents from getting stuck in iterative linting loops.",
+    solution: "?",
+    theme: {
+      bg: "bg-[#0F0204]",
+      text: "text-[#FAF0F1]",
+      subtext: "text-rose-300/60",
+      border: "border-rose-950/60",
+      cardBg: "bg-[#1F080C]/85 backdrop-blur-md",
+      badge: "bg-rose-950/40 text-rose-400 border-rose-800/30",
+      titleFont: "font-serif font-black tracking-tight",
+      bodyFont: "font-sans text-rose-100/90 text-[15px] leading-relaxed font-light",
+      accentColor: "#E11D48",
+      isDark: true
+    },
+    techStack: [
+      { name: "Orchestrator Agent", desc: "Coordinates file lock permissions and structures step pipelines." },
+      { name: "JSON RPC Messaging", desc: "Coordinates asynchronous inter-agent messages and feedback loops." },
+      { name: "AST Parser System", desc: "Synthesizes code edits and keeps semantic variables synchronized." }
+    ],
+    gallery: [
+      {
+        title: "Autonomous Swarm Visualizer",
+        desc: "Interactive visual mockup of multiple agents (Research, Write, Test) communicating to build a task.",
+        type: "vector",
+        render: () => (
+          <div className="w-full h-full bg-[#050102] flex flex-col items-center justify-center p-6 relative rounded-xl border border-rose-500/20 font-space-mono text-rose-400">
+            <div className="absolute top-4 left-4 text-[8px] uppercase tracking-wider text-rose-500/50">SWARM CONTROL HUB</div>
+            <div className="flex items-center gap-6 mt-4">
+              <div className="border border-rose-500/30 p-2 rounded bg-black/60 text-center text-[9px] w-20">
+                <span className="block font-bold">Research</span>
+                <span className="text-[7px] text-[#A855F7] animate-pulse">Scanning...</span>
+              </div>
+              <span className="text-rose-500/45 text-sm animate-ping">→</span>
+              <div className="border border-rose-500/50 p-2 rounded bg-rose-950/20 text-center text-[9px] w-20 shadow-[0_0_10px_rgba(225,29,72,0.2)]">
+                <span className="block font-bold text-white">Write</span>
+                <span className="text-[7.5px] text-green-400 font-bold">Edits Active</span>
+              </div>
+              <span className="text-rose-500/45 text-sm">→</span>
+              <div className="border border-rose-500/30 p-2 rounded bg-black/60 text-center text-[9px] w-20">
+                <span className="block font-bold">Verify</span>
+                <span className="text-[7px] text-slate-500">Idle</span>
+              </div>
+            </div>
+          </div>
+        )
+      }
+    ],
+    github: null,
+    demo: null,
+    docs: null
+  },
+  "quantized-cosmos": {
+    name: "Quantized Cosmos",
+    tagline: "3D Quantum-Inspired Neural Spatial Representations.",
+    description: "An upcoming WebGL volumetric database renderer visualizing neural fields and spatial datasets in 3D.",
+    status: "CONCEPT",
+    color: "#06B6D4",
+    timeline: "2028 Vision",
+    role: "Graphics & Render Lead",
+    context: "Volumetric Graphics Research",
+    tags: ["WebGL", "Shaders", "Spatial Data", "Three.js"],
+    overview: "Quantized Cosmos is a graphical experiment seeking to render large volumetric datasets using neural representation models. Instead of standard voxel grids that waste memory, this system represents spatial fields mathematically through trained coordinate neural networks, decoding volumetric graphics in real-time.",
+    challenge: "Executing neural coordinate decoding at 60 FPS directly on the GPU within WebGL context limitations. Raymarching through implicit neural fields requires intensive float calculations.",
+    solution: "?",
+    theme: {
+      bg: "bg-[#010B0D]",
+      text: "text-[#FAFDFD]",
+      subtext: "text-cyan-300/60",
+      border: "border-cyan-950/60",
+      cardBg: "bg-[#061A1D]/85 backdrop-blur-md",
+      badge: "bg-cyan-950/40 text-cyan-400 border-cyan-800/30",
+      titleFont: "font-serif font-black tracking-tight",
+      bodyFont: "font-sans text-cyan-100/90 text-[15px] leading-relaxed font-light",
+      accentColor: "#06B6D4",
+      isDark: true
+    },
+    techStack: [
+      { name: "GLSL Raymarching", desc: "Custom pixel shaders performing real-time float raymarching coordinates." },
+      { name: "Weight Texture Map", desc: "Transforms coordinate models into compressed WebGL texture buffers." },
+      { name: "Three.js Scene Graph", desc: "Coordinates atmospheric meshes, viewport controls, and shadow render buffers." }
+    ],
+    gallery: [
+      {
+        title: "Volumetric Raymarching Sandbox",
+        desc: "Interactive fragment preview showing dynamic raymarching layers loading volume fields.",
+        type: "vector",
+        render: () => (
+          <div className="w-full h-full bg-[#010506] flex flex-col items-center justify-center p-6 relative rounded-xl border border-cyan-500/20 font-space-mono text-cyan-400">
+            <div className="absolute top-4 left-4 text-[8px] uppercase tracking-wider text-cyan-500/50">RAYMARCHER CONTROLS</div>
+            <div className="w-48 h-32 border border-cyan-500/30 rounded relative flex items-center justify-center bg-black/40 overflow-hidden">
+              {/* Dynamic shader grid representation */}
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#06B6D4_0%,transparent_60%)] opacity-30 animate-pulse" />
+              <div className="w-24 h-24 rounded-full border border-dashed border-cyan-400/40 animate-spin" style={{ animationDuration: "10s" }} />
+              <div className="absolute bottom-2 left-2 text-[7px] text-cyan-400/60">TENSOR DATA BLOCK ACTIVE</div>
+            </div>
+          </div>
+        )
+      }
+    ],
+    github: null,
+    demo: null,
+    docs: null
+  },
+  "cinesuggest-ai": {
+    name: "CineSuggest AI",
+    tagline: "AI-Powered Movie Recommendations via Behavioral & Sentiment Analysis.",
+    description: "An upcoming smart recommendation engine parsing user emotional graphs, viewing habits, and review sentiments.",
+    status: "PLANNING",
+    color: "#F59E0B",
+    timeline: "2026 Winter Vision",
+    role: "Machine Learning Lead",
+    context: "Behavioral Intelligence Research",
+    tags: ["NLP", "PyTorch", "Collaborative Filtering", "React"],
+    overview: "CineSuggest AI is an upcoming recommendation framework that moves beyond traditional matrix factorization. It analyzes micro-signals like dwell times, review text sentiments, and trailer interaction behaviors to generate highly aligned movie recommendations.",
+    challenge: "Standard engines suffer from the cold start problem and rely too heavily on explicit 5-star ratings. Building a pipeline that derives implicit user preferences from raw unstructured review text requires heavy computational NLP steps.",
+    solution: "We propose an embedding system using transformer-based sentiment encoders. These map user logs and review texts into a unified vector space, finding nearest neighbors representing deep cinematic styles.",
+    theme: {
+      bg: "bg-[#0F0A02]",
+      text: "text-[#FAF6F0]",
+      subtext: "text-amber-300/60",
+      border: "border-amber-950/60",
+      cardBg: "bg-[#1F1505]/85 backdrop-blur-md",
+      badge: "bg-amber-950/40 text-amber-400 border-amber-800/30",
+      titleFont: "font-serif font-black tracking-tight",
+      bodyFont: "font-sans text-amber-100/90 text-[15px] leading-relaxed font-light",
+      accentColor: "#F59E0B",
+      isDark: true
+    },
+    techStack: [
+      { name: "Sentiment Encoders", desc: "Maps text reviews to user emotion vector space." },
+      { name: "Implicit logs tracker", desc: "Tracks dwell duration, clicks, and drag indicators on media." },
+      { name: "Nearest Neighbors mapping", desc: "Finds movie clusters with close style distances." }
+    ],
+    gallery: [
+      {
+        title: "CineMatch App Interface Mockup",
+        desc: "High-fidelity mock of the movie recommendation hub showcasing top picks, taste profiles, and personalized lists.",
+        type: "image",
+        url: "/cinesuggest-showcase.jpg",
+        aspect: "aspect-[16/10]"
+      },
+      {
+        title: "Recommender Engine Simulation",
+        desc: "Interactive fragment preview showing dynamic movie recommendations based on user sentiment.",
+        type: "vector",
+        render: () => (
+          <div className="w-full h-full bg-[#050300] flex flex-col items-center justify-center p-6 relative rounded-xl border border-amber-500/20 font-space-mono text-amber-400">
+            <div className="absolute top-4 left-4 text-[8px] uppercase tracking-wider text-amber-500/50">RECOMMENDER ENGINE MOCK</div>
+            <div className="w-5/6 flex flex-col gap-2 mt-4 text-[9px]">
+              <div className="border border-amber-900/40 p-2 rounded flex justify-between bg-black/40">
+                <span>Interstellar</span>
+                <span className="text-amber-400 font-bold">98.4% Match</span>
+              </div>
+              <div className="border border-amber-900/40 p-2 rounded flex justify-between bg-black/40">
+                <span>Inception</span>
+                <span className="text-amber-400 font-bold">95.1% Match</span>
+              </div>
+              <div className="border border-amber-900/40 p-2 rounded flex justify-between bg-black/40">
+                <span>The Prestige</span>
+                <span className="text-amber-400/60 font-bold">89.8% Match</span>
+              </div>
+            </div>
+          </div>
+        )
+      }
+    ],
+    github: null,
+    demo: null,
+    docs: null
   }
 };
 
@@ -506,6 +731,7 @@ export default function ProjectDetailPage({ params }) {
   const project = projectsDetails[slug];
 
   const [activeSlide, setActiveSlide] = useState(0);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   // If project slug is invalid, render page-not-found details
   if (!project) {
@@ -594,13 +820,26 @@ export default function ProjectDetailPage({ params }) {
         <div className="lg:col-span-5 w-full flex items-center justify-center">
           {project.gallery && project.gallery.length > 0 && currentSlide ? (
             <div className={`w-full rounded-2xl border ${theme.isDark ? "border-white/5 bg-black/60 shadow-[0_10px_40px_rgba(0,0,0,0.5)]" : "border-slate-200 bg-white shadow-[0_10px_40px_rgba(0,0,0,0.03)]"} p-3 flex flex-col gap-3`}>
-              <div className={`w-full ${currentSlide.aspect || "aspect-[4/3]"} rounded-xl overflow-hidden relative bg-slate-950 border border-slate-100/50 flex items-center justify-center`}>
+              <div className={`w-full ${currentSlide.aspect || "aspect-[4/3]"} rounded-xl overflow-hidden relative bg-slate-950 border border-slate-100/50 flex items-center justify-center group`}>
                 {currentSlide.type === "image" ? (
-                  <img
-                    src={currentSlide.url}
-                    alt={currentSlide.title}
-                    className="w-full h-full object-cover transition-all duration-300"
-                  />
+                  <>
+                    <img
+                      src={currentSlide.url}
+                      alt={currentSlide.title}
+                      onClick={() => setIsLightboxOpen(true)}
+                      className={`w-full h-full ${currentSlide.contain ? "object-contain bg-slate-900/30" : "object-cover"} transition-all duration-300 cursor-zoom-in hover:scale-[1.01]`}
+                    />
+                    {/* Expand icon overlay */}
+                    <div 
+                      onClick={() => setIsLightboxOpen(true)}
+                      className="absolute bottom-3 right-3 bg-black/75 hover:bg-black/90 text-white/85 hover:text-white p-2 rounded-lg border border-white/10 opacity-0 group-hover:opacity-100 transition-all duration-300 cursor-pointer flex items-center gap-1.5 text-[9px] font-space-mono select-none"
+                    >
+                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5" />
+                      </svg>
+                      <span>EXPAND</span>
+                    </div>
+                  </>
                 ) : (
                   currentSlide.render()
                 )}
@@ -658,9 +897,20 @@ export default function ProjectDetailPage({ params }) {
           {/* Solution */}
           <div className="flex flex-col gap-4 border-t border-slate-200/50 pt-8">
             <h2 className="font-serif text-3xl font-bold tracking-tight">The Solution</h2>
-            <p className={`${theme.bodyFont} text-[16px] font-medium leading-relaxed`}>
-              {project.solution}
-            </p>
+            {project.solution === "?" ? (
+              <div className="flex flex-col items-center justify-center p-12 border border-dashed rounded-2xl border-slate-800 bg-slate-950/20 my-4 w-full">
+                <span className="font-orbitron text-7xl md:text-8xl font-black animate-pulse" style={{ color: theme.accentColor, textShadow: `0 0 20px ${theme.accentColor}40` }}>
+                  ?
+                </span>
+                <span className="font-space-mono text-xs uppercase tracking-widest text-slate-500 mt-4 text-center">
+                  Research Under Incubation // Solution Uncharted
+                </span>
+              </div>
+            ) : (
+              <p className={`${theme.bodyFont} text-[16px] font-medium leading-relaxed`}>
+                {project.solution}
+              </p>
+            )}
           </div>
 
           {/* How We Made It */}
@@ -770,12 +1020,63 @@ export default function ProjectDetailPage({ params }) {
                   <Globe className={`w-3.5 h-3.5 ${theme.isDark ? "text-slate-700" : "text-slate-300"}`} /> Live Demo Unavailable
                 </button>
               )}
+
+              {project.pptUrl && (
+                <a
+                  href={project.pptUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex items-center justify-center gap-2 px-5 py-3 border ${
+                    theme.isDark 
+                      ? "border-red-500/20 bg-red-500/5 text-red-400 hover:text-red-300 hover:border-red-500/50 hover:bg-red-500/10" 
+                      : "border-red-200 bg-red-50/30 hover:bg-red-50 text-red-650 hover:text-red-700 hover:border-red-400"
+                  } rounded-xl transition-all duration-300 shadow-xs font-space-mono text-xs tracking-wider`}
+                >
+                  <FileText className="w-4 h-4 text-red-500/70" /> View PPT
+                </a>
+              )}
             </div>
           </div>
 
         </div>
-      </div>
+    </div>
 
-    </main>
+    {/* Lightbox / Fullscreen Image Preview Modal */}
+    {isLightboxOpen && currentSlide && currentSlide.type === "image" && (
+      <div 
+        className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black/95 backdrop-blur-md transition-all duration-300 pointer-events-auto cursor-zoom-out animate-fade-in"
+        onClick={() => setIsLightboxOpen(false)}
+      >
+        {/* Close Button */}
+        <button 
+          className="absolute top-6 right-6 text-white/60 hover:text-white transition-colors duration-200 bg-white/10 hover:bg-white/20 p-3 rounded-full border border-white/10 cursor-pointer"
+          onClick={(e) => { e.stopPropagation(); setIsLightboxOpen(false); }}
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+
+        {/* Fullscreen Image Container */}
+        <div 
+          className="w-[90vw] h-[80vh] flex items-center justify-center p-4 relative cursor-default" 
+          onClick={(e) => e.stopPropagation()}
+        >
+          <img 
+            src={currentSlide.url} 
+            alt={currentSlide.title} 
+            className="max-w-full max-h-full object-contain rounded-lg shadow-2xl border border-white/5 selection:bg-transparent"
+          />
+        </div>
+
+        {/* Caption Overlay */}
+        <div className="text-center max-w-2xl px-6 mt-4 pointer-events-none select-none">
+          <h3 className="text-white font-bold text-base md:text-lg tracking-wide">{currentSlide.title}</h3>
+          <p className="text-slate-400 text-xs md:text-sm mt-1 leading-relaxed">{currentSlide.desc}</p>
+        </div>
+      </div>
+    )}
+
+  </main>
   );
 }

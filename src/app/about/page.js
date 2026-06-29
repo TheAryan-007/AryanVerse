@@ -42,8 +42,8 @@ function CanvasStarfield() {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    // Populate stars
-    const starsCount = 100;
+    const isMobile = window.innerWidth < 768;
+    const starsCount = isMobile ? 20 : 100;
     const stars = [];
     for (let i = 0; i < starsCount; i++) {
       stars.push({
@@ -51,7 +51,7 @@ function CanvasStarfield() {
         y: Math.random() * canvas.height,
         radius: Math.random() * 1.3 + 0.3,
         alpha: Math.random() * 0.7 + 0.3,
-        speed: Math.random() * 0.04 + 0.01,
+        speed: isMobile ? 0.005 : Math.random() * 0.04 + 0.01,
         factor: Math.random() > 0.5 ? 1 : -1,
       });
     }

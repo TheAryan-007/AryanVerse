@@ -20,6 +20,25 @@ class LemniscateCurve extends THREE.Curve {
   }
 }
 
+function GlassCrystalMaterial({ color }) {
+  return (
+    <meshPhysicalMaterial 
+      color={color} 
+      roughness={0.04} 
+      metalness={0.45}
+      transmission={0.36}
+      thickness={1.2}
+      ior={1.8}
+      flatShading={true}
+      clearcoat={1.0}
+      clearcoatRoughness={0.03}
+      iridescence={0.85}
+      iridescenceIOR={1.85}
+      iridescenceThicknessRange={[150, 450]}
+    />
+  );
+}
+
 export default function DestinationHubs({ onNodeClick, transitionState, selectedNode }) {
   const [hoveredNode, setHoveredNode] = useState(null);
   const size = useThree((state) => state.size);
@@ -62,6 +81,7 @@ function HubNode({ node, position, isHovered, isSelected, setHovered, onClick, t
   const sat2Ref = useRef();
   const particlesRef = useRef();
   const pointLightRef = useRef();
+  const dustRef = useRef();
 
   const isLeaving = transitionState === "LEAVING";
 
@@ -113,10 +133,10 @@ function HubNode({ node, position, isHovered, isSelected, setHovered, onClick, t
 
     if (isLeaving) return; // Freeze rotation and motion on route exit
 
-    // 1. Slow Y-axis rotation
+    // 1. Shimmering dual-axis rotation to emphasize 3D depth
     if (meshRef.current) {
-      meshRef.current.rotation.y = elapsed * 0.35;
-      meshRef.current.rotation.x = Math.sin(elapsed * 0.2) * 0.15;
+      meshRef.current.rotation.y = elapsed * 0.65;
+      meshRef.current.rotation.x = elapsed * 0.35;
     }
 
     // 2. Slow desynchronized floating cycle
@@ -132,7 +152,8 @@ function HubNode({ node, position, isHovered, isSelected, setHovered, onClick, t
     if (node.geometryType === "teardrop") {
       // ABOUT HEADQUARTERS
       if (ring1Ref.current) {
-        ring1Ref.current.rotation.z = -elapsed * 0.18 * speedMult;
+        ring1Ref.current.rotation.y = elapsed * 0.45 * speedMult;
+        ring1Ref.current.rotation.x = elapsed * 0.15 * speedMult;
       }
       if (ring2Ref.current) {
         // Spindle vertical pulse
@@ -142,7 +163,8 @@ function HubNode({ node, position, isHovered, isSelected, setHovered, onClick, t
     else if (node.geometryType === "oval") {
       // SKILLS DISTRICT
       if (ring1Ref.current) {
-        ring1Ref.current.rotation.z = elapsed * 0.3 * speedMult;
+        ring1Ref.current.rotation.y = -elapsed * 0.35 * speedMult;
+        ring1Ref.current.rotation.x = elapsed * 0.25 * speedMult;
       }
       if (particlesRef.current) {
         particlesRef.current.rotation.y = -elapsed * 0.2 * speedMult;
@@ -150,6 +172,9 @@ function HubNode({ node, position, isHovered, isSelected, setHovered, onClick, t
     }
     else if (node.geometryType === "oblong") {
       // PROJECTS LAB
+      if (ring1Ref.current) {
+        ring1Ref.current.rotation.z = -elapsed * 0.4 * speedMult;
+      }
       if (sat1Ref.current) {
         sat1Ref.current.position.y = 0.24 + Math.sin(elapsed * 2.5 * speedMult) * 0.02;
         sat1Ref.current.rotation.y = elapsed * 1.2 * speedMult;
@@ -192,14 +217,20 @@ function HubNode({ node, position, isHovered, isSelected, setHovered, onClick, t
       }
     }
 
+    // 4. Swirling cosmic dust particles
+    if (dustRef.current) {
+      dustRef.current.rotation.y = elapsed * 0.18 * speedMult;
+      dustRef.current.rotation.z = elapsed * 0.08;
+    }
+
     // Dynamic point light intensity modulation (breathing energy pulse)
     if (pointLightRef.current) {
       pointLightRef.current.intensity = (isLeaving ? 6.0 : (isHovered ? 2.5 : 1.2)) + Math.sin(elapsed * 4.5) * 0.25;
     }
   });
 
-  // Calculate dynamic emissive intensity
-  const currentEmissive = isLeaving ? 4.5 : (isHovered ? 1.6 : 0.8);
+  // Calculate dynamic emissive intensity (lower to preserve flat-shading shadows)
+  const currentEmissive = isLeaving ? 3.0 : (isHovered ? 0.38 : 0.14);
 
   // Consolidated pointer event handlers to be attached strictly to the visible crystal meshes
   const pointerHandlers = {
@@ -232,19 +263,7 @@ function HubNode({ node, position, isHovered, isSelected, setHovered, onClick, t
           <group>
             {/* 1. Outer Glass Cage */}
             <Icosahedron args={[0.16, 0]} ref={meshRef} {...pointerHandlers}>
-              <meshPhysicalMaterial 
-                color={currentColor} 
-                emissive={currentColor} 
-                emissiveIntensity={currentEmissive} 
-                roughness={0.02} 
-                metalness={0.05}
-                transmission={0.95}
-                thickness={1.8}
-                ior={2.2}
-                flatShading={true}
-                clearcoat={1.0}
-                clearcoatRoughness={0.02}
-              />
+              <GlassCrystalMaterial color={currentColor} emissive={currentColor} intensity={currentEmissive} />
             </Icosahedron>
             {/* 2. Inner Glowing Spindle Spire */}
             <mesh ref={ring2Ref} raycast={() => null}>
@@ -261,11 +280,17 @@ function HubNode({ node, position, isHovered, isSelected, setHovered, onClick, t
                 opacity={0.25} 
               />
             </Icosahedron>
-            {/* Under Ring */}
-            <mesh ref={ring1Ref} position={[0, -0.15, 0]} rotation={[Math.PI / 2, 0, 0]} raycast={() => null}>
-              <torusGeometry args={[0.25, 0.006, 8, 32]} />
-              <meshBasicMaterial color={currentColor} transparent opacity={0.3} />
-            </mesh>
+            {/* Under Rings (Dual-axis gyroscopic cage) */}
+            <group ref={ring1Ref} position={[0, -0.15, 0]}>
+              <mesh rotation={[Math.PI / 2, 0, 0]} raycast={() => null}>
+                <torusGeometry args={[0.25, 0.006, 8, 32]} />
+                <meshBasicMaterial color={currentColor} transparent opacity={0.35} />
+              </mesh>
+              <mesh rotation={[0, Math.PI / 2, 0]} raycast={() => null}>
+                <torusGeometry args={[0.25, 0.004, 8, 32]} />
+                <meshBasicMaterial color={currentColor} transparent opacity={0.2} />
+              </mesh>
+            </group>
           </group>
         );
 
@@ -274,19 +299,7 @@ function HubNode({ node, position, isHovered, isSelected, setHovered, onClick, t
           <group>
             {/* 1. Outer Glass Double-Pyramid */}
             <Octahedron args={[0.16, 0]} scale={[1.0, 1.3, 1.0]} ref={meshRef} {...pointerHandlers}>
-              <meshPhysicalMaterial 
-                color={currentColor} 
-                emissive={currentColor} 
-                emissiveIntensity={currentEmissive} 
-                roughness={0.02} 
-                metalness={0.05}
-                transmission={0.95}
-                thickness={1.8}
-                ior={2.2}
-                flatShading={true}
-                clearcoat={1.0}
-                clearcoatRoughness={0.02}
-              />
+              <GlassCrystalMaterial color={currentColor} emissive={currentColor} intensity={currentEmissive} />
             </Octahedron>
             {/* 2. Inner Glowing Core */}
             <Octahedron args={[0.16, 0]} scale={[0.4, 0.52, 0.4]} raycast={() => null}>
@@ -301,11 +314,17 @@ function HubNode({ node, position, isHovered, isSelected, setHovered, onClick, t
                 opacity={0.25} 
               />
             </Octahedron>
-            {/* Equatorial Ring */}
-            <mesh ref={ring1Ref} rotation={[Math.PI / 2, 0.1, 0]} raycast={() => null}>
-              <torusGeometry args={[0.26, 0.005, 8, 36]} />
-              <meshBasicMaterial color={currentColor} transparent opacity={0.3} />
-            </mesh>
+            {/* Tilted Rings (Dual-axis gyroscope) */}
+            <group ref={ring1Ref}>
+              <mesh rotation={[Math.PI / 2, 0.1, 0]} raycast={() => null}>
+                <torusGeometry args={[0.26, 0.005, 8, 36]} />
+                <meshBasicMaterial color={currentColor} transparent opacity={0.35} />
+              </mesh>
+              <mesh rotation={[Math.PI / 4, 0.1, 0]} raycast={() => null}>
+                <torusGeometry args={[0.26, 0.004, 8, 36]} />
+                <meshBasicMaterial color={currentColor} transparent opacity={0.2} />
+              </mesh>
+            </group>
           </group>
         );
 
@@ -314,24 +333,17 @@ function HubNode({ node, position, isHovered, isSelected, setHovered, onClick, t
           <group>
             {/* 1. Outer Glass Polyhedron Core */}
             <Dodecahedron args={[0.15, 0]} ref={meshRef} {...pointerHandlers}>
-              <meshPhysicalMaterial 
-                color={currentColor} 
-                emissive={currentColor} 
-                emissiveIntensity={currentEmissive} 
-                roughness={0.02} 
-                metalness={0.05}
-                transmission={0.95}
-                thickness={1.8}
-                ior={2.2}
-                flatShading={true}
-                clearcoat={1.0}
-                clearcoatRoughness={0.02}
-              />
+              <GlassCrystalMaterial color={currentColor} emissive={currentColor} intensity={currentEmissive} />
             </Dodecahedron>
             {/* 2. Inner Glowing Core */}
             <Dodecahedron args={[0.15, 0]} scale={[0.4, 0.4, 0.4]} raycast={() => null}>
               <meshBasicMaterial color={node.color} />
             </Dodecahedron>
+            {/* Project Orbiting Halo */}
+            <mesh ref={ring1Ref} rotation={[Math.PI / 2, 0, 0]} raycast={() => null}>
+              <torusGeometry args={[0.26, 0.004, 8, 36]} />
+              <meshBasicMaterial color={currentColor} transparent opacity={0.25} />
+            </mesh>
             {/* 3. Wireframe Overlay */}
             <Dodecahedron args={[0.15, 0]} scale={[1.015, 1.015, 1.015]} raycast={() => null}>
               <meshBasicMaterial 
@@ -375,19 +387,7 @@ function HubNode({ node, position, isHovered, isSelected, setHovered, onClick, t
           <group>
             {/* 1. Outer Glass Sphere Core */}
             <Sphere args={[0.16, 16, 16]} ref={meshRef} {...pointerHandlers}>
-              <meshPhysicalMaterial 
-                color={currentColor} 
-                emissive={currentColor} 
-                emissiveIntensity={currentEmissive} 
-                roughness={0.02} 
-                metalness={0.05}
-                transmission={0.95}
-                thickness={1.8}
-                ior={2.2}
-                flatShading={true}
-                clearcoat={1.0}
-                clearcoatRoughness={0.02}
-              />
+              <GlassCrystalMaterial color={currentColor} emissive={currentColor} intensity={currentEmissive} />
             </Sphere>
             {/* 2. Inner Glowing Core */}
             <Sphere args={[0.16, 16, 16]} scale={[0.4, 0.4, 0.4]} raycast={() => null}>
@@ -421,21 +421,8 @@ function HubNode({ node, position, isHovered, isSelected, setHovered, onClick, t
           <group>
             {/* Group tilted down-left by -45 degrees */}
             <group rotation={[0, 0, -Math.PI / 4]} ref={meshRef}>
-              {/* 1. Tapered Cylinder Spire */}
               <Cylinder args={[0.015, 0.065, 0.32, 6]} {...pointerHandlers}>
-                <meshPhysicalMaterial 
-                  color={currentColor} 
-                  emissive={currentColor} 
-                  emissiveIntensity={currentEmissive} 
-                  roughness={0.02} 
-                  metalness={0.05}
-                  transmission={0.95}
-                  thickness={1.8}
-                  ior={2.2}
-                  flatShading={true}
-                  clearcoat={1.0}
-                  clearcoatRoughness={0.02}
-                />
+                <GlassCrystalMaterial color={currentColor} emissive={currentColor} intensity={currentEmissive} />
               </Cylinder>
               {/* 2. Inner Glowing Core */}
               <Cylinder args={[0.005, 0.02, 0.30, 6]} scale={[1.0, 1.0, 1.0]} raycast={() => null}>
@@ -486,19 +473,7 @@ function HubNode({ node, position, isHovered, isSelected, setHovered, onClick, t
             {/* 1. Outer Glass Lemniscate Infinity Tube */}
             <mesh ref={meshRef} raycast={() => null}>
               <tubeGeometry args={[loopCurve, 64, 0.03, 8, true]} />
-              <meshPhysicalMaterial 
-                color={currentColor} 
-                emissive={currentColor} 
-                emissiveIntensity={currentEmissive} 
-                roughness={0.02} 
-                metalness={0.05}
-                transmission={0.95}
-                thickness={1.8}
-                ior={2.2}
-                flatShading={true}
-                clearcoat={1.0}
-                clearcoatRoughness={0.02}
-              />
+              <GlassCrystalMaterial color={currentColor} emissive={currentColor} intensity={currentEmissive} />
             </mesh>
             {/* 2. Inner Glowing Core Tube */}
             <mesh raycast={() => null}>
@@ -555,7 +530,7 @@ function HubNode({ node, position, isHovered, isSelected, setHovered, onClick, t
         )}
 
         {/* Local Stars/Dust System */}
-        <points raycast={() => null}>
+        <points ref={dustRef} raycast={() => null}>
           <bufferGeometry>
             <bufferAttribute
               attach="attributes-position"

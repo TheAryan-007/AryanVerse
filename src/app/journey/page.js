@@ -38,10 +38,11 @@ function CanvasStarfield() {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    const particlesCount = 80;
+    const isMobile = window.innerWidth < 768;
+    const particlesCount = isMobile ? 15 : 80;
     const particles = [];
     for (let i = 0; i < particlesCount; i++) {
-      const isFloating = Math.random() > 0.4;
+      const isFloating = !isMobile && Math.random() > 0.4;
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
@@ -830,9 +831,6 @@ function DoorsIllustration() {
           <line x1="28" y1="20" x2="28" y2="70" stroke="rgba(255,255,255,0.03)" strokeWidth="0.3"/>
           <circle cx="34" cy="45" r="0.6" fill="#475569"/>
         </g>
-        <span className="absolute bottom-5 left-10 font-space-mono text-[8px] text-slate-500 uppercase tracking-widest">
-          Elite
-        </span>
 
         {/* RIGHT SIDE: Open Door */}
         <g>
@@ -841,10 +839,13 @@ function DoorsIllustration() {
           <polygon points="62,20 74,16 74,66 62,70" fill="#1c1917" stroke="#fb923c" strokeWidth="0.5" className="animate-[float_5s_infinite]" style={{ transformOrigin: "62px 45px" }}/>
           <circle cx="70" cy="43" r="0.6" fill="#fb923c"/>
         </g>
-        <span className="absolute bottom-5 right-10 font-space-mono text-[8px] text-orange-400 uppercase tracking-widest">
-          Family
-        </span>
       </svg>
+      <span className="absolute bottom-5 left-10 font-space-mono text-[8px] text-slate-500 uppercase tracking-widest">
+        Elite
+      </span>
+      <span className="absolute bottom-5 right-10 font-space-mono text-[8px] text-orange-400 uppercase tracking-widest">
+        Family
+      </span>
       <div className="absolute inset-0 bg-gradient-to-t from-[#050508]/60 via-transparent to-transparent pointer-events-none" />
     </div>
   );
@@ -1172,9 +1173,6 @@ function BridgeIllustration() {
           <circle cx="16" cy="44" r="1.2" fill="#cbd5e1"/>
           <path d="M13 49 C13 47 19 47 19 49 L18 58 H14 Z" fill="#334155"/>
         </g>
-        <span className="absolute bottom-5 left-10 font-space-mono text-[8px] text-slate-500 uppercase tracking-widest">
-          Students
-        </span>
 
         <g opacity="0.6">
           <circle cx="78" cy="42" r="1.2" fill="#cbd5e1"/>
@@ -1182,12 +1180,15 @@ function BridgeIllustration() {
           <circle cx="84" cy="44" r="1.2" fill="#cbd5e1"/>
           <path d="M81 49 C81 47 87 47 87 49 L86 58 H82 Z" fill="#334155"/>
         </g>
-        <span className="absolute bottom-5 right-10 font-space-mono text-[8px] text-purple-400 uppercase tracking-widest">
-          Teachers
-        </span>
 
         <ellipse cx="50" cy="56" rx="22" ry="2" fill="#090914" stroke="#A855F7" strokeWidth="0.3" opacity="0.7"/>
       </svg>
+      <span className="absolute bottom-5 left-10 font-space-mono text-[8px] text-slate-500 uppercase tracking-widest">
+        Students
+      </span>
+      <span className="absolute bottom-5 right-10 font-space-mono text-[8px] text-purple-400 uppercase tracking-widest">
+        Teachers
+      </span>
       <div className="absolute inset-0 bg-gradient-to-t from-[#050508]/60 via-transparent to-transparent pointer-events-none" />
     </div>
   );
