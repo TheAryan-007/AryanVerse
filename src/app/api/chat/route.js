@@ -46,7 +46,7 @@ TIMELINE CHAPTERS:
 CONTACT INFORMATION:
 - Email: aryanncr2@gmail.com
 - WhatsApp/Phone: +91 7827087385
-- LinkedIn: https://www.linkedin.com/in/aryan-chauhan-4284b32a7
+- LinkedIn: https://www.linkedin.com/in/aryan-chauhan-0b05a3386
 - GitHub: https://github.com/TheAryan-007
 - Instagram: @aryannxnn._.02
 - Portfolio URL: https://aryanverse.vercel.app
@@ -75,7 +75,7 @@ function getLocalResponse(query) {
     return "Aryan's major achievements include:\n\n* **National-Level Athlete:** Competed at the National High Jump Championship in Class 8.\n* **School Head Boy:** Appointed leader of the MDVM student council in Class 11.\n* **Perfect Art Score:** Scored 100/100 on his CBSE Class 12 Fine Arts Landscape project.\n* **Entrepreneurship:** Bootstrapped a custom streetwear clothing brand to ₹84,000 in revenue in school.";
   }
   if (q.includes("contact") || q.includes("email") || q.includes("phone") || q.includes("whatsapp") || q.includes("linkedin") || q.includes("social") || q.includes("instagram")) {
-    return "Here are Aryan's contact coordinates:\n\n* **Email:** [aryanncr2@gmail.com](mailto:aryanncr2@gmail.com)\n* **WhatsApp/Call:** [+91 7827087385](https://wa.me/917827087385)\n* **LinkedIn:** [Aryan Chauhan](https://www.linkedin.com/in/aryan-chauhan-4284b32a7)\n* **GitHub:** [TheAryan-007](https://github.com/TheAryan-007)\n* **Instagram:** [@aryannxnn._.02](https://www.instagram.com/aryannxnn._.02)";
+    return "Here are Aryan's contact coordinates:\n\n* **Email:** [aryanncr2@gmail.com](mailto:aryanncr2@gmail.com)\n* **WhatsApp/Call:** [+91 7827087385](https://wa.me/917827087385)\n* **LinkedIn:** [Aryan Chauhan](https://www.linkedin.com/in/aryan-chauhan-0b05a3386)\n* **GitHub:** [TheAryan-007](https://github.com/TheAryan-007)\n* **Instagram:** [@aryannxnn._.02](https://www.instagram.com/aryannxnn._.02)";
   }
 
   return "Hello! I am EON, Aryan's digital assistant. I am currently operating in local low-power mode because the host's Gemini API key is not yet configured. I can tell you all about Aryan's skills, projects, internships, achievements, or contact coordinates. Go ahead and ask!";

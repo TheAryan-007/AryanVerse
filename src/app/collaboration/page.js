@@ -398,7 +398,7 @@ ${message}`;
   // Connect routes
   const connects = [
     { label: "GitHub", url: "https://github.com/TheAryan-007", icon: <SiGithub className="w-4 h-4" /> },
-    { label: "LinkedIn", url: "https://www.linkedin.com/in/aryan-chauhan-4284b32a7", icon: <FaLinkedin className="w-4 h-4" /> },
+    { label: "LinkedIn", url: "https://www.linkedin.com/in/aryan-chauhan-0b05a3386", icon: <FaLinkedin className="w-4 h-4" /> },
     { label: "Instagram", url: "https://www.instagram.com/aryannxnn._.02", icon: <FaInstagram className="w-4 h-4" /> },
     { label: "Email", url: "mailto:aryanncr2@gmail.com", icon: <Mail className="w-4 h-4" /> }
   ];
@@ -709,7 +709,7 @@ ${message}`;
                             setIsCopied(true);
                             setTimeout(() => setIsCopied(false), 2000);
                           }
-                          window.open("https://www.linkedin.com/in/aryan-chauhan-4284b32a7", "_blank");
+                          window.open("https://www.linkedin.com/in/aryan-chauhan-0b05a3386", "_blank");
                         }}
                         className="w-full h-12 bg-[#0A66C2] hover:bg-[#0077b5] text-white font-space-mono text-xs uppercase tracking-wider font-bold rounded-xl transition-all duration-300 shadow-md hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer"
                       >

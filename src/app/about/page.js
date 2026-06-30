@@ -599,7 +599,7 @@ export default function AboutPage() {
         <div className="flex items-center gap-6">
           {/* LinkedIn */}
           <a
-            href="https://www.linkedin.com/in/aryan-chauhan-4284b32a7"
+            href="https://www.linkedin.com/in/aryan-chauhan-0b05a3386"
             target="_blank"
             rel="noopener noreferrer"
             className="group/social p-3 bg-[#0d0d1a] border border-[#0A66C2]/30 hover:border-[#0A66C2] rounded-full transition-all duration-300 hover:shadow-[0_0_20px_rgba(10,102,194,0.5)] hover:translate-y-[-4px]"
