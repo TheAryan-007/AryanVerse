@@ -657,7 +657,7 @@ ${message}`;
                           <Mail className="w-4 h-4" /> Launch Mail App
                         </a>
                         <a
-                          href={`https://mail.google.com/mail/?view=cm&fs=1&to=aryanncr2@gmail.com&su=${encodeURIComponent(`Project Inquiry: ${submittedData.service}`)}&body=${encodeURIComponent(`[Paste (Ctrl+V) the copied proposal here]`)}`}
+                          href={`https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=aryanncr2@gmail.com&su=${encodeURIComponent(`Project Inquiry: ${submittedData.service}`)}&body=${encodeURIComponent(`[Paste (Ctrl+V) the copied proposal here]`)}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={() => {
