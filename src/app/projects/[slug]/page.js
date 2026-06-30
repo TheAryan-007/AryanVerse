@@ -478,34 +478,16 @@ const projectsDetails = {
             <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#808080_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
             
             {/* 3D Book Cover Container */}
-            <div className="relative w-44 h-64 shadow-[0_15px_35px_rgba(0,0,0,0.7)] rounded-r-md overflow-hidden bg-gradient-to-r from-[#200508] via-[#4D0A14] to-[#36060C] border-y border-r border-[#6B1824]/30 flex flex-col justify-between p-5 text-center group cursor-pointer transition-transform duration-300 hover:scale-[1.03]">
+            <div className="relative w-44 h-64 shadow-[0_15px_35px_rgba(0,0,0,0.7)] rounded-r-md overflow-hidden border-y border-r border-[#6B1824]/30 flex flex-col justify-between group cursor-pointer transition-transform duration-300 hover:scale-[1.03]">
+              {/* Actual Image cover */}
+              <img 
+                src="/unscripted-love.jpg" 
+                alt="Unscripted Love Book Cover" 
+                className="absolute inset-0 w-full h-full object-cover"
+              />
               
-              {/* Spine highlight */}
-              <div className="absolute top-0 left-0 w-3.5 h-full bg-gradient-to-r from-black/50 via-white/10 to-transparent border-r border-black/35" />
-              
-              {/* Double Gold Borders */}
-              <div className="absolute inset-1.5 border border-[#D4AF37]/30 rounded pointer-events-none" />
-              <div className="absolute inset-2 border-2 border-[#D4AF37]/10 rounded pointer-events-none" />
-
-              {/* Cover Headers */}
-              <div className="flex flex-col gap-2 mt-4 relative z-10">
-                <span className="font-sans text-[7.5px] uppercase tracking-[0.25em] text-[#D4AF37]/80 font-bold">A Contemporary Novel</span>
-                <h3 className="font-serif italic text-2xl font-black text-[#F5EFEB] leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
-                  Unscripted Love
-                </h3>
-              </div>
-
-              {/* Cover Footer & Release Date */}
-              <div className="flex flex-col gap-2 mb-3 relative z-10">
-                <div className="w-8 h-[1px] bg-[#D4AF37]/30 mx-auto" />
-                <span className="font-sans text-[8px] uppercase tracking-[0.2em] text-[#C2A99B] font-semibold">Aryan Chauhan</span>
-                
-                <div className="mt-4 px-2 py-1 bg-[#D4AF37]/5 border border-[#D4AF37]/20 rounded backdrop-blur-xs">
-                  <span className="block font-sans text-[7px] uppercase tracking-wider text-[#D4AF37]/80 font-bold">COMING</span>
-                  <span className="block font-sans text-[8.5px] font-black text-white tracking-widest uppercase mt-0.5">12 SEP 2027</span>
-                </div>
-              </div>
-
+              {/* Spine highlight overlay */}
+              <div className="absolute top-0 left-0 w-3.5 h-full bg-gradient-to-r from-black/60 via-white/10 to-transparent border-r border-black/35 z-10" />
             </div>
           </div>
         )

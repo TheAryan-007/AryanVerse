@@ -1133,12 +1133,52 @@ export default function ArchivePage() {
     setIsAddModalOpen(true);
   };
 
+  const saveCustomEntries = (updatedEntries) => {
+    setCustomEntries(updatedEntries);
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.setItem("aryan_archive_custom_entries", JSON.stringify(updatedEntries));
+        return true;
+      } catch (err) {
+        console.error("Local storage save failed:", err);
+        alert("Storage Limit Exceeded!\n\nThe cover image file you uploaded is too large for your browser's local storage database.\n\nWe have automatically kept the modal open so you do not lose your reflection text. Please try using a smaller image cover or paste an image URL instead.");
+        return false;
+      }
+    }
+    return true;
+  };
+
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setNewImage(reader.result);
+        const img = document.createElement("img");
+        img.src = reader.result;
+        img.onload = () => {
+          const maxDim = 600;
+          let width = img.width;
+          let height = img.height;
+          
+          if (width > maxDim || height > maxDim) {
+            if (width > height) {
+              height = Math.round((height * maxDim) / width);
+              width = maxDim;
+            } else {
+              width = Math.round((width * maxDim) / height);
+              height = maxDim;
+            }
+          }
+          
+          const canvas = document.createElement("canvas");
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, width, height);
+          
+          const compressedDataUrl = canvas.toDataURL("image/jpeg", 0.7);
+          setNewImage(compressedDataUrl);
+        };
       };
       reader.readAsDataURL(file);
     }
@@ -1148,15 +1188,9 @@ export default function ArchivePage() {
     if (editingEntry) {
       const isEditingDefault = !editingEntry.isCustom;
       if (isEditingDefault) {
-        const updatedDeleted = [...deletedDefaultTitles, editingEntry.title];
-        setDeletedDefaultTitles(updatedDeleted);
-        if (typeof window !== "undefined") {
-          localStorage.setItem("aryan_archive_deleted_defaults", JSON.stringify(updatedDeleted));
-        }
-
         const newEntry = {
           title: newTitle,
-          thumbnailCode: newImage || "interstellar",
+          thumbnailCode: newImage || (newTitle.trim().toLowerCase() === "unscripted love" ? "/unscripted-love.jpg" : "interstellar"),
           tag: newCategory === "Favorite Films" ? "Favorite Film" : newCategory,
           category: newCategory,
           date: newDate,
@@ -1174,9 +1208,18 @@ export default function ArchivePage() {
           [activeChamberIdx]: [newEntry, ...(customEntries[activeChamberIdx] || [])]
         };
 
-        setCustomEntries(updated);
-        if (typeof window !== "undefined") {
-          localStorage.setItem("aryan_archive_custom_entries", JSON.stringify(updated));
+        if (saveCustomEntries(updated)) {
+          const updatedDeleted = [...deletedDefaultTitles, editingEntry.title];
+          setDeletedDefaultTitles(updatedDeleted);
+          if (typeof window !== "undefined") {
+            try {
+              localStorage.setItem("aryan_archive_deleted_defaults", JSON.stringify(updatedDeleted));
+            } catch (err) {
+              console.error(err);
+            }
+          }
+          setEditingEntry(null);
+          setIsAddModalOpen(false);
         }
       } else {
         const chamberCustoms = customEntries[activeChamberIdx] || [];
@@ -1185,7 +1228,7 @@ export default function ArchivePage() {
             return {
               ...entry,
               title: newTitle,
-              thumbnailCode: newImage || "interstellar",
+              thumbnailCode: newImage || (newTitle.trim().toLowerCase() === "unscripted love" ? "/unscripted-love.jpg" : "interstellar"),
               tag: newCategory === "Favorite Films" ? "Favorite Film" : newCategory,
               category: newCategory,
               date: newDate,
@@ -1205,16 +1248,15 @@ export default function ArchivePage() {
           [activeChamberIdx]: updatedChamberCustoms
         };
 
-        setCustomEntries(updated);
-        if (typeof window !== "undefined") {
-          localStorage.setItem("aryan_archive_custom_entries", JSON.stringify(updated));
+        if (saveCustomEntries(updated)) {
+          setEditingEntry(null);
+          setIsAddModalOpen(false);
         }
       }
-      setEditingEntry(null);
     } else {
       const newEntry = {
         title: newTitle,
-        thumbnailCode: newImage || "interstellar",
+        thumbnailCode: newImage || (newTitle.trim().toLowerCase() === "unscripted love" ? "/unscripted-love.jpg" : "interstellar"),
         tag: newCategory === "Favorite Films" ? "Favorite Film" : newCategory,
         category: newCategory,
         date: newDate,
@@ -1232,12 +1274,10 @@ export default function ArchivePage() {
         [activeChamberIdx]: [newEntry, ...(customEntries[activeChamberIdx] || [])]
       };
 
-      setCustomEntries(updated);
-      if (typeof window !== "undefined") {
-        localStorage.setItem("aryan_archive_custom_entries", JSON.stringify(updated));
+      if (saveCustomEntries(updated)) {
+        setIsAddModalOpen(false);
       }
     }
-    setIsAddModalOpen(false);
   };
 
   const handleDeleteEntry = (entryToDelete) => {
@@ -1252,16 +1292,17 @@ export default function ArchivePage() {
       [activeChamberIdx]: updatedChamberCustoms
     };
 
-    setCustomEntries(updated);
-    if (typeof window !== "undefined") {
-      localStorage.setItem("aryan_archive_custom_entries", JSON.stringify(updated));
-    }
-
-    if (!entryToDelete.isCustom) {
-      const updatedDeleted = [...deletedDefaultTitles, entryToDelete.title];
-      setDeletedDefaultTitles(updatedDeleted);
-      if (typeof window !== "undefined") {
-        localStorage.setItem("aryan_archive_deleted_defaults", JSON.stringify(updatedDeleted));
+    if (saveCustomEntries(updated)) {
+      if (!entryToDelete.isCustom) {
+        const updatedDeleted = [...deletedDefaultTitles, entryToDelete.title];
+        setDeletedDefaultTitles(updatedDeleted);
+        if (typeof window !== "undefined") {
+          try {
+            localStorage.setItem("aryan_archive_deleted_defaults", JSON.stringify(updatedDeleted));
+          } catch (err) {
+            console.error(err);
+          }
+        }
       }
     }
   };
