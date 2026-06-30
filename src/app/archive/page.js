@@ -784,7 +784,7 @@ const chambersConfig = [
     entries: [
       {
         title: "Stranger Things",
-        thumbnailCode: "stranger-things",
+        thumbnailCode: "/movies/stranger-things.jpg",
         tag: "Series",
         category: "Series",
         date: "2026-06-29",
@@ -793,7 +793,7 @@ const chambersConfig = [
       },
       {
         title: "True Detective",
-        thumbnailCode: "true-detective",
+        thumbnailCode: "/movies/true-detective.jpg",
         tag: "Series",
         category: "Series",
         date: "2026-06-29",
@@ -802,12 +802,30 @@ const chambersConfig = [
       },
       {
         title: "Dark",
-        thumbnailCode: "dark",
+        thumbnailCode: "/movies/dark.jpg",
         tag: "Series",
         category: "Series",
         date: "2026-06-29",
         rating: 10,
         description: "Dark is easily one of the greatest TV series I've ever watched. It's not just a show—it's a puzzle that demands your full attention, rewarding you with one of the most brilliantly written stories ever created. Every episode adds another layer, making the plot deeper and more fascinating. The atmosphere, performances, soundtrack, and mind-blowing time-travel concept are executed flawlessly. Unlike many series, Dark delivers a powerful and satisfying ending that ties everything together beautifully. If you enjoy intelligent storytelling that challenges your mind, this is an absolute masterpiece and a perfect 10/10."
+      },
+      {
+        title: "From",
+        thumbnailCode: "/movies/from.jpg",
+        tag: "Series",
+        category: "Series",
+        date: "2026-06-30",
+        rating: 8.5,
+        description: "From is a thrilling, suspenseful mystery-horror series that keeps you constantly on the edge of your seat. Set in a nightmarish town in middle America that traps everyone who enters, the residents fight to survive while searching for a way out. The creature designs are hauntingly simple and the lore gets deeper with every episode. A hidden gem of horror television."
+      },
+      {
+        title: "Harry Potter",
+        thumbnailCode: "/movies/harry-potter.jpg",
+        tag: "Movies",
+        category: "Movies",
+        date: "2026-06-30",
+        rating: 9.5,
+        description: "The Harry Potter series is a cinematic masterpiece of world-building and nostalgic storytelling. Growing up alongside Harry, Ron, and Hermione as they navigate the magical world of Hogwarts is a journey that remains unmatched. From the magical score by John Williams to the growing darkness and depth of the plot, it is a timeless classic that stays in the hearts of millions."
       }
     ]
   },
