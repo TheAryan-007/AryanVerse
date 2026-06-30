@@ -598,6 +598,42 @@ function EntryThumbnail({ code, imageFit, imagePosition, imageZoom }) {
       />
     );
   }
+  if (code === "stranger-things") {
+    return (
+      <div className="w-full h-full bg-gradient-to-br from-[#0c0507] via-[#240a0f] to-[#050102] relative overflow-hidden flex items-center justify-center rounded-xl border border-red-500/10">
+        <div className="absolute w-32 h-32 rounded-full bg-red-600/10 blur-2xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute w-1 h-1 rounded-full bg-red-400 opacity-60 top-1/4 left-1/3 animate-pulse" />
+        <div className="absolute w-1.5 h-1.5 rounded-full bg-red-500 opacity-80 top-2/3 right-1/4 animate-ping" style={{ animationDuration: "4s" }} />
+        <div className="absolute w-1 h-1 rounded-full bg-white opacity-40 bottom-1/3 left-1/2 animate-pulse" style={{ animationDuration: "5s" }} />
+        <div className="font-orbitron text-[9px] font-black text-red-500/60 tracking-widest border border-red-500/20 px-2.5 py-1.5 rounded bg-black/40 shadow-[0_0_15px_rgba(239,68,68,0.15)]">
+          THE UPSIDE DOWN
+        </div>
+      </div>
+    );
+  }
+  if (code === "true-detective") {
+    return (
+      <div className="w-full h-full bg-gradient-to-br from-[#0a0c0a] via-[#151c14] to-[#040604] relative overflow-hidden flex items-center justify-center rounded-xl border border-lime-500/10">
+        <div className="absolute w-36 h-36 rounded-full bg-lime-600/5 blur-3xl top-1/3 left-1/3" />
+        <div className="absolute w-28 h-28 rounded-full bg-emerald-700/5 blur-2xl bottom-1/4 right-1/4" />
+        <div className="font-space-mono text-[9px] font-bold text-lime-400/50 tracking-wider uppercase border border-lime-500/15 px-3 py-1 bg-black/30 rounded">
+          Carcosa // Yellow King
+        </div>
+      </div>
+    );
+  }
+  if (code === "dark") {
+    return (
+      <div className="w-full h-full bg-gradient-to-br from-[#0b0816] via-[#16112c] to-[#050308] relative overflow-hidden flex items-center justify-center rounded-xl border border-purple-500/10">
+        <div className="absolute w-24 h-24 rounded-full border border-purple-500/10 animate-spin" style={{ animationDuration: "12s" }} />
+        <div className="absolute w-24 h-24 rounded-full border border-blue-500/5 translate-x-2 animate-spin" style={{ animationDuration: "16s", animationDirection: "reverse" }} />
+        <div className="absolute w-12 h-12 rounded-full bg-purple-600/10 blur-xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+        <div className="font-orbitron text-[9px] font-black text-purple-400/60 tracking-widest border border-purple-500/20 px-2.5 py-1.5 rounded bg-black/40 shadow-[0_0_15px_rgba(168,85,247,0.15)]">
+          SIC MUNDUS CREATUS EST
+        </div>
+      </div>
+    );
+  }
   if (code === "interstellar") {
     return (
       <div className="w-full h-full bg-gradient-to-br from-[#0c0d16] via-[#1a1b35] to-[#050508] relative overflow-hidden flex items-center justify-center rounded-xl border border-black/5">
@@ -745,7 +781,35 @@ const chambersConfig = [
       { name: "Directors", icon: <Award className="w-4 h-4" /> },
       { name: "Favourites", icon: <Star className="w-4 h-4" /> }
     ],
-    entries: []
+    entries: [
+      {
+        title: "Stranger Things",
+        thumbnailCode: "stranger-things",
+        tag: "Series",
+        category: "Series",
+        date: "2026-06-29",
+        rating: 8.6,
+        description: "Stranger Things is one of my all-time favorite series. The first four seasons were a perfect blend of mystery, horror, adventure, and unforgettable characters—I would've easily rated it 10/10 after Season 4. However, the final season didn't live up to the incredible standards the show had set, making the ending feel a bit disappointing. Even so, the journey, the nostalgia, and the emotional moments make it a series I'll always recommend."
+      },
+      {
+        title: "True Detective",
+        thumbnailCode: "true-detective",
+        tag: "Series",
+        category: "Series",
+        date: "2026-06-29",
+        rating: 9.1,
+        description: "True Detective (Season 1) is one of the finest crime thrillers ever made. The slow-burn storytelling, haunting atmosphere, and phenomenal performances by Matthew McConaughey and Woody Harrelson make every episode unforgettable. It's not just about solving a murder—it's a deep exploration of human nature, philosophy, and morality. Dark, intelligent, and brilliantly written, this season is a masterpiece that stays with you long after it ends."
+      },
+      {
+        title: "Dark",
+        thumbnailCode: "dark",
+        tag: "Series",
+        category: "Series",
+        date: "2026-06-29",
+        rating: 10,
+        description: "Dark is easily one of the greatest TV series I've ever watched. It's not just a show—it's a puzzle that demands your full attention, rewarding you with one of the most brilliantly written stories ever created. Every episode adds another layer, making the plot deeper and more fascinating. The atmosphere, performances, soundtrack, and mind-blowing time-travel concept are executed flawlessly. Unlike many series, Dark delivers a powerful and satisfying ending that ties everything together beautifully. If you enjoy intelligent storytelling that challenges your mind, this is an absolute masterpiece and a perfect 10/10."
+      }
+    ]
   },
   {
     title: "Unscript Love",
