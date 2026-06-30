@@ -2123,12 +2123,17 @@ export default function ArchivePage() {
                             boxShadow: `0 5px 15px -10px ${activeChamber.color}30`
                           }}
                         >
-                          <div className={`shrink-0 rounded-xl overflow-hidden border border-white/5 opacity-80 group-hover:opacity-100 transition-opacity ${
+                          <div className={`shrink-0 rounded-xl overflow-hidden border border-white/5 opacity-80 group-hover:opacity-100 transition-opacity bg-black/40 flex items-center justify-center ${
                             activeChamberIdx === 4 
                               ? "w-full md:w-24 h-36" 
                               : "w-full md:w-36 h-24"
                           }`}>
-                            <EntryThumbnail code={entry.thumbnailCode} imageFit={entry.imageFit} imagePosition={entry.imagePosition} imageZoom={entry.imageZoom} />
+                            <EntryThumbnail 
+                              code={entry.thumbnailCode} 
+                              imageFit={activeChamberIdx === 4 ? "contain" : (entry.imageFit || "cover")} 
+                              imagePosition={entry.imagePosition} 
+                              imageZoom={entry.imageZoom} 
+                            />
                           </div>
 
                           <div className="flex flex-col justify-between gap-4 w-full">
