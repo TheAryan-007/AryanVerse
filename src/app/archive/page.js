@@ -1040,6 +1040,14 @@ export default function ArchivePage() {
     return {};
   });
 
+  const [deletedDefaultTitles, setDeletedDefaultTitles] = useState(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("aryan_archive_deleted_defaults");
+      return saved ? JSON.parse(saved) : [];
+    }
+    return [];
+  });
+
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
@@ -1138,35 +1146,69 @@ export default function ArchivePage() {
 
   const handleAddEntry = () => {
     if (editingEntry) {
-      const chamberCustoms = customEntries[activeChamberIdx] || [];
-      const updatedChamberCustoms = chamberCustoms.map((entry) => {
-        if (entry === editingEntry || (entry.title === editingEntry.title && entry.description === editingEntry.description && entry.date === editingEntry.date)) {
-          return {
-            ...entry,
-            title: newTitle,
-            thumbnailCode: newImage || "interstellar",
-            tag: newCategory === "Favorite Films" ? "Favorite Film" : newCategory,
-            category: newCategory,
-            date: newDate,
-            rating: newRating,
-            description: newDescription,
-            content: activeChamberIdx === 3 ? newBlogContent : "",
-            imageFit: activeChamberIdx === 3 ? newBlogImageFit : "cover",
-            imagePosition: activeChamberIdx === 3 ? newBlogImagePos : 50,
-            imageZoom: activeChamberIdx === 3 ? newBlogImageZoom : 100,
-          };
+      const isEditingDefault = !editingEntry.isCustom;
+      if (isEditingDefault) {
+        const updatedDeleted = [...deletedDefaultTitles, editingEntry.title];
+        setDeletedDefaultTitles(updatedDeleted);
+        if (typeof window !== "undefined") {
+          localStorage.setItem("aryan_archive_deleted_defaults", JSON.stringify(updatedDeleted));
         }
-        return entry;
-      });
 
-      const updated = {
-        ...customEntries,
-        [activeChamberIdx]: updatedChamberCustoms
-      };
+        const newEntry = {
+          title: newTitle,
+          thumbnailCode: newImage || "interstellar",
+          tag: newCategory === "Favorite Films" ? "Favorite Film" : newCategory,
+          category: newCategory,
+          date: newDate,
+          rating: newRating,
+          description: newDescription,
+          content: activeChamberIdx === 3 ? newBlogContent : "",
+          imageFit: activeChamberIdx === 3 ? newBlogImageFit : "cover",
+          imagePosition: activeChamberIdx === 3 ? newBlogImagePos : 50,
+          imageZoom: activeChamberIdx === 3 ? newBlogImageZoom : 100,
+          isCustom: true
+        };
 
-      setCustomEntries(updated);
-      if (typeof window !== "undefined") {
-        localStorage.setItem("aryan_archive_custom_entries", JSON.stringify(updated));
+        const updated = {
+          ...customEntries,
+          [activeChamberIdx]: [newEntry, ...(customEntries[activeChamberIdx] || [])]
+        };
+
+        setCustomEntries(updated);
+        if (typeof window !== "undefined") {
+          localStorage.setItem("aryan_archive_custom_entries", JSON.stringify(updated));
+        }
+      } else {
+        const chamberCustoms = customEntries[activeChamberIdx] || [];
+        const updatedChamberCustoms = chamberCustoms.map((entry) => {
+          if (entry === editingEntry || (entry.title === editingEntry.title && entry.description === editingEntry.description && entry.date === editingEntry.date)) {
+            return {
+              ...entry,
+              title: newTitle,
+              thumbnailCode: newImage || "interstellar",
+              tag: newCategory === "Favorite Films" ? "Favorite Film" : newCategory,
+              category: newCategory,
+              date: newDate,
+              rating: newRating,
+              description: newDescription,
+              content: activeChamberIdx === 3 ? newBlogContent : "",
+              imageFit: activeChamberIdx === 3 ? newBlogImageFit : "cover",
+              imagePosition: activeChamberIdx === 3 ? newBlogImagePos : 50,
+              imageZoom: activeChamberIdx === 3 ? newBlogImageZoom : 100,
+            };
+          }
+          return entry;
+        });
+
+        const updated = {
+          ...customEntries,
+          [activeChamberIdx]: updatedChamberCustoms
+        };
+
+        setCustomEntries(updated);
+        if (typeof window !== "undefined") {
+          localStorage.setItem("aryan_archive_custom_entries", JSON.stringify(updated));
+        }
       }
       setEditingEntry(null);
     } else {
@@ -1213,6 +1255,14 @@ export default function ArchivePage() {
     setCustomEntries(updated);
     if (typeof window !== "undefined") {
       localStorage.setItem("aryan_archive_custom_entries", JSON.stringify(updated));
+    }
+
+    if (!entryToDelete.isCustom) {
+      const updatedDeleted = [...deletedDefaultTitles, entryToDelete.title];
+      setDeletedDefaultTitles(updatedDeleted);
+      if (typeof window !== "undefined") {
+        localStorage.setItem("aryan_archive_deleted_defaults", JSON.stringify(updatedDeleted));
+      }
     }
   };
 
@@ -1444,7 +1494,7 @@ export default function ArchivePage() {
 
   const chamberEntries = [
     ...(customEntries[activeChamberIdx] || []),
-    ...activeChamber.entries
+    ...activeChamber.entries.filter((entry) => !deletedDefaultTitles.includes(entry.title))
   ];
 
   const filteredEntries = chamberEntries.filter((entry) => {
@@ -2028,7 +2078,7 @@ export default function ArchivePage() {
                                 Read Thought <ArrowRight className="w-3.5 h-3.5 transform group-hover/btn:translate-x-0.5 transition-transform duration-200" />
                               </span>
 
-                              {entry.isCustom && isAdmin && (
+                              {isAdmin && (
                                 <div className="flex items-center gap-3">
                                   <button
                                     onClick={(e) => {
@@ -2154,7 +2204,7 @@ export default function ArchivePage() {
                                 {activeChamberIdx === 3 ? "Read Blog Post" : "Read Reflection"} <ArrowRight className="w-3.5 h-3.5 transform group-hover/btn:translate-x-0.5 transition-transform duration-200" />
                               </span>
 
-                              {entry.isCustom && isAdmin && (
+                              {isAdmin && (
                                 <div className="flex items-center gap-3">
                                   <button
                                     onClick={() => openEditModal(entry)}
