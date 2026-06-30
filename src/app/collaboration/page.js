@@ -650,71 +650,67 @@ ${message}`;
                   <div className="flex flex-col sm:flex-row gap-3 w-full">
                     {submittedData.contactMethod === "Email" && (
                       <>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            const subject = encodeURIComponent(`Project Inquiry: ${submittedData.service}`);
-                            const body = encodeURIComponent(submittedData.formattedMessage);
-                            window.location.href = `mailto:aryanncr2@gmail.com?subject=${subject}&body=${body}`;
-                          }}
+                        <a
+                          href={`mailto:aryanncr2@gmail.com?subject=${encodeURIComponent(`Project Inquiry: ${submittedData.service}`)}&body=${encodeURIComponent(submittedData.formattedMessage)}`}
                           className="flex-1 h-12 bg-gradient-to-r from-red-600 to-rose-500 hover:from-red-500 hover:to-rose-400 text-white font-space-mono text-xs uppercase tracking-wider font-bold rounded-xl transition-all duration-300 shadow-md hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer"
                         >
                           <Mail className="w-4 h-4" /> Launch Mail App
-                        </button>
-                        <button
-                          type="button"
+                        </a>
+                        <a
+                          href={`https://mail.google.com/mail/?view=cm&fs=1&to=aryanncr2@gmail.com&su=${encodeURIComponent(`Project Inquiry: ${submittedData.service}`)}&body=${encodeURIComponent(`[Paste (Ctrl+V) the copied proposal here]`)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           onClick={() => {
-                            const subject = encodeURIComponent(`Project Inquiry: ${submittedData.service}`);
-                            const body = encodeURIComponent(submittedData.formattedMessage);
-                            window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=aryanncr2@gmail.com&su=${subject}&body=${body}`, "_blank");
+                            if (navigator.clipboard) {
+                              navigator.clipboard.writeText(submittedData.formattedMessage);
+                              setIsCopied(true);
+                              setTimeout(() => setIsCopied(false), 2000);
+                            }
                           }}
                           className="flex-1 h-12 border border-slate-800 hover:border-slate-700 bg-slate-950/40 text-slate-200 hover:text-white font-space-mono text-xs uppercase tracking-wider font-bold rounded-xl transition-all duration-300 shadow-md hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer"
                         >
                           <Globe className="w-4 h-4 text-red-400" /> Send via Gmail Web
-                        </button>
+                        </a>
                       </>
                     )}
 
                     {submittedData.contactMethod === "WhatsApp" && (
                       <>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            const waText = encodeURIComponent(submittedData.formattedMessage);
-                            window.open(`https://wa.me/917827087385?text=${waText}`, "_blank");
-                          }}
+                        <a
+                          href={`https://wa.me/917827087385?text=${encodeURIComponent(submittedData.formattedMessage)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="flex-1 h-12 bg-[#25D366] hover:bg-[#20ba56] text-black font-space-mono text-xs uppercase tracking-wider font-bold rounded-xl transition-all duration-300 shadow-md hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer"
                         >
                           <FaWhatsapp className="w-4 h-4" /> Launch WhatsApp
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            const waText = encodeURIComponent(submittedData.formattedMessage);
-                            window.open(`https://web.whatsapp.com/send?phone=917827087385&text=${waText}`, "_blank");
-                          }}
+                        </a>
+                        <a
+                          href={`https://web.whatsapp.com/send?phone=917827087385&text=${encodeURIComponent(submittedData.formattedMessage)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="flex-1 h-12 border border-slate-800 hover:border-slate-700 bg-slate-950/40 text-slate-200 hover:text-white font-space-mono text-xs uppercase tracking-wider font-bold rounded-xl transition-all duration-300 shadow-md hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer"
                         >
                           <Globe className="w-4 h-4 text-[#25D366]" /> WhatsApp Web
-                        </button>
+                        </a>
                       </>
                     )}
 
                     {submittedData.contactMethod === "LinkedIn" && (
-                      <button
-                        type="button"
+                      <a
+                        href="https://www.linkedin.com/in/aryan-chauhan-0b05a3386"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         onClick={() => {
                           if (navigator.clipboard) {
                             navigator.clipboard.writeText(submittedData.formattedMessage);
                             setIsCopied(true);
                             setTimeout(() => setIsCopied(false), 2000);
                           }
-                          window.open("https://www.linkedin.com/in/aryan-chauhan-0b05a3386", "_blank");
                         }}
                         className="w-full h-12 bg-[#0A66C2] hover:bg-[#0077b5] text-white font-space-mono text-xs uppercase tracking-wider font-bold rounded-xl transition-all duration-300 shadow-md hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer"
                       >
                         <FaLinkedin className="w-4 h-4" /> Copy Proposal & Go to LinkedIn
-                      </button>
+                      </a>
                     )}
                   </div>
 
