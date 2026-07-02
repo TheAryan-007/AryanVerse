@@ -601,7 +601,7 @@ export default function PlanetBackground({ transitionState, onPlanetClick }) {
       W = window.innerWidth;
       H = window.innerHeight;
       const isMobile = W < 768;
-      const dpr = isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = 1;
       canvas.width = W * dpr;
       canvas.height = H * dpr;
       gl.viewport(0, 0, canvas.width, canvas.height);

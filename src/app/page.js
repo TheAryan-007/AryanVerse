@@ -366,7 +366,7 @@ export default function Home() {
       <div className="absolute inset-0 w-full h-full z-10">
         <Canvas 
           camera={{ position: [0, 0, 8], fov: 60 }}
-          dpr={typeof window !== "undefined" && window.innerWidth < 768 ? 1 : [1, 2]}
+          dpr={1}
         >
           <UniverseScene
             transitionState={transitionState}
