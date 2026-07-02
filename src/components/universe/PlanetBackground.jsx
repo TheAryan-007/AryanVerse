@@ -170,53 +170,45 @@ const fsPlanet = `
 
   float fbm3(vec3 p, int oct){
     float v=0.0, a=0.5, t=0.0;
-    for(int i=0;i<8;i++){
-      if(i>=oct) break;
+    int maxOct = oct;
+    if(maxOct > 4) maxOct = 4; // Cap maximum octaves to 4 for performance
+    for(int i=0;i<4;i++){
+      if(i>=maxOct) break;
       v += a*vn3(p); t+=a; p*=2.03; a*=0.5;
     }
     return v/t;
   }
 
   float warpedCloud(vec3 p){
-    vec3 q = vec3(fbm3(p,             5),
-                  fbm3(p+vec3(5.2,1.3,3.1), 5),
-                  fbm3(p+vec3(1.7,9.2,0.5), 5));
-    vec3 r = vec3(fbm3(p + 4.0*q + vec3(1.7,9.2,5.1), 5),
-                  fbm3(p + 4.0*q + vec3(8.3,2.8,1.2), 5),
-                  fbm3(p + 4.0*q + vec3(0.3,6.1,4.4), 5));
-    return fbm3(p + 4.0*r, 6);
+    vec3 q = vec3(vn3(p),
+                  vn3(p+vec3(5.2,1.3,3.1)),
+                  vn3(p+vec3(1.7,9.2,0.5)));
+    vec3 r = vec3(vn3(p + 2.0*q + vec3(1.7,9.2,5.1)),
+                  vn3(p + 2.0*q + vec3(8.3,2.8,1.2)),
+                  vn3(p + 2.0*q + vec3(0.3,6.1,4.4)));
+    return vn3(p + 2.0*r);
   }
 
   float cloudBands(vec3 p){
     float lat   = p.y;
-    float band1 = sin(lat * 8.0  + fbm3(p*1.5, 4)*3.0) * 0.5 + 0.5;
-    float band2 = sin(lat * 14.0 + fbm3(p*2.5+vec3(3.0), 4)*2.5) * 0.5 + 0.5;
-    float band3 = sin(lat * 5.0  + fbm3(p*0.8+vec3(7.0), 3)*4.0) * 0.5 + 0.5;
+    float band1 = sin(lat * 8.0  + vn3(p*1.5)*3.0) * 0.5 + 0.5;
+    float band2 = sin(lat * 14.0 + vn3(p*2.5+vec3(3.0))*2.5) * 0.5 + 0.5;
+    float band3 = sin(lat * 5.0  + vn3(p*0.8+vec3(7.0))*4.0) * 0.5 + 0.5;
     float swirl = warpedCloud(p * 1.2);
     return band1*0.35 + band2*0.25 + band3*0.20 + swirl*0.20;
   }
 
   float craterField(vec3 p){
-    float cr = 0.0;
-    for(int i=0;i<6;i++){
-      float fi   = float(i);
-      vec3  seed = vec3(fi*1.7+0.5, fi*2.3-1.1, fi*0.9+0.3);
-      vec3  cellP= p * (1.8 + fi*0.4) + seed;
-      vec3  cell = floor(cellP);
-      vec3  frc  = fract(cellP);
-      float minD = 1e9;
-      for(int x=-1;x<=1;x++) for(int y=-1;y<=1;y++) for(int z=-1;z<=1;z++){
-        vec3 nb   = vec3(float(x),float(y),float(z));
-        vec3 rnd  = hash33(cell+nb);
-        vec3 diff = nb + rnd - frc;
-        float d   = length(diff);
-        minD = min(minD, d);
-      }
-      float rim  = smoothstep(0.35,0.42,minD) - smoothstep(0.42,0.55,minD);
-      float bowl = smoothstep(0.55,0.35,minD) * 0.4;
-      cr += (rim + bowl) * (0.5 / (fi+1.0));
-    }
-    return clamp(cr, 0.0, 1.0);
+    // Pseudo-crater shader using fast noise subtraction to avoid nested 3D Voronoi search loops
+    float n1 = vn3(p * 3.5);
+    float rim1 = smoothstep(0.40, 0.45, n1) - smoothstep(0.45, 0.52, n1);
+    float bowl1 = smoothstep(0.52, 0.40, n1) * 0.35;
+    
+    float n2 = vn3(p * 6.0 + vec3(1.7, 4.3, 0.8));
+    float rim2 = smoothstep(0.38, 0.42, n2) - smoothstep(0.42, 0.50, n2);
+    float bowl2 = smoothstep(0.50, 0.38, n2) * 0.25;
+    
+    return (rim1 + bowl1) * 0.45 + (rim2 + bowl2) * 0.20;
   }
 
   void main(){

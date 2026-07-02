@@ -20,21 +20,17 @@ class LemniscateCurve extends THREE.Curve {
   }
 }
 
-function GlassCrystalMaterial({ color }) {
+function GlassCrystalMaterial({ color, emissive, intensity }) {
   return (
-    <meshPhysicalMaterial 
+    <meshStandardMaterial 
       color={color} 
-      roughness={0.04} 
-      metalness={0.45}
-      transmission={0.36}
-      thickness={1.2}
-      ior={1.8}
+      roughness={0.1} 
+      metalness={0.8}
+      transparent={true}
+      opacity={0.8}
       flatShading={true}
-      clearcoat={1.0}
-      clearcoatRoughness={0.03}
-      iridescence={0.85}
-      iridescenceIOR={1.85}
-      iridescenceThicknessRange={[150, 450]}
+      emissive={emissive || color}
+      emissiveIntensity={intensity !== undefined ? intensity : 0.8}
     />
   );
 }
