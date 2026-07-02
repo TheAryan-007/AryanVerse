@@ -6,6 +6,7 @@
   --font-inter: var(--font-inter);
   --font-dancing-script: var(--font-dancing-script);
   --font-serif: var(--font-serif);
+  --font-audiowide: var(--font-audiowide);
   
   --color-brand-bg: #050508;
   --color-card-bg: rgba(13, 13, 26, 0.6);
@@ -15,6 +16,24 @@
   --color-electric-blue: #3b82f6;
   --color-status-green: #22c55e;
   --color-muted-text: #94a3b8;
+}
+
+.text-chrome-silver {
+  background: linear-gradient(180deg, #ffffff 15%, #d1dbed 45%, #8b9bb4 70%, #d8e5f5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 2px 10px rgba(255, 255, 255, 0.35));
+}
+
+.text-chrome-purple {
+  background: linear-gradient(180deg, #f5efff 10%, #c084fc 45%, #7e22ce 75%, #c084fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.6));
 }
 
 body {

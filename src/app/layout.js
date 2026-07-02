@@ -1,4 +1,4 @@
-import { Orbitron, Space_Mono, Inter, Dancing_Script, Playfair_Display } from "next/font/google";
+import { Orbitron, Space_Mono, Inter, Dancing_Script, Playfair_Display, Audiowide } from "next/font/google";
 import "./globals.css";
 
 const orbitron = Orbitron({
@@ -15,6 +15,7 @@ const spaceMono = Space_Mono({
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const dancingScript = Dancing_Script({
@@ -29,6 +30,12 @@ const playfairDisplay = Playfair_Display({
   style: ["normal", "italic"],
 });
 
+const audiowide = Audiowide({
+  variable: "--font-audiowide",
+  subsets: ["latin"],
+  weight: "400",
+});
+
 export const metadata = {
   title: "AryanVerse — Interactive 3D Portfolio",
   description: "Step into the cinematic 3D universe of Aryan Chauhan, a B.Tech Data Science student at Bennett University.",
@@ -38,7 +45,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${orbitron.variable} ${spaceMono.variable} ${inter.variable} ${dancingScript.variable} ${playfairDisplay.variable} h-full antialiased`}
+      className={`${orbitron.variable} ${spaceMono.variable} ${inter.variable} ${dancingScript.variable} ${playfairDisplay.variable} ${audiowide.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[#050508] text-white overflow-hidden">
         {children}

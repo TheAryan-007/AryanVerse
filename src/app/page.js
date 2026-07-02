@@ -402,13 +402,22 @@ export default function Home() {
         <div className={`absolute left-8 md:left-16 lg:left-24 top-1/2 -translate-y-1/2 max-w-sm md:max-w-md lg:max-w-lg flex flex-col items-start gap-4 ${
           transitionState === "IDLE" ? "pointer-events-auto" : "pointer-events-none"
         }`}>
-          <div className="hero-text flex flex-col gap-4">
-            <h1 className="font-orbitron text-4xl md:text-7xl lg:text-8xl font-black tracking-[0.05em] text-white leading-[0.9] flex flex-col gap-2 md:gap-3 uppercase">
-              <span>Aryan</span>
-              <span>Verse</span>
+          <div className="hero-text flex flex-col gap-3 w-full">
+            <h1 className="font-audiowide text-5xl md:text-7xl lg:text-8xl tracking-[0.04em] leading-[0.9] flex flex-col items-start gap-2 md:gap-3 uppercase select-none">
+              <span className="text-chrome-silver">Aryan</span>
+              <span className="text-chrome-purple">Verse</span>
             </h1>
-            <p className="font-inter font-medium text-slate-400 text-[10px] md:text-xs tracking-[0.3em] uppercase mt-1">
-              welcome
+            
+            <div className="flex items-center gap-3 w-full max-w-[280px] md:max-w-[340px] mt-2">
+              <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-[#A855F7]/30 to-[#A855F7]/50" />
+              <span className="font-space-mono text-[9px] md:text-[10px] tracking-[0.4em] text-[#C084FC] uppercase select-none">
+                welcome
+              </span>
+              <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent via-[#A855F7]/30 to-[#A855F7]/50" />
+            </div>
+
+            <p className="font-inter font-semibold text-slate-500 text-[8px] md:text-[9.5px] tracking-[0.45em] uppercase mt-2 ml-1 select-none">
+              explore. create. inspire.
             </p>
           </div>
         </div>
