@@ -2650,12 +2650,30 @@ export default function JourneyPage() {
     const activeChapterEl = document.getElementById(`chapter-${activeChapterIdx + 1}`);
     if (!activeChapterEl) return;
 
-    const moments = activeChapterEl.querySelectorAll(".scroll-animate-moment");
-    
-    // Reset state before registering ScrollTrigger
-    gsap.set(moments, { y: 50, opacity: 0 });
+    const moments = Array.from(activeChapterEl.querySelectorAll(".scroll-animate-moment"));
+    if (moments.length === 0) return;
 
-    moments.forEach((moment) => {
+    // Split between the first 2 moments (stats banner + title screen) and the rest
+    const instantMoments = moments.slice(0, 2);
+    const scrollMoments = moments.slice(2);
+
+    // 1. Animate stats banner and title screen instantly on load (no scroll required!)
+    gsap.fromTo(
+      instantMoments,
+      { y: 35, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power2.out"
+      }
+    );
+
+    // 2. Animate the remaining moments down the page on scroll
+    gsap.set(scrollMoments, { y: 50, opacity: 0 });
+
+    scrollMoments.forEach((moment) => {
       gsap.fromTo(
         moment,
         { y: 50, opacity: 0 },
@@ -2667,9 +2685,9 @@ export default function JourneyPage() {
           scrollTrigger: {
             trigger: moment,
             scroller: mainRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
+            start: "top 88%", // Trigger slightly earlier for responsive feel
+            toggleActions: "play none none none"
+          }
         }
       );
     });
