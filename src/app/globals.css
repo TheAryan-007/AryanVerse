@@ -7,6 +7,7 @@
   --font-dancing-script: var(--font-dancing-script);
   --font-serif: var(--font-serif);
   --font-audiowide: var(--font-audiowide);
+  --font-cinzel: var(--font-cinzel);
   
   --color-brand-bg: #050508;
   --color-card-bg: rgba(13, 13, 26, 0.6);
@@ -34,6 +35,22 @@
   -webkit-text-fill-color: transparent;
   color: transparent;
   filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.6));
+}
+
+.text-luxury-white {
+  color: #ffffff;
+  font-family: var(--font-cinzel), serif;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+}
+
+.text-luxury-gold {
+  background: linear-gradient(135deg, #fef7e5 0%, #e5c060 40%, #b28c28 75%, #edd28c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-family: var(--font-cinzel), serif;
+  filter: drop-shadow(0 0 12px rgba(229, 192, 96, 0.25));
 }
 
 body {

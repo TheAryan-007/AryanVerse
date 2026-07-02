@@ -1,4 +1,4 @@
-import { Orbitron, Space_Mono, Inter, Dancing_Script, Playfair_Display, Audiowide } from "next/font/google";
+import { Orbitron, Space_Mono, Inter, Dancing_Script, Playfair_Display, Audiowide, Cinzel } from "next/font/google";
 import "./globals.css";
 
 const orbitron = Orbitron({
@@ -36,6 +36,12 @@ const audiowide = Audiowide({
   weight: "400",
 });
 
+const cinzel = Cinzel({
+  variable: "--font-cinzel",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+});
+
 export const metadata = {
   title: "AryanVerse — Interactive 3D Portfolio",
   description: "Step into the cinematic 3D universe of Aryan Chauhan, a B.Tech Data Science student at Bennett University.",
@@ -45,7 +51,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${orbitron.variable} ${spaceMono.variable} ${inter.variable} ${dancingScript.variable} ${playfairDisplay.variable} ${audiowide.variable} h-full antialiased`}
+      className={`${orbitron.variable} ${spaceMono.variable} ${inter.variable} ${dancingScript.variable} ${playfairDisplay.variable} ${audiowide.variable} ${cinzel.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[#050508] text-white overflow-hidden">
         {children}
