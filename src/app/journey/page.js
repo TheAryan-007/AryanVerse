@@ -2572,26 +2572,6 @@ export default function JourneyPage() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Fade-in animation for each moment block
-    gsap.utils.toArray(".scroll-animate-moment").forEach((moment) => {
-      gsap.fromTo(
-        moment,
-        { y: 50, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1.0,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: moment,
-            scroller: mainRef.current,
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-    });
-
     // Initial positions setup
     gsap.set("#desktop-boy", { x: 125, y: 417.5, opacity: 0 }); // Node 1 (150, 480) -> (125, 417.5)
     gsap.set("#mobile-boy", { x: 10, y: -4, opacity: 0 }); // Mobile Node 1 horizontal: (35, 60) -> (10, -4)
@@ -2656,14 +2636,49 @@ export default function JourneyPage() {
     }
   }, [activeChapterIdx]);
 
-  // Refresh ScrollTrigger when entering a chapter
+  // Dynamically initialize and refresh ScrollTriggers for active chapter moments
   useEffect(() => {
-    if (viewMode === "CHAPTER") {
-      setTimeout(() => {
-        ScrollTrigger.refresh();
-        if (mainRef.current) mainRef.current.scrollTop = 0;
-      }, 100);
-    }
+    if (viewMode !== "CHAPTER") return;
+
+    // Clean up any old scroll-animate-moment ScrollTriggers to prevent layout bugs
+    ScrollTrigger.getAll().forEach((trigger) => {
+      if (trigger.vars.trigger && trigger.vars.trigger.classList.contains("scroll-animate-moment")) {
+        trigger.kill();
+      }
+    });
+
+    const activeChapterEl = document.getElementById(`chapter-${activeChapterIdx + 1}`);
+    if (!activeChapterEl) return;
+
+    const moments = activeChapterEl.querySelectorAll(".scroll-animate-moment");
+    
+    // Reset state before registering ScrollTrigger
+    gsap.set(moments, { y: 50, opacity: 0 });
+
+    moments.forEach((moment) => {
+      gsap.fromTo(
+        moment,
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.0,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: moment,
+            scroller: mainRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    });
+
+    // Refresh layout calculations and scroll to top
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+      if (mainRef.current) mainRef.current.scrollTop = 0;
+    }, 120);
   }, [viewMode, activeChapterIdx]);
 
   // Effect to animate the boy between nodes during chapter transitions
