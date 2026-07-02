@@ -2640,63 +2640,65 @@ export default function JourneyPage() {
   useEffect(() => {
     if (viewMode !== "CHAPTER") return;
 
-    // Clean up any old scroll-animate-moment ScrollTriggers to prevent layout bugs
-    ScrollTrigger.getAll().forEach((trigger) => {
-      if (trigger.vars.trigger && trigger.vars.trigger.classList.contains("scroll-animate-moment")) {
-        trigger.kill();
-      }
-    });
+    // Use a deferred timeout to ensure the DOM is fully painted and heights are correct
+    const timer = setTimeout(() => {
+      // Clean up any old scroll-animate-moment ScrollTriggers to prevent layout bugs
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (trigger.vars.trigger && trigger.vars.trigger.classList.contains("scroll-animate-moment")) {
+          trigger.kill();
+        }
+      });
 
-    const activeChapterEl = document.getElementById(`chapter-${activeChapterIdx + 1}`);
-    if (!activeChapterEl) return;
+      const activeChapterEl = document.getElementById(`chapter-${activeChapterIdx + 1}`);
+      if (!activeChapterEl) return;
 
-    const moments = Array.from(activeChapterEl.querySelectorAll(".scroll-animate-moment"));
-    if (moments.length === 0) return;
+      const moments = Array.from(activeChapterEl.querySelectorAll(".scroll-animate-moment"));
+      if (moments.length === 0) return;
 
-    // Split between the first 2 moments (stats banner + title screen) and the rest
-    const instantMoments = moments.slice(0, 2);
-    const scrollMoments = moments.slice(2);
+      // Split between the first 2 moments (stats banner + title screen) and the rest
+      const instantMoments = moments.slice(0, 2);
+      const scrollMoments = moments.slice(2);
 
-    // 1. Animate stats banner and title screen instantly on load (no scroll required!)
-    gsap.fromTo(
-      instantMoments,
-      { y: 35, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power2.out"
-      }
-    );
-
-    // 2. Animate the remaining moments down the page on scroll
-    gsap.set(scrollMoments, { y: 50, opacity: 0 });
-
-    scrollMoments.forEach((moment) => {
+      // 1. Animate stats banner and title screen instantly on load (no scroll required!)
       gsap.fromTo(
-        moment,
-        { y: 50, opacity: 0 },
+        instantMoments,
+        { y: 35, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1.0,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: moment,
-            scroller: mainRef.current,
-            start: "top 88%", // Trigger slightly earlier for responsive feel
-            toggleActions: "play none none none"
-          }
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power2.out"
         }
       );
-    });
 
-    // Refresh layout calculations and scroll to top
-    setTimeout(() => {
+      // 2. Animate the remaining moments down the page on scroll
+      gsap.set(scrollMoments, { y: 50, opacity: 0 });
+
+      scrollMoments.forEach((moment) => {
+        gsap.fromTo(
+          moment,
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1.0,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: moment,
+              scroller: mainRef.current,
+              start: "top 95%", // Trigger immediately when entering from the bottom
+              toggleActions: "play none none none"
+            }
+          }
+        );
+      });
+
       ScrollTrigger.refresh();
       if (mainRef.current) mainRef.current.scrollTop = 0;
-    }, 120);
+    }, 250);
+
+    return () => clearTimeout(timer);
   }, [viewMode, activeChapterIdx]);
 
   // Effect to animate the boy between nodes during chapter transitions
