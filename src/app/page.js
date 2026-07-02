@@ -405,15 +405,15 @@ export default function Home() {
           <div className="hero-text flex flex-col gap-3 w-full">
             <h1 className="font-cinzel text-5xl md:text-7xl lg:text-8xl tracking-[0.14em] leading-[1.0] flex flex-col items-start gap-1.5 md:gap-2.5 uppercase select-none">
               <span className="text-luxury-white font-light">Aryan</span>
-              <span className="text-luxury-gold font-medium">Verse</span>
+              <span className="text-luxury-purple font-medium">Verse</span>
             </h1>
             
             <div className="flex items-center gap-3 w-full max-w-[280px] md:max-w-[340px] mt-3">
-              <div className="h-[0.5px] flex-1 bg-gradient-to-r from-transparent via-[#e5c060]/20 to-[#e5c060]/45" />
-              <span className="font-space-mono text-[9px] md:text-[10px] tracking-[0.4em] text-[#e5c060] uppercase select-none">
+              <div className="h-[0.5px] flex-1 bg-gradient-to-r from-transparent via-[#A855F7]/20 to-[#A855F7]/45" />
+              <span className="font-space-mono text-[9px] md:text-[10px] tracking-[0.4em] text-[#C084FC] uppercase select-none">
                 welcome
               </span>
-              <div className="h-[0.5px] flex-1 bg-gradient-to-l from-transparent via-[#e5c060]/20 to-[#e5c060]/45" />
+              <div className="h-[0.5px] flex-1 bg-gradient-to-l from-transparent via-[#A855F7]/20 to-[#A855F7]/45" />
             </div>
 
             <p className="font-inter font-medium text-slate-500 text-[8px] md:text-[9px] tracking-[0.45em] uppercase mt-2 ml-1 select-none">
