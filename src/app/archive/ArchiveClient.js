@@ -1049,6 +1049,8 @@ export default function ArchivePage() {
   });
 
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isSyncing, setIsSyncing] = useState(false);
+  const [dbConnected, setDbConnected] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -1067,6 +1069,73 @@ export default function ArchivePage() {
       }
     }
   }, []);
+
+  // Supabase Database Fetch on mount
+  useEffect(() => {
+    const fetchDB = async () => {
+      setIsSyncing(true);
+      try {
+        const res = await fetch("/api/archive");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.customEntries) {
+            setCustomEntries(data.customEntries);
+          }
+          if (data.deletedDefaultTitles) {
+            setDeletedDefaultTitles(data.deletedDefaultTitles);
+          }
+          setDbConnected(true);
+        } else {
+          setDbConnected(false);
+        }
+      } catch (err) {
+        console.error("Failed to load archive entries from database:", err);
+        setDbConnected(false);
+      } finally {
+        setIsSyncing(false);
+      }
+    };
+    fetchDB();
+  }, []);
+
+  const saveEntryToDB = async (entry, chamberIdx) => {
+    setIsSyncing(true);
+    try {
+      const res = await fetch("/api/archive", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...entry, chamberIdx })
+      });
+      if (res.ok) {
+        const result = await res.json();
+        if (result.success && result.data) {
+          setIsSyncing(false);
+          return result.data;
+        }
+      }
+      setIsSyncing(false);
+      return null;
+    } catch (err) {
+      console.error("Database save failed:", err);
+      setIsSyncing(false);
+      return null;
+    }
+  };
+
+  const deleteEntryFromDB = async (id) => {
+    setIsSyncing(true);
+    try {
+      const res = await fetch(`/api/archive?id=${id}`, {
+        method: "DELETE"
+      });
+      setIsSyncing(false);
+      return res.ok;
+    } catch (err) {
+      console.error("Database delete failed:", err);
+      setIsSyncing(false);
+      return false;
+    }
+  };
 
   const [passcodeInput, setPasscodeInput] = useState("");
   const [passcodeError, setPasscodeError] = useState(false);
@@ -1184,124 +1253,154 @@ export default function ArchivePage() {
     }
   };
 
-  const handleAddEntry = () => {
-    if (editingEntry) {
-      const isEditingDefault = !editingEntry.isCustom;
-      if (isEditingDefault) {
-        const newEntry = {
-          title: newTitle,
-          thumbnailCode: newImage || (newTitle.trim().toLowerCase() === "unscripted love" ? "/unscripted-love.jpg" : "interstellar"),
-          tag: newCategory === "Favorite Films" ? "Favorite Film" : newCategory,
-          category: newCategory,
-          date: newDate,
-          rating: newRating,
-          description: newDescription,
-          content: activeChamberIdx === 3 ? newBlogContent : "",
-          imageFit: activeChamberIdx === 3 ? newBlogImageFit : "cover",
-          imagePosition: activeChamberIdx === 3 ? newBlogImagePos : 50,
-          imageZoom: activeChamberIdx === 3 ? newBlogImageZoom : 100,
-          isCustom: true
-        };
+  const handleAddEntry = async () => {
+    const entryPayload = {
+      title: newTitle,
+      thumbnailCode: newImage || (newTitle.trim().toLowerCase() === "unscripted love" ? "/unscripted-love.jpg" : "interstellar"),
+      tag: newCategory === "Favorite Films" ? "Favorite Film" : newCategory,
+      category: newCategory,
+      date: newDate,
+      rating: newRating,
+      description: newDescription,
+      content: activeChamberIdx === 3 ? newBlogContent : "",
+      imageFit: activeChamberIdx === 3 ? newBlogImageFit : "cover",
+      imagePosition: activeChamberIdx === 3 ? newBlogImagePos : 50,
+      imageZoom: activeChamberIdx === 3 ? newBlogImageZoom : 100,
+      isCustom: true
+    };
 
-        const updated = {
-          ...customEntries,
-          [activeChamberIdx]: [newEntry, ...(customEntries[activeChamberIdx] || [])]
-        };
+    if (dbConnected) {
+      if (editingEntry) {
+        const isEditingDefault = !editingEntry.isCustom;
+        if (isEditingDefault) {
+          const savedEntry = await saveEntryToDB(entryPayload, activeChamberIdx);
+          if (savedEntry) {
+            await saveEntryToDB({
+              title: editingEntry.title,
+              category: "DELETED_DEFAULT",
+              date: "",
+              rating: 0,
+              description: "",
+              thumbnailCode: ""
+            }, activeChamberIdx);
 
-        if (saveCustomEntries(updated)) {
-          const updatedDeleted = [...deletedDefaultTitles, editingEntry.title];
-          setDeletedDefaultTitles(updatedDeleted);
-          if (typeof window !== "undefined") {
-            try {
-              localStorage.setItem("aryan_archive_deleted_defaults", JSON.stringify(updatedDeleted));
-            } catch (err) {
-              console.error(err);
-            }
+            const updated = {
+              ...customEntries,
+              [activeChamberIdx]: [savedEntry, ...(customEntries[activeChamberIdx] || [])]
+            };
+            setCustomEntries(updated);
+            setDeletedDefaultTitles([...deletedDefaultTitles, editingEntry.title]);
+            setEditingEntry(null);
+            setIsAddModalOpen(false);
           }
-          setEditingEntry(null);
-          setIsAddModalOpen(false);
+        } else {
+          entryPayload.id = editingEntry.id;
+          const savedEntry = await saveEntryToDB(entryPayload, activeChamberIdx);
+          if (savedEntry) {
+            const chamberCustoms = customEntries[activeChamberIdx] || [];
+            const updatedChamberCustoms = chamberCustoms.map((entry) => {
+              if (entry.id === editingEntry.id) return savedEntry;
+              return entry;
+            });
+            const updated = {
+              ...customEntries,
+              [activeChamberIdx]: updatedChamberCustoms
+            };
+            setCustomEntries(updated);
+            setEditingEntry(null);
+            setIsAddModalOpen(false);
+          }
         }
       } else {
-        const chamberCustoms = customEntries[activeChamberIdx] || [];
-        const updatedChamberCustoms = chamberCustoms.map((entry) => {
-          if (entry === editingEntry || (entry.title === editingEntry.title && entry.description === editingEntry.description && entry.date === editingEntry.date)) {
-            return {
-              ...entry,
-              title: newTitle,
-              thumbnailCode: newImage || (newTitle.trim().toLowerCase() === "unscripted love" ? "/unscripted-love.jpg" : "interstellar"),
-              tag: newCategory === "Favorite Films" ? "Favorite Film" : newCategory,
-              category: newCategory,
-              date: newDate,
-              rating: newRating,
-              description: newDescription,
-              content: activeChamberIdx === 3 ? newBlogContent : "",
-              imageFit: activeChamberIdx === 3 ? newBlogImageFit : "cover",
-              imagePosition: activeChamberIdx === 3 ? newBlogImagePos : 50,
-              imageZoom: activeChamberIdx === 3 ? newBlogImageZoom : 100,
-            };
-          }
-          return entry;
-        });
-
-        const updated = {
-          ...customEntries,
-          [activeChamberIdx]: updatedChamberCustoms
-        };
-
-        if (saveCustomEntries(updated)) {
-          setEditingEntry(null);
+        const savedEntry = await saveEntryToDB(entryPayload, activeChamberIdx);
+        if (savedEntry) {
+          const updated = {
+            ...customEntries,
+            [activeChamberIdx]: [savedEntry, ...(customEntries[activeChamberIdx] || [])]
+          };
+          setCustomEntries(updated);
           setIsAddModalOpen(false);
         }
       }
     } else {
-      const newEntry = {
-        title: newTitle,
-        thumbnailCode: newImage || (newTitle.trim().toLowerCase() === "unscripted love" ? "/unscripted-love.jpg" : "interstellar"),
-        tag: newCategory === "Favorite Films" ? "Favorite Film" : newCategory,
-        category: newCategory,
-        date: newDate,
-        rating: newRating,
-        description: newDescription,
-        content: activeChamberIdx === 3 ? newBlogContent : "",
-        imageFit: activeChamberIdx === 3 ? newBlogImageFit : "cover",
-        imagePosition: activeChamberIdx === 3 ? newBlogImagePos : 50,
-        imageZoom: activeChamberIdx === 3 ? newBlogImageZoom : 100,
-        isCustom: true
-      };
-
-      const updated = {
-        ...customEntries,
-        [activeChamberIdx]: [newEntry, ...(customEntries[activeChamberIdx] || [])]
-      };
-
-      if (saveCustomEntries(updated)) {
-        setIsAddModalOpen(false);
+      // Local storage fallback save
+      if (editingEntry) {
+        const isEditingDefault = !editingEntry.isCustom;
+        if (isEditingDefault) {
+          const newEntry = { ...entryPayload };
+          const updated = {
+            ...customEntries,
+            [activeChamberIdx]: [newEntry, ...(customEntries[activeChamberIdx] || [])]
+          };
+          if (saveCustomEntries(updated)) {
+            const updatedDeleted = [...deletedDefaultTitles, editingEntry.title];
+            setDeletedDefaultTitles(updatedDeleted);
+            localStorage.setItem("aryan_archive_deleted_defaults", JSON.stringify(updatedDeleted));
+            setEditingEntry(null);
+            setIsAddModalOpen(false);
+          }
+        } else {
+          const chamberCustoms = customEntries[activeChamberIdx] || [];
+          const updatedChamberCustoms = chamberCustoms.map((entry) => {
+            if (entry === editingEntry || (entry.title === editingEntry.title && entry.description === editingEntry.description && entry.date === editingEntry.date)) {
+              return entryPayload;
+            }
+            return entry;
+          });
+          const updated = { ...customEntries, [activeChamberIdx]: updatedChamberCustoms };
+          if (saveCustomEntries(updated)) {
+            setEditingEntry(null);
+            setIsAddModalOpen(false);
+          }
+        }
+      } else {
+        const updated = {
+          ...customEntries,
+          [activeChamberIdx]: [entryPayload, ...(customEntries[activeChamberIdx] || [])]
+        };
+        if (saveCustomEntries(updated)) {
+          setIsAddModalOpen(false);
+        }
       }
     }
   };
 
-  const handleDeleteEntry = (entryToDelete) => {
-    const chamberCustoms = customEntries[activeChamberIdx] || [];
-    const updatedChamberCustoms = chamberCustoms.filter(
-      (entry) => entry !== entryToDelete && 
-                !(entry.title === entryToDelete.title && entry.description === entryToDelete.description && entry.date === entryToDelete.date)
-    );
-
-    const updated = {
-      ...customEntries,
-      [activeChamberIdx]: updatedChamberCustoms
-    };
-
-    if (saveCustomEntries(updated)) {
-      if (!entryToDelete.isCustom) {
-        const updatedDeleted = [...deletedDefaultTitles, entryToDelete.title];
-        setDeletedDefaultTitles(updatedDeleted);
-        if (typeof window !== "undefined") {
-          try {
-            localStorage.setItem("aryan_archive_deleted_defaults", JSON.stringify(updatedDeleted));
-          } catch (err) {
-            console.error(err);
-          }
+  const handleDeleteEntry = async (entryToDelete) => {
+    if (dbConnected) {
+      if (entryToDelete.isCustom) {
+        const success = await deleteEntryFromDB(entryToDelete.id);
+        if (success) {
+          const chamberCustoms = customEntries[activeChamberIdx] || [];
+          const updatedChamberCustoms = chamberCustoms.filter((entry) => entry.id !== entryToDelete.id);
+          const updated = { ...customEntries, [activeChamberIdx]: updatedChamberCustoms };
+          setCustomEntries(updated);
+        }
+      } else {
+        const savedHider = await saveEntryToDB({
+          title: entryToDelete.title,
+          category: "DELETED_DEFAULT",
+          date: "",
+          rating: 0,
+          description: "",
+          thumbnailCode: ""
+        }, activeChamberIdx);
+        if (savedHider) {
+          setDeletedDefaultTitles([...deletedDefaultTitles, entryToDelete.title]);
+        }
+      }
+    } else {
+      // Local storage fallback delete
+      const chamberCustoms = customEntries[activeChamberIdx] || [];
+      const updatedChamberCustoms = chamberCustoms.filter(
+        (entry) => entry !== entryToDelete && 
+                  !(entry.title === entryToDelete.title && entry.description === entryToDelete.description && entry.date === entryToDelete.date)
+      );
+      const updated = { ...customEntries, [activeChamberIdx]: updatedChamberCustoms };
+      if (saveCustomEntries(updated)) {
+        if (!entryToDelete.isCustom) {
+          const updatedDeleted = [...deletedDefaultTitles, entryToDelete.title];
+          setDeletedDefaultTitles(updatedDeleted);
+          localStorage.setItem("aryan_archive_deleted_defaults", JSON.stringify(updatedDeleted));
         }
       }
     }
@@ -1776,12 +1875,25 @@ export default function ArchivePage() {
           <div className="sticky top-0 z-30 bg-[#050508]/80 backdrop-blur-md border-b border-white/10 w-full py-4.5 px-6 md:px-12">
             <div className="max-w-6xl w-full mx-auto flex items-center justify-between">
               
-              <button
-                onClick={() => setViewMode("ORBIT")}
-                className="flex items-center gap-1.5 px-3 py-1.5 border border-white/10 bg-black/60 hover:border-white/20 hover:text-white text-slate-200 rounded-lg font-space-mono text-[12px] tracking-wider uppercase font-bold cursor-pointer transition-colors shadow-sm"
-              >
-                ← Return to Archive
-              </button>
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={() => setViewMode("ORBIT")}
+                  className="flex items-center gap-1.5 px-3 py-1.5 border border-white/10 bg-black/60 hover:border-white/20 hover:text-white text-slate-200 rounded-lg font-space-mono text-[12px] tracking-wider uppercase font-bold cursor-pointer transition-colors shadow-sm"
+                >
+                  ← Return to Archive
+                </button>
+                
+                <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 border border-white/5 bg-white/[0.02] rounded-lg font-space-mono text-[9px] uppercase tracking-wider text-slate-400">
+                  <span className={`w-1.5 h-1.5 rounded-full ${
+                    isSyncing 
+                      ? "bg-amber-400 animate-pulse shadow-[0_0_8px_#fbbf24]" 
+                      : dbConnected 
+                        ? "bg-green-400 shadow-[0_0_8px_#34d399]" 
+                        : "bg-orange-400 shadow-[0_0_8px_#fb923c]"
+                  }`} />
+                  {isSyncing ? "Syncing..." : dbConnected ? "Supabase Connected" : "Local Mode"}
+                </div>
+              </div>
 
               <div className="flex flex-col items-center gap-1">
                 <span className="font-space-mono text-[11px] text-slate-300 uppercase tracking-widest font-black">
