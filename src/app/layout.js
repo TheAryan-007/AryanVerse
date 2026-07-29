@@ -1,5 +1,6 @@
 import { Orbitron, Space_Mono, Inter, Dancing_Script, Playfair_Display, Audiowide, Cinzel } from "next/font/google";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const orbitron = Orbitron({
@@ -153,6 +154,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="min-h-full flex flex-col bg-[#050508] text-white overflow-hidden">
         {children}
+        <Analytics />
       </body>
     </html>
   );
